@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="706.0" prefWidth="998.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.dashboard">
+    <top>
+        <AnchorPane prefHeight="86.0" prefWidth="998.0" style="-fx-background-color: #000000;" BorderPane.alignment="CENTER">
+            <children>
+                <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="854.0" layoutY="26.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="120.0" style="-fx-background-color: transparent;" text="Profile" textFill="WHITE">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                    <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@Design/profile1.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <HBox layoutX="14.0" layoutY="6.0" prefHeight="90.0" prefWidth="330.0">
+                    <children>
+                        <ImageView fitHeight="85.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@Design/LOGO.png" />
+                            </image>
+                        </ImageView>
+                        <Label text="XtraTime">
+                            <font>
+                                <Font size="37.0" />
+                            </font>
+                            <padding>
+                                <Insets left="21.0" top="16.0" />
+                            </padding>
+                            <textFill>
+                                <LinearGradient endX="1.0" endY="1.0">
+                                    <stops>
+                                        <Stop>
+                                            <color>
+                                                <Color green="0.6315789222717285" blue="0.27368420362472534" />
+                                            </color>
+                                        </Stop>
+                                        <Stop offset="1.0">
+                                            <color>
+                                                <Color red="1.0" green="1.0" blue="1.0" />
+                                            </color>
+                                        </Stop>
+                                    </stops>
+                                </LinearGradient>
+                            </textFill>
+                        </Label>
+                    </children>
+                </HBox>
+            </children>
+        </AnchorPane>
+    </top>
+    <left>
+        <AnchorPane prefHeight="611.0" prefWidth="217.0" style="-fx-background-color: #000000;" BorderPane.alignment="CENTER">
+            <children>
+                <VBox layoutX="-1.0" layoutY="34.0" prefHeight="484.0" prefWidth="222.0">
+                    <children>
+                        <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="228.0" style="-fx-background-color: transparent;" text="Utilisateurs" textFill="WHITE">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                            <graphic>
+                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@Design/users1.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <padding>
+                                <Insets left="30.0" />
+                            </padding>
+                        </Button>
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+    </left>
+    <center>
+        <AnchorPane prefHeight="610.0" prefWidth="798.0" BorderPane.alignment="CENTER">
+         <children>
+            <TabPane prefHeight="610.0" prefWidth="778.0" tabClosingPolicy="UNAVAILABLE">
+               <tabs>
+                  <Tab text="ADMINS">
+                     <content>
+                        <TableView fx:id="adminsTV" prefHeight="461.0" prefWidth="778.0">
+                           <columns>
+                              <TableColumn fx:id="adminsPseudo" prefWidth="119.20004272460938" text="PSEUDO" />
+                              <TableColumn fx:id="adminsCin" minWidth="5.60003662109375" prefWidth="126.39996337890625" text="CIN" />
+                              <TableColumn fx:id="adminsNom" prefWidth="84.00003051757812" text="NOM" />
+                              <TableColumn fx:id="adminsPrenom" prefWidth="112.00006103515625" text="PRENOM" />
+                              <TableColumn fx:id="adminsAge" prefWidth="72.800048828125" text="AGE" />
+                              <TableColumn fx:id="adminsNumTel" prefWidth="108.800048828125" text="N°TEL" />
+                              <TableColumn fx:id="adminsEmail" prefWidth="155.99993896484375" text="EMAIL" />
+                           </columns>
+                        </TableView>
+                     </content>
+                  </Tab>
+                  <Tab text="CLIENTS">
+                     <content>
+                        <TableView fx:id="clientsTV" prefHeight="427.0" prefWidth="534.0">
+                           <columns>
+                              <TableColumn fx:id="clientsPseudo" prefWidth="119.20004272460938" text="PSEUDO" />
+                              <TableColumn fx:id="clientsCin" minWidth="5.60003662109375" prefWidth="126.39996337890625" text="CIN" />
+                              <TableColumn fx:id="clientsNom" prefWidth="84.00003051757812" text="NOM" />
+                              <TableColumn fx:id="clientsPrenom" prefWidth="112.00006103515625" text="PRENOM" />
+                              <TableColumn fx:id="clientsAge" prefWidth="72.800048828125" text="AGE" />
+                              <TableColumn fx:id="clientsNumTel" prefWidth="108.800048828125" text="N°TEL" />
+                              <TableColumn fx:id="clientsEmail" prefWidth="155.99993896484375" text="EMAIL" />
+                           </columns>
+                        </TableView>
+                     </content>
+                  </Tab>
+                  <Tab text="LOCATEURS">
+                     <content>
+                        <TableView fx:id="locateursTV" prefHeight="427.0" prefWidth="534.0">
+                           <columns>
+                              <TableColumn fx:id="locateursPseudo" prefWidth="119.20004272460938" text="PSEUDO" />
+                              <TableColumn fx:id="locateursCIn" minWidth="5.60003662109375" prefWidth="126.39996337890625" text="CIN" />
+                              <TableColumn fx:id="locateursNom" prefWidth="84.00003051757812" text="NOM" />
+                              <TableColumn fx:id="locateursPrenom" prefWidth="112.00006103515625" text="PRENOM" />
+                              <TableColumn fx:id="locateursAge" prefWidth="72.800048828125" text="AGE" />
+                              <TableColumn fx:id="locateursNumTel" prefWidth="108.800048828125" text="N°TEL" />
+                              <TableColumn fx:id="locateursEmail" prefWidth="155.99993896484375" text="EMAIL" />
+                           </columns>
+                        </TableView>
+                     </content>
+                  </Tab>
+                  <Tab text="LIVREURS">
+                     <content>
+                        <TableView fx:id="livreursTV" prefHeight="427.0" prefWidth="534.0">
+                           <columns>
+                              <TableColumn fx:id="livreursPseudo" prefWidth="119.20004272460938" text="PSEUDO" />
+                              <TableColumn fx:id="livreursCin" minWidth="5.60003662109375" prefWidth="126.39996337890625" text="CIN" />
+                              <TableColumn fx:id="livreursNom" prefWidth="84.00003051757812" text="NOM" />
+                              <TableColumn fx:id="livreursPrenom" prefWidth="112.00006103515625" text="PRENOM" />
+                              <TableColumn fx:id="livreursAge" prefWidth="72.800048828125" text="AGE" />
+                              <TableColumn fx:id="livreursNumTel" prefWidth="108.800048828125" text="N°TEL" />
+                              <TableColumn fx:id="livreursEmail" prefWidth="155.99993896484375" text="EMAIL" />
+                           </columns>
+                        </TableView>
+                     </content>
+                  </Tab>
+               </tabs>
+            </TabPane>
+         </children>
+        </AnchorPane>
+    </center>
+</BorderPane>

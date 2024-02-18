@@ -139,6 +139,5 @@ public class signupController implements Initializable {
             }
 
         }
-
     }
 }

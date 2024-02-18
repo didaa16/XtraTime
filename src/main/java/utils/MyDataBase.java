@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class MyDataBase {
     private Connection cnx;
-    private String url ="jdbc:mysql://localhost:3306/user";
+    private String url ="jdbc:mysql://localhost:3306/xtratime";
     private String login = "root";
     private String pwd ="";
     private static MyDataBase instance;

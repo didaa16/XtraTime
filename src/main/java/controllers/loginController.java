@@ -109,10 +109,8 @@ public class loginController implements Initializable {
         if (isPasswordVisible) {
             mdpTextLogin.setText(mdpLogin.getText());
             mdpTextLogin.setVisible(true);
-            // Si le mot de passe était visible, changer l'image pour l'icône d'œil fermé
             eyeIconLogin.setStyle("-fx-background-image : url('../../resources/Design/eyeIcon1.png')");
         } else {
-            // Sinon, changer l'image pour l'icône d'œil ouvert
             mdpLogin.setText(mdpTextLogin.getText());
             eyeIconLogin.setStyle("-fx-background-image: url('../../resources/Design/eyeIcon.png')");
         }

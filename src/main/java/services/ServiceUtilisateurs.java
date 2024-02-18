@@ -71,7 +71,7 @@ public class ServiceUtilisateurs implements IService <Utilisateur> {
     }
 
     @Override
-    public ObservableList<Utilisateur> afficher(){
+    public List<Utilisateur> afficher(){
         List<Utilisateur> utilisateurs= new ArrayList<>();
         String req="SELECT * FROM `utilisateurs`";
         try {
@@ -93,7 +93,7 @@ public class ServiceUtilisateurs implements IService <Utilisateur> {
         }catch (SQLException e){
             System.out.println(e.getMessage());
         }
-        return FXCollections.observableArrayList(utilisateurs);
+        return utilisateurs;
     }
 
 
@@ -109,7 +109,7 @@ public class ServiceUtilisateurs implements IService <Utilisateur> {
         return u;
     }
 
-    public ObservableList<Utilisateur> afficherParRole(String role){
+    public List<Utilisateur> afficherParRole(String role){
         List<Utilisateur> utilisateurs = new ArrayList<>() ; // Initialize the ObservableList
         String req = "SELECT * FROM `utilisateurs` WHERE `role`=?";
         try {
@@ -132,7 +132,7 @@ public class ServiceUtilisateurs implements IService <Utilisateur> {
         }catch (SQLException e){
             System.out.println(e.getMessage());
         }
-        return FXCollections.observableArrayList(utilisateurs);
+        return utilisateurs;
     }
 
 

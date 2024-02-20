@@ -2,24 +2,22 @@ package controllers;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
 import entities.Utilisateur;
+import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import services.ServiceUtilisateurs;
 
 import javax.swing.*;
@@ -141,6 +139,26 @@ public class dashboard {
     private RadioButton locateurs;
     @FXML
     private RadioButton livreurs;
+    @FXML
+    private Button Menu;
+    @FXML
+    private Button MenuClose;
+    @FXML
+    private AnchorPane slider;
+    @FXML
+    private AnchorPane utilisateursAnchorPane;
+    @FXML
+    private AnchorPane ajouterAnchorPane;
+    @FXML
+    private Button utilisateursButton;
+    @FXML
+    private TextField pseudoAjout, cinAjout, nomAjouter, prenomAjout, ageAjout, numtelAjout, emailAjout, mdpAjout;
+    @FXML
+    private PasswordField confirmMdpAjout;
+    @FXML
+    private Label pseudoError, cinError, nomError, prenomError, ageError, numtelError, emailError, mdpError, confirmMdpError ;;
+    @FXML
+    private Button annulerButton;
     ServiceUtilisateurs serviceUtilisateurs;
     private int index = -1;
 
@@ -155,7 +173,43 @@ public class dashboard {
     }
     @FXML
     void initialize() {
+        deconnecterButton.setOnMouseClicked(event -> {
+            System.exit(0);
+        });
+        slider.setTranslateX(-176);
+        Menu.setOnMouseClicked(event -> {
+            TranslateTransition slide = new TranslateTransition();
+            slide.setDuration(Duration.seconds(0.4));
+            slide.setNode(slider);
+
+            slide.setToX(0);
+            slide.play();
+
+            slider.setTranslateX(-176);
+
+            slide.setOnFinished((ActionEvent e)-> {
+                Menu.setVisible(false);
+                MenuClose.setVisible(true);
+            });
+        });
+
+        MenuClose.setOnMouseClicked(event -> {
+            TranslateTransition slide = new TranslateTransition();
+            slide.setDuration(Duration.seconds(0.4));
+            slide.setNode(slider);
+
+            slide.setToX(-176);
+            slide.play();
+
+            slider.setTranslateX(0);
+
+            slide.setOnFinished((ActionEvent e)-> {
+                Menu.setVisible(true);
+                MenuClose.setVisible(false);
+            });
+        });
         updateData();
+
     }
 
     private void afficherUtilisateursParRole(String role) {
@@ -230,12 +284,13 @@ public class dashboard {
             cinDashboardError.setText("Le CIN est invalide");
             return true;
         }
-        if(nomDashboard.getText().isBlank() || !nomDashboard.getText().matches("[a-zA-Z]+")){
+        if(nomDashboard.getText().isBlank() || !nomDashboard.getText().matches("[a-zA-Z ]+")){
             nomDashboardError.setTextFill(Color.RED);
             nomDashboardError.setText("Le nom est invalide");
             return true;
         }
-        if(prenomDashboard.getText().isBlank() || !prenomDashboard.getText().matches("[a-zA-Z]+")){
+
+        if(prenomDashboard.getText().isBlank() || !prenomDashboard.getText().matches("[a-zA-Z ]+")){
             prenomDashboardError.setTextFill(Color.RED);
             prenomDashboardError.setText("Le prénom est invalide");
             return true;
@@ -274,6 +329,22 @@ public class dashboard {
                 serviceUtilisateurs.modifier(newUser);
                 JOptionPane.showMessageDialog(null,"Modification effectuée! ");
                 updateData();
+                switch (newUser.getRole()){
+                    case "Admin":
+                        admins.setSelected(true);
+                        break;
+                    case "Client":
+                        clients.setSelected(true);
+                        break;
+                    case "Locateur":
+                        locateurs.setSelected(true);
+                        break;
+                    case "Livreur":
+                        livreurs.setSelected(true);
+                        break;
+                    default:
+                        break;
+                }
                 afficherUtilisateursParRole(newUser.getRole());
                 TableView.refresh();
                 System.out.println("Utilisateur modifié avec succès !");
@@ -303,7 +374,119 @@ public class dashboard {
             System.out.println("Erreur lors de la suppression de l'utilisateur : " + e.getMessage());
         }
     }
+    @FXML
+    public void rechercheButtonOnClick(ActionEvent event){
+        String data = rechercheDashboard.getText().toString();
+        admins.setSelected(false);
+        clients.setSelected(false);
+        locateurs.setSelected(false);
+        livreurs.setSelected(false);
+        ObservableList<Utilisateur> listeUtilisateurs = FXCollections.observableList(serviceUtilisateurs.recherche(data));
+        pseudoC.setCellValueFactory(new PropertyValueFactory<>("pseudo"));
+        cinC.setCellValueFactory(new PropertyValueFactory<>("cin"));
+        nomC.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        prenomC.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+        ageC.setCellValueFactory(new PropertyValueFactory<>("age"));
+        numTelC.setCellValueFactory(new PropertyValueFactory<>("numtel"));
+        emailC.setCellValueFactory(new PropertyValueFactory<>("email"));
+        TableView.setItems(listeUtilisateurs);
+    }
 
+    @FXML
+    private void utilisateursButtonOnClick(ActionEvent event){
+        utilisateursAnchorPane.setVisible(true);
+        ajouterAnchorPane.setVisible(false);
+    }
+    @FXML
+    private void ajouterButtonOnClick(ActionEvent event){
+        utilisateursAnchorPane.setVisible(false);
+        ajouterAnchorPane.setVisible(true);
+    }
+    public boolean getErrors1(){
+        pseudoError.setText("");
+        cinError.setText("");
+        nomError.setText("");
+        prenomError.setText("");
+        ageError.setText("");
+        numtelError.setText("");
+        emailError.setText("");
+        mdpError.setText("");
+        confirmMdpError.setText("");
+        if(pseudoAjout.getText().isBlank()){
+            pseudoError.setTextFill(Color.RED);
+            pseudoError.setText("Le Pseudo est invalide");
+            return true;
+        }
+        if(cinAjout.getText().isBlank() || !cinAjout.getText().matches("\\d{1,9}")){
+            cinError.setTextFill(Color.RED);
+            cinError.setText("Le CIN est invalide");
+            return true;
+        }
+        if(nomAjouter.getText().isBlank() || !nomAjouter.getText().matches("[a-zA-Z ]+")){
+            nomError.setTextFill(Color.RED);
+            nomError.setText("Le nom est invalide");
+            return true;
+        }
+
+        if(prenomAjout.getText().isBlank() || !prenomAjout.getText().matches("[a-zA-Z ]+")){
+            prenomError.setTextFill(Color.RED);
+            prenomError.setText("Le prénom est invalide");
+            return true;
+        }
+        if(ageAjout.getText().isBlank() || !ageAjout.getText().matches("\\d+") || Integer.parseInt(ageAjout.getText()) < 18){
+            ageError.setTextFill(Color.RED);
+            ageError.setText("L'âge doit être un nombre valide et être supérieur à 18");
+            return true;
+        }
+        if(numtelAjout.getText().isBlank() || !numtelAjout.getText().matches("\\d{1,12}")){
+            numtelError.setTextFill(Color.RED);
+            numtelError.setText("Le numéro de téléphone est invalide");
+            return true;
+        }
+        if(emailAjout.getText().isBlank() || !emailAjout.getText().matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")){
+            emailError.setTextFill(Color.RED);
+            emailError.setText("L'email est invalide");
+            return true;
+        }
+        if(mdpAjout.getText().isBlank()|| mdpAjout.getText().length() < 8 || mdpAjout.getText().matches("[^a-zA-Z0-9]")){
+            mdpError.setTextFill(Color.RED);
+            mdpError.setText("Le mot de passe est invalide");
+            return true;
+        }
+        if(confirmMdpAjout.getText().isBlank()){
+            confirmMdpError.setTextFill(Color.RED);
+            confirmMdpError.setText("La confirmation du mot de passe est invalide");
+            return true;
+        }
+        if(!Objects.equals(confirmMdpAjout.getText(), mdpAjout.getText())){
+            confirmMdpError.setTextFill(Color.RED);
+            confirmMdpError.setText("Le mot de passe doit etre le meme");
+            return true;
+        }
+        return false;
+    }
+
+
+    @FXML
+    private void ajoutAdminButtonOnClick(ActionEvent event){
+        if (!getErrors1()) {
+            Utilisateur newUser = new Utilisateur(pseudoAjout.getText(), Integer.parseInt(cinAjout.getText()), nomAjouter.getText(),
+                    prenomAjout.getText(), Integer.parseInt(ageAjout.getText()), Integer.parseInt(numtelAjout.getText()), emailAjout.getText(),
+                    mdpAjout.getText(), "Admin");
+            try {
+                serviceUtilisateurs.ajouter(newUser);
+                System.out.println("Admin ajouté avec succès !");
+                JOptionPane.showMessageDialog(null,"Admin ajouté avec succès !");
+                updateData();
+                TableView.refresh();
+                ajouterAnchorPane.setVisible(false);
+                utilisateursAnchorPane.setVisible(true);
+            } catch (SQLException e) {
+                System.out.println("Erreur lors de l'ajout de l'utilisateur : " + e.getMessage());
+            }
+
+        }
+    }
 
 
 

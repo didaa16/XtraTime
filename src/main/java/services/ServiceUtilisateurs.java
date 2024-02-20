@@ -55,7 +55,7 @@ public class ServiceUtilisateurs implements IService <Utilisateur> {
 
     @Override
     public void modifier(Utilisateur utilisateur) throws SQLException {
-        String req="UPDATE `utilisateurs` SET `cin`=?,`nom`=?,`prenom`=?,`age`=?,`numTel`=?,`email`=?,`mdp`=? WHERE pseudo=?";
+        String req="UPDATE `utilisateurs` SET `cin`=?,`nom`=?,`prenom`=?,`age`=?,`numTel`=?,`email`=?,`mdp`=?, `role`=?  WHERE pseudo=?";
         PreparedStatement ps= cnx.prepareStatement(req);
         ps.setInt(1, utilisateur.getCin());
         ps.setString(2, utilisateur.getNom());
@@ -64,7 +64,8 @@ public class ServiceUtilisateurs implements IService <Utilisateur> {
         ps.setInt(5, utilisateur.getNumtel());
         ps.setString(6, utilisateur.getEmail());
         ps.setString(7, utilisateur.getMdp());
-        ps.setString(8, utilisateur.getPseudo());
+        ps.setString(8, utilisateur.getRole());
+        ps.setString(9, utilisateur.getPseudo());
         ps.executeUpdate();
         System.out.println("Personne modifie");
 
@@ -164,6 +165,56 @@ public class ServiceUtilisateurs implements IService <Utilisateur> {
         }catch (IOException e){
             e.printStackTrace();
         }
+    }
+
+    public Utilisateur rechercher(String chose) throws SQLException {
+        Utilisateur u = new Utilisateur();
+        String req = "SELECT * FROM `utilisateurs` WHERE pseudo=? OR cin =? OR nom =? OR prenom =? OR age =? OR numTel =? OR email =?";
+        PreparedStatement ps= cnx.prepareStatement(req);
+        ps.setString(1, chose);
+        ps.setString(2, chose);
+        ps.setString(3, chose);
+        ps.setString(4, chose);
+        ps.setString(5, chose);
+        ps.setString(6, chose);
+        ps.setString(7, chose);
+        ResultSet rs = ps.executeQuery(); // Remove req from executeQuery
+        while (rs.next()){
+            u = new Utilisateur(rs.getString("PSEUDO"), rs.getInt("CIN"), rs.getString("NOM"), rs.getString("PRENOM"), rs.getInt("AGE"), rs.getInt("NUMTEL"), rs.getString("EMAIL"), rs.getString("MDP"), rs.getString("ROLE"));
+        }
+        return u;
+    }
+
+    public List<Utilisateur> recherche(String data){
+        List<Utilisateur> utilisateurs = new ArrayList<>() ; // Initialize the ObservableList
+        String req = "SELECT * FROM `utilisateurs` WHERE pseudo=? OR cin =? OR nom =? OR prenom =? OR age =? OR numTel =? OR email =?";
+        try {
+            PreparedStatement ps= cnx.prepareStatement(req);
+            ps.setString(1, data);
+            ps.setString(2, data);
+            ps.setString(3, data);
+            ps.setString(4, data);
+            ps.setString(5, data);
+            ps.setString(6, data);
+            ps.setString(7, data);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                Utilisateur u = new Utilisateur();
+                u.setPseudo(rs.getString("PSEUDO"));
+                u.setCin(rs.getInt("CIN"));
+                u.setNom(rs.getString("NOM"));
+                u.setPrenom(rs.getString("PRENOM"));
+                u.setAge(rs.getInt("AGE"));
+                u.setNumtel(rs.getInt("NUMTEL"));
+                u.setEmail(rs.getString("EMAIL"));
+                u.setMdp(rs.getString("MDP"));
+                u.setRole(rs.getString("ROLE"));
+                utilisateurs.add(u);
+            }
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return utilisateurs;
     }
 
 

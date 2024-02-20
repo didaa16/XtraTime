@@ -14,9 +14,7 @@ import java.util.Date;
 public class Main extends Application {
 
     public static void main(String[] args) {
-        ServiceUtilisateurs su = new ServiceUtilisateurs();
         launch(args);
-        System.out.println(su.afficher());
     }
 
     private double x, y =0;

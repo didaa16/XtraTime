@@ -1,7 +1,9 @@
 package controllers;
 import entities.Utilisateur;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -11,6 +13,8 @@ import javafx.scene.paint.Color;
 import javafx.event.ActionEvent;
 import services.ServiceUtilisateurs;
 
+import javax.swing.*;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Objects;
@@ -69,12 +73,12 @@ public class signupController implements Initializable {
             cinSignupError.setText("Le CIN est invalide");
             return true;
         }
-        if(nomSignup.getText().isBlank() || !nomSignup.getText().matches("[a-zA-Z]+")){
+        if(nomSignup.getText().isBlank() || !nomSignup.getText().matches("[a-zA-Z ]+")){
             nomSignupError.setTextFill(Color.RED);
             nomSignupError.setText("Le nom est invalide");
             return true;
         }
-        if(prenomSignup.getText().isBlank() || !prenomSignup.getText().matches("[a-zA-Z]+")){
+        if(prenomSignup.getText().isBlank() || !prenomSignup.getText().matches("[a-zA-Z ]+")){
             prenomSignupError.setTextFill(Color.RED);
             prenomSignupError.setText("Le prénom est invalide");
             return true;
@@ -133,7 +137,8 @@ public class signupController implements Initializable {
             try {
                 serviceUtilisateurs.ajouter(newUser);
                 System.out.println("Utilisateur ajouté avec succès !");
-                serviceUtilisateurs.changeScreen(event, "/login.fxml", "Sign Up avec succées, Connectez vous!");
+                JOptionPane.showMessageDialog(null,"Vous etes inscris avec succès ! Veuillez connecter maintenant.");
+                serviceUtilisateurs.changeScreen(event, "/login.fxml", "LOGIN");
             } catch (SQLException e) {
                 System.out.println("Erreur lors de l'ajout de l'utilisateur : " + e.getMessage());
             }

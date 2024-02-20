@@ -1,33 +1,32 @@
 package controllers;
 import entities.Utilisateur;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.event.ActionEvent;
+import javafx.stage.Stage;
 import services.ServiceUtilisateurs;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import java.io.IOException;
 import java.net.URL;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class loginController implements Initializable {
-    /**
-     * Called to initialize a controller after its root element has been
-     * completely processed.
-     *
-     * @param location  The location used to resolve relative paths for the root object, or
-     *                  {@code null} if the location is not known.
-     * @param resources The resources used to localize the root object, or {@code null} if
-     *                  the root object was not localized.
-     */
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-    }
+public class loginController {
     @FXML
     private Button loginButton, signupLogin;
     @FXML
@@ -38,10 +37,20 @@ public class loginController implements Initializable {
     private PasswordField mdpLogin;
     @FXML
     private Button eyeIconLogin;
+    @FXML
+    private Button Exit;
+
+    @FXML
+    void initialize() {
+        Exit.setOnMouseClicked(event -> {
+            System.exit(0);
+        });
+    }
+
 
     ServiceUtilisateurs serviceUtilisateurs = new ServiceUtilisateurs();
 
-    private void handleLogin(ActionEvent event) {
+    private void handleLogin(ActionEvent event) throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         try {
             if (!serviceUtilisateurs.utilisateurLoggedIn(pseudoLogin.getText(), mdpLogin.getText())) {
                 echecLoginLabel.setTextFill(Color.RED);
@@ -53,7 +62,8 @@ public class loginController implements Initializable {
 
                 switch (utilisateur.getRole()) {
                     case "Admin":
-                        serviceUtilisateurs.changeScreen(event, "/dashboard.fxml", "Admin");
+                        dashboard.setLoggedInUser(utilisateur);
+                        serviceUtilisateurs.changeScreen(event, "/dashboard.fxml", "Client");
                         break;
                     case "Client":
                         serviceUtilisateurs.changeScreen(event, "/clientFront.fxml", "Client");
@@ -73,7 +83,7 @@ public class loginController implements Initializable {
         }
     }
 
-    public void loginButtonOnClick(ActionEvent event){
+    public void loginButtonOnClick(ActionEvent event) throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         if (!mdpLogin.isVisible()){
             if (!pseudoLogin.getText().isBlank() && !mdpTextLogin.getText().isBlank()) {
                 mdpLogin.setText(mdpTextLogin.getText());

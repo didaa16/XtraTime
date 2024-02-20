@@ -79,7 +79,7 @@
                                 </LinearGradient>
                             </textFill>
                         </Label>
-                      <Button fx:id="profileButton" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="120.0" style="-fx-background-color: transparent;" text="Profile" textFill="WHITE">
+                      <Button fx:id="profileButton" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#profileButtonOnClick" prefHeight="43.0" prefWidth="120.0" style="-fx-background-color: transparent;" text="Profile" textFill="WHITE">
                           <font>
                               <Font size="18.0" />
                           </font>
@@ -283,7 +283,7 @@
                   </HBox>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="ajouterAnchorPane" prefHeight="694.0" prefWidth="1341.0">
+            <AnchorPane fx:id="ajouterAnchorPane" prefHeight="694.0" prefWidth="1341.0" visible="false">
                <children>
                   <GridPane layoutX="221.0" layoutY="52.0" prefHeight="544.0" prefWidth="898.0">
                      <columnConstraints>
@@ -327,9 +327,9 @@
                         <Label prefHeight="22.0" prefWidth="67.0" text="E-mail" GridPane.rowIndex="6" />
                         <TextField fx:id="emailAjout" promptText="E-mail" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                         <Label fx:id="emailError" prefHeight="26.0" prefWidth="386.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                        <Label prefHeight="22.0" prefWidth="84.0" text="Mot de passe" GridPane.rowIndex="7" />
+                        <Label fx:id="mdpLabel" prefHeight="22.0" prefWidth="84.0" text="Mot de passe" GridPane.rowIndex="7" />
                         <PasswordField fx:id="mdpAjout" promptText="Mot de passe" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                        <Label prefHeight="22.0" prefWidth="143.0" text="Confirmer Mot de passe" GridPane.rowIndex="8" />
+                        <Label fx:id="confirmMdpLabel" prefHeight="22.0" prefWidth="143.0" text="Confirmer Mot de passe" GridPane.rowIndex="8" />
                         <PasswordField fx:id="confirmMdpAjout" promptText="Confirmer Mot de passe" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                         <Label fx:id="confirmMdpError" prefHeight="26.0" prefWidth="390.0" GridPane.columnIndex="2" GridPane.rowIndex="8" />
                         <Label fx:id="mdpError" prefHeight="26.0" prefWidth="390.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />

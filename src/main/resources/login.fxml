@@ -30,7 +30,7 @@
                </font>
             </Label>
             <Label alignment="CENTER" layoutX="33.0" layoutY="347.0" prefHeight="38.0" prefWidth="161.0" text="Version 1.0" textFill="WHITE" underline="true" />
-            <Button layoutX="85.0" layoutY="29.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-border-color: #2daa67;">
+            <Button fx:id="Exit" layoutX="85.0" layoutY="29.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-border-color: #2daa67;">
                <graphic>
                   <FontAwesomeIconView fill="#2daa67" glyphName="ARROW_LEFT" size="30" />
                </graphic>

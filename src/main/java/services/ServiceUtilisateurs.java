@@ -1,6 +1,7 @@
 package services;
 
 import controllers.loginController;
+import entities.Encryptor;
 import entities.Utilisateur;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,12 +14,22 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import utils.MyDataBase;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import java.io.IOException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ServiceUtilisateurs implements IService <Utilisateur> {
+    Encryptor encryptor = new Encryptor();
+
+    byte[] encryptionKey = {65, 12, 12, 12, 12, 12, 12, 12, 12,
+            12, 12, 12, 12, 12, 12, 12 };
     private Connection cnx;
     private Statement st;
     private PreparedStatement pst;
@@ -137,14 +148,21 @@ public class ServiceUtilisateurs implements IService <Utilisateur> {
     }
 
 
-    public boolean utilisateurLoggedIn(String pseudo, String mdp) throws SQLException {
-        String req = "SELECT * FROM `utilisateurs` WHERE pseudo=? AND mdp=?";
+    public boolean utilisateurLoggedIn(String pseudo, String mdp) throws SQLException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
+        String req = "SELECT mdp FROM `utilisateurs` WHERE pseudo=?";
         PreparedStatement ps = cnx.prepareStatement(req);
         ps.setString(1, pseudo);
-        ps.setString(2, mdp);
         ResultSet rs = ps.executeQuery();
-        return rs.next();
+
+        if (rs.next()) {
+            String mdpCrypteDB = rs.getString("mdp");
+            String mdpCrypteInput = encryptor.encryptString(mdp);
+            return mdpCrypteInput.equals(mdpCrypteDB);
+        } else {
+            return false;
+        }
     }
+
 
     public boolean pseudoExiste(String pseudo) throws SQLException {
         String req = "SELECT * FROM `utilisateurs` WHERE pseudo=?";

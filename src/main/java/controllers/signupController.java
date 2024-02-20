@@ -1,5 +1,6 @@
 package controllers;
 import entities.Utilisateur;
+import entities.Encryptor;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,15 +14,22 @@ import javafx.scene.paint.Color;
 import javafx.event.ActionEvent;
 import services.ServiceUtilisateurs;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class signupController implements Initializable {
     ServiceUtilisateurs serviceUtilisateurs = new ServiceUtilisateurs();
+    Encryptor encryptor = new Encryptor();
 
     /**
      * Called to initialize a controller after its root element has been
@@ -129,11 +137,11 @@ public class signupController implements Initializable {
         }
         return false;
     }
-    public void signUpButtonButtonOnClick(ActionEvent event){
+    public void signUpButtonButtonOnClick(ActionEvent event) throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         if (!getErrors()) {
             Utilisateur newUser = new Utilisateur(pseudoSignup.getText(), Integer.parseInt(cinSignup.getText()), nomSignup.getText(),
                     prenomSignup.getText(), Integer.parseInt(ageSignup.getText()), Integer.parseInt(numtelSignup.getText()), emailSignup.getText(),
-                    mdpSignup.getText(), (roleClientSignup.isSelected() ? "Client" : (roleLocateurSignup.isSelected() ? "Locateur" : "Livreur")));
+                    encryptor.encryptString(mdpSignup.getText()), (roleClientSignup.isSelected() ? "Client" : (roleLocateurSignup.isSelected() ? "Locateur" : "Livreur")));
             try {
                 serviceUtilisateurs.ajouter(newUser);
                 System.out.println("Utilisateur ajouté avec succès !");

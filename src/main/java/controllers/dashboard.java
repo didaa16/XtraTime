@@ -1,11 +1,15 @@
 package controllers;
 
 import java.net.URL;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+import entities.Encryptor;
 import entities.Utilisateur;
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
@@ -20,6 +24,9 @@ import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import services.ServiceUtilisateurs;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.swing.*;
 
 public class dashboard {
@@ -156,11 +163,17 @@ public class dashboard {
     @FXML
     private PasswordField confirmMdpAjout;
     @FXML
-    private Label pseudoError, cinError, nomError, prenomError, ageError, numtelError, emailError, mdpError, confirmMdpError ;;
+    private Label pseudoError, cinError, nomError, prenomError, ageError, numtelError, emailError, mdpError, confirmMdpError, mdpLabel, confirmMdpLabel;
     @FXML
-    private Button annulerButton;
+    private Button annulerButton, ajoutAdminButton;
     ServiceUtilisateurs serviceUtilisateurs;
+    Encryptor encryptor = new Encryptor();
     private int index = -1;
+    private static Utilisateur loggedInUser;
+
+    public static void setLoggedInUser(Utilisateur user) {
+        loggedInUser = user;
+    }
 
     void updateData(){
         pseudoDashboard.setDisable(true);
@@ -412,6 +425,7 @@ public class dashboard {
         emailError.setText("");
         mdpError.setText("");
         confirmMdpError.setText("");
+
         if(pseudoAjout.getText().isBlank()){
             pseudoError.setTextFill(Color.RED);
             pseudoError.setText("Le Pseudo est invalide");
@@ -463,16 +477,23 @@ public class dashboard {
             confirmMdpError.setText("Le mot de passe doit etre le meme");
             return true;
         }
+        try {
+            if (serviceUtilisateurs.pseudoExiste(pseudoAjout.getText())){
+                pseudoError.setTextFill(Color.RED);
+                pseudoError.setText("Ce pseudo est déjà utilisé, veuillez en choisir un autre");
+                return true;
+            }
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
         return false;
     }
-
-
     @FXML
-    private void ajoutAdminButtonOnClick(ActionEvent event){
+    private void ajoutAdminButtonOnClick(ActionEvent event) throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         if (!getErrors1()) {
             Utilisateur newUser = new Utilisateur(pseudoAjout.getText(), Integer.parseInt(cinAjout.getText()), nomAjouter.getText(),
                     prenomAjout.getText(), Integer.parseInt(ageAjout.getText()), Integer.parseInt(numtelAjout.getText()), emailAjout.getText(),
-                    mdpAjout.getText(), "Admin");
+                    encryptor.encryptString(mdpAjout.getText()), "Admin");
             try {
                 serviceUtilisateurs.ajouter(newUser);
                 System.out.println("Admin ajouté avec succès !");
@@ -487,8 +508,31 @@ public class dashboard {
 
         }
     }
-
-
-
-
+    @FXML
+    private void profileButtonOnClick(ActionEvent event){
+        utilisateursAnchorPane.setVisible(false);
+        ajouterAnchorPane.setVisible(true);
+        pseudoAjout.setDisable(true);
+        cinAjout.setDisable(true);
+        nomAjouter.setDisable(true);
+        prenomAjout.setDisable(true);
+        ageAjout.setDisable(true);
+        numtelAjout.setDisable(true);
+        emailAjout.setDisable(true);
+        mdpAjout.setDisable(true);
+        confirmMdpAjout.setDisable(true);
+        pseudoAjout.setText(loggedInUser.getPseudo());
+        cinAjout.setText(String.valueOf(loggedInUser.getCin()));
+        nomAjouter.setText(loggedInUser.getNom());
+        prenomAjout.setText(loggedInUser.getPrenom());
+        ageAjout.setText(String.valueOf(loggedInUser.getAge()));
+        numtelAjout.setText(String.valueOf(loggedInUser.getNumtel()));
+        emailAjout.setText(loggedInUser.getEmail());
+        mdpLabel.setVisible(false);
+        confirmMdpLabel.setVisible(false);
+        mdpAjout.setVisible(false);
+        confirmMdpAjout.setVisible(false);
+        ajoutAdminButton.setVisible(false);
+        annulerButton.setVisible(false);
+    }
 }

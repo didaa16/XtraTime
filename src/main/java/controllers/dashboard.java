@@ -1,5 +1,7 @@
 package controllers;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -16,10 +18,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import services.ServiceUtilisateurs;
@@ -33,144 +41,100 @@ public class dashboard {
 
     @FXML
     private ResourceBundle resources;
-
     @FXML
     private URL location;
 
-    @FXML
-    private TableView<Utilisateur> TableView;
+    //BORDER TOP
+        @FXML
+        private Button Menu;
+        @FXML
+        private Button MenuClose;
+        @FXML
+        private Button logo;
+        @FXML
+        private MenuItem deconnecterButton;
 
-    @FXML
-    private TableColumn<Utilisateur, Integer> ageC;
 
-    @FXML
-    private TextField ageDashboard;
+    //BORDER LEFT
+        @FXML
+        private Button utilisateursButton;
+        @FXML
+        private AnchorPane slider;
 
-    @FXML
-    private Label ageDashboardError;
 
-    @FXML
-    private TableColumn<Utilisateur, Integer> cinC;
+    //BORDER CENTER
 
-    @FXML
-    private TextField cinDashboard;
+        //ANCHOR PANE USERS
+        @FXML
+        private AnchorPane utilisateursAnchorPane;
 
-    @FXML
-    private Label cinDashboardError;
+            //HBOX (RECHERCHE, AJOUTER ADMIN, MODIFIER, SUPPRIMER)
+            @FXML
+            private Button modifierButton, supprimerButton, rechercheButton, ajouterButton;
+            @FXML
+            private TextField rechercheDashboard;
 
-    @FXML
-    private Button deconnecterButton;
+            //HBOX BELOW THE TABLE VIEW (CONTAINS RADIO BOXES)
+            @FXML
+            private ToggleGroup roles;
+            @FXML
+            private RadioButton admins, clients, locateurs, livreurs;
 
-    @FXML
-    private TableColumn<Utilisateur, String> emailC;
+            //TABLE VIEW
+            @FXML
+            private TableView<Utilisateur> TableView;
+            @FXML
+            private TableColumn<Utilisateur, String> pseudoC;
+            @FXML
+            private TableColumn<Utilisateur, Integer> cinC;
+            @FXML
+            private TableColumn<Utilisateur, Integer> nomC;
+            @FXML
+            private TableColumn<Utilisateur, String> prenomC;
+            @FXML
+            private TableColumn<Utilisateur, Integer> ageC;
+            @FXML
+            private TableColumn<Utilisateur, Integer> numTelC;
+            @FXML
+            private TableColumn<Utilisateur, String> emailC;
 
-    @FXML
-    private TextField emailDashboard;
+            //GRIDPANE
+            @FXML
+            private TextField pseudoDashboard, cinDashboard, nomDashboard, prenomDashboard, ageDashboard, numtelDashboard, emailDashboard;
+            @FXML
+            private ToggleGroup role;
+            @FXML
+            private RadioButton roleClientDashboard, roleLocateurDashboard, roleLivreurDashboard;
+            @FXML
+            private Label pseudoDashboardError, cinDashboardError, nomDashboardError, prenomDashboardError, ageDashboardError, numtelDashboardError, emailDashboardError, roleDashboardError;
 
-    @FXML
-    private Label emailDashboardError;
 
-    @FXML
-    private Button modifierButton;
+        //ANCHOR PANE ADD ADMIN, PROFILE
+        @FXML
+        private AnchorPane ajouterAnchorPane;
+            @FXML
+            private TextField pseudoAjout, cinAjout, nomAjouter, prenomAjout, ageAjout, numtelAjout, emailAjout, mdpAjout;
+            @FXML
+            private PasswordField confirmMdpAjout;
+            @FXML
+            private Label pseudoError, cinError, nomError, prenomError, ageError, numtelError, emailError, mdpError, confirmMdpError, mdpLabel, confirmMdpLabel;
+            @FXML
+            private Button annulerButton, ajoutAdminButton;
 
-    @FXML
-    private TableColumn<Utilisateur, Integer> nomC;
+        //ANCHOR PANE MODIFIER MDP
+        @FXML
+        private AnchorPane anchorPaneModifierMdp;
+            @FXML
+            private PasswordField ancienText, nouveauMdp, confirmNouveauMdp;
+            @FXML
+            private Label ancienError, nouveauMdpError, confirmNouveauMdpError;
+            @FXML
+            private Button confirmerNouveauMdp;
 
-    @FXML
-    private TextField nomDashboard;
-
-    @FXML
-    private Label nomDashboardError;
-
-    @FXML
-    private TableColumn<Utilisateur, Integer> numTelC;
-
-    @FXML
-    private TextField numtelDashboard;
-
-    @FXML
-    private Label numtelDashboardError;
-
-    @FXML
-    private TableColumn<Utilisateur, String> prenomC;
-
-    @FXML
-    private TextField prenomDashboard;
-
-    @FXML
-    private Label prenomDashboardError;
-
-    @FXML
-    private Button profileButton;
-
-    @FXML
-    private TableColumn<Utilisateur, String> pseudoC;
-
-    @FXML
-    private TextField pseudoDashboard;
-
-    @FXML
-    private Label pseudoDashboardError;
-
-    @FXML
-    private Button rechercheButton;
-
-    @FXML
-    private TextField rechercheDashboard;
-
-    @FXML
-    private ToggleGroup role;
-
-    @FXML
-    private RadioButton roleClientDashboard;
-
-    @FXML
-    private Label roleDashboardError;
-
-    @FXML
-    private RadioButton roleLivreurDashboard;
-
-    @FXML
-    private RadioButton roleLocateurDashboard;
-
-    @FXML
-    private ToggleGroup roles;
-
-    @FXML
-    private Button supprimerButton;
-    @FXML
-    private RadioButton admins;
-    @FXML
-    private RadioButton clients;
-    @FXML
-    private RadioButton locateurs;
-    @FXML
-    private RadioButton livreurs;
-    @FXML
-    private Button Menu;
-    @FXML
-    private Button MenuClose;
-    @FXML
-    private AnchorPane slider;
-    @FXML
-    private AnchorPane utilisateursAnchorPane;
-    @FXML
-    private AnchorPane ajouterAnchorPane;
-    @FXML
-    private Button utilisateursButton;
-    @FXML
-    private TextField pseudoAjout, cinAjout, nomAjouter, prenomAjout, ageAjout, numtelAjout, emailAjout, mdpAjout;
-    @FXML
-    private PasswordField confirmMdpAjout;
-    @FXML
-    private Label pseudoError, cinError, nomError, prenomError, ageError, numtelError, emailError, mdpError, confirmMdpError, mdpLabel, confirmMdpLabel;
-    @FXML
-    private Button annulerButton, ajoutAdminButton;
     ServiceUtilisateurs serviceUtilisateurs;
     Encryptor encryptor = new Encryptor();
     private int index = -1;
     private static Utilisateur loggedInUser;
-
     public static void setLoggedInUser(Utilisateur user) {
         loggedInUser = user;
     }
@@ -186,8 +150,19 @@ public class dashboard {
     }
     @FXML
     void initialize() {
-        deconnecterButton.setOnMouseClicked(event -> {
-            System.exit(0);
+        logo.setOnAction(event -> {
+            utilisateursAnchorPane.setVisible(false);
+            ajouterAnchorPane.setVisible(false);
+        });
+        deconnecterButton.setOnAction(event -> {
+            try {
+                loggedInUser = null;
+                Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
+                TableView.getScene().setRoot(root);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
         });
         slider.setTranslateX(-176);
         Menu.setOnMouseClicked(event -> {
@@ -252,6 +227,9 @@ public class dashboard {
         emailDashboard.setText(utilisateurSelectionne.getEmail());
         switch (utilisateurSelectionne.getRole()){
             case "Admin":
+                roleClientDashboard.setSelected(false);
+                roleLivreurDashboard.setSelected(false);
+                roleLivreurDashboard.setSelected(false);
                 roleClientDashboard.setDisable(true);
                 roleLocateurDashboard.setDisable(true);
                 roleLivreurDashboard.setDisable(true);
@@ -286,7 +264,6 @@ public class dashboard {
         ageDashboardError.setText("");
         numtelDashboardError.setText("");
         emailDashboardError.setText("");
-        roleDashboardError.setText("");
         if(pseudoDashboard.getText().isBlank()){
             pseudoDashboardError.setTextFill(Color.RED);
             pseudoDashboardError.setText("Le Pseudo est invalide");
@@ -323,11 +300,6 @@ public class dashboard {
             emailDashboardError.setText("L'email est invalide");
             return true;
         }
-        if(!roleClientDashboard.isSelected() && !roleLocateurDashboard.isSelected() && !roleLivreurDashboard.isSelected()){
-            roleDashboardError.setTextFill(Color.RED);
-            roleDashboardError.setText("Le role est obligatoire");
-            return true;
-        }
         return false;
     }
 
@@ -338,7 +310,7 @@ public class dashboard {
                 Utilisateur newUser1 = serviceUtilisateurs.afficherParPseudo(pseudoDashboard.getText());
                 Utilisateur newUser = new Utilisateur(newUser1.getPseudo(), Integer.parseInt(cinDashboard.getText()), nomDashboard.getText(),
                         prenomDashboard.getText(), Integer.parseInt(ageDashboard.getText()), Integer.parseInt(numtelDashboard.getText()),
-                        emailDashboard.getText(), newUser1.getMdp(), (roleClientDashboard.isSelected() ? "Client" : (roleLocateurDashboard.isSelected() ? "Locateur" : "Livreur")));
+                        emailDashboard.getText(), newUser1.getMdp(), (roleClientDashboard.isSelected() ? "Client" : (roleLocateurDashboard.isSelected() ? "Locateur" : (roleLivreurDashboard.isSelected() ? "Livreur" : "Admin"))));
                 serviceUtilisateurs.modifier(newUser);
                 JOptionPane.showMessageDialog(null,"Modification effectuée! ");
                 updateData();
@@ -371,17 +343,22 @@ public class dashboard {
     public void SupprimerButtonButtonOnClick(ActionEvent event){
         try {
             Utilisateur newUser = serviceUtilisateurs.afficherParPseudo(pseudoDashboard.getText());
-            int choix = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment supprimer cet utilisateur ?", "Confirmation de suppression", JOptionPane.YES_NO_OPTION);
+            if (newUser.equals(loggedInUser)){
+                JOptionPane.showMessageDialog(null, "Il s'agit de votre compte! Vous ne pouvez pas le supprimer! ");
+            }
+            else {
+                int choix = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment supprimer cet utilisateur ?", "Confirmation de suppression", JOptionPane.YES_NO_OPTION);
 
-            if (choix == JOptionPane.YES_OPTION) {
-                serviceUtilisateurs.supprimer(newUser);
-                JOptionPane.showMessageDialog(null,"Utilisateur supprimé avec succès ! ");
-                updateData();
-                afficherUtilisateursParRole(newUser.getRole());
-                TableView.refresh();
-                System.out.println("Utilisateur supprimé avec succès !");
-            } else {
-                System.out.println("Suppression annulée par l'utilisateur.");
+                if (choix == JOptionPane.YES_OPTION) {
+                    serviceUtilisateurs.supprimer(newUser);
+                    JOptionPane.showMessageDialog(null,"Utilisateur supprimé avec succès ! ");
+                    updateData();
+                    afficherUtilisateursParRole(newUser.getRole());
+                    TableView.refresh();
+                    System.out.println("Utilisateur supprimé avec succès !");
+                } else {
+                    System.out.println("Suppression annulée par l'utilisateur.");
+                }
             }
         } catch (SQLException e) {
             System.out.println("Erreur lors de la suppression de l'utilisateur : " + e.getMessage());
@@ -404,7 +381,6 @@ public class dashboard {
         emailC.setCellValueFactory(new PropertyValueFactory<>("email"));
         TableView.setItems(listeUtilisateurs);
     }
-
     @FXML
     private void utilisateursButtonOnClick(ActionEvent event){
         utilisateursAnchorPane.setVisible(true);
@@ -535,4 +511,53 @@ public class dashboard {
         ajoutAdminButton.setVisible(false);
         annulerButton.setVisible(false);
     }
+    @FXML
+    private void deconnecterButtonOnClick(ActionEvent event){
+        loggedInUser = null;
+        serviceUtilisateurs.changeScreen(event, "/login.fxml", "LOGIN");
+    }
+    @FXML
+    private void modifierMdpOnClick(ActionEvent event){
+        ajouterAnchorPane.setVisible(false);
+        utilisateursAnchorPane.setVisible(false);
+        anchorPaneModifierMdp.setVisible(true);
+    }
+    private boolean getErrorsMdp() throws NoSuchAlgorithmException {
+        String thisUserMdp = loggedInUser.getMdp();
+        String mdpSaisi = encryptor.encryptString(ancienText.getText());
+        if(!Objects.equals(thisUserMdp, mdpSaisi)){
+            ancienError.setTextFill(Color.RED);
+            ancienError.setText("Ancien Mot de passe invalide");
+            return true;
+        }
+        if(nouveauMdp.getText().isBlank()|| nouveauMdp.getText().length() < 8 || nouveauMdp.getText().matches("[^a-zA-Z0-9]")){
+            nouveauMdpError.setTextFill(Color.RED);
+            nouveauMdpError.setText("Le mot de passe est invalide");
+            return true;
+        }
+        if(confirmNouveauMdp.getText().isBlank()){
+            confirmNouveauMdpError.setTextFill(Color.RED);
+            confirmNouveauMdpError.setText("La confirmation du mot de passe est invalide");
+            return true;
+        }
+        if(!Objects.equals(confirmNouveauMdp.getText(), nouveauMdp.getText())){
+            confirmNouveauMdpError.setTextFill(Color.RED);
+            confirmNouveauMdpError.setText("Le mot de passe doit etre le meme");
+            return true;
+        }
+        return false;
+    }
+    @FXML
+    private void confirmerNouveauMdpOnClick(ActionEvent event) throws NoSuchAlgorithmException {
+        if (!getErrorsMdp()){
+            try {
+                serviceUtilisateurs.modifierMdp(loggedInUser, encryptor.encryptString(nouveauMdp.getText()));
+                JOptionPane.showMessageDialog(null,"Mot de Passe modifié avec succès !");
+                anchorPaneModifierMdp.setVisible(false);
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
 }

@@ -234,6 +234,14 @@ public class ServiceUtilisateurs implements IService <Utilisateur> {
         }
         return utilisateurs;
     }
+    public void modifierMdp(Utilisateur utilisateur, String mdp) throws SQLException {
+        String req="UPDATE `utilisateurs` SET `mdp`=? WHERE pseudo=?";
+        PreparedStatement ps= cnx.prepareStatement(req);
+        ps.setString(1, mdp);
+        ps.setString(2, utilisateur.getPseudo());
+        ps.executeUpdate();
+        System.out.println("Personne modifie");
+    }
 
 
 

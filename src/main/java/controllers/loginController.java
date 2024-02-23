@@ -12,6 +12,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
@@ -41,10 +43,9 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeRequestUrl;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.json.JsonFactory;
+import utils.SendSMS;
 
 public class loginController {
-    @FXML
-    private Button loginButton, signupLogin, googleButton;
     @FXML
     private Label echecLoginLabel;
     @FXML
@@ -52,12 +53,17 @@ public class loginController {
     @FXML
     private PasswordField mdpLogin;
     @FXML
-    private Button eyeIconLogin;
+    private Button loginButton, signupLogin, googleButton, eyeIconLogin, Exit, mdpOublie, verifierEmail, verifierNumTel;
     @FXML
-    private Button Exit;
+    private AnchorPane selectModeAnchor;
     @FXML
-    private Button mdpOublie;
+    private VBox vboxLogin;
 
+
+    private static int rand;
+    private static void setRand(int r) {
+        rand = r;
+    }
     @FXML
     void initialize() {
         Exit.setOnMouseClicked(event -> {
@@ -70,7 +76,10 @@ public class loginController {
 
     private void handleLogin(ActionEvent event) throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         try {
-            if (!serviceUtilisateurs.utilisateurLoggedIn(pseudoLogin.getText(), mdpLogin.getText())) {
+            if (!serviceUtilisateurs.pseudoExiste(pseudoLogin.getText())) {
+                echecLoginLabel.setTextFill(Color.RED);
+                echecLoginLabel.setText("Pseudo ou mot de passe incorrect");
+            }else if (!serviceUtilisateurs.utilisateurLoggedIn(pseudoLogin.getText(), mdpLogin.getText())){
                 echecLoginLabel.setTextFill(Color.RED);
                 echecLoginLabel.setText("Pseudo ou mot de passe incorrect");
                 mdpOublie.setVisible(true);
@@ -144,11 +153,12 @@ public class loginController {
             mdpTextLogin.setVisible(false);
         }
     }
+
+
     @FXML
     private void mdpOublieOnClick(ActionEvent event){
-        Random rd = new Random();
-        int Rand = rd.nextInt(1000000+1);
-        sendMail(event, Rand);
+        vboxLogin.setVisible(false);
+        selectModeAnchor.setVisible(true);
     }
     private void sendMail(ActionEvent event, int Rand){
 
@@ -169,9 +179,10 @@ public class loginController {
             MimeMessage message = new MimeMessage(session);
             message.setSubject("Code de Confirmation d'oublie le mot de passe");
             message.setFrom(new InternetAddress("bchirben8@gmail.com"));
-            message.setText("Voici code de Confirmation d'oublie le mot de passe : " + String.valueOf(Rand));
             Utilisateur newUser = serviceUtilisateurs.afficherParPseudo(pseudoLogin.getText());
             motDePasseOublie.setLoggedInUser(newUser);
+            message.setText("Bonjour " + newUser.getNom() + "\n Voici code de Confirmation d'oublie le mot de passe : " + String.valueOf(Rand));
+
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(newUser.getEmail()));
             try
             {
@@ -180,7 +191,6 @@ public class loginController {
                 transport.connect("smtp.gmail.com","bchirben8@gmail.com","oeopsajyvhamngzz");
                 transport.sendMessage(message, message.getAllRecipients());
                 transport.close();
-                serviceUtilisateurs.changeScreen(event, "/motDePasseOublie.fxml", "Vérifier le code");
             }catch(Exception e)
             {
                 System.out.println(e.getMessage());
@@ -190,6 +200,45 @@ public class loginController {
             System.out.println(e.getMessage());
         }
     }
+
+    @FXML
+    private void verifierNumTelOnClick(ActionEvent event){
+        Random rd = new Random();
+        int Ra = rd.nextInt(1000000+1);
+        motDePasseOublie.setRand(Ra);
+        try {
+            Utilisateur newUser = serviceUtilisateurs.afficherParPseudo(pseudoLogin.getText());
+            motDePasseOublie.setLoggedInUser(newUser);
+            String message = "Bonjour " + newUser.getNom() + " Voici votre code de Confirmation de le mot de passe : " + String.valueOf(Ra);
+            System.out.println(message);
+            String num = "+216"+String.valueOf(newUser.getNumtel());
+            System.out.println(num);
+            SendSMS.SendSMS(message, num);
+            System.out.println("MOOOOOOOOOOOOOOo");
+            motDePasseOublie.setLoggedInUser(serviceUtilisateurs.afficherParPseudo(newUser.getPseudo()));
+            System.out.println("mochkla");
+            serviceUtilisateurs.changeScreen(event, "/motDePasseOublie.fxml", "Vérifier le code");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+    @FXML
+    private void verifierEmailOnClick(ActionEvent event){
+        Random rd = new Random();
+        int Rand = rd.nextInt(1000000+1);
+        serviceUtilisateurs.changeScreen(event, "/motDePasseOublie.fxml", "Vérifier le code");
+        sendMail(event, Rand);
+    }
+
+    @FXML
+    private void retourButtonOnClick(ActionEvent event){
+        vboxLogin.setVisible(true);
+        selectModeAnchor.setVisible(false);
+    }
+
+
 
     @FXML
     private void googleButtonOnClick(ActionEvent event) {

@@ -1,17 +1,14 @@
 package services;
 
 import controllers.loginController;
-import entities.Encryptor;
+import utils.Encryptor;
 import entities.Utilisateur;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import utils.MyDataBase;
 
 import javax.crypto.BadPaddingException;
@@ -120,6 +117,8 @@ public class ServiceUtilisateurs implements IService <Utilisateur> {
         }
         return u;
     }
+
+
 
     public List<Utilisateur> afficherParRole(String role){
         List<Utilisateur> utilisateurs = new ArrayList<>() ; // Initialize the ObservableList

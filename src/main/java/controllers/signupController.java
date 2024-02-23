@@ -1,10 +1,8 @@
 package controllers;
 import entities.Utilisateur;
-import entities.Encryptor;
+import utils.Encryptor;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -15,19 +13,13 @@ import javafx.scene.paint.Color;
 import javafx.event.ActionEvent;
 import services.ServiceUtilisateurs;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 import javax.mail.Message;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.*;
-import java.io.IOException;
 import java.net.URL;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.Objects;
@@ -194,9 +186,9 @@ public class signupController implements Initializable {
             Random rd = new Random();
             int Rand = rd.nextInt(1000000+1);
             signupController.setRand(Rand);
-            sendMail(event, Rand);
             signUpAnchor.setVisible(false);
             codeVerifAnchor.setVisible(true);
+            sendMail(event, Rand);
         }
     }
     @FXML

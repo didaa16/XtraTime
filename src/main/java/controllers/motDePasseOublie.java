@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-import entities.Encryptor;
+import utils.Encryptor;
 import entities.Utilisateur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

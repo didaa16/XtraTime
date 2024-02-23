@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -28,9 +29,9 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="791.0" prefWidth="1561.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.dashboard">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="791.0" prefWidth="1561.0" styleClass="gradient-background" stylesheets="@styless.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.dashboard">
     <top>
-        <AnchorPane prefHeight="86.0" prefWidth="998.0" style="-fx-background-color: #000000;" BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="86.0" prefWidth="998.0" style="-fx-background-color: #000000;" styleClass="container" stylesheets="@styless.css" BorderPane.alignment="CENTER">
             <children>
                 <HBox layoutX="2.0" layoutY="6.0" prefHeight="90.0" prefWidth="1561.0">
                     <children>
@@ -80,7 +81,7 @@
                         </LinearGradient>
                      </textFill>
                      <font>
-                        <Font size="30.0" />
+                        <Font name="System Bold" size="31.0" />
                      </font>
                      <HBox.margin>
                         <Insets top="21.0" />
@@ -130,13 +131,13 @@
         </AnchorPane>
     </top>
     <left>
-        <AnchorPane fx:id="slider" prefHeight="694.0" prefWidth="118.0" style="-fx-background-color: #000000;" BorderPane.alignment="CENTER">
+        <AnchorPane fx:id="slider" prefHeight="722.0" prefWidth="222.0" style="-fx-background-color: #000000;" styleClass="container" stylesheets="@styless.css" BorderPane.alignment="CENTER">
             <children>
                 <VBox layoutX="-1.0" layoutY="34.0" prefHeight="484.0" prefWidth="222.0">
                     <children>
                         <Button fx:id="utilisateursButton" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#utilisateursButtonOnClick" prefHeight="40.0" prefWidth="228.0" style="-fx-background-color: transparent;" text="Utilisateurs" textFill="WHITE">
                             <font>
-                                <Font size="18.0" />
+                                <Font name="System Bold" size="21.0" />
                             </font>
                             <cursor>
                                 <Cursor fx:constant="HAND" />
@@ -167,6 +168,9 @@
                            <HBox.margin>
                               <Insets left="11.0" />
                            </HBox.margin>
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
                         </TextField>
                       <Button fx:id="rechercheButton" mnemonicParsing="false" onAction="#rechercheButtonOnClick" prefHeight="13.0">
                            <graphic>
@@ -209,46 +213,104 @@
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                      </columnConstraints>
                      <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="38.200018310546874" minHeight="10.0" prefHeight="35.000006103515624" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="24.599996948242186" minHeight="10.0" prefHeight="23.799993896484374" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="36.60001220703124" minHeight="10.0" prefHeight="36.60001220703124" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="24.600012207031256" minHeight="10.0" prefHeight="22.199987792968756" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="39.00001831054689" minHeight="10.0" prefHeight="37.40001220703127" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="24.600012207031256" minHeight="10.0" prefHeight="19.79998779296875" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="37.400000000000006" minHeight="10.0" prefHeight="37.400000000000006" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="24.59998168945313" minHeight="10.0" prefHeight="21.400000000000006" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="39.0000061035156" minHeight="10.0" prefHeight="36.60001220703123" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="24.599981689453102" minHeight="10.0" prefHeight="20.59998779296876" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="41.39999999999998" minHeight="10.0" prefHeight="36.60001220703123" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="24.600012207031227" minHeight="10.0" prefHeight="20.59998779296876" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="39.19998779296873" minHeight="10.0" prefHeight="39.19998779296873" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="25.600012207031227" minHeight="10.0" prefHeight="21.600012207031227" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="38.19998779296873" minHeight="10.0" prefHeight="29.399999999999977" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="31.800024414062477" minHeight="10.0" prefHeight="29.399999999999977" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Label prefHeight="22.0" prefWidth="67.0" text="Pseudo" />
-                        <TextField fx:id="pseudoDashboard" promptText="Pseudo" GridPane.columnIndex="1" />
-                        <Label fx:id="pseudoDashboardError" prefHeight="26.0" prefWidth="381.0" GridPane.columnIndex="2" />
-                        <Label prefHeight="22.0" prefWidth="67.0" text="CIN" GridPane.rowIndex="1" />
-                        <TextField fx:id="cinDashboard" promptText="Cin" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label fx:id="cinDashboardError" prefHeight="26.0" prefWidth="384.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                        <Label prefHeight="22.0" prefWidth="67.0" text="Nom" GridPane.rowIndex="2" />
-                        <TextField fx:id="nomDashboard" promptText="Nom" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label fx:id="nomDashboardError" prefHeight="26.0" prefWidth="386.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                        <Label prefHeight="22.0" prefWidth="67.0" text="Prénom" GridPane.rowIndex="3" />
-                        <TextField fx:id="prenomDashboard" promptText="Prénom" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label fx:id="prenomDashboardError" prefHeight="26.0" prefWidth="385.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                        <Label prefHeight="22.0" prefWidth="77.0" text="Age" GridPane.rowIndex="4" />
-                        <TextField fx:id="ageDashboard" promptText="Age" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Label fx:id="ageDashboardError" prefHeight="26.0" prefWidth="387.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                        <Label prefHeight="22.0" prefWidth="87.0" text="N°Téléphone" GridPane.rowIndex="5" />
-                        <TextField fx:id="numtelDashboard" promptText="N°Téléphone" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <Label fx:id="numtelDashboardError" prefHeight="26.0" prefWidth="385.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                        <Label prefHeight="22.0" prefWidth="67.0" text="E-mail" GridPane.rowIndex="6" />
-                        <TextField fx:id="emailDashboard" promptText="E-mail" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                        <Label fx:id="emailDashboardError" prefHeight="26.0" prefWidth="386.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                        <RadioButton fx:id="roleClientDashboard" mnemonicParsing="false" text="Client" GridPane.rowIndex="7">
+                        <Label prefHeight="22.0" prefWidth="67.0" text="Pseudo" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font></Label>
+                        <TextField fx:id="pseudoDashboard" promptText="Pseudo" GridPane.columnIndex="1">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></TextField>
+                        <Label fx:id="pseudoDashboardError" prefHeight="26.0" prefWidth="381.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label prefHeight="22.0" prefWidth="67.0" text="CIN" textFill="WHITE" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font></Label>
+                        <TextField fx:id="cinDashboard" promptText="Cin" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></TextField>
+                        <Label fx:id="cinDashboardError" prefHeight="26.0" prefWidth="384.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label prefHeight="22.0" prefWidth="67.0" text="Nom" textFill="WHITE" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font></Label>
+                        <TextField fx:id="nomDashboard" promptText="Nom" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></TextField>
+                        <Label fx:id="nomDashboardError" prefHeight="26.0" prefWidth="386.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label prefHeight="22.0" prefWidth="67.0" text="Prénom" textFill="WHITE" GridPane.rowIndex="6">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font></Label>
+                        <TextField fx:id="prenomDashboard" promptText="Prénom" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></TextField>
+                        <Label fx:id="prenomDashboardError" prefHeight="26.0" prefWidth="385.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <Label prefHeight="22.0" prefWidth="77.0" text="Age" textFill="WHITE" GridPane.rowIndex="8">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font></Label>
+                        <TextField fx:id="ageDashboard" promptText="Age" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></TextField>
+                        <Label fx:id="ageDashboardError" prefHeight="26.0" prefWidth="387.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                        <Label prefHeight="26.0" prefWidth="117.0" text="N°Téléphone" textFill="WHITE" GridPane.rowIndex="10">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font></Label>
+                        <TextField fx:id="numtelDashboard" promptText="N°Téléphone" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></TextField>
+                        <Label fx:id="numtelDashboardError" prefHeight="26.0" prefWidth="385.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                        <Label prefHeight="22.0" prefWidth="67.0" text="E-mail" textFill="WHITE" GridPane.rowIndex="12">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font></Label>
+                        <TextField fx:id="emailDashboard" promptText="E-mail" GridPane.columnIndex="1" GridPane.rowIndex="12">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></TextField>
+                        <Label fx:id="emailDashboardError" prefHeight="26.0" prefWidth="386.0" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+                        <RadioButton fx:id="roleClientDashboard" mnemonicParsing="false" text="Client" textFill="WHITE" GridPane.rowIndex="14">
                            <toggleGroup>
                               <ToggleGroup fx:id="role" />
                            </toggleGroup>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
                         </RadioButton>
-                        <RadioButton fx:id="roleLocateurDashboard" mnemonicParsing="false" text="Locateur" toggleGroup="$role" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                        <RadioButton fx:id="roleLivreurDashboard" mnemonicParsing="false" text="Livreur" toggleGroup="$role" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-                        <Label fx:id="roleDashboardError" prefHeight="26.0" prefWidth="210.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <RadioButton fx:id="roleLocateurDashboard" mnemonicParsing="false" text="Locateur" textFill="WHITE" toggleGroup="$role" GridPane.columnIndex="1" GridPane.rowIndex="14">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font></RadioButton>
+                        <RadioButton fx:id="roleLivreurDashboard" mnemonicParsing="false" text="Livreur" textFill="WHITE" toggleGroup="$role" GridPane.columnIndex="2" GridPane.rowIndex="14">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font></RadioButton>
+                        <Label fx:id="roleDashboardError" prefHeight="26.0" prefWidth="210.0" GridPane.columnIndex="1" GridPane.rowIndex="15" />
                      </children>
                   </GridPane>
                   <TableView fx:id="TableView" layoutX="1.0" layoutY="137.0" onMouseClicked="#getSelected" prefHeight="485.0" prefWidth="779.0">
@@ -262,39 +324,51 @@
                         <TableColumn fx:id="emailC" prefWidth="155.99993896484375" text="EMAIL" />
                      </columns>
                   </TableView>
-                  <HBox layoutX="230.0" layoutY="99.0" prefHeight="18.0" prefWidth="319.0">
+                  <HBox layoutX="173.0" layoutY="91.0" prefHeight="26.0" prefWidth="434.0">
                      <children>
-                        <RadioButton fx:id="admins" mnemonicParsing="false" selected="true" text="Admins">
+                        <RadioButton fx:id="admins" mnemonicParsing="false" selected="true" text="Admins" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                            <toggleGroup>
                               <ToggleGroup fx:id="roles" />
                            </toggleGroup>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
                         </RadioButton>
-                        <RadioButton fx:id="clients" mnemonicParsing="false" text="Clients" toggleGroup="$roles">
+                        <RadioButton fx:id="clients" mnemonicParsing="false" text="Clients" textFill="WHITE" toggleGroup="$roles">
                            <padding>
                               <Insets left="20.0" />
                            </padding>
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
                         </RadioButton>
-                        <RadioButton fx:id="locateurs" mnemonicParsing="false" text="Locateurs" toggleGroup="$roles">
+                        <RadioButton fx:id="locateurs" mnemonicParsing="false" text="Locateurs" textFill="WHITE" toggleGroup="$roles">
                            <padding>
                               <Insets left="20.0" />
                            </padding>
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
                         </RadioButton>
-                        <RadioButton fx:id="livreurs" mnemonicParsing="false" text="Livreurs" toggleGroup="$roles">
+                        <RadioButton fx:id="livreurs" mnemonicParsing="false" text="Livreurs" textFill="WHITE" toggleGroup="$roles">
                            <padding>
                               <Insets left="20.0" />
                            </padding>
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
                         </RadioButton>
                      </children>
                   </HBox>
@@ -302,9 +376,8 @@
             </AnchorPane>
             <AnchorPane fx:id="ajouterAnchorPane" prefHeight="694.0" prefWidth="1341.0" visible="false">
                <children>
-                  <GridPane layoutX="221.0" layoutY="52.0" prefHeight="544.0" prefWidth="898.0">
+                  <GridPane layoutX="221.0" layoutY="52.0" prefHeight="583.0" prefWidth="898.0">
                      <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                      </columnConstraints>
@@ -321,50 +394,125 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Label prefHeight="22.0" prefWidth="67.0" text="Pseudo" />
+                        <Label prefHeight="22.0" prefWidth="67.0" stylesheets="@styless.css" text="Pseudo" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="shadow" />
+                              <String fx:value="disabled-label" />
+                           </styleClass></Label>
                         <TextField fx:id="pseudoAjout" promptText="Pseudo" GridPane.columnIndex="1" />
-                        <Label fx:id="pseudoError" prefHeight="26.0" prefWidth="381.0" GridPane.columnIndex="2" />
-                        <Label prefHeight="22.0" prefWidth="67.0" text="CIN" GridPane.rowIndex="1" />
-                        <TextField fx:id="cinAjout" promptText="Cin" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label fx:id="cinError" prefHeight="26.0" prefWidth="384.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                        <Label prefHeight="22.0" prefWidth="67.0" text="Nom" GridPane.rowIndex="2" />
-                        <TextField fx:id="nomAjouter" promptText="Nom" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label fx:id="nomError" prefHeight="26.0" prefWidth="386.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                        <Label prefHeight="22.0" prefWidth="67.0" text="Prénom" GridPane.rowIndex="3" />
-                        <TextField fx:id="prenomAjout" promptText="Prénom" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label fx:id="prenomError" prefHeight="26.0" prefWidth="385.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                        <Label prefHeight="22.0" prefWidth="77.0" text="Age" GridPane.rowIndex="4" />
-                        <TextField fx:id="ageAjout" promptText="Age" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Label fx:id="ageError" prefHeight="26.0" prefWidth="387.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                        <Label prefHeight="22.0" prefWidth="87.0" text="N°Téléphone" GridPane.rowIndex="5" />
-                        <TextField fx:id="numtelAjout" promptText="N°Téléphone" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <Label fx:id="numtelError" prefHeight="26.0" prefWidth="385.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                        <Label prefHeight="22.0" prefWidth="67.0" text="E-mail" GridPane.rowIndex="6" />
-                        <TextField fx:id="emailAjout" promptText="E-mail" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                        <Label fx:id="emailError" prefHeight="26.0" prefWidth="386.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                        <Label fx:id="mdpLabel" prefHeight="22.0" prefWidth="84.0" text="Mot de passe" GridPane.rowIndex="7" />
-                        <PasswordField fx:id="mdpAjout" promptText="Mot de passe" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                        <Label fx:id="confirmMdpLabel" prefHeight="22.0" prefWidth="143.0" text="Confirmer Mot de passe" GridPane.rowIndex="8" />
-                        <PasswordField fx:id="confirmMdpAjout" promptText="Confirmer Mot de passe" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                        <Label fx:id="confirmMdpError" prefHeight="26.0" prefWidth="390.0" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-                        <Label fx:id="mdpError" prefHeight="26.0" prefWidth="390.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-                        <Button fx:id="ajoutAdminButton" mnemonicParsing="false" onAction="#ajoutAdminButtonOnClick" prefHeight="33.0" prefWidth="178.0" style="-fx-background-color: #2daa67;" text="Ajouter Admin" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                        <Label fx:id="pseudoError" prefHeight="26.0" prefWidth="381.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label prefHeight="22.0" prefWidth="67.0" stylesheets="@styless.css" text="CIN" textFill="WHITE" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="shadow" />
+                              <String fx:value="disabled-label" />
+                           </styleClass></Label>
+                        <TextField fx:id="cinAjout" promptText="Cin" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label fx:id="cinError" prefHeight="26.0" prefWidth="384.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label prefHeight="22.0" prefWidth="67.0" stylesheets="@styless.css" text="Nom" textFill="WHITE" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="shadow" />
+                              <String fx:value="disabled-label" />
+                           </styleClass></Label>
+                        <TextField fx:id="nomAjouter" promptText="Nom" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label fx:id="nomError" prefHeight="26.0" prefWidth="386.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label prefHeight="22.0" prefWidth="67.0" stylesheets="@styless.css" text="Prénom" textFill="WHITE" GridPane.rowIndex="6">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="shadow" />
+                              <String fx:value="disabled-label" />
+                           </styleClass></Label>
+                        <TextField fx:id="prenomAjout" promptText="Prénom" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Label fx:id="prenomError" prefHeight="26.0" prefWidth="385.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <Label prefHeight="22.0" prefWidth="77.0" stylesheets="@styless.css" text="Age" textFill="WHITE" GridPane.rowIndex="8">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="shadow" />
+                              <String fx:value="disabled-label" />
+                           </styleClass></Label>
+                        <TextField fx:id="ageAjout" promptText="Age" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <Label fx:id="ageError" prefHeight="26.0" prefWidth="387.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                        <Label prefHeight="22.0" prefWidth="87.0" stylesheets="@styless.css" text="N°Téléphone" textFill="WHITE" GridPane.rowIndex="10">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="shadow" />
+                              <String fx:value="disabled-label" />
+                           </styleClass></Label>
+                        <TextField fx:id="numtelAjout" promptText="N°Téléphone" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                        <Label fx:id="numtelError" prefHeight="26.0" prefWidth="385.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                        <Label prefHeight="22.0" prefWidth="67.0" stylesheets="@styless.css" text="E-mail" textFill="WHITE" GridPane.rowIndex="12">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="shadow" />
+                              <String fx:value="disabled-label" />
+                           </styleClass></Label>
+                        <TextField fx:id="emailAjout" promptText="E-mail" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+                        <Label fx:id="emailError" prefHeight="26.0" prefWidth="386.0" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+                        <Label fx:id="mdpLabel" prefHeight="26.0" prefWidth="108.0" stylesheets="@styless.css" text="Mot de passe" textFill="WHITE" GridPane.rowIndex="14">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="shadow" />
+                              <String fx:value="disabled-label" />
+                           </styleClass></Label>
+                        <PasswordField fx:id="mdpAjout" promptText="Mot de passe" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+                        <Label fx:id="confirmMdpLabel" prefHeight="26.0" prefWidth="190.0" stylesheets="@styless.css" text="Confirmer Mot de passe" textFill="WHITE" GridPane.rowIndex="16">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="shadow" />
+                              <String fx:value="disabled-label" />
+                           </styleClass></Label>
+                        <PasswordField fx:id="confirmMdpAjout" promptText="Confirmer Mot de passe" GridPane.columnIndex="1" GridPane.rowIndex="16" />
+                        <Label fx:id="confirmMdpError" prefHeight="26.0" prefWidth="390.0" GridPane.columnIndex="1" GridPane.rowIndex="17" />
+                        <Label fx:id="mdpError" prefHeight="26.0" prefWidth="390.0" GridPane.columnIndex="1" GridPane.rowIndex="15" />
+                        <Button fx:id="ajoutAdminButton" mnemonicParsing="false" onAction="#ajoutAdminButtonOnClick" prefHeight="33.0" prefWidth="178.0" style="-fx-background-color: #2daa67;" text="Ajouter Admin" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="18">
                            <GridPane.margin>
-                              <Insets left="50.0" />
+                              <Insets />
                            </GridPane.margin>
                            <font>
-                              <Font size="15.0" />
+                              <Font name="System Bold" size="15.0" />
                            </font>
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button fx:id="annulerButton" mnemonicParsing="false" onAction="#utilisateursButtonOnClick" prefHeight="26.0" prefWidth="168.0" text="Annuler" GridPane.columnIndex="1" GridPane.rowIndex="11">
+                        <Button fx:id="annulerButton" mnemonicParsing="false" onAction="#utilisateursButtonOnClick" prefHeight="26.0" prefWidth="168.0" text="Annuler" GridPane.columnIndex="1" GridPane.rowIndex="20">
                            <GridPane.margin>
-                              <Insets left="57.0" />
+                              <Insets left="5.0" />
                            </GridPane.margin>
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
                         </Button>
                      </children>
                   </GridPane>
@@ -376,7 +524,6 @@
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -385,31 +532,46 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Label prefHeight="22.0" prefWidth="116.0" text="Ancien Mot de passe" />
-                        <Label fx:id="ancienError" prefHeight="26.0" prefWidth="386.0" GridPane.columnIndex="2" />
-                        <Label fx:id="mdpLabel1" prefHeight="22.0" prefWidth="84.0" text="Mot de passe" GridPane.rowIndex="1" />
-                        <PasswordField fx:id="nouveauMdp" promptText="Mot de passe" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label fx:id="confirmMdpLabel1" prefHeight="22.0" prefWidth="143.0" text="Confirmer Mot de passe" GridPane.rowIndex="2" />
-                        <PasswordField fx:id="confirmNouveauMdp" promptText="Confirmer Mot de passe" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label fx:id="confirmNouveauMdpError" prefHeight="26.0" prefWidth="390.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                        <Label fx:id="nouveauMdpError" prefHeight="26.0" prefWidth="390.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                        <Button fx:id="confirmerNouveauMdp" mnemonicParsing="false" onAction="#confirmerNouveauMdpOnClick" prefHeight="33.0" prefWidth="178.0" style="-fx-background-color: #2daa67;" text="Confirmer" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                        <Label prefHeight="27.0" prefWidth="181.0" text="Ancien Mot de passe" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font></Label>
+                        <Label fx:id="ancienError" prefHeight="26.0" prefWidth="386.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="mdpLabel1" prefHeight="27.0" prefWidth="217.0" text="Nouveau Mot de passe" textFill="WHITE" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font></Label>
+                        <PasswordField fx:id="nouveauMdp" promptText="Nouveau Mot de passe" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label fx:id="confirmMdpLabel1" prefHeight="27.0" prefWidth="217.0" text="Confirmer Mot de passe" textFill="WHITE" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font></Label>
+                        <PasswordField fx:id="confirmNouveauMdp" promptText="Confirmer Mot de passe" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label fx:id="confirmNouveauMdpError" prefHeight="26.0" prefWidth="390.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label fx:id="nouveauMdpError" prefHeight="26.0" prefWidth="390.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Button fx:id="confirmerNouveauMdp" mnemonicParsing="false" onAction="#confirmerNouveauMdpOnClick" prefHeight="33.0" prefWidth="178.0" style="-fx-background-color: #2daa67;" text="Confirmer" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="7">
                            <GridPane.margin>
-                              <Insets left="50.0" />
+                              <Insets />
                            </GridPane.margin>
                            <font>
-                              <Font size="15.0" />
+                              <Font name="System Bold" size="16.0" />
                            </font>
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button fx:id="annulerButton1" mnemonicParsing="false" onAction="#utilisateursButtonOnClick" prefHeight="26.0" prefWidth="168.0" text="Annuler" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                        <Button fx:id="annulerButton1" mnemonicParsing="false" onAction="#utilisateursButtonOnClick" prefHeight="26.0" prefWidth="168.0" text="Annuler" GridPane.columnIndex="1" GridPane.rowIndex="8">
                            <GridPane.margin>
-                              <Insets left="57.0" />
+                              <Insets left="5.0" />
                            </GridPane.margin>
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
                         </Button>
                         <PasswordField fx:id="ancienText" promptText="Ancien Mot de passe" GridPane.columnIndex="1" />
                      </children>

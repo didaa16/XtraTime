@@ -1,112 +1,327 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="706.0" prefWidth="1122.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.signupController">
-   <left>
-      <AnchorPane prefHeight="598.0" prefWidth="217.0" style="-fx-background-color: #000000;" BorderPane.alignment="CENTER">
+<SplitPane dividerPositions="0.23123074428409274" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1235.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.signupController">
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #000000;">
          <children>
-            <ImageView fitHeight="118.0" fitWidth="131.0" layoutX="50.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@Design/LOGO.png" />
-               </image>
-            </ImageView>
-            <Label layoutX="20.0" layoutY="445.0" text="XtraTime Application Desktop" textFill="WHITE" />
-            <Label layoutX="75.0" layoutY="480.0" text="Version 1.0" textFill="WHITE" />
-            <Button layoutX="82.0" layoutY="23.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-border-color: #2daa67;">
-               <graphic>
-                  <FontAwesomeIconView fill="#2daa67" glyphName="ARROW_LEFT" size="30" />
-               </graphic>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-         </children>
-      </AnchorPane>
-   </left>
-   <center>
-      <AnchorPane prefHeight="598.0" prefWidth="576.0" BorderPane.alignment="CENTER">
-         <children>
-            <GridPane layoutX="35.0" layoutY="37.0" prefHeight="514.0" prefWidth="866.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+            <VBox prefHeight="738.0" prefWidth="322.0" styleClass="container">
                <children>
-                  <Label prefHeight="22.0" prefWidth="67.0" text="Pseudo" />
-                  <TextField fx:id="pseudoSignup" promptText="Pseudo" GridPane.columnIndex="1" />
-                  <Label fx:id="pseudoSignupError" prefHeight="26.0" prefWidth="381.0" GridPane.columnIndex="2" />
-                  <Label prefHeight="22.0" prefWidth="67.0" text="CIN" GridPane.rowIndex="1" />
-                  <TextField fx:id="cinSignup" promptText="Cin" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label fx:id="cinSignupError" prefHeight="26.0" prefWidth="384.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <Label prefHeight="22.0" prefWidth="67.0" text="Nom" GridPane.rowIndex="2" />
-                  <TextField fx:id="nomSignup" promptText="Nom" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label fx:id="nomSignupError" prefHeight="26.0" prefWidth="386.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <Label prefHeight="22.0" prefWidth="67.0" text="Prénom" GridPane.rowIndex="3" />
-                  <TextField fx:id="prenomSignup" promptText="Prénom" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Label fx:id="prenomSignupError" prefHeight="26.0" prefWidth="385.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                  <Label prefHeight="22.0" prefWidth="77.0" text="Age" GridPane.rowIndex="4" />
-                  <TextField fx:id="ageSignup" promptText="Age" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <Label fx:id="ageSignupError" prefHeight="26.0" prefWidth="387.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                  <Label prefHeight="22.0" prefWidth="87.0" text="N°Téléphone" GridPane.rowIndex="5" />
-                  <TextField fx:id="numtelSignup" promptText="N°Téléphone" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <Label fx:id="numtelSignupError" prefHeight="26.0" prefWidth="385.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                  <Label prefHeight="22.0" prefWidth="67.0" text="E-mail" GridPane.rowIndex="6" />
-                  <TextField fx:id="emailSignup" promptText="E-mail" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <Label fx:id="emailSignupError" prefHeight="26.0" prefWidth="386.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                  <Label prefHeight="22.0" prefWidth="84.0" text="Mot de passe" GridPane.rowIndex="7" />
-                  <PasswordField fx:id="mdpSignup" promptText="Mot de passe" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                  <Label prefHeight="22.0" prefWidth="143.0" text="Confirmer Mot de passe" GridPane.rowIndex="8" />
-                  <PasswordField fx:id="confirmMdpSignup" promptText="Confirmer Mot de passe" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                  <Label fx:id="confirmMdpSignupError" prefHeight="26.0" prefWidth="390.0" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-                  <Label fx:id="mdpSignupError" prefHeight="26.0" prefWidth="390.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-                  <RadioButton fx:id="roleClientSignup" mnemonicParsing="false" text="Client" GridPane.rowIndex="9">
+                  <Button fx:id="Exit" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-border-color: #2daa67;">
+                     <graphic>
+                        <FontAwesomeIconView fill="#2daa67" glyphName="ARROW_LEFT" size="30" />
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <VBox.margin>
+                        <Insets left="140.0" top="50.0" />
+                     </VBox.margin>
+                  </Button>
+                  <ImageView fitHeight="247.0" fitWidth="253.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Design/LOGO.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets left="30.0" top="100.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <Label alignment="CENTER" prefHeight="43.0" prefWidth="202.0" text="XtraTime Desktop Application" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="50.0" top="100.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="38.0" prefWidth="161.0" text="Version 1.0" textFill="WHITE" underline="true">
+                     <font>
+                        <Font name="System Bold Italic" size="13.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="65.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+               <stylesheets>
+                  <URL value="@styless.css" />
+                  <URL value="@styless.css" />
+               </stylesheets>
+            </VBox>
+         </children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="580.0" prefWidth="754.0" styleClass="gradient-background" stylesheets="@styless.css">
+         <children>
+            <GridPane layoutX="23.0" layoutY="30.0" prefHeight="528.0" prefWidth="866.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label prefHeight="22.0" prefWidth="67.0" styleClass="shadow" text="Pseudo" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <stylesheets>
+                        <URL value="@styless.css" />
+                        <URL value="@styless.css" />
+                     </stylesheets>
+                  </Label>
+                  <TextField fx:id="pseudoSignup" promptText="Pseudo" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </TextField>
+                  <Label fx:id="pseudoSignupError" prefHeight="26.0" prefWidth="381.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <stylesheets>
+                        <URL value="@styless.css" />
+                        <URL value="@styless.css" />
+                     </stylesheets></Label>
+                  <Label prefHeight="22.0" prefWidth="67.0" styleClass="shadow" text="CIN" textFill="WHITE" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <stylesheets>
+                        <URL value="@styless.css" />
+                        <URL value="@styless.css" />
+                     </stylesheets>
+                  </Label>
+                  <TextField fx:id="cinSignup" promptText="Cin" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </TextField>
+                  <Label fx:id="cinSignupError" prefHeight="26.0" prefWidth="384.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <stylesheets>
+                        <URL value="@styless.css" />
+                        <URL value="@styless.css" />
+                     </stylesheets></Label>
+                  <Label prefHeight="22.0" prefWidth="67.0" styleClass="shadow" text="Nom" textFill="WHITE" GridPane.rowIndex="4">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <stylesheets>
+                        <URL value="@styless.css" />
+                        <URL value="@styless.css" />
+                     </stylesheets>
+                  </Label>
+                  <TextField fx:id="nomSignup" promptText="Nom" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </TextField>
+                  <Label fx:id="nomSignupError" prefHeight="26.0" prefWidth="386.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <stylesheets>
+                        <URL value="@styless.css" />
+                        <URL value="@styless.css" />
+                     </stylesheets></Label>
+                  <Label prefHeight="22.0" prefWidth="67.0" styleClass="shadow" text="Prénom" textFill="WHITE" GridPane.rowIndex="6">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <stylesheets>
+                        <URL value="@styless.css" />
+                        <URL value="@styless.css" />
+                     </stylesheets>
+                  </Label>
+                  <TextField fx:id="prenomSignup" promptText="Prénom" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </TextField>
+                  <Label fx:id="prenomSignupError" prefHeight="26.0" prefWidth="385.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                     <stylesheets>
+                        <URL value="@styless.css" />
+                        <URL value="@styless.css" />
+                     </stylesheets></Label>
+                  <Label prefHeight="22.0" prefWidth="77.0" styleClass="shadow" text="Age" textFill="WHITE" GridPane.rowIndex="8">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <stylesheets>
+                        <URL value="@styless.css" />
+                        <URL value="@styless.css" />
+                     </stylesheets>
+                  </Label>
+                  <TextField fx:id="ageSignup" promptText="Age" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </TextField>
+                  <Label fx:id="ageSignupError" prefHeight="26.0" prefWidth="387.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                     <stylesheets>
+                        <URL value="@styless.css" />
+                        <URL value="@styless.css" />
+                     </stylesheets></Label>
+                  <Label prefHeight="26.0" prefWidth="134.0" styleClass="shadow" text="N°Téléphone" textFill="WHITE" GridPane.rowIndex="10">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <stylesheets>
+                        <URL value="@styless.css" />
+                        <URL value="@styless.css" />
+                     </stylesheets>
+                  </Label>
+                  <TextField fx:id="numtelSignup" promptText="N°Téléphone" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </TextField>
+                  <Label fx:id="numtelSignupError" prefHeight="26.0" prefWidth="385.0" GridPane.columnIndex="1" GridPane.rowIndex="11">
+                     <stylesheets>
+                        <URL value="@styless.css" />
+                        <URL value="@styless.css" />
+                     </stylesheets></Label>
+                  <Label prefHeight="22.0" prefWidth="67.0" styleClass="shadow" text="E-mail" textFill="WHITE" GridPane.rowIndex="12">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <stylesheets>
+                        <URL value="@styless.css" />
+                        <URL value="@styless.css" />
+                     </stylesheets>
+                  </Label>
+                  <TextField fx:id="emailSignup" promptText="E-mail" GridPane.columnIndex="1" GridPane.rowIndex="12">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </TextField>
+                  <Label fx:id="emailSignupError" prefHeight="26.0" prefWidth="386.0" GridPane.columnIndex="1" GridPane.rowIndex="13">
+                     <stylesheets>
+                        <URL value="@styless.css" />
+                        <URL value="@styless.css" />
+                     </stylesheets></Label>
+                  <Label prefHeight="26.0" prefWidth="134.0" styleClass="shadow" text="Mot de passe" textFill="WHITE" GridPane.rowIndex="14">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <stylesheets>
+                        <URL value="@styless.css" />
+                        <URL value="@styless.css" />
+                     </stylesheets>
+                  </Label>
+                  <PasswordField fx:id="mdpSignup" promptText="Mot de passe" GridPane.columnIndex="1" GridPane.rowIndex="14">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </PasswordField>
+                  <Label prefHeight="26.0" prefWidth="198.0" styleClass="shadow" text="Confirmer Mot de passe" textFill="WHITE" GridPane.rowIndex="16">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <stylesheets>
+                        <URL value="@styless.css" />
+                        <URL value="@styless.css" />
+                     </stylesheets>
+                  </Label>
+                  <PasswordField fx:id="confirmMdpSignup" promptText="Confirmer Mot de passe" GridPane.columnIndex="1" GridPane.rowIndex="16">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </PasswordField>
+                  <Label fx:id="confirmMdpSignupError" prefHeight="26.0" prefWidth="390.0" GridPane.columnIndex="1" GridPane.rowIndex="17">
+                     <stylesheets>
+                        <URL value="@styless.css" />
+                        <URL value="@styless.css" />
+                     </stylesheets></Label>
+                  <Label fx:id="mdpSignupError" prefHeight="26.0" prefWidth="390.0" GridPane.columnIndex="1" GridPane.rowIndex="15">
+                     <stylesheets>
+                        <URL value="@styless.css" />
+                        <URL value="@styless.css" />
+                     </stylesheets></Label>
+                  <RadioButton fx:id="roleClientSignup" mnemonicParsing="false" styleClass="shadow" text="Client" textFill="WHITE" GridPane.rowIndex="18">
                      <toggleGroup>
                         <ToggleGroup fx:id="role" />
                      </toggleGroup>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <stylesheets>
+                        <URL value="@styless.css" />
+                        <URL value="@styless.css" />
+                     </stylesheets>
                   </RadioButton>
-                  <RadioButton fx:id="roleLocateurSignup" mnemonicParsing="false" text="Locateur" toggleGroup="$role" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                  <RadioButton fx:id="roleLivreurSignup" mnemonicParsing="false" text="Livreur" toggleGroup="$role" GridPane.columnIndex="2" GridPane.rowIndex="9" />
-                  <Label fx:id="roleSignupError" prefHeight="26.0" prefWidth="301.0" GridPane.rowIndex="10" />
+                  <RadioButton fx:id="roleLocateurSignup" mnemonicParsing="false" styleClass="shadow" text="Locateur" textFill="WHITE" toggleGroup="$role" GridPane.columnIndex="1" GridPane.rowIndex="18">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <stylesheets>
+                        <URL value="@styless.css" />
+                        <URL value="@styless.css" />
+                     </stylesheets>
+                  </RadioButton>
+                  <RadioButton fx:id="roleLivreurSignup" mnemonicParsing="false" styleClass="shadow" text="Livreur" textFill="WHITE" toggleGroup="$role" GridPane.columnIndex="2" GridPane.rowIndex="18">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <stylesheets>
+                        <URL value="@styless.css" />
+                        <URL value="@styless.css" />
+                     </stylesheets>
+                  </RadioButton>
+                  <Label fx:id="roleSignupError" prefHeight="26.0" prefWidth="301.0" GridPane.columnIndex="1" GridPane.rowIndex="19" />
                </children>
             </GridPane>
-            <VBox layoutX="368.0" layoutY="567.0" prefHeight="124.0" prefWidth="222.0">
+            <VBox layoutX="345.0" layoutY="571.0" prefHeight="124.0" prefWidth="222.0">
                <children>
-                  <Button fx:id="signUpButton" mnemonicParsing="false" onAction="#signUpButtonButtonOnClick" prefHeight="41.0" prefWidth="226.0" style="-fx-background-color: #2daa67;" text="S'inscrire" textFill="WHITE" />
-                  <Label alignment="CENTER" prefHeight="43.0" prefWidth="224.0" text="Vous avez déja un compte ?" />
-                  <Button fx:id="loginSignup" mnemonicParsing="false" onAction="#loginSignupButtonOnClick" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Se Connecter" textFill="#2f00ff" underline="true" />
+                  <Button fx:id="signUpButton" mnemonicParsing="false" onAction="#signUpButtonButtonOnClick" prefHeight="41.0" prefWidth="226.0" style="-fx-background-color: #2daa67;" text="S'inscrire" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Label alignment="CENTER" prefHeight="43.0" prefWidth="224.0" styleClass="shadow" text="Vous avez déja un compte ?" textFill="WHITE">
+                     <stylesheets>
+                        <URL value="@styless.css" />
+                        <URL value="@styless.css" />
+                     </stylesheets></Label>
+                  <Button fx:id="loginSignup" mnemonicParsing="false" onAction="#loginSignupButtonOnClick" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Se Connecter" textFill="#2f00ff" underline="true">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
                </children>
             </VBox>
-         </children>
-      </AnchorPane>
-   </center>
-</BorderPane>
+         </children></AnchorPane>
+  </items>
+</SplitPane>

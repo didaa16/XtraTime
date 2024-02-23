@@ -1,4 +1,5 @@
 package controllers;
+import com.google.api.client.http.javanet.NetHttpTransport;
 import controllers.motDePasseOublie;
 import entities.Utilisateur;
 import javafx.fxml.FXML;
@@ -19,22 +20,31 @@ import services.ServiceUtilisateurs;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import java.awt.*;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Array;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.ResourceBundle;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
+import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
+import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeRequestUrl;
+import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
+import com.google.api.client.json.JsonFactory;
 
 public class loginController {
     @FXML
-    private Button loginButton, signupLogin;
+    private Button loginButton, signupLogin, googleButton;
     @FXML
     private Label echecLoginLabel;
     @FXML
@@ -131,7 +141,7 @@ public class loginController {
             eyeIconLogin.setStyle("-fx-background-image : url('../../resources/Design/eyeIcon1.png')");
         } else {
             mdpLogin.setText(mdpTextLogin.getText());
-            eyeIconLogin.setStyle("-fx-background-image: url('../../resources/Design/eyeIcon.png')");
+            mdpTextLogin.setVisible(false);
         }
     }
     @FXML
@@ -179,6 +189,36 @@ public class loginController {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    @FXML
+    private void googleButtonOnClick(ActionEvent event) {
+        /*// Créer un flux d'autorisation OAuth 2.0 avec les identifiants client
+        GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
+                new NetHttpTransport(),
+                new JacksonFactory(),
+                "587517788482-hrp0jkobrr5m28rtqs1qr2r24ufdt9se.apps.googleusercontent.com", // Utilisez votre ID client ici
+                "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", // Utilisez votre code secret de client ici
+                Arrays.asList("profile", "email", "calendar")) // Exemple de scopes
+                .build();
+
+        // Générer l'URL d'autorisation OAuth 2.0
+        String authorizationUrl = flow.newAuthorizationUrl()
+                .setRedirectUri("YOUR_REDIRECT_URI")
+                .build();
+
+        // Ouvrir une fenêtre de navigateur ou une boîte de dialogue pour permettre à l'utilisateur de se connecter avec Google
+        // et autoriser votre application
+        // Par exemple, vous pouvez utiliser la classe Desktop pour ouvrir une URL dans le navigateur par défaut
+        try {
+            Desktop.getDesktop().browse(new URI(authorizationUrl));
+        } catch (IOException | URISyntaxException e) {
+            System.out.println(e.getMessage());
+        }
+
+        // Une fois l'utilisateur connecté avec succès, changer d'écran vers le tableau de bord
+        // Notez que cette ligne sera exécutée après que l'utilisateur se soit connecté et ait autorisé l'application
+        serviceUtilisateurs.changeScreen(event, "/dashboard.fxml", "Client");*/
     }
 
 

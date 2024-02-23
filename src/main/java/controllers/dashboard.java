@@ -153,6 +153,7 @@ public class dashboard {
         logo.setOnAction(event -> {
             utilisateursAnchorPane.setVisible(false);
             ajouterAnchorPane.setVisible(false);
+            anchorPaneModifierMdp.setVisible(false);
         });
         deconnecterButton.setOnAction(event -> {
             try {
@@ -385,6 +386,7 @@ public class dashboard {
     private void utilisateursButtonOnClick(ActionEvent event){
         utilisateursAnchorPane.setVisible(true);
         ajouterAnchorPane.setVisible(false);
+        anchorPaneModifierMdp.setVisible(false);
     }
     @FXML
     private void ajouterButtonOnClick(ActionEvent event){
@@ -487,6 +489,7 @@ public class dashboard {
     @FXML
     private void profileButtonOnClick(ActionEvent event){
         utilisateursAnchorPane.setVisible(false);
+        anchorPaneModifierMdp.setVisible(false);
         ajouterAnchorPane.setVisible(true);
         pseudoAjout.setDisable(true);
         cinAjout.setDisable(true);

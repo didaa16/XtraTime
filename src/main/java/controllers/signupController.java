@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.RadioButton;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.event.ActionEvent;
 import services.ServiceUtilisateurs;
@@ -17,6 +18,11 @@ import services.ServiceUtilisateurs;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
@@ -25,6 +31,8 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.Objects;
+import java.util.Properties;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class signupController implements Initializable {
@@ -45,16 +53,23 @@ public class signupController implements Initializable {
 
     }
     @FXML
-    private TextField pseudoSignup, cinSignup, nomSignup, prenomSignup, ageSignup, numtelSignup, emailSignup;
+    private TextField pseudoSignup, cinSignup, nomSignup, prenomSignup, ageSignup, numtelSignup, emailSignup, codeVerification;
     @FXML
     private PasswordField mdpSignup, confirmMdpSignup;
     @FXML
     private RadioButton roleClientSignup, roleLocateurSignup, roleLivreurSignup;
     @FXML
-    private Button signUpButton, loginSignup;
+    private Button signUpButton, loginSignup, validerCode, retourButton;
     @FXML
     private Label pseudoSignupError, cinSignupError, nomSignupError, prenomSignupError, ageSignupError, numtelSignupError, emailSignupError, mdpSignupError, confirmMdpSignupError, roleSignupError ;
+    @FXML
+    private AnchorPane codeVerifAnchor, signUpAnchor ;
 
+
+    private static int rand;
+    private static void setRand(int r) {
+        rand = r;
+    }
 
     public void loginSignupButtonOnClick(ActionEvent event){
         serviceUtilisateurs.changeScreen(event, "/login.fxml", "Login");
@@ -137,8 +152,57 @@ public class signupController implements Initializable {
         }
         return false;
     }
-    public void signUpButtonButtonOnClick(ActionEvent event) throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
+    private void sendMail(ActionEvent event, int Rand){
+
+        Properties props=new Properties();
+        props.put("mail.smtp.host","smtp.gmail.com");
+        props.put("mail.smtp.port",465);
+        props.put("mail.smtp.user","bchirben8@gmail.com");
+        props.put("mail.smtp.auth",true);
+        props.put("mail.smtp.starttls.enable",true);
+        props.put("mail.smtp.debug",true);
+        props.put("mail.smtp.socketFactory.port",465);
+        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        props.put("mail.smtp.socketFactory.fallback",false);
+
+        try {
+            Session session = Session.getDefaultInstance(props, null);
+            session.setDebug(true);
+            MimeMessage message = new MimeMessage(session);
+            message.setSubject("Code de Confirmation d'oublie le mot de passe");
+            message.setFrom(new InternetAddress("bchirben8@gmail.com"));
+            message.setText("Voici code de Confirmation d'oublie le mot de passe : " + String.valueOf(Rand));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(emailSignup.getText()));
+            try
+            {
+                signupController.setRand(Rand);
+                Transport transport = session.getTransport("smtp");
+                transport.connect("smtp.gmail.com","bchirben8@gmail.com","oeopsajyvhamngzz");
+                transport.sendMessage(message, message.getAllRecipients());
+                transport.close();
+            }catch(Exception e)
+            {
+                System.out.println(e.getMessage());
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public void signUpButtonButtonOnClick(ActionEvent event){
         if (!getErrors()) {
+            Random rd = new Random();
+            int Rand = rd.nextInt(1000000+1);
+            signupController.setRand(Rand);
+            sendMail(event, Rand);
+            signUpAnchor.setVisible(false);
+            codeVerifAnchor.setVisible(true);
+        }
+    }
+    @FXML
+    void validateCodeOnClick(ActionEvent event) throws NoSuchAlgorithmException {
+        System.out.println(String.valueOf(rand));
+        if (Integer.parseInt(codeVerification.getText()) == this.rand){
             Utilisateur newUser = new Utilisateur(pseudoSignup.getText(), Integer.parseInt(cinSignup.getText()), nomSignup.getText(),
                     prenomSignup.getText(), Integer.parseInt(ageSignup.getText()), Integer.parseInt(numtelSignup.getText()), emailSignup.getText(),
                     encryptor.encryptString(mdpSignup.getText()), (roleClientSignup.isSelected() ? "Client" : (roleLocateurSignup.isSelected() ? "Locateur" : "Livreur")));
@@ -150,7 +214,16 @@ public class signupController implements Initializable {
             } catch (SQLException e) {
                 System.out.println("Erreur lors de l'ajout de l'utilisateur : " + e.getMessage());
             }
-
+        }
+        else {
+            JOptionPane.showMessageDialog(null,"Code incorrecte! ");
         }
     }
+
+    @FXML
+    private void returnButtonOnClick(ActionEvent event){
+        codeVerifAnchor.setVisible(false);
+        signUpAnchor.setVisible(true);
+    }
+
 }

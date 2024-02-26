@@ -2,6 +2,7 @@
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -10,6 +11,7 @@
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -37,7 +39,7 @@
                     <children>
                   <Button fx:id="Menu" mnemonicParsing="false" prefHeight="46.0" prefWidth="50.0" style="-fx-background-color: TRANSPARENT;">
                      <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="FORWARD" size="30" />
+                        <FontAwesomeIconView fill="WHITE" glyphName="BARS" size="30" />
                      </graphic>
                      <HBox.margin>
                         <Insets left="8.0" top="17.0" />
@@ -306,10 +308,6 @@
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font></RadioButton>
-                        <RadioButton fx:id="roleLivreurDashboard" mnemonicParsing="false" text="Livreur" textFill="WHITE" toggleGroup="$role" GridPane.columnIndex="2" GridPane.rowIndex="14">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font></RadioButton>
                         <Label fx:id="roleDashboardError" prefHeight="26.0" prefWidth="210.0" GridPane.columnIndex="1" GridPane.rowIndex="15" />
                      </children>
                   </GridPane>
@@ -376,8 +374,9 @@
             </AnchorPane>
             <AnchorPane fx:id="ajouterAnchorPane" prefHeight="694.0" prefWidth="1341.0" visible="false">
                <children>
-                  <GridPane layoutX="221.0" layoutY="52.0" prefHeight="583.0" prefWidth="898.0">
+                  <GridPane layoutX="175.0" layoutY="24.0" prefHeight="638.0" prefWidth="988.0">
                      <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                      </columnConstraints>
@@ -401,7 +400,8 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="51.79996337890623" minHeight="10.0" prefHeight="51.79996337890623" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="24.600012207031227" minHeight="7.000036621093727" prefHeight="7.000036621093727" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
@@ -455,7 +455,7 @@
                            </styleClass></Label>
                         <TextField fx:id="ageAjout" promptText="Age" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                         <Label fx:id="ageError" prefHeight="26.0" prefWidth="387.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                        <Label prefHeight="22.0" prefWidth="87.0" stylesheets="@styless.css" text="N°Téléphone" textFill="WHITE" GridPane.rowIndex="10">
+                        <Label prefHeight="26.0" prefWidth="218.0" stylesheets="@styless.css" text="N°Téléphone" textFill="WHITE" GridPane.rowIndex="10">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -495,7 +495,7 @@
                         <PasswordField fx:id="confirmMdpAjout" promptText="Confirmer Mot de passe" GridPane.columnIndex="1" GridPane.rowIndex="16" />
                         <Label fx:id="confirmMdpError" prefHeight="26.0" prefWidth="390.0" GridPane.columnIndex="1" GridPane.rowIndex="17" />
                         <Label fx:id="mdpError" prefHeight="26.0" prefWidth="390.0" GridPane.columnIndex="1" GridPane.rowIndex="15" />
-                        <Button fx:id="ajoutAdminButton" mnemonicParsing="false" onAction="#ajoutAdminButtonOnClick" prefHeight="33.0" prefWidth="178.0" style="-fx-background-color: #2daa67;" text="Ajouter Admin" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="18">
+                        <Button fx:id="ajoutAdminButton" mnemonicParsing="false" onAction="#ajoutAdminButtonOnClick" prefHeight="33.0" prefWidth="178.0" style="-fx-background-color: #2daa67;" text="Ajouter Admin" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="19">
                            <GridPane.margin>
                               <Insets />
                            </GridPane.margin>
@@ -506,7 +506,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button fx:id="annulerButton" mnemonicParsing="false" onAction="#utilisateursButtonOnClick" prefHeight="26.0" prefWidth="168.0" text="Annuler" GridPane.columnIndex="1" GridPane.rowIndex="20">
+                        <Button fx:id="annulerButton" mnemonicParsing="false" onAction="#utilisateursButtonOnClick" prefHeight="26.0" prefWidth="168.0" text="Annuler" GridPane.columnIndex="1" GridPane.rowIndex="21">
                            <GridPane.margin>
                               <Insets left="5.0" />
                            </GridPane.margin>
@@ -514,15 +514,47 @@
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Button>
+                        <ProgressBar fx:id="complexiteBar1" blendMode="COLOR_DODGE" prefHeight="26.0" prefWidth="366.0" progress="0.0" style="-fx-background-color: transparent;" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="14" />
+                        <Label fx:id="complexiteLabel1" prefHeight="18.0" prefWidth="196.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="14">
+                           <padding>
+                              <Insets right="25.0" />
+                           </padding>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <RadioButton fx:id="roleAdminSignup" mnemonicParsing="false" styleClass="shadow" text="Admin" textFill="WHITE" GridPane.rowIndex="18">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <stylesheets>
+                              <URL value="@styless.css" />
+                              <URL value="@styless.css" />
+                           </stylesheets>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="role2" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="roleLivreurSignup" mnemonicParsing="false" styleClass="shadow" text="Livreur" textFill="WHITE" toggleGroup="$role2" GridPane.columnIndex="1" GridPane.rowIndex="18">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <stylesheets>
+                              <URL value="@styless.css" />
+                              <URL value="@styless.css" />
+                           </stylesheets>
+                        </RadioButton>
+                        <Label fx:id="roleAddError" prefHeight="26.0" prefWidth="301.0" GridPane.columnIndex="2" GridPane.rowIndex="18" />
                      </children>
                   </GridPane>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="anchorPaneModifierMdp" prefHeight="693.0" prefWidth="1342.0" visible="false">
                <children>
-                  <GridPane layoutX="222.0" layoutY="75.0" prefHeight="544.0" prefWidth="898.0">
+                  <GridPane layoutX="151.0" layoutY="74.0" prefHeight="546.0" prefWidth="1064.0">
                      <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.199951171875" minWidth="10.0" prefWidth="209.5999755859375" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="390.4000244140625" minWidth="10.0" prefWidth="390.4000244140625" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                      </columnConstraints>
                      <rowConstraints>
@@ -552,9 +584,9 @@
                               <Font name="System Bold" size="18.0" />
                            </font></Label>
                         <PasswordField fx:id="confirmNouveauMdp" promptText="Confirmer Mot de passe" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Label fx:id="confirmNouveauMdpError" prefHeight="26.0" prefWidth="390.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label fx:id="confirmNouveauMdpError" prefHeight="34.0" prefWidth="390.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                         <Label fx:id="nouveauMdpError" prefHeight="26.0" prefWidth="390.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Button fx:id="confirmerNouveauMdp" mnemonicParsing="false" onAction="#confirmerNouveauMdpOnClick" prefHeight="33.0" prefWidth="178.0" style="-fx-background-color: #2daa67;" text="Confirmer" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                        <Button fx:id="confirmerNouveauMdp" mnemonicParsing="false" onAction="#confirmerNouveauMdpOnClick" prefHeight="33.0" prefWidth="178.0" style="-fx-background-color: #2daa67;" text="Confirmer" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
                            <GridPane.margin>
                               <Insets />
                            </GridPane.margin>
@@ -565,7 +597,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button fx:id="annulerButton1" mnemonicParsing="false" onAction="#utilisateursButtonOnClick" prefHeight="26.0" prefWidth="168.0" text="Annuler" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                        <Button fx:id="annulerButton1" mnemonicParsing="false" onAction="#utilisateursButtonOnClick" prefHeight="26.0" prefWidth="168.0" text="Annuler" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8">
                            <GridPane.margin>
                               <Insets left="5.0" />
                            </GridPane.margin>
@@ -574,6 +606,19 @@
                            </font>
                         </Button>
                         <PasswordField fx:id="ancienText" promptText="Ancien Mot de passe" GridPane.columnIndex="1" />
+                        <ProgressBar fx:id="complexiteBar" blendMode="COLOR_DODGE" prefHeight="26.0" prefWidth="366.0" progress="0.0" style="-fx-background-color: transparent;" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets left="10.0" />
+                           </GridPane.margin>
+                        </ProgressBar>
+                        <Label fx:id="complexiteLabel" prefHeight="18.0" prefWidth="196.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                           <padding>
+                              <Insets right="25.0" />
+                           </padding>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
                      </children>
                   </GridPane>
                </children>

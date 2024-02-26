@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+import javafx.scene.effect.BlendMode;
 import utils.Encryptor;
 import entities.Utilisateur;
 import javafx.animation.TranslateTransition;
@@ -98,7 +99,7 @@ public class dashboard {
             @FXML
             private ToggleGroup role;
             @FXML
-            private RadioButton roleClientDashboard, roleLocateurDashboard, roleLivreurDashboard;
+            private RadioButton roleClientDashboard, roleLocateurDashboard;
             @FXML
             private Label pseudoDashboardError, cinDashboardError, nomDashboardError, prenomDashboardError, ageDashboardError, numtelDashboardError, emailDashboardError, roleDashboardError;
 
@@ -111,9 +112,16 @@ public class dashboard {
             @FXML
             private PasswordField confirmMdpAjout;
             @FXML
-            private Label pseudoError, cinError, nomError, prenomError, ageError, numtelError, emailError, mdpError, confirmMdpError, mdpLabel, confirmMdpLabel;
+            private Label complexiteLabel1, pseudoError, cinError, nomError, prenomError, ageError, numtelError, emailError, mdpError, confirmMdpError, mdpLabel, confirmMdpLabel, roleAddError;
             @FXML
             private Button annulerButton, ajoutAdminButton;
+            @FXML
+            private RadioButton roleAdminSignup, roleLivreurSignup;
+            @FXML
+            private ToggleGroup role2;
+            @FXML
+            private ProgressBar complexiteBar1;
+
 
         //ANCHOR PANE MODIFIER MDP
         @FXML
@@ -121,9 +129,11 @@ public class dashboard {
             @FXML
             private PasswordField ancienText, nouveauMdp, confirmNouveauMdp;
             @FXML
-            private Label ancienError, nouveauMdpError, confirmNouveauMdpError;
+            private Label ancienError, nouveauMdpError, confirmNouveauMdpError, complexiteLabel;
             @FXML
             private Button confirmerNouveauMdp;
+            @FXML
+            private ProgressBar complexiteBar;
 
     ServiceUtilisateurs serviceUtilisateurs;
     Encryptor encryptor = new Encryptor();
@@ -192,7 +202,10 @@ public class dashboard {
             });
         });
         updateData();
-
+        modifierButton.setDisable(true);
+        supprimerButton.setDisable(true);
+        getComplexite();
+        getComplexite1();
     }
 
     private void afficherUtilisateursParRole(String role) {
@@ -221,35 +234,27 @@ public class dashboard {
         numtelDashboard.setText(String.valueOf(utilisateurSelectionne.getNumtel()));
         emailDashboard.setText(utilisateurSelectionne.getEmail());
         switch (utilisateurSelectionne.getRole()){
-            case "Admin":
+            case "Admin", "Livreur":
                 roleClientDashboard.setSelected(false);
-                roleLivreurDashboard.setSelected(false);
-                roleLivreurDashboard.setSelected(false);
+                roleLocateurDashboard.setSelected(false);
                 roleClientDashboard.setDisable(true);
                 roleLocateurDashboard.setDisable(true);
-                roleLivreurDashboard.setDisable(true);
                 break;
             case "Client":
                 roleClientDashboard.setDisable(false);
                 roleLocateurDashboard.setDisable(false);
-                roleLivreurDashboard.setDisable(false);
                 roleClientDashboard.setSelected(true);
                 break;
             case "Locateur":
                 roleClientDashboard.setDisable(false);
                 roleLocateurDashboard.setDisable(false);
-                roleLivreurDashboard.setDisable(false);
                 roleLocateurDashboard.setSelected(true);
-                break;
-            case "Livreur":
-                roleClientDashboard.setDisable(false);
-                roleLocateurDashboard.setDisable(false);
-                roleLivreurDashboard.setDisable(false);
-                roleLivreurDashboard.setSelected(true);
                 break;
             default:
                 break;
         }
+        modifierButton.setDisable(false);
+        supprimerButton.setDisable(false);
     }
     public boolean getErrors(){
         pseudoDashboardError.setText("");
@@ -305,7 +310,7 @@ public class dashboard {
                 Utilisateur newUser1 = serviceUtilisateurs.afficherParPseudo(pseudoDashboard.getText());
                 Utilisateur newUser = new Utilisateur(newUser1.getPseudo(), Integer.parseInt(cinDashboard.getText()), nomDashboard.getText(),
                         prenomDashboard.getText(), Integer.parseInt(ageDashboard.getText()), Integer.parseInt(numtelDashboard.getText()),
-                        emailDashboard.getText(), newUser1.getMdp(), (roleClientDashboard.isSelected() ? "Client" : (roleLocateurDashboard.isSelected() ? "Locateur" : (roleLivreurDashboard.isSelected() ? "Livreur" : "Admin"))));
+                        emailDashboard.getText(), newUser1.getMdp(), (roleClientDashboard.isSelected() ? "Client" : (roleLocateurDashboard.isSelected() ? "Locateur" : newUser1.getRole())));
                 serviceUtilisateurs.modifier(newUser);
                 JOptionPane.showMessageDialog(null,"Modification effectuée! ");
                 updateData();
@@ -375,6 +380,8 @@ public class dashboard {
         numTelC.setCellValueFactory(new PropertyValueFactory<>("numtel"));
         emailC.setCellValueFactory(new PropertyValueFactory<>("email"));
         TableView.setItems(listeUtilisateurs);
+        modifierButton.setDisable(true);
+        supprimerButton.setDisable(true);
     }
     @FXML
     private void utilisateursButtonOnClick(ActionEvent event){
@@ -413,7 +420,6 @@ public class dashboard {
             nomError.setText("Le nom est invalide");
             return true;
         }
-
         if(prenomAjout.getText().isBlank() || !prenomAjout.getText().matches("[a-zA-Z ]+")){
             prenomError.setTextFill(Color.RED);
             prenomError.setText("Le prénom est invalide");
@@ -434,7 +440,7 @@ public class dashboard {
             emailError.setText("L'email est invalide");
             return true;
         }
-        if(mdpAjout.getText().isBlank()|| mdpAjout.getText().length() < 8 || mdpAjout.getText().matches("[^a-zA-Z0-9]")){
+        if(mdpAjout.getText().isBlank()|| complexiteLabel1.getText().equals("Faible") || complexiteLabel1.getText().equals("Très Faible")){
             mdpError.setTextFill(Color.RED);
             mdpError.setText("Le mot de passe est invalide");
             return true;
@@ -447,6 +453,11 @@ public class dashboard {
         if(!Objects.equals(confirmMdpAjout.getText(), mdpAjout.getText())){
             confirmMdpError.setTextFill(Color.RED);
             confirmMdpError.setText("Le mot de passe doit etre le meme");
+            return true;
+        }
+        if(!roleAdminSignup.isSelected() && !roleLivreurSignup.isSelected()){
+            roleAddError.setTextFill(Color.RED);
+            roleAddError.setText("Le role est obligatoire");
             return true;
         }
         try {
@@ -465,11 +476,11 @@ public class dashboard {
         if (!getErrors1()) {
             Utilisateur newUser = new Utilisateur(pseudoAjout.getText(), Integer.parseInt(cinAjout.getText()), nomAjouter.getText(),
                     prenomAjout.getText(), Integer.parseInt(ageAjout.getText()), Integer.parseInt(numtelAjout.getText()), emailAjout.getText(),
-                    encryptor.encryptString(mdpAjout.getText()), "Admin");
+                    encryptor.encryptString(mdpAjout.getText()), (roleAdminSignup.isSelected() ? "Admin" : "Livreur"));
             try {
                 serviceUtilisateurs.ajouter(newUser);
-                System.out.println("Admin ajouté avec succès !");
-                JOptionPane.showMessageDialog(null,"Admin ajouté avec succès !");
+                System.out.println("Utilisateur ajouté avec succès !");
+                JOptionPane.showMessageDialog(null,"Utilisateur ajouté avec succès !");
                 updateData();
                 TableView.refresh();
                 ajouterAnchorPane.setVisible(false);
@@ -507,6 +518,8 @@ public class dashboard {
         confirmMdpAjout.setVisible(false);
         ajoutAdminButton.setVisible(false);
         annulerButton.setVisible(false);
+        roleLivreurSignup.setVisible(false);
+        roleAdminSignup.setVisible(false);
     }
     @FXML
     private void deconnecterButtonOnClick(ActionEvent event){
@@ -527,7 +540,7 @@ public class dashboard {
             ancienError.setText("Ancien Mot de passe invalide");
             return true;
         }
-        if(nouveauMdp.getText().isBlank()|| nouveauMdp.getText().length() < 8 || nouveauMdp.getText().matches("[^a-zA-Z0-9]")){
+        if(nouveauMdp.getText().isBlank()|| complexiteLabel.getText().equals("Faible") || complexiteLabel.getText().equals("Très Faible")){
             nouveauMdpError.setTextFill(Color.RED);
             nouveauMdpError.setText("Le mot de passe est invalide");
             return true;
@@ -555,6 +568,121 @@ public class dashboard {
                 System.out.println(e.getMessage());
             }
         }
+    }
+
+    @FXML
+    private void getComplexite() {
+        nouveauMdp.textProperty().addListener((observable, oldValue, newValue) -> {
+            complexiteBar.setVisible(true);
+
+            // Reset complexity label and bar color
+            complexiteLabel.setText("");
+            complexiteBar.setProgress(0);
+            complexiteBar.setBlendMode(null);
+
+            // Check if the password contains special characters
+            boolean hasSpecialChars = newValue.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?].*");
+            // Check if the password contains digits
+            boolean hasDigits = newValue.matches(".*\\d.*");
+            // Check if the password contains lowercase letters
+            boolean hasLowercase = newValue.matches(".*[a-z].*");
+            // Check if the password contains uppercase letters
+            boolean hasUppercase = newValue.matches(".*[A-Z].*");
+
+            // Calculate complexity score
+            int complexityScore = 0;
+            if (hasSpecialChars) complexityScore += 2;
+            if (hasDigits) complexityScore += 2;
+            if (hasLowercase) complexityScore += 2;
+            if (hasUppercase) complexityScore += 2;
+
+            // Check if the password length is at least 8 characters
+            if (newValue.length() < 8) {
+                complexiteLabel.setText("Faible");
+                complexiteBar.setProgress(0.0);
+                complexiteBar.setBlendMode(BlendMode.RED);
+            } else {
+                // Set complexity level and progress bar based on score
+                if (complexityScore >= 8) {
+                    complexiteLabel.setText("Très Fort");
+                    complexiteBar.setProgress(1.0);
+                    complexiteBar.setBlendMode(BlendMode.COLOR_DODGE);
+                } else if (complexityScore >= 6) {
+                    complexiteLabel.setText("Fort");
+                    complexiteBar.setProgress(0.75);
+                    complexiteBar.setBlendMode(BlendMode.COLOR_DODGE);
+                } else if (complexityScore >= 4) {
+                    complexiteLabel.setText("Moyenne");
+                    complexiteBar.setProgress(0.5);
+                    complexiteBar.setBlendMode(BlendMode.HARD_LIGHT);
+                } else if (complexityScore >= 2) {
+                    complexiteLabel.setText("Faible");
+                    complexiteBar.setProgress(0.25);
+                    complexiteBar.setBlendMode(BlendMode.RED);
+                } else {
+                    complexiteLabel.setText("Très Faible");
+                    complexiteBar.setProgress(0.0);
+                    complexiteBar.setBlendMode(BlendMode.RED);
+                }
+            }
+        });
+    }
+    @FXML
+    private void getComplexite1() {
+        mdpAjout.textProperty().addListener((observable, oldValue, newValue) -> {
+            complexiteBar1.setVisible(true);
+
+            // Reset complexity label and bar color
+            complexiteLabel1.setText("");
+            complexiteBar1.setProgress(0);
+            complexiteBar1.setBlendMode(null);
+
+            // Check if the password contains special characters
+            boolean hasSpecialChars = newValue.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?].*");
+            // Check if the password contains digits
+            boolean hasDigits = newValue.matches(".*\\d.*");
+            // Check if the password contains lowercase letters
+            boolean hasLowercase = newValue.matches(".*[a-z].*");
+            // Check if the password contains uppercase letters
+            boolean hasUppercase = newValue.matches(".*[A-Z].*");
+
+            // Calculate complexity score
+            int complexityScore = 0;
+            if (hasSpecialChars) complexityScore += 2;
+            if (hasDigits) complexityScore += 2;
+            if (hasLowercase) complexityScore += 2;
+            if (hasUppercase) complexityScore += 2;
+
+            // Check if the password length is at least 8 characters
+            if (newValue.length() < 8) {
+                complexiteLabel1.setText("Faible");
+                complexiteBar1.setProgress(0.0);
+                complexiteBar1.setBlendMode(BlendMode.RED);
+            } else {
+                // Set complexity level and progress bar based on score
+                if (complexityScore >= 8) {
+                    complexiteLabel1.setText("Très Fort");
+                    complexiteBar1.setProgress(1.0);
+                    complexiteBar1.setBlendMode(BlendMode.COLOR_DODGE);
+                } else if (complexityScore >= 6) {
+                    complexiteLabel1.setText("Fort");
+                    complexiteBar1.setProgress(0.75);
+                    complexiteBar1.setBlendMode(BlendMode.COLOR_DODGE);
+                } else if (complexityScore >= 4) {
+                    complexiteLabel1.setText("Moyenne");
+                    complexiteBar1.setProgress(0.5);
+                    complexiteBar1.setBlendMode(BlendMode.HARD_LIGHT);
+                } else if (complexityScore >= 2) {
+                    complexiteLabel1.setText("Faible");
+                    complexiteBar1.setProgress(0.25);
+                    complexiteBar1.setBlendMode(BlendMode.RED);
+                } else {
+                    complexiteLabel1.setText("Très Faible");
+                    complexiteBar1.setProgress(0.0);
+                    complexiteBar1.setBlendMode(BlendMode.RED);
+                }
+            }
+        });
     }
 
 }

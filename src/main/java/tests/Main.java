@@ -4,9 +4,11 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import services.ServiceUtilisateurs;
+import javafx.event.EventHandler;
+
 
 import java.io.IOException;
 import java.util.Date;
@@ -17,23 +19,32 @@ public class Main extends Application {
         launch(args);
     }
 
-    private double x, y =0;
+    //define your offsets here
+    private double xOffset = 0;
+    private double yOffset = 0;
+
     @Override
-    public void start(Stage stage) throws Exception{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            stage.setTitle("Login");
-            stage.initStyle(StageStyle.DECORATED);
-            root.setOnMousePressed(evt ->{
-                x= evt.getSceneX();
-                y= evt.getSceneY();
-            });
-            root.setOnMouseDragged(evt ->{
-                stage.setX(evt.getScreenX()- x);
-                stage.setX(evt.getScreenY()- y);
-            });
-            stage.setScene(scene);
-            stage.show();
+    public void start(Stage stage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
+        stage.setMaximized(false);
+        root.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                xOffset = event.getSceneX();
+                yOffset = event.getSceneY();
+            }
+        });
+        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                stage.setX(event.getScreenX() - xOffset);
+                stage.setY(event.getScreenY() - yOffset);
+            }
+        });
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
+
 }

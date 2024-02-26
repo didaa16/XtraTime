@@ -53,11 +53,9 @@ public class loginController {
     @FXML
     private PasswordField mdpLogin;
     @FXML
-    private Button loginButton, signupLogin, googleButton, eyeIconLogin, Exit, mdpOublie, verifierEmail, verifierNumTel;
+    private Button loginButton, signupLogin, eyeIconLogin, mdpOublie, verifierEmail, verifierNumTel;
     @FXML
-    private AnchorPane selectModeAnchor;
-    @FXML
-    private VBox vboxLogin;
+    private AnchorPane selectModeAnchor, anchorLogin;
 
 
     private static int rand;
@@ -66,9 +64,6 @@ public class loginController {
     }
     @FXML
     void initialize() {
-        Exit.setOnMouseClicked(event -> {
-            System.exit(0);
-        });
     }
 
 
@@ -157,8 +152,13 @@ public class loginController {
 
     @FXML
     private void mdpOublieOnClick(ActionEvent event){
-        vboxLogin.setVisible(false);
-        selectModeAnchor.setVisible(true);
+        if (pseudoLogin.getText().isBlank()){
+            echecLoginLabel.setTextFill(Color.TOMATO);
+            echecLoginLabel.setText("Entrer le pseudo s'il vous plait !");
+        }else {
+            anchorLogin.setVisible(false);
+            selectModeAnchor.setVisible(true);
+        }
     }
     private void sendMail(ActionEvent event, int Rand){
 
@@ -234,42 +234,9 @@ public class loginController {
 
     @FXML
     private void retourButtonOnClick(ActionEvent event){
-        vboxLogin.setVisible(true);
+        anchorLogin.setVisible(true);
         selectModeAnchor.setVisible(false);
     }
-
-
-
-    @FXML
-    private void googleButtonOnClick(ActionEvent event) {
-        /*// Créer un flux d'autorisation OAuth 2.0 avec les identifiants client
-        GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
-                new NetHttpTransport(),
-                new JacksonFactory(),
-                "587517788482-hrp0jkobrr5m28rtqs1qr2r24ufdt9se.apps.googleusercontent.com", // Utilisez votre ID client ici
-                "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", // Utilisez votre code secret de client ici
-                Arrays.asList("profile", "email", "calendar")) // Exemple de scopes
-                .build();
-
-        // Générer l'URL d'autorisation OAuth 2.0
-        String authorizationUrl = flow.newAuthorizationUrl()
-                .setRedirectUri("YOUR_REDIRECT_URI")
-                .build();
-
-        // Ouvrir une fenêtre de navigateur ou une boîte de dialogue pour permettre à l'utilisateur de se connecter avec Google
-        // et autoriser votre application
-        // Par exemple, vous pouvez utiliser la classe Desktop pour ouvrir une URL dans le navigateur par défaut
-        try {
-            Desktop.getDesktop().browse(new URI(authorizationUrl));
-        } catch (IOException | URISyntaxException e) {
-            System.out.println(e.getMessage());
-        }
-
-        // Une fois l'utilisateur connecté avec succès, changer d'écran vers le tableau de bord
-        // Notez que cette ligne sera exécutée après que l'utilisateur se soit connecté et ait autorisé l'application
-        serviceUtilisateurs.changeScreen(event, "/dashboard.fxml", "Client");*/
-    }
-
 
 
 

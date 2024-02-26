@@ -44,6 +44,7 @@ public class frontController {
 
     @FXML
     void sponsor(ActionEvent event) {
+        loadUi("/listsponsors");
 
     }
     private void loadUi(String ui) {

@@ -122,4 +122,16 @@ public class sponsoService implements IService<sponso> {
         return -1;
     }
 
+
+    public int numbersponso() throws SQLException {
+        int y = 0;
+        this.ste = this.conn.createStatement();
+
+        for(ResultSet rs = this.ste.executeQuery("SELECT COUNT(*) as total FROM sponso "); rs.next(); y = rs.getInt("total")) {
+        }
+
+        System.out.println("total number : " + y);
+        return y;
+    }
+
 }

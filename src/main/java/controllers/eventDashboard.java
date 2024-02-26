@@ -119,7 +119,7 @@ public class eventDashboard {
         if (tfsponso.getSelectionModel().isEmpty() || tfterrain.getSelectionModel().isEmpty() ||
                 tftitre.getText().isEmpty()|| tfhd.getText().isEmpty() || tfhf.getText().isEmpty()||
                 tfdescription.getText().isEmpty() ||
-                tfdd.getValue() == null || tfdf.getValue() == null) {
+                tfdd.getValue() == null ) {
 
             Alert missingFieldAlert = new Alert(Alert.AlertType.WARNING);
             missingFieldAlert.setTitle("Missing Information");
@@ -148,18 +148,24 @@ public class eventDashboard {
        // Timestamp dated = Timestamp.valueOf(tfdd.getValue().atTime(LocalTime.parse(tfhd.getText())));
        // Timestamp datef = Timestamp.valueOf(tfdf.getValue().atTime(LocalTime.parse(tfhf.getText())));
         LocalDate startDate = tfdd.getValue();
-        LocalDate endDate = tfdf.getValue();
         LocalTime startTime = LocalTime.parse(tfhd.getText());
         LocalTime endTime = LocalTime.parse(tfhf.getText());
 
         Timestamp dated = Timestamp.valueOf(LocalDateTime.of(startDate, startTime));
-        Timestamp datef = Timestamp.valueOf(LocalDateTime.of(endDate, endTime));
+        Timestamp datef = Timestamp.valueOf(LocalDateTime.of(startDate, endTime));
 
 
         // Create a new event object
-        if (verifTitre()&& verifDate() && verifDatedebut()) {
+        if (verifTitre() && verifDatedebut()) {
             event newEvent = new event(titre, description, imageUrl, dated, datef, idTerrain, idSponso, "boh");
-
+            if (es.eventExistsWithSameDates(newEvent)) {
+                Alert eventExistsAlert = new Alert(Alert.AlertType.WARNING);
+                eventExistsAlert.setTitle("Duplicate Event");
+                eventExistsAlert.setHeaderText(null);
+                eventExistsAlert.setContentText("An event with the same start and end dates already exists!");
+                eventExistsAlert.showAndWait();
+                return; // Return from the method if an event with the same dates already exists
+            }
             // Call the add method in the eventService to add the new event to the database
             es.add(newEvent);
 
@@ -174,7 +180,6 @@ public class eventDashboard {
             tftitre.clear();
             tfdescription.clear();
             tfdd.getEditor().clear();
-            tfdf.getEditor().clear();
             tfsponso.setValue(null);
             tfterrain.setValue(null);
             imageimport.setImage(null);
@@ -209,7 +214,7 @@ public class eventDashboard {
 
         // Check if any required field is empty
         if (tftitre.getText().isEmpty() || tfdescription.getText().isEmpty() || tfdd.getValue() == null ||
-                tfdf.getValue() == null || tfsponso.getValue() == null || tfterrain.getValue() == null
+               tfsponso.getValue() == null || tfterrain.getValue() == null
         ||  tfhd.getText().isEmpty() || tfhf.getText().isEmpty()) {
             Alert missingFieldAlert = new Alert(Alert.AlertType.WARNING);
             missingFieldAlert.setTitle("Missing Information");
@@ -234,7 +239,7 @@ public class eventDashboard {
         //Timestamp datef = Timestamp.valueOf(tfdf.getValue().atStartOfDay());
 
         LocalDate startDate = tfdd.getValue();
-        LocalDate endDate = tfdf.getValue();
+
 
         LocalTime startTime = LocalTime.parse(tfhd.getText());
         LocalTime endTime = LocalTime.parse(tfhf.getText());
@@ -242,7 +247,7 @@ public class eventDashboard {
 
 
         Timestamp dated = Timestamp.valueOf(LocalDateTime.of(startDate, startTime));
-        Timestamp datef = Timestamp.valueOf(LocalDateTime.of(endDate, endTime));
+        Timestamp datef = Timestamp.valueOf(LocalDateTime.of(startDate, endTime));
 
 
         // Update the selected sponsor object
@@ -421,7 +426,7 @@ public class eventDashboard {
             tftitre.setText(selectedEvent.getTitre());
             tfdescription.setText(selectedEvent.getDescription());
             tfdd.setValue(selectedEvent.getDatedebut().toLocalDateTime().toLocalDate());
-            tfdf.setValue(selectedEvent.getDatefin().toLocalDateTime().toLocalDate());
+           // tfdf.setValue(selectedEvent.getDatefin().toLocalDateTime().toLocalDate());
             String imagePath = selectedEvent.getImage();
             tfhd.setText(selectedEvent.getDatedebut().toLocalDateTime().toLocalTime().toString());
             tfhf.setText(selectedEvent.getDatefin().toLocalDateTime().toLocalTime().toString());
@@ -447,7 +452,7 @@ public class eventDashboard {
     }
 
 
-    ////////Controle de saisie/////
+   ////////Controle de saisie/////
     private boolean verifTitre() {
         Pattern p = Pattern.compile("[a-zA-Z]+");
         Matcher m = p.matcher(tftitre.getText());
@@ -462,7 +467,7 @@ public class eventDashboard {
             return false;
         }
     }
-    private boolean verifDate() {
+   /* private boolean verifDate() {
         Timestamp dated = Timestamp.valueOf(tfdd.getValue().atTime(LocalTime.MIDNIGHT));
 
         Timestamp datef = Timestamp.valueOf(tfdf.getValue().atTime(LocalTime.MIDNIGHT));
@@ -476,7 +481,7 @@ public class eventDashboard {
             alert.showAndWait();
             return false;
         }
-    }
+    }*/
     private boolean verifDatedebut() {
         Timestamp dated = Timestamp.valueOf(tfdd.getValue().atTime(LocalTime.MIDNIGHT));
         Date date = new Date();

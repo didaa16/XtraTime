@@ -184,5 +184,44 @@ public class eventService implements IService<event>{
         return y;
     }
 
+    public int findbyImage(String image) {
+        int u = 0;
+
+        try {
+            PreparedStatement pre = this.conn.prepareStatement("Select * from event  WHERE image=? ");
+            pre.setString(1, image);
+
+            for(ResultSet rs = pre.executeQuery(); rs.next(); u = rs.getInt("idevent")) {
+            }
+        } catch (SQLException var5) {
+            var5.getMessage();
+        }
+
+        return u;
+    }
+
+    public boolean eventExistsWithSameDates(event event) {
+        String req = "SELECT * FROM event WHERE datedebut = ? AND datefin = ?";
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(req);
+            ps.setTimestamp(1, event.getDatedebut());
+            ps.setTimestamp(2, event.getDatefin());
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
+
+
+
+
+
 
 }

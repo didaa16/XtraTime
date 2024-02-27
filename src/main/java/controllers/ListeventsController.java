@@ -1,8 +1,13 @@
 package controllers;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 import entities.event;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -18,6 +23,8 @@ import javafx.stage.Stage;
 import services.eventService;
 import utils.DataSource;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -27,6 +34,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
+
 import javafx.scene.input.MouseEvent;
 
 import javax.xml.ws.Holder;
@@ -94,9 +105,18 @@ public class ListeventsController {
     @FXML
     private AnchorPane liste_events;
     public ArrayList<ImageView> ListImagese;
+    public ArrayList<ImageView> ListImageseQrcode;
     public ArrayList<Label> Listlabeltitleevent;
     public ArrayList<Label> Listlabeldateevent;
     public ArrayList<Label> Listlabelheurevent;
+    @FXML
+    private ImageView qrcode;
+
+    @FXML
+    private ImageView qrcode1;
+
+    @FXML
+    private ImageView qrcode11;
     private eventService eventService;
 
     private ObservableList<event> eventData;
@@ -107,6 +127,7 @@ public class ListeventsController {
     public ArrayList<AnchorPane> Listpaneevent;
     Connection con = null;
     public  static Holder<String> holdIDs = new Holder();
+    public ObservableList<event> dataa = FXCollections.observableArrayList();
 
 
     public ListeventsController() {
@@ -115,6 +136,7 @@ public class ListeventsController {
         this.Listlabeltitleevent = new ArrayList();
         this.Listlabeldateevent= new ArrayList();
         this.Listlabelheurevent= new ArrayList();
+        this.ListImageseQrcode = new ArrayList();
     }
 
 
@@ -127,6 +149,7 @@ public class ListeventsController {
 
         try {
             this.getUserData(this.CurrentEvent);
+
         } catch (SQLException var4) {
             var4.printStackTrace();
         }
@@ -155,6 +178,10 @@ public class ListeventsController {
         this.Listlabelheurevent.add(this.heureeventspanefx1);
         this.Listlabelheurevent.add(this.heureeventspanefx11);
 
+        this.ListImageseQrcode.add(this.qrcode);
+        this.ListImageseQrcode.add(this.qrcode1);
+        this.ListImageseQrcode.add(this.qrcode11);
+
 
         int Nombre = this.es.numberevent();
         for (this.i = CurrentEvent; this.i < CurrentEvent + 3; ++this.i) {
@@ -162,7 +189,6 @@ public class ListeventsController {
             Image image = new Image(((event) this.data.get(this.i)).getImage());
             ((ImageView) this.ListImagese.get(this.i)).setImage(image);
             ((Label)this.Listlabeltitleevent.get(this.i)).setText(((event)this.data.get(this.i)).getTitre());
-
             // Get the timestamp
             Timestamp timestamp = ((event) this.data.get(this.i)).getDatedebut();
 
@@ -178,8 +204,19 @@ public class ListeventsController {
 
            // Set time (hour) to heureeventspanefx, heureeventspanefx1, heureeventspanefx11
             ((Label) this.Listlabelheurevent.get(this.i)).setText(dateTime.toLocalTime().format(timeFormatter));
+            ImageView qrImageView = this.ListImageseQrcode.get(this.i);
+            event ev = this.data.get(this.i);
+
+            // Call ini method passing the event and its corresponding qrImageView
+            ini(ev, qrImageView);
+            //Image imageqr = new Image(((event) this.data.get(q.ini(e));
+            //((ImageView) this.ListImageseQrcode.get(this.i)).setImage(imageqr);
+
+
+
 
             ((AnchorPane) this.Listpaneevent.get(this.i)).setVisible(true);
+
         }
 
         this.imageeventspanefx.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -240,6 +277,9 @@ public class ListeventsController {
 
     }
 
+
+
+
     @FXML
     private void viewmore(ActionEvent event) {
         int Nombre = 0;
@@ -272,6 +312,43 @@ public class ListeventsController {
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
+    }
+    public void ini(event ev, ImageView qrImageView) throws SQLException {
+        String myWeb = "Nom de l'event= " + ev.getTitre() + " , = " + ev.getDescription();
+        System.out.println(myWeb);
+        QRCodeWriter qrCodeWriter = new QRCodeWriter();
+
+        int width = 300;
+        int height = 300;
+        String fileType = "png";
+
+        BufferedImage bufferedImage = null;
+        try {
+            BitMatrix byteMatrix = qrCodeWriter.encode(myWeb, BarcodeFormat.QR_CODE, width, height);
+            bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+            bufferedImage.createGraphics();
+
+            Graphics2D graphics = (Graphics2D) bufferedImage.getGraphics();
+            graphics.setColor(Color.WHITE);
+            graphics.fillRect(0, 0, width, height);
+            graphics.setColor(Color.BLACK);
+
+            for (int i = 0; i < height; i++) {
+                for (int j = 0; j < width; j++) {
+                    if (byteMatrix.get(i, j)) {
+                        graphics.fillRect(i, j, 1, 1);
+                    }
+                }
+            }
+
+            System.out.println("Success...");
+
+        } catch (WriterException ex) {
+            Logger.getLogger(Qrcodecontroller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        // Set the QR code image to the corresponding ImageView
+        qrImageView.setImage(SwingFXUtils.toFXImage(bufferedImage, null));
     }
 
 

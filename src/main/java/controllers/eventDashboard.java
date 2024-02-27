@@ -15,6 +15,8 @@ import entities.sponso;
 import javafx.beans.property.SimpleStringProperty;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
 import entities.event;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -104,7 +106,10 @@ public class eventDashboard {
 
     @FXML
     private TableView<event> tvevent;
-
+    public ObservableList<event> data = FXCollections.observableArrayList();
+    @FXML
+    private TextField searchTF;
+    ObservableList<event> events = FXCollections.observableList(es.readAll());
 
     @FXML
     void afficher(ActionEvent event) {
@@ -328,7 +333,7 @@ public class eventDashboard {
 
     @FXML
     void initialize() {
-        ObservableList<event> events = FXCollections.observableList(es.readAll());
+
         tvevent.setItems(events);
         coltitre.setCellValueFactory(new PropertyValueFactory<>("titre"));
         coldescrition.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -499,4 +504,21 @@ public class eventDashboard {
             return false;
         }
     }
+
+    @FXML
+    void filter(ActionEvent event) {
+        events.clear();
+        System.out.println("data"+events);
+        events.addAll(es.readAll().stream().filter((art)
+                        -> art.getTitre().toLowerCase().contains(searchTF.getText().toLowerCase())
+                //|| art.get().toLowerCase().contains(searchTF.getText().toLowerCase())
+
+
+
+        ).collect(Collectors.toList()));
+        System.out.println("data2"+events);
+
+
+    }
+
 }

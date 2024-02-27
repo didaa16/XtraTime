@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Listsponsocontroller">
+   <children>
+      <AnchorPane fx:id="Paneeventsfx" layoutX="14.0" layoutY="42.0" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <ImageView fx:id="imageeventspanefx" fitHeight="150.0" fitWidth="200.0" layoutY="-26.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="Paneeventsfx1" layoutX="214.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <ImageView fx:id="imageeventspanefx1" fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="Paneeventsfx11" layoutX="400.0" layoutY="193.0" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <ImageView fx:id="imageeventspanefx11" fitHeight="150.0" fitWidth="200.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

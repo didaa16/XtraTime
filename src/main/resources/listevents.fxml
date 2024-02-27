@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane fx:id="liste_events" prefHeight="387.0" prefWidth="533.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ListeventsController">
    <children>
       <AnchorPane fx:id="Paneeventsfx" layoutY="80.0" prefHeight="349.0" prefWidth="186.0" AnchorPane.topAnchor="80.0">
@@ -43,6 +42,7 @@
                   <Font name="Franklin Gothic Medium Cond" size="27.0" />
                </font>
             </Label>
+            <ImageView fx:id="qrcode" fitHeight="103.0" fitWidth="166.0" layoutX="11.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="Paneeventsfx1" layoutX="164.0" layoutY="107.0" prefHeight="349.0" prefWidth="186.0" AnchorPane.topAnchor="80.0">
@@ -78,6 +78,7 @@
                   <Font name="Franklin Gothic Medium Cond" size="27.0" />
                </font>
             </Label>
+            <ImageView fx:id="qrcode1" fitHeight="150.0" fitWidth="118.0" layoutX="83.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
       <Button fx:id="bouton" layoutX="14.0" layoutY="23.0" mnemonicParsing="false" onAction="#viewmore" stylesheets="@styless.css" text="Voir plus">
@@ -122,6 +123,7 @@
                   <Font name="Franklin Gothic Medium Cond" size="27.0" />
                </font>
             </Label>
+            <ImageView fx:id="qrcode11" fitHeight="150.0" fitWidth="108.0" layoutX="14.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
    </children>

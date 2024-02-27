@@ -4,8 +4,11 @@ import entities.event;
 import utils.DataSource;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class eventService implements IService<event>{
     private Connection conn;
@@ -218,6 +221,39 @@ public class eventService implements IService<event>{
         }
         return false;
     }
+
+        public Map<Timestamp, List<event>> getEventsByDateRange(Timestamp startDate, Timestamp endDate) throws SQLException {
+            Map<Timestamp, List<event>> eventsByDate = new HashMap<>();
+
+            String sql = "SELECT * FROM event WHERE datedebut >= ? AND datefin <= ?";
+            try (PreparedStatement statement = conn.prepareStatement(sql)) {
+                statement.setTimestamp(1, (startDate));
+                statement.setTimestamp(2, (endDate));
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    while (resultSet.next()) {
+                        Timestamp eventDate = resultSet.getTimestamp("datedebut");
+                        event event = new event(
+
+                                resultSet.getInt("idevent"),
+                                resultSet.getString("titre"),
+                                resultSet.getString("description"),
+                                resultSet.getString("image"),
+                                eventDate,
+                                resultSet.getTimestamp("datefin"),
+                                resultSet.getInt("idterrain"),
+                                resultSet.getInt("idsponso"),
+                                resultSet.getString("iduser")
+
+                                // Ajoutez d'autres colonnes de la base de données selon votre schéma d'événements
+                        );
+
+                        eventsByDate.computeIfAbsent(eventDate, k -> new ArrayList<>()).add(event);
+                    }
+                }
+            }
+
+            return eventsByDate;
+        }
 
 
 

@@ -68,5 +68,6 @@
       <ImageView fx:id="imageimport" fitHeight="91.0" fitWidth="118.0" layoutX="326.0" layoutY="240.0" pickOnBounds="true" preserveRatio="true" />
       <TextField fx:id="tfhd" layoutX="165.0" layoutY="251.0" prefHeight="25.0" prefWidth="124.0" promptText="Heure_Debut" stylesheets="@styless.css" />
       <TextField fx:id="tfhf" layoutX="166.0" layoutY="291.0" prefHeight="25.0" prefWidth="124.0" promptText="Heure_Fin" stylesheets="@styless.css" />
+      <TextField fx:id="searchTF" layoutX="166.0" layoutY="331.0" onAction="#filter" />
    </children>
 </AnchorPane>

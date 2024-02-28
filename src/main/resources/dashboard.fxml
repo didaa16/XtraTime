@@ -135,7 +135,7 @@
     <left>
         <AnchorPane fx:id="slider" prefHeight="722.0" prefWidth="222.0" style="-fx-background-color: #000000;" styleClass="container" stylesheets="@styless.css" BorderPane.alignment="CENTER">
             <children>
-                <VBox layoutX="-1.0" layoutY="34.0" prefHeight="484.0" prefWidth="222.0">
+                <VBox layoutX="-1.0" layoutY="34.0" prefHeight="484.0" prefWidth="222.0" styleClass="selected-border" stylesheets="@front.css">
                     <children>
                         <Button fx:id="utilisateursButton" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#utilisateursButtonOnClick" prefHeight="40.0" prefWidth="228.0" style="-fx-background-color: transparent;" text="Utilisateurs" textFill="WHITE">
                             <font>
@@ -150,6 +150,14 @@
                      <graphic>
                         <FontAwesomeIconView fill="WHITE" glyphName="USERS" selectionFill="BLACK" />
                      </graphic>
+                     <stylesheets>
+                        <URL value="@styless.css" />
+                        <URL value="@front.css" />
+                     </stylesheets>
+                     <styleClass>
+                        <String fx:value="selected" />
+                        <String fx:value="selected" />
+                     </styleClass>
                         </Button>
                     </children>
                 </VBox>

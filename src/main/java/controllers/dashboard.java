@@ -219,6 +219,8 @@ public class dashboard {
         emailC.setCellValueFactory(new PropertyValueFactory<>("email"));
         TableView.setItems(listeUtilisateurs);
     }
+
+
     @FXML
     void getSelected(MouseEvent event) {
         index = TableView.getSelectionModel().getSelectedIndex();

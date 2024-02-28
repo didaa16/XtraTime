@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.event.ActionEvent;
 import services.ServiceUtilisateurs;
+import utils.SendMail;
 
 import javax.mail.Message;
 import javax.mail.Session;
@@ -164,51 +165,18 @@ public class signupController implements Initializable {
         }
         return false;
     }
-    private void sendMail(ActionEvent event, int Rand){
 
-        Properties props=new Properties();
-        props.put("mail.smtp.host","smtp.gmail.com");
-        props.put("mail.smtp.port",465);
-        props.put("mail.smtp.user","bchirben8@gmail.com");
-        props.put("mail.smtp.auth",true);
-        props.put("mail.smtp.starttls.enable",true);
-        props.put("mail.smtp.debug",true);
-        props.put("mail.smtp.socketFactory.port",465);
-        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        props.put("mail.smtp.socketFactory.fallback",false);
-
-        try {
-            Session session = Session.getDefaultInstance(props, null);
-            session.setDebug(true);
-            MimeMessage message = new MimeMessage(session);
-            message.setSubject("Code de Confirmation d'oublie le mot de passe");
-            message.setFrom(new InternetAddress("bchirben8@gmail.com"));
-            message.setText("Voici code de Confirmation d'oublie le mot de passe : " + String.valueOf(Rand));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(emailSignup.getText()));
-            try
-            {
-                signupController.setRand(Rand);
-                Transport transport = session.getTransport("smtp");
-                transport.connect("smtp.gmail.com","bchirben8@gmail.com","oeopsajyvhamngzz");
-                transport.sendMessage(message, message.getAllRecipients());
-                transport.close();
-            }catch(Exception e)
-            {
-                System.out.println(e.getMessage());
-            }
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-    public void signUpButtonButtonOnClick(ActionEvent event){
+    public void signUpButtonButtonOnClick(ActionEvent event) throws NoSuchAlgorithmException {
         if (!getErrors()) {
             Random rd = new Random();
             int Rand = rd.nextInt(1000000+1);
             signupController.setRand(Rand);
             signUpAnchor.setVisible(false);
             codeVerifAnchor.setVisible(true);
-            sendMail(event, Rand);
+            Utilisateur newUser = new Utilisateur(pseudoSignup.getText(), Integer.parseInt(cinSignup.getText()), nomSignup.getText(),
+                    prenomSignup.getText(), Integer.parseInt(ageSignup.getText()), Integer.parseInt(numtelSignup.getText()), emailSignup.getText(),
+                    encryptor.encryptString(mdpSignup.getText()), (roleClientSignup.isSelected() ? "Client" : "Locateur"));
+            SendMail.SendMail(event, Rand, newUser);
         }
     }
     @FXML

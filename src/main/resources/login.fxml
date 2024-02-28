@@ -149,12 +149,12 @@
                   </Label>
                </children>
             </AnchorPane>
-            <ImageView fitHeight="40.0" fitWidth="65.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="40.0" fitWidth="65.0" layoutX="7.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Design/DARK.png" />
                </image>
             </ImageView>
-            <FontAwesomeIconView glyphName="LOCK" layoutX="695.0" layoutY="42.0" size="40" />
+            <FontAwesomeIconView glyphName="LOCK" layoutX="689.0" layoutY="42.0" size="50" />
          </children></AnchorPane>
   </items>
 </SplitPane>

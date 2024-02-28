@@ -65,7 +65,15 @@ public class motDePasseOublie {
     }
     @FXML
     void retourButtonOnClick(ActionEvent event) {
-        serviceUtilisateurs.changeScreen(event, "/login.fxml", "LOGIN");
+        switch (loggedInUser.getRole()){
+            case "Admin":
+                serviceUtilisateurs.changeScreen(event, "/login.fxml", "LOGIN");
+                break;
+            case "Client":
+                clientFrontController.setLoggedInUser(loggedInUser);
+                serviceUtilisateurs.changeScreen(event, "/clientFront.fxml", "xtratime");
+                break;
+        }
     }
 
     @FXML

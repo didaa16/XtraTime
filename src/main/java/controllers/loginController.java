@@ -43,6 +43,7 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeRequestUrl;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.json.JsonFactory;
+import utils.SendMail;
 import utils.SendSMS;
 
 public class loginController {
@@ -86,15 +87,18 @@ public class loginController {
                 switch (utilisateur.getRole()) {
                     case "Admin":
                         dashboard.setLoggedInUser(utilisateur);
-                        serviceUtilisateurs.changeScreen(event, "/dashboard.fxml", "Client");
+                        serviceUtilisateurs.changeScreen(event, "/dashboard.fxml", "XTRATIME");
                         break;
                     case "Client":
-                        serviceUtilisateurs.changeScreen(event, "/clientFront.fxml", "Client");
+                        clientFrontController.setLoggedInUser(utilisateur);
+                        serviceUtilisateurs.changeScreen(event, "/clientFront.fxml", "xtratime");
                         break;
                     case "Locateur":
+                        locateurFrontController.setLoggedInUser(utilisateur);
                         serviceUtilisateurs.changeScreen(event, "/locateurFront.fxml", "Locateur");
                         break;
                     case "Livreur":
+                        livreurFrontController.setLoggedInUser(utilisateur);
                         serviceUtilisateurs.changeScreen(event, "/livreurFront.fxml", "Livreur");
                         break;
                     default:
@@ -160,45 +164,15 @@ public class loginController {
             selectModeAnchor.setVisible(true);
         }
     }
-    private void sendMail(ActionEvent event, int Rand){
-
-        Properties props=new Properties();
-        props.put("mail.smtp.host","smtp.gmail.com");
-        props.put("mail.smtp.port",465);
-        props.put("mail.smtp.user","bchirben8@gmail.com");
-        props.put("mail.smtp.auth",true);
-        props.put("mail.smtp.starttls.enable",true);
-        props.put("mail.smtp.debug",true);
-        props.put("mail.smtp.socketFactory.port",465);
-        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        props.put("mail.smtp.socketFactory.fallback",false);
-
-        try {
-            Session session = Session.getDefaultInstance(props, null);
-            session.setDebug(true);
-            MimeMessage message = new MimeMessage(session);
-            message.setSubject("Code de Confirmation d'oublie le mot de passe");
-            message.setFrom(new InternetAddress("bchirben8@gmail.com"));
-            Utilisateur newUser = serviceUtilisateurs.afficherParPseudo(pseudoLogin.getText());
-            motDePasseOublie.setLoggedInUser(newUser);
-            message.setText("Bonjour " + newUser.getNom() + "\n Voici code de Confirmation d'oublie le mot de passe : " + String.valueOf(Rand));
-
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(newUser.getEmail()));
-            try
-            {
-                motDePasseOublie.setRand(Rand);
-                Transport transport = session.getTransport("smtp");
-                transport.connect("smtp.gmail.com","bchirben8@gmail.com","oeopsajyvhamngzz");
-                transport.sendMessage(message, message.getAllRecipients());
-                transport.close();
-            }catch(Exception e)
-            {
-                System.out.println(e.getMessage());
-            }
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+    @FXML
+    private void verifierEmailOnClick(ActionEvent event) throws SQLException {
+        Random rd = new Random();
+        int Rand = rd.nextInt(1000000 + 1);
+        Utilisateur newUser = serviceUtilisateurs.afficherParPseudo(pseudoLogin.getText());
+        motDePasseOublie.setLoggedInUser(newUser);
+        motDePasseOublie.setRand(Rand);
+        serviceUtilisateurs.changeScreen(event, "/motDePasseOublie.fxml", "Vérifier le code");
+        SendMail.SendMail(event, Rand, newUser);
     }
 
     @FXML
@@ -214,9 +188,7 @@ public class loginController {
             String num = "+216"+String.valueOf(newUser.getNumtel());
             System.out.println(num);
             SendSMS.SendSMS(message, num);
-            System.out.println("MOOOOOOOOOOOOOOo");
             motDePasseOublie.setLoggedInUser(serviceUtilisateurs.afficherParPseudo(newUser.getPseudo()));
-            System.out.println("mochkla");
             serviceUtilisateurs.changeScreen(event, "/motDePasseOublie.fxml", "Vérifier le code");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -224,13 +196,7 @@ public class loginController {
 
     }
 
-    @FXML
-    private void verifierEmailOnClick(ActionEvent event){
-        Random rd = new Random();
-        int Rand = rd.nextInt(1000000+1);
-        serviceUtilisateurs.changeScreen(event, "/motDePasseOublie.fxml", "Vérifier le code");
-        sendMail(event, Rand);
-    }
+
 
     @FXML
     private void retourButtonOnClick(ActionEvent event){

@@ -1,5 +1,6 @@
 package controllers;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -9,11 +10,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
+import javafx.scene.control.Button;
 import entities.event;
 import entities.sponso;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -31,6 +33,8 @@ public class Listsponsocontroller {
 
     @FXML
     private URL location;
+    @FXML
+    private Button bouton;
 
     @FXML
     private AnchorPane Paneeventsfx;
@@ -101,6 +105,33 @@ public class Listsponsocontroller {
         }
 
 
+    }
+
+    @FXML
+    private void viewmore(ActionEvent event) {
+        int Nombre = 0;
+
+        try {
+            Nombre = this.es.numbersponso();
+        } catch (SQLException var6) {
+            var6.getMessage();
+        }
+
+        this.CurrentEvent += 3;
+        int diff = Nombre - this.CurrentEvent;
+        if (diff == 2) {
+            --this.CurrentEvent;
+        } else if (diff == 1) {
+            this.CurrentEvent -= 2;
+        } else if (diff <= 0) {
+            this.CurrentEvent = 0;
+        }
+
+        try {
+            this.getUserData(this.CurrentEvent);
+        } catch (SQLException var5) {
+            var5.printStackTrace();
+        }
     }
 
 

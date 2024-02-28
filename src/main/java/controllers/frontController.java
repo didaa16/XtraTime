@@ -39,6 +39,7 @@ public class frontController {
 
     @FXML
     void logout(ActionEvent event) {
+        loadUi("/login");
 
     }
 

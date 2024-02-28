@@ -48,3 +48,8 @@
     -fx-background-color: transparent;
     -fx-text-fill: white; /* Pour changer la couleur du texte si nécessaire */
 }
+.produit-item{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 30;
+    -fx-padding: 10px;
+}

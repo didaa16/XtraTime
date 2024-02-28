@@ -65,8 +65,8 @@ public class backController {
 
     }
 
-    public void logout(ActionEvent actionEvent) throws IOException {
-
+    public void logout(ActionEvent actionEvent)  {
+        loadUi("/login");
 
     }
 }

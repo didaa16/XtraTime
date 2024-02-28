@@ -1,6 +1,8 @@
 package controllers;
 
+import java.awt.*;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.net.URL;
 import java.sql.*;
 import java.time.LocalDate;
@@ -10,6 +12,11 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Date;
 
+
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import entities.sponso;
 import javafx.beans.property.SimpleStringProperty;
@@ -23,6 +30,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -31,6 +40,9 @@ import javafx.stage.FileChooser;
 import services.eventService;
 import services.sponsoService;
 import utils.DataSource;
+
+
+import javax.swing.*;
 
 public class eventDashboard {
     private Image image;
@@ -56,8 +68,8 @@ public class eventDashboard {
 
     @FXML
     private Button bsupprimer;
-    eventService es =new eventService();
-    sponsoService sp =new sponsoService();
+    eventService es = new eventService();
+    sponsoService sp = new sponsoService();
 
     @FXML
     private TableColumn<event, Timestamp> coldebut;
@@ -117,14 +129,13 @@ public class eventDashboard {
     }
 
 
-
     @FXML
     void ajouter(ActionEvent event) {
         // Check if any required field is empty
         if (tfsponso.getSelectionModel().isEmpty() || tfterrain.getSelectionModel().isEmpty() ||
-                tftitre.getText().isEmpty()|| tfhd.getText().isEmpty() || tfhf.getText().isEmpty()||
+                tftitre.getText().isEmpty() || tfhd.getText().isEmpty() || tfhf.getText().isEmpty() ||
                 tfdescription.getText().isEmpty() ||
-                tfdd.getValue() == null ) {
+                tfdd.getValue() == null) {
 
             Alert missingFieldAlert = new Alert(Alert.AlertType.WARNING);
             missingFieldAlert.setTitle("Missing Information");
@@ -150,8 +161,8 @@ public class eventDashboard {
         int idTerrain = es.getterrainIdByName(tfterrain.getValue());
         String titre = tftitre.getText();
         String description = tfdescription.getText();
-       // Timestamp dated = Timestamp.valueOf(tfdd.getValue().atTime(LocalTime.parse(tfhd.getText())));
-       // Timestamp datef = Timestamp.valueOf(tfdf.getValue().atTime(LocalTime.parse(tfhf.getText())));
+        // Timestamp dated = Timestamp.valueOf(tfdd.getValue().atTime(LocalTime.parse(tfhd.getText())));
+        // Timestamp datef = Timestamp.valueOf(tfdf.getValue().atTime(LocalTime.parse(tfhf.getText())));
         LocalDate startDate = tfdd.getValue();
         LocalTime startTime = LocalTime.parse(tfhd.getText());
         LocalTime endTime = LocalTime.parse(tfhf.getText());
@@ -194,13 +205,12 @@ public class eventDashboard {
             // Refresh TableView to display the newly added event
             refreshTableView();
         }
-        }
+    }
 
     private void refreshTableView() {
         ObservableList<event> events = FXCollections.observableList(es.readAll());
         tvevent.setItems(events);
     }
-
 
 
     @FXML
@@ -219,8 +229,8 @@ public class eventDashboard {
 
         // Check if any required field is empty
         if (tftitre.getText().isEmpty() || tfdescription.getText().isEmpty() || tfdd.getValue() == null ||
-               tfsponso.getValue() == null || tfterrain.getValue() == null
-        ||  tfhd.getText().isEmpty() || tfhf.getText().isEmpty()) {
+                tfsponso.getValue() == null || tfterrain.getValue() == null
+                || tfhd.getText().isEmpty() || tfhf.getText().isEmpty()) {
             Alert missingFieldAlert = new Alert(Alert.AlertType.WARNING);
             missingFieldAlert.setTitle("Missing Information");
             missingFieldAlert.setHeaderText(null);
@@ -240,7 +250,7 @@ public class eventDashboard {
         String titre = tftitre.getText();
         String description = tfdescription.getText();
 
-       // Timestamp dated = Timestamp.valueOf(tfdd.getValue().atStartOfDay());
+        // Timestamp dated = Timestamp.valueOf(tfdd.getValue().atStartOfDay());
         //Timestamp datef = Timestamp.valueOf(tfdf.getValue().atStartOfDay());
 
         LocalDate startDate = tfdd.getValue();
@@ -248,7 +258,6 @@ public class eventDashboard {
 
         LocalTime startTime = LocalTime.parse(tfhd.getText());
         LocalTime endTime = LocalTime.parse(tfhf.getText());
-
 
 
         Timestamp dated = Timestamp.valueOf(LocalDateTime.of(startDate, startTime));
@@ -263,8 +272,6 @@ public class eventDashboard {
         selectedEvent.setIdsponso(idSponso);
         selectedEvent.setIdterrain(idTerrain);
         selectedEvent.setImage(imageUrl);
-
-
 
 
         // Call the update method in eventService to update the event in the database
@@ -343,13 +350,13 @@ public class eventDashboard {
         //colsponso.setCellValueFactory(new PropertyValueFactory<>("idsponso"));
         colsponso.setCellValueFactory(cellData -> {
             int sponsorId = cellData.getValue().getIdsponso();
-            String sponsorName =es.getNomsponsoByID(sponsorId);
+            String sponsorName = es.getNomsponsoByID(sponsorId);
             System.out.print(sponsorName);
             return new SimpleStringProperty(sponsorName);
         });
         colterrain.setCellValueFactory(cellData -> {
             int terraiId = cellData.getValue().getIdterrain();
-            String terrainName =es.getNomterrainIdByID(terraiId);
+            String terrainName = es.getNomterrainIdByID(terraiId);
             System.out.print(terrainName);
             return new SimpleStringProperty(terrainName);
         });
@@ -359,12 +366,13 @@ public class eventDashboard {
         tfhf.setText("");
 
     }
+
     Connection connection = DataSource.getInstance().getCnx();
     private ObservableList<String> terrainList = FXCollections.observableArrayList();
     private ObservableList<String> sponsorList = FXCollections.observableArrayList();
 
     private void populateSponsorComboBox() {
-        try  {
+        try {
             String query = "SELECT nom FROM sponso";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
@@ -381,7 +389,7 @@ public class eventDashboard {
     }
 
     private void populateTerrainComboBox() {
-        try  {
+        try {
             String query = "SELECT nom FROM terrain";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
@@ -415,7 +423,7 @@ public class eventDashboard {
             // Set the selected file path to the class-level variable
             imageUrl = selectedFile.toURI().toString();
 
-            image=new Image(selectedFile.toURI().toString(), 330, 210, false, true);
+            image = new Image(selectedFile.toURI().toString(), 330, 210, false, true);
             imageimport.setImage(image);
         }
         System.out.println(selectedFile);
@@ -424,14 +432,13 @@ public class eventDashboard {
     }
 
 
-
     public void slecteddata(javafx.scene.input.MouseEvent mouseEvent) {
         event selectedEvent = tvevent.getSelectionModel().getSelectedItem();
         if (selectedEvent != null) {
             tftitre.setText(selectedEvent.getTitre());
             tfdescription.setText(selectedEvent.getDescription());
             tfdd.setValue(selectedEvent.getDatedebut().toLocalDateTime().toLocalDate());
-           // tfdf.setValue(selectedEvent.getDatefin().toLocalDateTime().toLocalDate());
+            // tfdf.setValue(selectedEvent.getDatefin().toLocalDateTime().toLocalDate());
             String imagePath = selectedEvent.getImage();
             tfhd.setText(selectedEvent.getDatedebut().toLocalDateTime().toLocalTime().toString());
             tfhf.setText(selectedEvent.getDatefin().toLocalDateTime().toLocalTime().toString());
@@ -457,7 +464,91 @@ public class eventDashboard {
     }
 
 
-   ////////Controle de saisie/////
+    @FXML
+    void filter(ActionEvent event) {
+        events.clear();
+        System.out.println("data" + events);
+        events.addAll(es.readAll().stream().filter((art)
+                        -> art.getTitre().toLowerCase().contains(searchTF.getText().toLowerCase())
+                //|| art.get().toLowerCase().contains(searchTF.getText().toLowerCase())
+
+
+        ).collect(Collectors.toList()));
+        System.out.println("data2" + events);
+
+
+    }
+
+    @FXML
+    void pdf(ActionEvent event) {
+        try {
+            Document document = new Document();
+            PdfWriter.getInstance(document, new FileOutputStream("C://Users//MTIRI LYNDA//Desktop//eventpi//event.pdf"));
+            document.open();
+
+            // Title
+            Paragraph title = new Paragraph("Liste des Événements\n\n");
+            title.setAlignment(Element.ALIGN_CENTER);
+            document.add(title);
+
+            PdfPTable table = new PdfPTable(5); // Nombre de colonnes
+            table.setWidthPercentage(100.0F);
+            table.getDefaultCell().setPadding(5);
+            table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.getDefaultCell().setVerticalAlignment(Element.ALIGN_MIDDLE);
+
+            // En-têtes de colonnes
+            String[] headers = {"Titre", "Description", "Date début", "Date fin", "Image"};
+            for (String header : headers) {
+                PdfPCell headerCell = new PdfPCell(new Phrase(header));
+                headerCell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                headerCell.setBackgroundColor(new BaseColor(0, 128, 0)); // Green color
+
+                table.addCell(headerCell);
+            }
+
+            // Récupérer les données depuis la base de données
+            Connection con = DataSource.getInstance().getCnx();
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("SELECT titre, description, datedebut, datefin, image FROM event");
+
+            // Remplir le tableau avec les données
+            while (rs.next()) {
+                table.addCell(rs.getString("titre"));
+                table.addCell(rs.getString("description"));
+                table.addCell(rs.getString("datedebut"));
+                table.addCell(rs.getString("datefin"));
+
+                // Ajouter l'image à la cellule
+                String imageUrl = rs.getString("image");
+                Image img = new Image(imageUrl); // Utilisez le constructeur prenant une URL en paramètre
+
+                // Convertir l'image JavaFX en iText image
+                com.itextpdf.text.Image itextImage = com.itextpdf.text.Image.getInstance(img.getUrl());
+                itextImage.scaleToFit(100, 100);
+
+                // Ajouter l'image à la cellule
+                PdfPCell imageCell = new PdfPCell(itextImage, true);
+                imageCell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(imageCell);
+            }
+
+            // Ajouter le tableau au document
+            document.add(table);
+
+            // Fermer le document
+            document.close();
+
+            // Afficher un message de confirmation
+            JOptionPane.showMessageDialog(null, "Données exportées en PDF avec succès.");
+        } catch (Exception e) {
+            System.out.println("Erreur lors de la création du PDF : " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+
+    ////////Controle de saisie/////
     private boolean verifTitre() {
         Pattern p = Pattern.compile("[a-zA-Z]+");
         Matcher m = p.matcher(tftitre.getText());
@@ -472,25 +563,10 @@ public class eventDashboard {
             return false;
         }
     }
-   /* private boolean verifDate() {
-        Timestamp dated = Timestamp.valueOf(tfdd.getValue().atTime(LocalTime.MIDNIGHT));
 
-        Timestamp datef = Timestamp.valueOf(tfdf.getValue().atTime(LocalTime.MIDNIGHT));
-        if (dated.before(datef)) {
-            return true;
-        } else {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Validation des champs");
-            alert.setHeaderText(null);
-            alert.setContentText("date début inférieur à date fin");
-            alert.showAndWait();
-            return false;
-        }
-    }*/
     private boolean verifDatedebut() {
         Timestamp dated = Timestamp.valueOf(tfdd.getValue().atTime(LocalTime.MIDNIGHT));
         Date date = new Date();
-
         Timestamp ts = new Timestamp(date.getTime());
 
         if (ts.before(dated)) {
@@ -502,23 +578,11 @@ public class eventDashboard {
             alert.setContentText("date début inférieur à date système");
             alert.showAndWait();
             return false;
-        }
-    }
+        }}
 
-    @FXML
-    void filter(ActionEvent event) {
-        events.clear();
-        System.out.println("data"+events);
-        events.addAll(es.readAll().stream().filter((art)
-                        -> art.getTitre().toLowerCase().contains(searchTF.getText().toLowerCase())
-                //|| art.get().toLowerCase().contains(searchTF.getText().toLowerCase())
-
-
-
-        ).collect(Collectors.toList()));
-        System.out.println("data2"+events);
 
 
     }
 
-}
+
+

@@ -6,10 +6,15 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+import javafx.collections.ListChangeListener;
+import javafx.scene.chart.PieChart;
 import javafx.scene.effect.BlendMode;
+import javafx.scene.input.KeyCode;
 import utils.Encryptor;
 import entities.Utilisateur;
 import javafx.animation.TranslateTransition;
@@ -58,6 +63,9 @@ public class dashboard {
 
 
     //BORDER CENTER
+
+    @FXML
+    private AnchorPane statsAnchor;
 
         //ANCHOR PANE USERS
         @FXML
@@ -142,6 +150,7 @@ public class dashboard {
     public static void setLoggedInUser(Utilisateur user) {
         loggedInUser = user;
     }
+    private static List<Utilisateur>deletedUtilisateurs = new ArrayList<>();
 
     void updateData(){
         pseudoDashboard.setDisable(true);
@@ -155,6 +164,7 @@ public class dashboard {
     @FXML
     void initialize() {
         logo.setOnAction(event -> {
+            statsAnchor.setVisible(true);
             utilisateursAnchorPane.setVisible(false);
             ajouterAnchorPane.setVisible(false);
             anchorPaneModifierMdp.setVisible(false);
@@ -206,8 +216,20 @@ public class dashboard {
         supprimerButton.setDisable(true);
         getComplexite();
         getComplexite1();
+        updateChart();
+        TableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        TableView.getSelectionModel().getSelectedItems().addListener((ListChangeListener.Change<? extends Utilisateur> change) -> {
+            if (change.getList().size() > 0 && change.getList().get(0) != null && change.getList().get(0).equals(KeyCode.CONTROL)) {
+                recupererPseudos();
+            }
+        });
     }
-
+    @FXML
+    private void recupererPseudos() {
+        List<Utilisateur> utilisateursSelectionnes = TableView.getSelectionModel().getSelectedItems();
+        deletedUtilisateurs.clear();
+        deletedUtilisateurs.addAll(utilisateursSelectionnes);
+    }
     private void afficherUtilisateursParRole(String role) {
         ObservableList<Utilisateur> listeUtilisateurs = FXCollections.observableList(serviceUtilisateurs.afficherParRole(role));
         pseudoC.setCellValueFactory(new PropertyValueFactory<>("pseudo"));
@@ -219,8 +241,6 @@ public class dashboard {
         emailC.setCellValueFactory(new PropertyValueFactory<>("email"));
         TableView.setItems(listeUtilisateurs);
     }
-
-
     @FXML
     void getSelected(MouseEvent event) {
         index = TableView.getSelectionModel().getSelectedIndex();
@@ -304,7 +324,6 @@ public class dashboard {
         }
         return false;
     }
-
     @FXML
     public void ModifierButtonButtonOnClick(ActionEvent event){
         if (!getErrors()) {
@@ -314,6 +333,7 @@ public class dashboard {
                         prenomDashboard.getText(), Integer.parseInt(ageDashboard.getText()), Integer.parseInt(numtelDashboard.getText()),
                         emailDashboard.getText(), newUser1.getMdp(), (roleClientDashboard.isSelected() ? "Client" : (roleLocateurDashboard.isSelected() ? "Locateur" : newUser1.getRole())));
                 serviceUtilisateurs.modifier(newUser);
+                updateChart();
                 JOptionPane.showMessageDialog(null,"Modification effectuée! ");
                 updateData();
                 switch (newUser.getRole()){
@@ -344,26 +364,51 @@ public class dashboard {
     @FXML
     public void SupprimerButtonButtonOnClick(ActionEvent event){
         try {
-            Utilisateur newUser = serviceUtilisateurs.afficherParPseudo(pseudoDashboard.getText());
-            if (newUser.equals(loggedInUser)){
-                JOptionPane.showMessageDialog(null, "Il s'agit de votre compte! Vous ne pouvez pas le supprimer! ");
+            List<Utilisateur> utilisateursSelectionnes = TableView.getSelectionModel().getSelectedItems();
+            if (utilisateursSelectionnes.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Aucun utilisateur sélectionné !");
+                return;
             }
-            else {
-                int choix = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment supprimer cet utilisateur ?", "Confirmation de suppression", JOptionPane.YES_NO_OPTION);
-
-                if (choix == JOptionPane.YES_OPTION) {
-                    serviceUtilisateurs.supprimer(newUser);
-                    JOptionPane.showMessageDialog(null,"Utilisateur supprimé avec succès ! ");
-                    updateData();
-                    afficherUtilisateursParRole(newUser.getRole());
-                    TableView.refresh();
-                    System.out.println("Utilisateur supprimé avec succès !");
-                } else {
-                    System.out.println("Suppression annulée par l'utilisateur.");
+            String role = "";
+            for (Utilisateur utilisateur : utilisateursSelectionnes) {
+                if (utilisateur.equals(loggedInUser)) {
+                    JOptionPane.showMessageDialog(null, "Il s'agit de votre compte ! Vous ne pouvez pas le supprimer !");
+                    return;
                 }
             }
+            int choix = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment supprimer ces utilisateurs ?", "Confirmation de suppression", JOptionPane.YES_NO_OPTION);
+            if (choix == JOptionPane.YES_OPTION) {
+                for (Utilisateur utilisateur : utilisateursSelectionnes) {
+                    role = utilisateur.getRole();
+                    serviceUtilisateurs.supprimer(utilisateur);
+                }
+                updateChart();
+                JOptionPane.showMessageDialog(null,"Utilisateurs supprimés avec succès !");
+                updateData();
+                TableView.refresh();
+                switch (role){
+                    case "Admin":
+                        admins.setSelected(true);
+                        break;
+                    case "Client":
+                        clients.setSelected(true);
+                        break;
+                    case "Locateur":
+                        locateurs.setSelected(true);
+                        break;
+                    case "Livreur":
+                        livreurs.setSelected(true);
+                        break;
+                    default:
+                        break;
+                }
+                afficherUtilisateursParRole(role);
+                System.out.println("Utilisateurs supprimés avec succès !");
+            } else {
+                System.out.println("Suppression annulée par l'utilisateur.");
+            }
         } catch (SQLException e) {
-            System.out.println("Erreur lors de la suppression de l'utilisateur : " + e.getMessage());
+            System.out.println("Erreur lors de la suppression des utilisateurs : " + e.getMessage());
         }
     }
     @FXML
@@ -390,11 +435,13 @@ public class dashboard {
         utilisateursAnchorPane.setVisible(true);
         ajouterAnchorPane.setVisible(false);
         anchorPaneModifierMdp.setVisible(false);
+        statsAnchor.setVisible(false);
     }
     @FXML
     private void ajouterButtonOnClick(ActionEvent event){
         utilisateursAnchorPane.setVisible(false);
         ajouterAnchorPane.setVisible(true);
+        statsAnchor.setVisible(false);
     }
     public boolean getErrors1(){
         pseudoError.setText("");
@@ -474,17 +521,35 @@ public class dashboard {
         return false;
     }
     @FXML
-    private void ajoutAdminButtonOnClick(ActionEvent event) throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
+    private void ajoutAdminButtonOnClick(ActionEvent event) throws NoSuchAlgorithmException{
         if (!getErrors1()) {
             Utilisateur newUser = new Utilisateur(pseudoAjout.getText(), Integer.parseInt(cinAjout.getText()), nomAjouter.getText(),
                     prenomAjout.getText(), Integer.parseInt(ageAjout.getText()), Integer.parseInt(numtelAjout.getText()), emailAjout.getText(),
                     encryptor.encryptString(mdpAjout.getText()), (roleAdminSignup.isSelected() ? "Admin" : "Livreur"));
             try {
                 serviceUtilisateurs.ajouter(newUser);
+                updateChart();
                 System.out.println("Utilisateur ajouté avec succès !");
                 JOptionPane.showMessageDialog(null,"Utilisateur ajouté avec succès !");
                 updateData();
                 TableView.refresh();
+                afficherUtilisateursParRole(newUser.getRole());
+                switch (newUser.getRole()){
+                    case "Admin":
+                        admins.setSelected(true);
+                        break;
+                    case "Client":
+                        clients.setSelected(true);
+                        break;
+                    case "Locateur":
+                        locateurs.setSelected(true);
+                        break;
+                    case "Livreur":
+                        livreurs.setSelected(true);
+                        break;
+                    default:
+                        break;
+                }
                 ajouterAnchorPane.setVisible(false);
                 utilisateursAnchorPane.setVisible(true);
             } catch (SQLException e) {
@@ -495,6 +560,7 @@ public class dashboard {
     }
     @FXML
     private void profileButtonOnClick(ActionEvent event){
+        statsAnchor.setVisible(false);
         utilisateursAnchorPane.setVisible(false);
         anchorPaneModifierMdp.setVisible(false);
         ajouterAnchorPane.setVisible(true);
@@ -530,6 +596,7 @@ public class dashboard {
     }
     @FXML
     private void modifierMdpOnClick(ActionEvent event){
+        statsAnchor.setVisible(false);
         ajouterAnchorPane.setVisible(false);
         utilisateursAnchorPane.setVisible(false);
         anchorPaneModifierMdp.setVisible(true);
@@ -571,40 +638,27 @@ public class dashboard {
             }
         }
     }
-
     @FXML
     private void getComplexite() {
         nouveauMdp.textProperty().addListener((observable, oldValue, newValue) -> {
             complexiteBar.setVisible(true);
-
-            // Reset complexity label and bar color
             complexiteLabel.setText("");
             complexiteBar.setProgress(0);
             complexiteBar.setBlendMode(null);
-
-            // Check if the password contains special characters
             boolean hasSpecialChars = newValue.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?].*");
-            // Check if the password contains digits
             boolean hasDigits = newValue.matches(".*\\d.*");
-            // Check if the password contains lowercase letters
             boolean hasLowercase = newValue.matches(".*[a-z].*");
-            // Check if the password contains uppercase letters
             boolean hasUppercase = newValue.matches(".*[A-Z].*");
-
-            // Calculate complexity score
             int complexityScore = 0;
             if (hasSpecialChars) complexityScore += 2;
             if (hasDigits) complexityScore += 2;
             if (hasLowercase) complexityScore += 2;
             if (hasUppercase) complexityScore += 2;
-
-            // Check if the password length is at least 8 characters
             if (newValue.length() < 8) {
                 complexiteLabel.setText("Faible");
                 complexiteBar.setProgress(0.0);
                 complexiteBar.setBlendMode(BlendMode.RED);
             } else {
-                // Set complexity level and progress bar based on score
                 if (complexityScore >= 8) {
                     complexiteLabel.setText("Très Fort");
                     complexiteBar.setProgress(1.0);
@@ -686,5 +740,38 @@ public class dashboard {
             }
         });
     }
+    private void pieChart (){
+        List<Utilisateur> user = serviceUtilisateurs.afficher();
+        List<Utilisateur> admins = serviceUtilisateurs.afficherParRole("Admin");
+        List<Utilisateur> clients = serviceUtilisateurs.afficherParRole("Client");
+        List<Utilisateur> locateurs = serviceUtilisateurs.afficherParRole("Locateur");
+        List<Utilisateur> livreurs = serviceUtilisateurs.afficherParRole("Livreur");
+        float admin = (float) admins.size() /user.size();
+        float client = (float) clients.size()/user.size();
+        float locateur = (float) locateurs.size()/user.size();
+        float livreur = (float) livreurs.size()/user.size();
+        float adminP = admin*100;
+        float clientP = client*100;
+        float locateurP = locateur*100;
+        float livreurP = livreur*100;
 
+        ObservableList<PieChart.Data> pie = FXCollections.observableArrayList(
+                new PieChart.Data("ADMINS : " + String.valueOf(adminP) + " %", admin),
+                new PieChart.Data("CLIENTS : " + String.valueOf(clientP) + " %", client),
+                new PieChart.Data("LOCATEURS : " + String.valueOf(locateurP) + " %", locateur),
+                new PieChart.Data("LIVREURS : " + String.valueOf(livreurP) + " %", livreur)
+        );
+        PieChart pieChart = new PieChart(pie);
+        pieChart.setTitle("ROLES");
+        pieChart.setClockwise(true);
+        pieChart.setAnimated(true);
+        pieChart.setLabelLineLength(50);
+        pieChart.setVisible(true);
+        pieChart.setStartAngle(180);
+        statsAnchor.getChildren().add(pieChart);
+    }
+    private void updateChart(){
+        statsAnchor.getChildren().clear();
+        pieChart();
+    }
 }

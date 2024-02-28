@@ -13,6 +13,7 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -91,28 +92,34 @@
                   </Label>
                   <MenuButton mnemonicParsing="false" prefHeight="40.0" prefWidth="186.0" style="-fx-background-color: transparent;" text="Paramétres" textFill="WHITE">
                     <items>
+                        <SeparatorMenuItem mnemonicParsing="false" />
                         <Menu mnemonicParsing="false" text="Profile">
                           <items>
+                              <SeparatorMenuItem mnemonicParsing="false" />
                             <MenuItem mnemonicParsing="false" onAction="#profileButtonOnClick" text="Voir profile">
                                  <graphic>
                                     <FontAwesomeIconView glyphName="USER" size="20" />
                                  </graphic>
                               </MenuItem>
+                              <SeparatorMenuItem mnemonicParsing="false" />
                             <MenuItem mnemonicParsing="false" onAction="#modifierMdpOnClick" text="Modifier Mot de passe">
                                  <graphic>
                                     <FontAwesomeIconView glyphName="KEY" size="20" />
                                  </graphic>
                               </MenuItem>
+                              <SeparatorMenuItem mnemonicParsing="false" />
                           </items>
                            <graphic>
                               <FontAwesomeIconView glyphName="USER" size="20" />
                            </graphic>
                         </Menu>
+                        <SeparatorMenuItem mnemonicParsing="false" />
                       <MenuItem fx:id="deconnecterButton" mnemonicParsing="false" onAction="#deconnecterButtonOnClick" text="Déconnecter">
                            <graphic>
                               <FontAwesomeIconView glyphName="ARROW_CIRCLE_LEFT" size="20" />
                            </graphic>
                         </MenuItem>
+                        <SeparatorMenuItem mnemonicParsing="false" />
                     </items>
                      <HBox.margin>
                         <Insets left="850.0" top="25.0" />
@@ -167,6 +174,7 @@
     <center>
         <AnchorPane prefHeight="694.0" prefWidth="1322.0" BorderPane.alignment="CENTER">
          <children>
+            <AnchorPane fx:id="statsAnchor" layoutX="671.0" layoutY="153.0" prefHeight="388.0" prefWidth="545.0" style="-fx-background-color: #FFFFFF;" />
             <AnchorPane fx:id="utilisateursAnchorPane" layoutX="1.0" prefHeight="694.0" prefWidth="1341.0" visible="false">
                <children>
                   <HBox layoutX="1.0" layoutY="32.0" prefHeight="37.0" prefWidth="778.0">
@@ -503,7 +511,7 @@
                         <PasswordField fx:id="confirmMdpAjout" promptText="Confirmer Mot de passe" GridPane.columnIndex="1" GridPane.rowIndex="16" />
                         <Label fx:id="confirmMdpError" prefHeight="26.0" prefWidth="390.0" GridPane.columnIndex="1" GridPane.rowIndex="17" />
                         <Label fx:id="mdpError" prefHeight="26.0" prefWidth="390.0" GridPane.columnIndex="1" GridPane.rowIndex="15" />
-                        <Button fx:id="ajoutAdminButton" mnemonicParsing="false" onAction="#ajoutAdminButtonOnClick" prefHeight="33.0" prefWidth="178.0" style="-fx-background-color: #2daa67;" text="Ajouter Admin" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="19">
+                        <Button fx:id="ajoutAdminButton" mnemonicParsing="false" onAction="#ajoutAdminButtonOnClick" prefHeight="33.0" prefWidth="178.0" style="-fx-background-color: #2daa67;" text="Ajouter" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="19">
                            <GridPane.margin>
                               <Insets />
                            </GridPane.margin>

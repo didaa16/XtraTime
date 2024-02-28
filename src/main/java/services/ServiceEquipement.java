@@ -3,6 +3,7 @@ package services;
 import entities.Equipement;
 import utils.MyDatabase;
 
+import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,14 +15,39 @@ public class ServiceEquipement implements  IService<Equipement>{
         connection= MyDatabase.getInstance().getConnection();
 
     }
+
+
     @Override
     public void ajouter(Equipement equi) throws SQLException {
-        String req ="insert into equipement (nom, description , type ,prix ,image , stock)"+
-                "values('"+equi.getNom()+"','"+equi.getDescription()+"','"+equi.getType()+"','"+equi.getPrix()+"','"+equi.getImage()+"',"+equi.getStock()+")";
-        Statement st = connection.createStatement();
-        st.executeUpdate(req);
-        System.out.println("equipement ajouté");
+        // Vérifier si l'équipement existe déjà dans la base de données
+        String checkReq = "SELECT COUNT(*) FROM equipement WHERE nom = ?";
+        PreparedStatement checkStatement = connection.prepareStatement(checkReq);
+        checkStatement.setString(1, equi.getNom());
+        ResultSet resultSet = checkStatement.executeQuery();
+        resultSet.next();
+        int count = resultSet.getInt(1);
+
+        if (count > 0) {
+            // L'équipement existe déjà, afficher un message d'erreur
+            JOptionPane.showMessageDialog(null,"Erreur : L'équipement existe déjà dans la base de données !");
+        } else {
+            // L'équipement n'existe pas, procéder à l'ajout
+            String req ="INSERT INTO equipement (nom, description, type, prix, image, stock, terrainId)"+
+                    " VALUES (?, ?, ?, ?, ?, ? , ?)";
+            PreparedStatement st = connection.prepareStatement(req);
+            st.setString(1, equi.getNom());
+            st.setString(2, equi.getDescription());
+            st.setString(3, equi.getType());
+            st.setInt(4, equi.getPrix());
+            st.setString(5, equi.getImage());
+            st.setInt(6, equi.getStock());
+            st.setInt(7, equi.getTerrainIdAjout());
+
+            st.executeUpdate();
+//            JOptionPane.showMessageDialog(null,"Equipement Ajoutée avec succés !");
+        }
     }
+
 
 
 
@@ -70,6 +96,31 @@ public class ServiceEquipement implements  IService<Equipement>{
 
            equipements.add(p);
        }
+        return equipements;
+    }
+
+
+    public List<Equipement> getEquipementsByTerrainId(int idTerrain){
+        List<Equipement> equipements= new ArrayList<>();
+        String req="select * from `equipement` WHERE `terrainId` = "+idTerrain+" ";
+        try {
+            Statement st  = connection.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            while (rs.next()){
+                Equipement p = new Equipement();
+                p.setId(rs.getInt(1));
+                p.setNom(rs.getString("nom"));
+                p.setDescription(rs.getString(3));
+                p.setType(rs.getString("type"));
+                p.setPrix(rs.getInt("prix"));
+                p.setImage(rs.getString("image"));
+                p.setStock(rs.getInt("stock"));
+
+                equipements.add(p);
+            }
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
         return equipements;
     }
 

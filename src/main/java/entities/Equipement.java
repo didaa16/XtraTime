@@ -1,13 +1,15 @@
 package entities;
 
+import jdk.jfr.MemoryAddress;
+
 public class Equipement {
-    private int idEquipement ,stock ,prix;
+    private int idEquipement ,stock ,prix , terrainIdAjout;
     private String nom ,description ,type ,image;
 
     public Equipement() {
     }
 
-    public Equipement(int idEquipement,String nom, String description, String type, int prix, String image, int stock) {
+    public Equipement(int idEquipement,String nom, String description, String type, int prix, String image, int stock , int terrainIdAjout) {
         this.idEquipement = idEquipement;
         this.stock = stock;
         this.prix = prix;
@@ -15,18 +17,27 @@ public class Equipement {
         this.description = description;
         this.type = type;
         this.image = image;
+        this.terrainIdAjout = terrainIdAjout ;
     }
 
-    public Equipement(String nom, String description, String type, int prix, String image, int stock) {
+    public Equipement(String nom, String description, String type, int prix, String image, int stock , int terrainIdAjout) {
         this.stock = stock;
         this.prix = prix;
         this.nom = nom;
         this.description = description;
         this.type = type;
         this.image = image;
+        this.terrainIdAjout = terrainIdAjout;
     }
 
 
+    public int getTerrainIdAjout() {
+        return terrainIdAjout;
+    }
+
+    public void setTerrainIdAjout(int terrainIdAjout) {
+        this.terrainIdAjout = terrainIdAjout;
+    }
 
     public int getId() {
         return idEquipement;

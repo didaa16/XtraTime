@@ -19,7 +19,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/reservation.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/affichageTerrain.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         stage.setTitle("Login");

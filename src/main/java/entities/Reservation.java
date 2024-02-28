@@ -1,18 +1,19 @@
 package entities;
 
 public class Reservation {
-    private int id ,prix ,terrainId;
-    private String clientPseudo ,equipements ,date ,duree;
-
+    private int id;
+    private int prix;
+    private int terrainId;
+    private String clientPseudo;
+    private String equipements;
+    private String date;
+    private String duree;
 
     public Reservation() {
     }
 
-    public Reservation(int id, int prix, int terrainid, String clientPseudo, String equipements, String date, String duree) {
-        this.id = id;
-        this.prix = prix;
-        this.terrainId = terrainid;
-        this.clientPseudo = clientPseudo;
+
+    public Reservation(String equipements, String date, String duree) {
         this.equipements = equipements;
         this.date = date;
         this.duree = duree;
@@ -34,12 +35,12 @@ public class Reservation {
         this.prix = prix;
     }
 
-    public int getTerrainid() {
+    public int getTerrainId() {
         return terrainId;
     }
 
-    public void setTerrainid(int terrainid) {
-        this.terrainId= terrainid;
+    public void setTerrainId(int terrainId) {
+        this.terrainId = terrainId;
     }
 
     public String getClientPseudo() {
@@ -57,6 +58,7 @@ public class Reservation {
     public void setEquipements(String equipements) {
         this.equipements = equipements;
     }
+
     public String getDate() {
         return date;
     }
@@ -73,17 +75,17 @@ public class Reservation {
         this.duree = duree;
     }
 
-
     @Override
     public String toString() {
         return "Reservation{" +
                 "id=" + id +
                 ", prix=" + prix +
-                ", terrainid=" + terrainId +
+                ", terrainId=" + terrainId +
                 ", clientPseudo='" + clientPseudo + '\'' +
                 ", equipements='" + equipements + '\'' +
                 ", date='" + date + '\'' +
-                ", duree='" + duree + '\'' +
+                ", duree=" + duree +
                 '}';
     }
+
 }

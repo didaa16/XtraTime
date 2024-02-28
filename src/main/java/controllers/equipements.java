@@ -1,14 +1,20 @@
 package controllers;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import entities.Terrain;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -23,9 +29,12 @@ import entities.Equipement;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import services.ServiceEquipement;
 
 import javax.swing.*;
+import javafx.collections.transformation.FilteredList;
+import services.ServiceTerrain;
 
 public class equipements {
 
@@ -93,6 +102,9 @@ public class equipements {
     private TextField idField;
 
     @FXML
+    private ComboBox<Integer> TerrainIdAjout;
+
+    @FXML
     private TableColumn<Equipement, Integer> stockEquipements;
 
     @FXML
@@ -109,6 +121,9 @@ public class equipements {
 
     @FXML
     private TableColumn<Equipement, String> typeEquipements;
+
+    @FXML
+    private Button listedesreservations;
 
     @FXML
     private Label typeError;
@@ -152,19 +167,28 @@ public class equipements {
     void ajouterButtonOnClick(ActionEvent event) {
         if (!getErrors()){
             Equipement e = new Equipement(nomAjout.getText(),descriptionAjout.getText(),typeAjout.getValue().toString()
-                    ,Integer.valueOf(prixAjout.getText()),url,Integer.valueOf(stockAjout.getText()));
+                    ,Integer.valueOf(prixAjout.getText()),url,Integer.valueOf(stockAjout.getText()),Integer.valueOf(TerrainIdAjout.getValue().toString()));
             try {
-                serviceEquipement.ajouter(e);
-                JOptionPane.showMessageDialog(null,"Equipement Ajoutée avec succés !");
-                refreshTableView();
+                // Vérifier si l'équipement existe déjà dans la base de données
+                List<Equipement> equipementsExistant = serviceEquipement.recherche(e.getNom());
+                if (!equipementsExistant.isEmpty()) {
+                    // L'équipement existe déjà, afficher un message d'erreur
+                    JOptionPane.showMessageDialog(null,"Erreur : L'équipement existe déjà dans la base de données !");
+                } else {
+                    // L'équipement n'existe pas, procéder à l'ajout
+                    serviceEquipement.ajouter(e);
+                    JOptionPane.showMessageDialog(null,"Equipement Ajoutée avec succés !");
+                    refreshTableView();
+                }
             } catch (SQLException ex) {
                 System.out.println("Erreur lors de l'ajout de l'utilisateur : " + ex.getMessage());
             }
-        }else {
+        } else {
             imageError.setTextFill(Color.RED);
             imageError.setText("Veullez remplir tous les champs !");
         }
     }
+
 
     @FXML
     void importerOnClick(ActionEvent event) {
@@ -184,7 +208,7 @@ public class equipements {
     void modifierButtonOnClick(ActionEvent event) {
         if (!getErrors()){
             Equipement e = new Equipement(Integer.valueOf(idField.getText()), nomAjout.getText(),descriptionAjout.getText(),typeAjout.getValue().toString()
-                    ,Integer.valueOf(prixAjout.getText()),url,Integer.valueOf(stockAjout.getText()));
+                    ,Integer.valueOf(prixAjout.getText()),url,Integer.valueOf(stockAjout.getText()),Integer.valueOf(TerrainIdAjout.getValue().toString()));
             try {
                 serviceEquipement.modifier(e);
                 JOptionPane.showMessageDialog(null,"Equipement Modifiée avec succès !");
@@ -201,30 +225,15 @@ public class equipements {
 
 
 
-    @FXML
-    void rechercheButtonOnClick(ActionEvent event) {
-        String termeRecherche = recherche.getText();
-        ObservableList<Equipement> liste = null;
-        try {
-            if (recherche.getText().isBlank()){
-                liste = FXCollections.observableList(serviceEquipement.afficher());
-            }else {
-                liste = FXCollections.observableList(serviceEquipement.recherche(termeRecherche));
+    private void filterTableView(String searchTerm) {
+        ObservableList<Equipement> filteredList = FXCollections.observableArrayList();
+        for (Equipement equipement : tableEquipements.getItems()) {
+            if (equipement.getNom().toLowerCase().contains(searchTerm.toLowerCase())) {
+                filteredList.add(equipement);
             }
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
         }
-        idEquipements.setCellValueFactory(new PropertyValueFactory<>("id"));
-        nomEquipements.setCellValueFactory(new PropertyValueFactory<>("nom"));
-        descriptionEquipements.setCellValueFactory(new PropertyValueFactory<>("description"));
-        typeEquipements.setCellValueFactory(new PropertyValueFactory<>("type"));
-        stockEquipements.setCellValueFactory(new PropertyValueFactory<>("stock"));
-        prixEquipements.setCellValueFactory(new PropertyValueFactory<>("prix"));
-        tableEquipements.setItems(liste);
+        tableEquipements.setItems(filteredList);
     }
-
-
 
 
     @FXML
@@ -250,6 +259,22 @@ public class equipements {
     void initialize() {
         ObservableList<String> types = FXCollections.observableArrayList("Football", "Handball", "Basketball", "Tennis", "Volleyball");
         typeAjout.setItems(types);
+        ServiceTerrain serviceTerrain = new ServiceTerrain();
+        ObservableList<Terrain> listeTerrains = null;
+        try {
+            listeTerrains = FXCollections.observableList(serviceTerrain.afficher());
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        // Création d'une liste pour stocker les noms des terrains
+        ObservableList<Integer> idTerrains = FXCollections.observableArrayList();
+        for (Terrain terrain : listeTerrains) {
+            idTerrains.add(terrain.getId());
+        }
+
+        // Ajout des noms des terrains à la liste déroulante
+        TerrainIdAjout.setItems(idTerrains);
         serviceEquipement = new ServiceEquipement();
         ObservableList<Equipement> liste = null;
         try {
@@ -263,9 +288,29 @@ public class equipements {
         typeEquipements.setCellValueFactory(new PropertyValueFactory<>("type"));
         stockEquipements.setCellValueFactory(new PropertyValueFactory<>("stock"));
         prixEquipements.setCellValueFactory(new PropertyValueFactory<>("prix"));
-        tableEquipements.setItems(liste);
-    }
 
+        // Créer une FilteredList à partir de la liste observable
+        FilteredList<Equipement> filteredList = new FilteredList<>(liste, p -> true);
+
+        // Ajouter un écouteur de modification de propriété sur le champ de recherche
+        recherche.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredList.setPredicate(equipement -> {
+                // Si le texte de recherche est vide, afficher tous les éléments
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Convertir le texte de recherche en minuscules pour une recherche insensible à la casse
+                String searchTerm = newValue.toLowerCase();
+
+                // Vérifier si l'équipement correspond au texte de recherche
+                return equipement.getNom().toLowerCase().contains(searchTerm);
+            });
+        });
+
+        // Lier la TableView à la FilteredList
+        tableEquipements.setItems(filteredList);
+    }
     @FXML
     void getSelected(MouseEvent event) {
         index = tableEquipements.getSelectionModel().getSelectedIndex();
@@ -290,6 +335,29 @@ public class equipements {
             System.out.println(e.getMessage());
         }
         tableEquipements.setItems(liste);
+    }
+
+    @FXML
+    private void navigateToListReservationInterface() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListReservations.fxml"));
+            Parent root = loader.load();
+            listReservation listReservation = loader.getController();
+
+            // Set the terrain ID in the Reservations controller
+            listReservation.toString();
+
+            // Create a new scene with the loaded FXML file
+            Scene scene = new Scene(root);
+
+            // Get the stage (window) from the VBox and set the scene
+            Stage stage = (Stage) listedesreservations.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            // Handle any potential errors loading the FXML file
+            System.out.println(e.getMessage());
+        }
     }
 
 }

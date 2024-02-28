@@ -1,6 +1,7 @@
 package services;
 
 import entities.ResEquip;
+import javafx.collections.ObservableList;
 import utils.MyDatabase;
 
 import java.sql.Connection;
@@ -42,8 +43,8 @@ public class ServiceResEquip implements IService<ResEquip> {
     }
 
     @Override
-    public List<ResEquip> afficher() throws SQLException {
-        List<ResEquip> relations = new ArrayList<>();
+    public ObservableList<ResEquip> afficher() throws SQLException {
+        ObservableList<ResEquip> relations = null;
         String req = "SELECT * FROM reservation_equipement";
         try (PreparedStatement ps = connection.prepareStatement(req);
              ResultSet rs = ps.executeQuery()) {

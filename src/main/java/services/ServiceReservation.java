@@ -1,6 +1,5 @@
 package services;
 
-import entities.Equipement;
 import entities.Reservation;
 import utils.MyDatabase;
 
@@ -8,66 +7,62 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServiceReservation implements  IService<Reservation>{
-    Connection connection;
+public class ServiceReservation implements IService<Reservation> {
+    static Connection connection;
 
-    public ServiceReservation(){
-        connection= MyDatabase.getInstance().getConnection();
-
+    public ServiceReservation() {
+        connection = MyDatabase.getInstance().getConnection();
     }
+
     @Override
     public void ajouter(Reservation res) throws SQLException {
-        String req ="insert into reservation (id, terrainid, clientPseudo , equipements ,prix ,date ,duree)"+
-                "values('"+res.getId()+"','"+res.getTerrainid()+"','"+res.getClientPseudo()+"','"+res.getEquipements()+"','"+res.getPrix()+"','"+res.getDate()+"',"+res.getDuree()+")";
-        Statement st = connection.createStatement();
-        st.executeUpdate(req);
-        System.out.println("reservation ajouté");
+        String req = "INSERT INTO reservation ( equipements, date, duree) " +
+                "VALUES (?, ?, ?)";
+        PreparedStatement ps = connection.prepareStatement(req);
+        ps.setString(1, res.getEquipements());
+        ps.setString(2, res.getDate());
+        ps.setString(3, res.getDuree());
+        ps.executeUpdate();
     }
-
 
     @Override
     public void modifier(Reservation res) throws SQLException {
-        String req="update reservation set  terrainid=? , clientPseudo=? ,equipements=? ,prix=? ,date=? ,duree=?  where id=?";
-        PreparedStatement ps= connection.prepareStatement(req);
-        ps.setInt(1, res.getTerrainid());
+        String req = "UPDATE reservation SET terrainid=?, clientPseudo=?, equipements=?, prix=?, date=?, duree=? WHERE id=?";
+        PreparedStatement ps = connection.prepareStatement(req);
+        ps.setInt(1, res.getTerrainId());
         ps.setString(2, res.getClientPseudo());
         ps.setString(3, res.getEquipements());
         ps.setInt(4, res.getPrix());
-        ps.setString(5, res.getDuree());
-        ps.setString(6, res.getDuree());
+        ps.setString(5, res.getDate());
+        ps.setString(6, res.getDuree()); // Changement ici
         ps.setInt(7, res.getId());
         ps.executeUpdate();
-        System.out.println("reservation modifie");
-
+        System.out.println("Réservation modifiée");
     }
 
     @Override
     public void supprimer(int id) throws SQLException {
-        String req ="delete from reservation where id = ?";
+        String req = "DELETE FROM `reservation` WHERE id=?";
         PreparedStatement ps = connection.prepareStatement(req);
-        ps.setInt(1,id);
+        ps.setInt(1, id);
         ps.executeUpdate();
-        System.out.println("supp avec succes !!");
-
+        System.out.println("Réservation supprimée avec succès");
     }
 
-    @Override
     public List<Reservation> afficher() throws SQLException {
-
-        List<Reservation> reservations= new ArrayList<>();
-        String req="select * from reservation";
-        Statement st  = connection.createStatement();
+        List<Reservation> reservations = new ArrayList<>();
+        String req = "SELECT * FROM reservation";
+        Statement st = connection.createStatement();
         ResultSet rs = st.executeQuery(req);
-        while (rs.next()){
+        while (rs.next()) {
             Reservation r = new Reservation();
-            r.setId(rs.getInt(1));
-            r.setDate(rs.getString("date"));
-            r.setDuree(rs.getString("duree"));
-            r.setPrix(rs.getInt("prix"));
-            r.setTerrainid(rs.getInt("terrainId"));
+            r.setId(rs.getInt("id"));
+            r.setTerrainId(rs.getInt("terrainid"));
             r.setClientPseudo(rs.getString("clientPseudo"));
             r.setEquipements(rs.getString("equipements"));
-
+            r.setPrix(rs.getInt("prix")); // Changement ici
+            r.setDate(rs.getString("date"));
+            r.setDuree(rs.getString("duree")); // Changement ici
             reservations.add(r);
         }
         return reservations;

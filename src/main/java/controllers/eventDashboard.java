@@ -326,43 +326,45 @@ public class eventDashboard {
     @FXML
     void supprimer(ActionEvent event) {
         // Get the selected event from the TableView
-        event selectedEvent = tvevent.getSelectionModel().getSelectedItem();
-        if (selectedEvent == null) {
+        ObservableList<event> selectedEvents = tvevent.getSelectionModel().getSelectedItems();
+        if (selectedEvents.isEmpty()) {
             // If no event is selected, show a warning message and return
             Alert noEventSelectedAlert = new Alert(Alert.AlertType.WARNING);
             noEventSelectedAlert.setTitle("Aucun événement sélectionné");
             noEventSelectedAlert.setHeaderText(null);
-            noEventSelectedAlert.setContentText("Veuillez sélectionner un événement à supprimer.");
+            noEventSelectedAlert.setContentText("Veuillez sélectionner un ou plusieurs événements à supprimer.");
             noEventSelectedAlert.showAndWait();
             return;
         }
 
-        // Ask for confirmation before deleting the event
+        // Ask for confirmation before deleting the events
         Alert confirmDeleteAlert = new Alert(Alert.AlertType.CONFIRMATION);
         confirmDeleteAlert.setTitle("Confirmer la suppression");
-        confirmDeleteAlert.setHeaderText("Supprimer l'événement");
-        confirmDeleteAlert.setContentText("Are you sure you want to delete the selected event?");
-        ButtonType confirmButton = new ButtonType("Yes", ButtonBar.ButtonData.YES);
-        ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        confirmDeleteAlert.setHeaderText("Supprimer les événements sélectionnés");
+        confirmDeleteAlert.setContentText("Êtes-vous sûr de vouloir supprimer les événements sélectionnés ?");
+        ButtonType confirmButton = new ButtonType("Oui", ButtonBar.ButtonData.YES);
+        ButtonType cancelButton = new ButtonType("Annuler", ButtonBar.ButtonData.CANCEL_CLOSE);
         confirmDeleteAlert.getButtonTypes().setAll(confirmButton, cancelButton);
         Optional<ButtonType> result = confirmDeleteAlert.showAndWait();
 
         if (result.isPresent() && result.get() == confirmButton) {
-            // If the user confirms deletion, call the delete method in eventService
-            es.delete(selectedEvent);
+            // If the user confirms deletion, delete all selected events
+            selectedEvents.forEach(es::delete);
             // Show a success message
             Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
-            successAlert.setTitle("Event Deleted");
+            successAlert.setTitle("Événements supprimés");
             successAlert.setHeaderText(null);
-            successAlert.setContentText("The event has been deleted successfully!");
+            successAlert.setContentText("Les événements sélectionnés ont été supprimés avec succès !");
             successAlert.showAndWait();
+            // Refresh TableView
+            refreshTableView();
         }
-        refreshTableView();
-
     }
 
     @FXML
     void initialize() {
+        tvevent.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
 
         tvevent.setItems(events);
         coltitre.setCellValueFactory(new PropertyValueFactory<>("titre"));
@@ -491,12 +493,18 @@ public class eventDashboard {
     void filter(ActionEvent event) {
         events.clear();
         System.out.println("data" + events);
-        events.addAll(es.readAll().stream().filter((art)
-                        -> art.getTitre().toLowerCase().contains(searchTF.getText().toLowerCase())
-                //|| art.get().toLowerCase().contains(searchTF.getText().toLowerCase())
 
+        String searchText = searchTF.getText().toLowerCase();
 
-        ).collect(Collectors.toList()));
+        events.addAll(es.readAll().stream().filter(events -> {
+            // Check if the event title or the sponsor name contains the search text
+            String sponsorName = es.getNomsponsoByID(events.getIdsponso());
+            String TerrainName = es.getNomterrainIdByID(events.getIdterrain());
+            return events.getTitre().toLowerCase().contains(searchText) ||
+                    sponsorName.toLowerCase().contains(searchText)||
+                    TerrainName.toLowerCase().contains(searchText);
+        }).collect(Collectors.toList()));
+
         System.out.println("data2" + events);
 
 

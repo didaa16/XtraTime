@@ -293,36 +293,38 @@ public class sponsoDashboard {
 
     @FXML
     void supprimer(ActionEvent event) {
-        // Get the selected sponsor from the TableView
-        sponso selectedSponsor = tvsponso.getSelectionModel().getSelectedItem();
-        if (selectedSponsor == null) {
-            // If no sponsor is selected, show a warning message and return
-            Alert noSponsorSelectedAlert = new Alert(Alert.AlertType.WARNING);
-            noSponsorSelectedAlert.setTitle("No Sponsor Selected");
-            noSponsorSelectedAlert.setHeaderText(null);
-            noSponsorSelectedAlert.setContentText("Please select a sponsor to delete.");
-            noSponsorSelectedAlert.showAndWait();
+
+        ObservableList<sponso> selectedSponsors = tvsponso.getSelectionModel().getSelectedItems();
+
+        if (selectedSponsors.isEmpty()) {
+            Alert noSponsorsSelectedAlert = new Alert(Alert.AlertType.WARNING);
+            noSponsorsSelectedAlert.setTitle("No Sponsors Selected");
+            noSponsorsSelectedAlert.setHeaderText(null);
+            noSponsorsSelectedAlert.setContentText("Please select one or more sponsors to delete.");
+            noSponsorsSelectedAlert.showAndWait();
             return;
         }
 
-        // Ask for confirmation before deleting the sponsor
         Alert confirmDeleteAlert = new Alert(Alert.AlertType.CONFIRMATION);
         confirmDeleteAlert.setTitle("Confirm Deletion");
-        confirmDeleteAlert.setHeaderText("Delete Sponsor");
-        confirmDeleteAlert.setContentText("Are you sure you want to delete the selected sponsor?");
+        confirmDeleteAlert.setHeaderText("Delete Sponsor(s)");
+        confirmDeleteAlert.setContentText("Are you sure you want to delete the selected sponsor(s)?");
         ButtonType confirmButton = new ButtonType("Yes", ButtonBar.ButtonData.YES);
         ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
         confirmDeleteAlert.getButtonTypes().setAll(confirmButton, cancelButton);
         Optional<ButtonType> result = confirmDeleteAlert.showAndWait();
 
         if (result.isPresent() && result.get() == confirmButton) {
-            // If the user confirms deletion, call the delete method in sponsoService
-            ss.delete(selectedSponsor);
+            // Delete each selected sponsor
+            for (sponso selectedSponsor : selectedSponsors) {
+                ss.delete(selectedSponsor);
+            }
+
             // Show a success message
             Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
-            successAlert.setTitle("Sponsor Deleted");
+            successAlert.setTitle("Sponsor(s) Deleted");
             successAlert.setHeaderText(null);
-            successAlert.setContentText("The sponsor has been deleted successfully!");
+            successAlert.setContentText("The selected sponsor(s) have been deleted successfully!");
             successAlert.showAndWait();
 
             // Refresh TableView
@@ -334,6 +336,8 @@ public class sponsoDashboard {
 
     @FXML
     void initialize() {
+        tvsponso.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
         ObservableList<sponso> sponsors = FXCollections.observableList(ss.readAll());
         tvsponso.setItems(sponsors);
         colnom.setCellValueFactory(new PropertyValueFactory<>("nom"));

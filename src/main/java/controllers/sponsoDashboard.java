@@ -28,6 +28,7 @@ import services.sponsoService;
 import java.awt.Label;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import javafx.scene.image.Image;
 
@@ -75,6 +76,7 @@ public class sponsoDashboard {
     @FXML
     private TextField tfmail;
 
+
     @FXML
     private TextField tfnom;
 
@@ -85,6 +87,8 @@ public class sponsoDashboard {
     private TableView<sponso> tvsponso;
     @FXML
     private ImageView imageimport;
+    @FXML
+    private TextField searchTF;
 
 
     private void refreshTableView() {
@@ -416,6 +420,22 @@ public class sponsoDashboard {
             return false;
         }
     }
+
+    ObservableList<sponso> sponsors = FXCollections.observableList(ss.readAll());
+
+    @FXML
+    void filter(ActionEvent event) {
+        ObservableList<sponso> filteredSponsors = FXCollections.observableArrayList();
+
+        // Filter sponsors based on their names
+        filteredSponsors.addAll(sponsors.stream()
+                .filter(sponsor -> sponsor.getNom().toLowerCase().contains(searchTF.getText().toLowerCase()))
+                .collect(Collectors.toList()));
+
+        // Update the TableView with the filtered list
+        tvsponso.setItems(filteredSponsors);
+    }
+
 
 
 

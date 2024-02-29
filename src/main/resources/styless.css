@@ -98,6 +98,16 @@
 .event-color-2 {
     -fx-background-color:linear-gradient(from 25% 25% to 100% 100%, #416D19, #ffffff); /* Couleur de fond pour le deuxième événement */
 }
+.default-color0.chart-bar {
+    -fx-bar-fill: green; /* Change the color to green */
+}
+
+.axis {
+    -fx-tick-label-fill: white; /* Change the color of axis tick labels to white */
+}
+
+.chart-legend {
+    -fx-text-fill: white; /* Change the color of legend text to white */}
 
 
 

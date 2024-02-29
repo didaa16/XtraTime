@@ -128,10 +128,7 @@ public class eventDashboard {
     private TextField searchTF;
     ObservableList<event> events = FXCollections.observableList(es.readAll());
 
-    @FXML
-    void afficher(ActionEvent event) {
 
-    }
 
 
     @FXML

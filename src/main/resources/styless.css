@@ -49,7 +49,57 @@
     -fx-text-fill: white; /* Pour changer la couleur du texte si nécessaire */
 }
 .produit-item{
-    -fx-background-color: #FFFFFF;
-    -fx-background-radius: 30;
-    -fx-padding: 10px;
+    -fx-border-color: white; /* Couleur de la bordure */
+    -fx-border-width: 1px; /* Largeur de la bordure */
+    -fx-border-radius: 10px; /* Rayon de la bordure */
+
 }
+.produit-item .image-container {
+    -fx-alignment: center;
+}
+
+
+
+.day-name {
+    -fx-alignment: center; /* Alignement central des textes */
+    -fx-font-size: 14px; /* Taille de la police */
+    -fx-font-weight: bold; /* Texte en gras */
+}
+
+.event-container {
+    -fx-padding: 10px; /* Espacement intérieur */
+    -fx-spacing: 5px; /* Espacement entre les éléments */
+}
+
+.event-title {
+    -fx-font-size: 16px; /* Taille de la police pour le titre */
+    -fx-font-weight: bold; /* Texte en gras */
+}
+
+.event-details {
+    -fx-font-size: 18px; /* Augmente la taille de la police */
+    -fx-effect: dropShadow(three-pass-box, rgba(0, 0, 0, 0.2), 10, 0, 0, 0); /* Ombre portée par défaut */
+    -fx-transition: transform 0.8s; /* Ajuste la durée de la transition */
+}
+
+
+.event-details:hover {
+    -fx-scale-x: 1.1; /* Redimensionnement horizontal au survol */
+    -fx-scale-y: 1.1; /* Redimensionnement vertical au survol */
+}
+
+
+
+/* Définition de différentes couleurs de fond pour chaque événement */
+.event-color-1 {
+    -fx-background-color:linear-gradient(from 25% 25% to 100% 100%, #ffffff , #416D19); /* Couleur de fond pour le premier événement */
+}
+
+.event-color-2 {
+    -fx-background-color:linear-gradient(from 25% 25% to 100% 100%, #416D19, #ffffff); /* Couleur de fond pour le deuxième événement */
+}
+
+
+
+
+

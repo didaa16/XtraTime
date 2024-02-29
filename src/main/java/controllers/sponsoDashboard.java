@@ -124,6 +124,43 @@ public class sponsoDashboard {
         String nom = tfnom.getText();
         String mail = tfmail.getText();
         int tel = Integer.parseInt(tftel.getText()); // Assuming tel is an integer
+        // Check if the sponsor with the given name already exists
+        if (ss.sponsorExistsByName(nom)) {
+            Alert existingSponsorAlert = new Alert(Alert.AlertType.WARNING);
+            existingSponsorAlert.setTitle("Commanditaire en double");
+            existingSponsorAlert.setHeaderText(null);
+            existingSponsorAlert.setContentText("Un sponsor du même nom existe déjà !");
+            existingSponsorAlert.showAndWait();
+            return; // Return from the method if sponsor with the same name exists
+        }
+
+        // Check if the sponsor with the given tel already exists
+        if (ss.sponsorExistsByTel(tel)) {
+            Alert existingSponsorAlert = new Alert(Alert.AlertType.WARNING);
+            existingSponsorAlert.setTitle("Duplicate Sponsor");
+            existingSponsorAlert.setHeaderText(null);
+            existingSponsorAlert.setContentText("Un sponsor du même Numero de telephone existe déjà !");
+            existingSponsorAlert.showAndWait();
+            return; // Return from the method if sponsor with the same tel exists
+        }
+        // Check if the selected image already exists
+        if (ss.imageExists(imageUrl)) {
+            Alert imageExistsAlert = new Alert(Alert.AlertType.WARNING);
+            imageExistsAlert.setTitle("Image double");
+            imageExistsAlert.setHeaderText(null);
+            imageExistsAlert.setContentText("Un sponsor avec la même image existe déjà !");
+            imageExistsAlert.showAndWait();
+            return; // Return from the method if the image already exists
+        }
+        // Check if the sponsor with the given email already exists
+        if (ss.sponsorExistsByEmail(mail)) {
+            Alert existingSponsorAlert = new Alert(Alert.AlertType.WARNING);
+            existingSponsorAlert.setTitle("Duplicate Sponsor");
+            existingSponsorAlert.setHeaderText(null);
+            existingSponsorAlert.setContentText("Un sponsor avec le même email existe déjà !");
+            existingSponsorAlert.showAndWait();
+            return; // Return from the method if sponsor with the same email exists
+        }
 
         // Create a new sponso object
         if (verifNom()&& verifMail(mail) && verifTelephone(tel)){

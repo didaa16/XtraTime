@@ -133,5 +133,67 @@ public class sponsoService implements IService<sponso> {
         System.out.println("total number : " + y);
         return y;
     }
+    public boolean sponsorExistsByName(String nom) {
+        String req = "SELECT * FROM sponso WHERE nom = ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(req);
+            ps.setString(1, nom);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
 
+    public boolean sponsorExistsByTel(int tel) {
+        String req = "SELECT * FROM sponso WHERE tel = ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(req);
+            ps.setInt(1, tel);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
+    public boolean imageExists(String imagePath) {
+        String req = "SELECT * FROM event WHERE image = ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(req);
+            ps.setString(1, imagePath);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
+
+
+    public boolean sponsorExistsByEmail(String email) {
+        String req = "SELECT * FROM sponso WHERE email = ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(req);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
 }

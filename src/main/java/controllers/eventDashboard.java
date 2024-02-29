@@ -3,6 +3,7 @@ package controllers;
 import java.awt.*;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.time.LocalDate;
@@ -29,6 +30,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -37,6 +41,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import services.eventService;
 import services.sponsoService;
 import utils.DataSource;
@@ -138,18 +143,18 @@ public class eventDashboard {
                 tfdd.getValue() == null) {
 
             Alert missingFieldAlert = new Alert(Alert.AlertType.WARNING);
-            missingFieldAlert.setTitle("Missing Information");
+            missingFieldAlert.setTitle("Information manquante");
             missingFieldAlert.setHeaderText(null);
-            missingFieldAlert.setContentText("Please fill in all required fields!");
+            missingFieldAlert.setContentText("Veuillez remplir tous les champs requis!");
             missingFieldAlert.showAndWait();
             return; // Return from the method if any required field is empty
         }
         // Check if an image is selected
         if (image == null || imageUrl == null || imageUrl.isEmpty()) {
             Alert missingImageAlert = new Alert(Alert.AlertType.WARNING);
-            missingImageAlert.setTitle("Missing Image");
+            missingImageAlert.setTitle("Image manquante");
             missingImageAlert.setHeaderText(null);
-            missingImageAlert.setContentText("Please select an image!");
+            missingImageAlert.setContentText("Veuillez sélectionner une image!");
             missingImageAlert.showAndWait();
             return; // Return from the method if no image is selected
         }
@@ -174,22 +179,43 @@ public class eventDashboard {
         // Create a new event object
         if (verifTitre() && verifDatedebut()) {
             event newEvent = new event(titre, description, imageUrl, dated, datef, idTerrain, idSponso, "boh");
-            if (es.eventExistsWithSameDates(newEvent)) {
+            if (es.eventExistsWithSameTerrainAndDates(tfterrain.getValue(), dated, datef)) {
                 Alert eventExistsAlert = new Alert(Alert.AlertType.WARNING);
-                eventExistsAlert.setTitle("Duplicate Event");
+                eventExistsAlert.setTitle("\n" +
+                        "Événement  double");
                 eventExistsAlert.setHeaderText(null);
-                eventExistsAlert.setContentText("An event with the same start and end dates already exists!");
+                eventExistsAlert.setContentText("Un événement avec le même nom de terrain et les mêmes dates existe déjà !");
                 eventExistsAlert.showAndWait();
-                return; // Return from the method if an event with the same dates already exists
+                return; // Retourne de la méthode si un événement avec le même nom de terrain et les mêmes dates existe déjà
+            }
+            // Check if the selected image already exists
+            if (es.imageExists(imageUrl)) {
+                Alert imageExistsAlert = new Alert(Alert.AlertType.WARNING);
+                imageExistsAlert.setTitle("Image double");
+                imageExistsAlert.setHeaderText(null);
+                imageExistsAlert.setContentText("Un événement avec la même image existe déjà !");
+                imageExistsAlert.showAndWait();
+                return; // Return from the method if the image already exists
+            }
+
+            // Vérifier si un événement avec le même nom existe déjà
+            if (es.eventExistsWithSameName(tftitre.getText())) {
+                Alert eventExistsAlert = new Alert(Alert.AlertType.WARNING);
+                eventExistsAlert.setTitle(" \n" +
+                        "Événement  double");
+                eventExistsAlert.setHeaderText(null);
+                eventExistsAlert.setContentText("Un événement du même titre existe déjà !");
+                eventExistsAlert.showAndWait();
+                return;
             }
             // Call the add method in the eventService to add the new event to the database
             es.add(newEvent);
 
             // Show a success message
             Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
-            successAlert.setTitle("Event Added");
+            successAlert.setTitle("Événement ajouté");
             successAlert.setHeaderText(null);
-            successAlert.setContentText("The event has been added successfully!");
+            successAlert.setContentText("L'événement a été ajouté avec succès !");
             successAlert.showAndWait();
 
             // Clear input fields
@@ -220,9 +246,9 @@ public class eventDashboard {
         if (selectedEvent == null) {
             // If no event is selected, show a warning message and return
             Alert noEventSelectedAlert = new Alert(Alert.AlertType.WARNING);
-            noEventSelectedAlert.setTitle("No Event Selected");
+            noEventSelectedAlert.setTitle("Aucun événement sélectionné");
             noEventSelectedAlert.setHeaderText(null);
-            noEventSelectedAlert.setContentText("Please select an event to modify.");
+            noEventSelectedAlert.setContentText("Veuillez sélectionner un événement à modifier.");
             noEventSelectedAlert.showAndWait();
             return;
         }
@@ -232,9 +258,9 @@ public class eventDashboard {
                 tfsponso.getValue() == null || tfterrain.getValue() == null
                 || tfhd.getText().isEmpty() || tfhf.getText().isEmpty()) {
             Alert missingFieldAlert = new Alert(Alert.AlertType.WARNING);
-            missingFieldAlert.setTitle("Missing Information");
+            missingFieldAlert.setTitle("Information manquante");
             missingFieldAlert.setHeaderText(null);
-            missingFieldAlert.setContentText("Please fill in all required fields!");
+            missingFieldAlert.setContentText("Veuillez remplir tous les champs requis!");
             missingFieldAlert.showAndWait();
             return; // Return from the method if any required field is empty
         }
@@ -279,9 +305,9 @@ public class eventDashboard {
 
         // Show a success message
         Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
-        successAlert.setTitle("Event Updated");
+        successAlert.setTitle("Événement mis à jour");
         successAlert.setHeaderText(null);
-        successAlert.setContentText("The event has been updated successfully!");
+        successAlert.setContentText("L'événement a été mis à jour avec succès !");
         successAlert.showAndWait();
 
         // Clear input fields
@@ -307,17 +333,17 @@ public class eventDashboard {
         if (selectedEvent == null) {
             // If no event is selected, show a warning message and return
             Alert noEventSelectedAlert = new Alert(Alert.AlertType.WARNING);
-            noEventSelectedAlert.setTitle("No Event Selected");
+            noEventSelectedAlert.setTitle("Aucun événement sélectionné");
             noEventSelectedAlert.setHeaderText(null);
-            noEventSelectedAlert.setContentText("Please select an event to delete.");
+            noEventSelectedAlert.setContentText("Veuillez sélectionner un événement à supprimer.");
             noEventSelectedAlert.showAndWait();
             return;
         }
 
         // Ask for confirmation before deleting the event
         Alert confirmDeleteAlert = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmDeleteAlert.setTitle("Confirm Deletion");
-        confirmDeleteAlert.setHeaderText("Delete Event");
+        confirmDeleteAlert.setTitle("Confirmer la suppression");
+        confirmDeleteAlert.setHeaderText("Supprimer l'événement");
         confirmDeleteAlert.setContentText("Are you sure you want to delete the selected event?");
         ButtonType confirmButton = new ButtonType("Yes", ButtonBar.ButtonData.YES);
         ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
@@ -480,6 +506,13 @@ public class eventDashboard {
     }
 
     @FXML
+    void calendrier(ActionEvent event) throws IOException {
+
+        loadFXML("/FullCalendar.fxml");
+
+    }
+
+    @FXML
     void pdf(ActionEvent event) {
         try {
             Document document = new Document();
@@ -581,7 +614,13 @@ public class eventDashboard {
         }}
 
 
-
+    private void loadFXML(String fxmlPath) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
     }
 
 

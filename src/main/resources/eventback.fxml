@@ -69,10 +69,18 @@
       <TextField fx:id="tfhd" layoutX="163.0" layoutY="286.0" prefHeight="25.0" prefWidth="124.0" promptText="Heure_Debut" stylesheets="@styless.css" />
       <TextField fx:id="tfhf" layoutX="161.0" layoutY="324.0" prefHeight="25.0" prefWidth="124.0" promptText="Heure_Fin" stylesheets="@styless.css" />
       <TextField fx:id="searchTF" layoutX="369.0" layoutY="5.0" onAction="#filter" prefHeight="33.0" prefWidth="136.0" promptText="Chercher_Event" stylesheets="@styless.css" />
-      <Button layoutX="18.0" layoutY="12.0" mnemonicParsing="false" onAction="#pdf" style="-fx-background-color: #FF0000;" stylesheets="@styless.css" text="PDF" textFill="GREEN">
+      <Button layoutX="17.0" layoutY="7.0" mnemonicParsing="false" onAction="#pdf" style="-fx-background-color: #FF0000;" stylesheets="@styless.css" text="PDF" textFill="GREEN">
          <styleClass>
             <String fx:value="transparent-button" />
             <String fx:value="button-container-mouse-moved" />
+            <String fx:value="day-name" />
          </styleClass></Button>
+      <Button layoutX="79.0" layoutY="4.0" mnemonicParsing="false" onAction="#calendrier" prefHeight="35.0" prefWidth="124.0" style="-fx-background-color: #008000;" stylesheets="@styless.css" text="Calendrier" textFill="#10b510">
+         <styleClass>
+            <String fx:value="transparent-button" />
+            <String fx:value="button-container-mouse-moved" />
+            <String fx:value="event-title" />
+         </styleClass>
+      </Button>
    </children>
 </AnchorPane>

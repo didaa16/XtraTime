@@ -203,7 +203,7 @@ public class eventService implements IService<event>{
         return u;
     }
 
-    public boolean eventExistsWithSameDates(event event) {
+  /*  public boolean eventExistsWithSameDates(event event) {
         String req = "SELECT * FROM event WHERE datedebut = ? AND datefin = ?";
 
         try {
@@ -221,8 +221,24 @@ public class eventService implements IService<event>{
         }
         return false;
     }
+*/
 
-        public Map<Timestamp, List<event>> getEventsByDateRange(Timestamp startDate, Timestamp endDate) throws SQLException {
+    public boolean eventExistsWithSameTerrainAndDates(String terrainName, Timestamp startDate, Timestamp endDate) {
+        String req = "SELECT * FROM event e JOIN terrain t ON e.idterrain = t.id WHERE t.nom = ? AND e.datedebut = ? AND e.datefin = ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(req);
+            ps.setString(1, terrainName);
+            ps.setTimestamp(2, startDate);
+            ps.setTimestamp(3, endDate);
+
+            ResultSet rs = ps.executeQuery();
+            return rs.next(); // Retourne vrai si un événement avec le même nom de terrain et les mêmes dates existe déjà
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Map<Timestamp, List<event>> getEventsByDateRange(Timestamp startDate, Timestamp endDate) throws SQLException {
             Map<Timestamp, List<event>> eventsByDate = new HashMap<>();
 
             String sql = "SELECT * FROM event WHERE datedebut >= ? AND datefin <= ?";
@@ -254,6 +270,37 @@ public class eventService implements IService<event>{
 
             return eventsByDate;
         }
+
+    public boolean eventExistsWithSameName(String eventName) {
+        String req = "SELECT COUNT(*) FROM event WHERE titre = ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(req);
+            ps.setString(1, eventName);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
+    public boolean imageExists(String imagePath) {
+        String req = "SELECT * FROM event WHERE image = ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(req);
+            ps.setString(1, imagePath);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
 
 
 

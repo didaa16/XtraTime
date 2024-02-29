@@ -53,7 +53,17 @@ public class Listsponsocontroller {
 
     @FXML
     private ImageView imageeventspanefx11;
+
+    @FXML
+    private Label subjecteventspanefx;
+
+    @FXML
+    private Label subjecteventspanefx1;
+
+    @FXML
+    private Label subjecteventspanefx11;
     public ArrayList<ImageView> ListImagese;
+    public ArrayList<Label> Listlabeltitleevent;
 
     private services.sponsoService sponsoService;
 
@@ -67,6 +77,7 @@ public class Listsponsocontroller {
     public Listsponsocontroller() {
         this.ListImagese = new ArrayList();
         this.Listpaneevent = new ArrayList();
+        this.Listlabeltitleevent = new ArrayList();
 
     }
 
@@ -93,6 +104,11 @@ public class Listsponsocontroller {
         this.ListImagese.add(this.imageeventspanefx1);
         this.ListImagese.add(this.imageeventspanefx11);
 
+        //nom
+        this.Listlabeltitleevent.add(this.subjecteventspanefx);
+        this.Listlabeltitleevent.add(this.subjecteventspanefx1);
+        this.Listlabeltitleevent.add(this.subjecteventspanefx11);
+
 
 
         int Nombre = this.es.numbersponso();
@@ -100,6 +116,8 @@ public class Listsponsocontroller {
             System.out.println(((sponso) this.data.get(this.i)).getImage());
             Image image = new Image(((sponso) this.data.get(this.i)).getImage());
             ((ImageView) this.ListImagese.get(this.i)).setImage(image);
+            ((Label)this.Listlabeltitleevent.get(this.i)).setText(((sponso)this.data.get(this.i)).getNom());
+
 
             ((AnchorPane) this.Listpaneevent.get(this.i)).setVisible(true);
         }

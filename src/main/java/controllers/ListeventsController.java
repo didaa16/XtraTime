@@ -30,6 +30,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -101,6 +102,14 @@ public class ListeventsController {
     @FXML
     private Label heureeventspanefx11;
 
+    @FXML
+    private Label label;
+
+    @FXML
+    private Label label1;
+
+    @FXML
+    private Label label11;
 
     @FXML
     private AnchorPane liste_events;
@@ -109,6 +118,7 @@ public class ListeventsController {
     public ArrayList<Label> Listlabeltitleevent;
     public ArrayList<Label> Listlabeldateevent;
     public ArrayList<Label> Listlabelheurevent;
+    public ArrayList<Label> Listlabelchrono;
     @FXML
     private ImageView qrcode;
 
@@ -137,6 +147,7 @@ public class ListeventsController {
         this.Listlabeldateevent= new ArrayList();
         this.Listlabelheurevent= new ArrayList();
         this.ListImageseQrcode = new ArrayList();
+        this.Listlabelchrono = new ArrayList();
     }
 
 
@@ -156,6 +167,8 @@ public class ListeventsController {
 
 
     }
+
+
 
     public void getUserData(int CurrentEvent) throws SQLException {
         this.Listpaneevent.add(this.Paneeventsfx);
@@ -181,6 +194,10 @@ public class ListeventsController {
         this.ListImageseQrcode.add(this.qrcode);
         this.ListImageseQrcode.add(this.qrcode1);
         this.ListImageseQrcode.add(this.qrcode11);
+
+        this.Listlabelchrono.add(this.label);
+        this.Listlabelchrono.add(this.label1);
+        this.Listlabelchrono.add(this.label11);
 
 
         int Nombre = this.es.numberevent();
@@ -212,7 +229,22 @@ public class ListeventsController {
             //Image imageqr = new Image(((event) this.data.get(q.ini(e));
             //((ImageView) this.ListImageseQrcode.get(this.i)).setImage(imageqr);
 
+            LocalDateTime currentTime = LocalDateTime.now();
+            LocalDateTime eventTime = timestamp.toLocalDateTime();
+            Duration duration = Duration.between(currentTime, eventTime);
 
+            // Vérifier si l'événement est à venir
+            if (duration.isNegative() || duration.isZero()) {
+                // L'événement est passé ou en cours, donc aucun compte à rebours n'est nécessaire
+                ((Label) this.Listlabelchrono.get(this.i)).setText("Événement passé ou en cours");
+            } else {
+                // Afficher le temps restant sous forme de compte à rebours
+                long days = duration.toDays();
+                long hours = duration.toHours() % 24;
+                long minutes = duration.toMinutes() % 60;
+                long seconds = duration.getSeconds() % 60;
+                ((Label) this.Listlabelchrono.get(this.i)).setText(String.format("%02d jours %02d heures %02d minutes %02d secondes", days, hours, minutes, seconds));
+            }
 
 
             ((AnchorPane) this.Listpaneevent.get(this.i)).setVisible(true);

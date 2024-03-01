@@ -23,14 +23,16 @@ public class Main {
            // serviceProduit.supprimer("refProduit");
 
             ServiceCommande serviceCommande = new ServiceCommande();
-            //Commande commande = new Commande(1, 0.0, Status.enAttente, "boh");
+            Commande commande = new Commande(0.0, Status.enAttente, "boh");
+            Commande commande2 = new Commande(0.0, Status.enAttente, "boh");
 
 
         // Ajouter le produit à la commande
-           // serviceCommandeProduit.ajouterProduitACommande("commande1","Abc");
-           // serviceCommandeProduit.ajouterProduitACommande("commande1","refff");
+        //   serviceCommandeProduit.ajouterProduitACommande(2,"RF-44");
+         //  serviceCommandeProduit.ajouterProduitACommande(1,"RF-123");
             System.out.println(serviceCommandeProduit.listerP("commande1"));
-           // serviceCommande.ajouter(commande);
+          //  serviceCommande.ajouter(commande);
+          //  serviceCommande.ajouter(commande2);
     } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

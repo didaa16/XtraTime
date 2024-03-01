@@ -1,50 +1,86 @@
-.gradient-background{
-    -fx-background-color:linear-gradient(from 25% 25% to 100% 100%, #000000 , #416D19);
-}
-.line-color{
-    -fx-background-color: #F6F5F5;
+.gradient-background {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #000000 , #416D19)
 }
 
-.container{
-    -fx-background-color:rgba(255,255,255,0.2);
-    -fx-background-radius: 10;
+.line-color {
+    -fx-background-color: #F6F5F5
 }
 
-.shadow{
-    -fx-effect: dropShadow(three-pass-box, rgba(0,0,0,0.2), 10.0, 0.0, 0.0, 10.0);
+.container {
+    -fx-background-color: rgba(255,255,255,0.2);
+    -fx-background-radius: 10
 }
-.button-container-mouse-moved:hover{
-    -fx-background-color: rgba(255,255,255,0.1);}
 
-.text-field{
-    -fx-font-family: "Quicksand";
-    -fx-font-size: 18;
-    -fx-padding: 1,1,1,1;
-    -fx-border-color: grey;
-    -fx-border-width: 2;
-    -fx-border-radius: 1;
-    -fx-border: gone;
-    -fx-background-color: transparent;
-    -fx-text-fill: grey;
+.shadow {
+    -fx-effect: dropShadow(three-pass-box, rgba(0,0,0,0.2), 10.0, 0.0, 0.0, 10.0)
 }
-.text-area .content{
+
+.button-container-mouse-moved:hover {
+    -fx-background-color: rgba(255,255,255,0.1)
+}
+
+
+
+.text-area .content {
     -fx-background-color: rgba(0,0,0,0.7);
+    -fx-border: none;
     -fx-border-color: grey;
+    -fx-border-width: 2;
+    -fx-border-radius: 1;
     -fx-font-family: "Quicksand";
     -fx-font-size: 18;
     -fx-padding: 1,1,1,1;
-    -fx-border-width: 2;
-    -fx-border-radius: 1;
-    -fx-border: gone;
-    -fx-text-fill: grey;
-
+    -fx-text-fill: grey
 }
+
 .disabled-label:disabled {
     -fx-background-color: rgb(252,252,252);
-    -fx-opacity: 1;
+    -fx-opacity: 1
 }
 
 .transparent-button {
     -fx-background-color: transparent;
-    -fx-text-fill: white; /* Pour changer la couleur du texte si nécessaire */
+    -fx-text-fill: white
+}
+
+.transparent {
+    -fx-background-color: rgba(0,0,0,0);
+}
+
+.produit-item {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 30
+}
+
+.labelll {
+    -fx-background-color: rgba(255, 255, 255, 0);
+    -fx-text-fill: rgba(255, 255, 255, 0)
+}
+
+.chosen-prod-card {
+    -fx-background-color: rgb(75, 96, 76);
+    -fx-background-radius: 30
+}
+
+.desc {
+}
+
+.com {
+    -fx-background-color: #D3D3D3;
+    -fx-background-radius: 10
+}
+
+
+.search-box {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 100
+}
+
+.switch_button {
+    -fx-background-color: #828282;
+    -fx-background-radius: 30
+}
+.comb{
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #8d8888, #416D19)
+
 }

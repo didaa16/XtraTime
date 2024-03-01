@@ -8,12 +8,6 @@ public class Produit_Commande {
 
     public Produit_Commande() {}
 
-    public Produit_Commande(int id, String ref, int refCommande) {
-
-        this.ref = ref;
-        this.refCommande = refCommande;
-    }
-
     public Produit_Commande(String ref, int refCommande) {
         this.ref = ref;
         this.refCommande = refCommande;

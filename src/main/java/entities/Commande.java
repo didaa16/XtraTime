@@ -13,8 +13,12 @@ public class Commande {
 
     public Commande() {
     }
-
-    public   Commande(int refCommande) {
+    public Commande(double prix, Status status, String idUser) {
+        this.prix = prix;
+        this.status = status;
+        this.idUser = idUser;
+    }
+    public Commande(int refCommande) {
         this.refCommande = refCommande;
     }
 
@@ -25,7 +29,6 @@ public class Commande {
         this.idUser = idUser;
         this.produits = produits;
     }
-
 
 
     public int getRefCommande() {
@@ -67,7 +70,6 @@ public class Commande {
     public void setProduits(List<Produit> produits) {
         this.produits = produits;
     }
-
 
 
     public void addProduit(Produit produit) {

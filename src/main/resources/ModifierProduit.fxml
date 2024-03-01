@@ -17,7 +17,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="583.0" prefWidth="934.0" styleClass="gradient-background" stylesheets="@styless.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ModifierProduitController">
+<AnchorPane prefHeight="634.0" prefWidth="960.0" styleClass="gradient-background" stylesheets="@styless.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ModifierProduitController">
    <children>
       <BorderPane prefHeight="583.0" prefWidth="882.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
@@ -51,7 +51,7 @@
                         <Insets left="20.0" right="20.0" />
                      </VBox.margin>
                   </Separator>
-                  <HBox prefHeight="60.0" prefWidth="260.0">
+                  <HBox prefHeight="60.0" prefWidth="260.0" styleClass="button-container-mouse-moved">
                      <VBox.margin>
                         <Insets top="30.0" />
                      </VBox.margin>
@@ -101,7 +101,7 @@
                         <String fx:value="button-container-mouse-moved" />
                      </styleClass>
                   </HBox>
-                  <HBox prefHeight="60.0" prefWidth="260.0">
+                  <HBox fx:id="backCom" onMouseClicked="#goBackCom" prefHeight="60.0" prefWidth="260.0" styleClass="button-container-mouse-moved">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
@@ -290,7 +290,6 @@
                   </VBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="liv" mnemonicParsing="false" onAction="#livCommande" text="livreur" />
                         <Button fx:id="btnsave" mnemonicParsing="false" onAction="#sauvegarder" prefHeight="35.0" prefWidth="90.0" styleClass="switch_button" text="save">
                            <font>
                               <Font size="19.0" />

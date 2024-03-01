@@ -37,6 +37,8 @@ public class ModifierProduitController {
 
     @FXML
     private HBox back;
+    @FXML
+    private HBox backCom;
 
     @FXML
     private Button btnsave;
@@ -282,7 +284,18 @@ public class ModifierProduitController {
     @FXML
     private void goBack() throws IOException {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/AfficherProduit.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/AjouterProduit.fxml"));
+            Scene scene = back.getScene();
+            scene.setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Erreur", "Erreur lors du retour à l'interface précédente", e.getMessage(), Alert.AlertType.ERROR);
+        }
+    }
+    @FXML
+    private void goBackCom() throws IOException {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/GestionCommande.fxml"));
             Scene scene = back.getScene();
             scene.setRoot(root);
         } catch (IOException e) {
@@ -319,12 +332,6 @@ public class ModifierProduitController {
             System.out.println("An error occurred while refreshing table: " + e.getMessage());
         }
     }
-
-  
-
-
-
-
 
 
 

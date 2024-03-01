@@ -20,7 +20,7 @@
 
 <AnchorPane prefHeight="634.0" prefWidth="960.0" styleClass="gradient-background" stylesheets="@styless.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AjouterProduitController">
    <children>
-      <BorderPane layoutX="-17.6" prefHeight="634.0" prefWidth="978.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-18.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane layoutX="-17.6" prefHeight="634.0" prefWidth="978.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
             <VBox prefHeight="496.0" prefWidth="246.0" styleClass="container" stylesheets="@styless.css" BorderPane.alignment="CENTER">
                <children>
@@ -52,7 +52,7 @@
                         <Insets left="20.0" right="20.0" />
                      </VBox.margin>
                   </Separator>
-                  <HBox prefHeight="60.0" prefWidth="260.0">
+                  <HBox prefHeight="60.0" prefWidth="260.0" styleClass="button-container-mouse-moved">
                      <VBox.margin>
                         <Insets top="30.0" />
                      </VBox.margin>
@@ -125,6 +125,7 @@
                         </Label>
                      </children>
                   </HBox>
+                  <Button fx:id="store" mnemonicParsing="false" onAction="#store" text="store" />
                </children>
                <opaqueInsets>
                   <Insets />

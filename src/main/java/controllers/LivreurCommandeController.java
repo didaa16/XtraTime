@@ -1,15 +1,22 @@
 package controllers;
 
 
+import com.itextpdf.kernel.pdf.canvas.draw.SolidLine;
+import com.itextpdf.layout.element.LineSeparator;
 import entities.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.TextAlignment;
 import services.ServiceCommande;
 import services.ServiceCommandeProduit;
@@ -23,7 +30,6 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
 
-import static com.itextpdf.layout.properties.TextAlignment.CENTER;
 
 
 public class LivreurCommandeController {
@@ -34,6 +40,8 @@ public class LivreurCommandeController {
     @FXML
     private Button btnsave;
 
+    @FXML
+    private ImageView retour;
     @FXML
     private TableView<Commande> tableCommande;
     @FXML
@@ -136,20 +144,38 @@ public class LivreurCommandeController {
     // Afficher le nombre de commandes
             //  afficherNombreCommandes(); // Ajoutez cette ligne pour appeler la méthode afficherNombreCommandes
             // Afficher le nombre de commandes
-            nbrA.setText(String.valueOf(serviceCommande.countEnAttente()));
-            nbrCOURS.setText(String.valueOf(serviceCommande.countEnCours()));
-            nbrliv.setText(String.valueOf(serviceCommande.countLivre()));
+//            nbrA.setText(String.valueOf(serviceCommande.countEnAttente()));
+//            nbrCOURS.setText(String.valueOf(serviceCommande.countEnCours()));
+//            nbrliv.setText(String.valueOf(serviceCommande.countLivre()));
+            // Afficher le nombre de commandes
+            afficherNombreCommandes(); // Ajoutez cette ligne pour appeler la méthode afficherNombreCommandes
             stat.setItems(FXCollections.observableArrayList(Status.values()));
+
 
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
+    @FXML
+    public void afficherNombreCommandes() {
+        try {
+            // Mettre à jour le nombre de commandes en attente
+            nbrA.setText(String.valueOf(serviceCommande.countEnAttente()));
+
+            // Mettre à jour le nombre de commandes en cours
+            nbrCOURS.setText(String.valueOf(serviceCommande.countEnCours()));
+
+            // Mettre à jour le nombre de commandes livrées
+            nbrliv.setText(String.valueOf(serviceCommande.countLivre()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     @FXML
-    void enregistrerS(ActionEvent event) {
+    void enregistrerS(ActionEvent event) throws SQLException {
         // Récupérer la commande sélectionnée
         Commande commande = tableCommande.getSelectionModel().getSelectedItem();
         if (commande != null) {
@@ -161,16 +187,42 @@ public class LivreurCommandeController {
                 e.printStackTrace();
             }
 
-
             // Rafraîchir la table des commandes
             tableCommande.refresh();
+
+            // Mettre à jour le nombre de commandes
+            afficherNombreCommandes();
+
+
+
+
         }
+    }
+
+    @FXML
+    void retourner(MouseEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/GestionCommande.fxml"));
+            Scene scene = retour.getScene();
+            scene.setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Erreur", "Erreur lors du retour à l'interface précédente", e.getMessage(), Alert.AlertType.ERROR);
+        }
+
+    }
+
+    private void showAlert(String title, String headerText, String contentText, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(headerText);
+        alert.setContentText(contentText);
+        alert.showAndWait();
     }
 
 
 
-
-//dependance itext7-core
+    //dependance itext7-core
 @FXML
 void exporterPDF(ActionEvent event) {
     // Récupérer la commande sélectionnée
@@ -191,7 +243,7 @@ void exporterPDF(ActionEvent event) {
             Paragraph title = new Paragraph("Commande " + commande.getRefCommande());
             title.setFontSize(24);
             title.setBold();
-            title.setTextAlignment(CENTER);
+            //title.setTextAlignment(CENTER);
             document.add(title);
 
             // Ajouter les informations de la commande
@@ -206,6 +258,7 @@ void exporterPDF(ActionEvent event) {
                 document.add(new Paragraph("Description: " + produit.getDescription()));
                 document.add(new Paragraph("Marque: " + produit.getMarque()));
                 document.add(new Paragraph("Taille: " + produit.getTaille()));
+                document.add(new LineSeparator(new SolidLine()));
 
             }
 

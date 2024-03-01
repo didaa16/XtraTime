@@ -119,4 +119,7 @@ public class Produit {
                 ", image='" + image + '\'' +
                 '}';
     }
+
+    public void updateRating(String ref, double newRating) {
+    }
 }

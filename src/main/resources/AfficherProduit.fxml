@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="586.0" prefWidth="866.0" styleClass="gradient-background" stylesheets="@styless.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AfficherProduitController">
+<AnchorPane prefHeight="634.0" prefWidth="960.0" styleClass="gradient-background" stylesheets="@styless.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AfficherProduitController">
    <children>
       <BorderPane prefHeight="586.0" prefWidth="858.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
@@ -49,7 +49,7 @@
                         <Insets left="20.0" right="20.0" />
                      </VBox.margin>
                   </Separator>
-                  <HBox prefHeight="60.0" prefWidth="260.0">
+                  <HBox prefHeight="60.0" prefWidth="260.0" styleClass="button-container-mouse-moved">
                      <VBox.margin>
                         <Insets top="30.0" />
                      </VBox.margin>
@@ -99,7 +99,7 @@
                         <String fx:value="container" />
                      </styleClass>
                   </HBox>
-                  <HBox prefHeight="78.0" prefWidth="226.0">
+                  <HBox fx:id="back" onMouseClicked="#goBack" prefHeight="78.0" prefWidth="226.0" styleClass="button-container-mouse-moved">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
@@ -122,6 +122,26 @@
                         </Label>
                      </children>
                   </HBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Button fx:id="btnpdf" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#exporterPDF" prefHeight="42.0" prefWidth="96.0" stylesheets="@styless.css" text="pdf">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="70.0" top="20.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button fx:id="btnExcel" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#exporteeExcel" prefHeight="42.0" prefWidth="96.0" stylesheets="@styless.css" text="excel">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="70.0" top="20.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
                </children>
                <opaqueInsets>
                   <Insets />
@@ -134,7 +154,7 @@
          <center>
             <VBox prefHeight="480.0" prefWidth="580.0" BorderPane.alignment="CENTER">
                <children>
-                  <HBox prefHeight="52.0" prefWidth="280.0" style="-fx-background-color: #769476; -fx-background-radius: 20;">
+                  <HBox alignment="CENTER" prefHeight="6.0" prefWidth="674.0" style="-fx-background-color: #769476; -fx-background-radius: 20;">
                      <children>
                         <Label prefHeight="47.0" prefWidth="254.0" text="Liste des produit" textFill="WHITE">
                            <font>
@@ -148,8 +168,11 @@
                            </HBox.margin>
                         </Label>
                      </children>
+                     <VBox.margin>
+                        <Insets left="100.0" right="100.0" top="50.0" />
+                     </VBox.margin>
                   </HBox>
-                  <TableView fx:id="listeProduit" prefHeight="272.0" prefWidth="485.0">
+                  <TableView fx:id="listeProduit" prefHeight="310.0" prefWidth="578.0" styleClass="shadow">
                      <columns>
                         <TableColumn fx:id="c_nom" prefWidth="66.39999085664749" text="Nom" />
                         <TableColumn fx:id="c_reference" prefWidth="97.60004425048828" text="reference" />
@@ -172,12 +195,12 @@
                               <Font size="18.0" />
                            </font>
                         </Button>
-                        <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#modifierProduit" prefHeight="45.0" prefWidth="98.0" style="-fx-background-radius: 100;" stylesheets="@StyleS.css" text="Update">
+                        <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#modifierProduit" prefHeight="45.0" prefWidth="98.0" style="-fx-background-radius: 100;" styleClass="switch_button" stylesheets="@StyleS.css" text="Update">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Button>
-                        <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#supprimerproduit" prefHeight="46.0" prefWidth="98.0" style="-fx-background-radius: 100;" stylesheets="@styless.css" text="Delete">
+                        <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#supprimerproduit" prefHeight="46.0" prefWidth="98.0" style="-fx-background-radius: 100;" styleClass="switch_button" stylesheets="@styless.css" text="Delete">
                            <font>
                               <Font size="18.0" />
                            </font>

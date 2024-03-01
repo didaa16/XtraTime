@@ -16,10 +16,9 @@ import services.ServiceCommandeProduit;
 import services.ServiceProduit;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class ClientController {
-
-
 
     @FXML
     private Button ajt;
@@ -80,9 +79,16 @@ public class ClientController {
 
     @FXML
     private Button save;
-    ServiceProduit serviceProduit =new ServiceProduit();
-    ServiceCommande serviceCommande =new ServiceCommande();
-    ServiceCommandeProduit serviceCommandeProduit=new ServiceCommandeProduit();
+
+    private Commande currentCommande;
+
+    private ServiceProduit serviceProduit = new ServiceProduit();
+    private ServiceCommande serviceCommande = new ServiceCommande();
+    private ServiceCommandeProduit serviceCommandeProduit = new ServiceCommandeProduit();
+
+    public ClientController() throws SQLException {
+    }
+
     @FXML
     public void initialize() throws SQLException {
         try {
@@ -100,18 +106,7 @@ public class ClientController {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-       /* // Initialiser les colonnes de la table de commandes
-        c_ref.setCellValueFactory(new PropertyValueFactory<>("refCommande"));
-        c_reference.setCellValueFactory(new PropertyValueFactory<>("ref"));
-        c_refc.setCellValueFactory(new PropertyValueFactory<>("refCommande"));
-        mar.setCellValueFactory(new PropertyValueFactory<>("marque"));
-        desc.setCellValueFactory(new PropertyValueFactory<>("description"));
-        nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
-        pr.setCellValueFactory(new PropertyValueFactory<>("prix"));
-        tail.setCellValueFactory(new PropertyValueFactory<>("taille"));*/
 
-        // Charger les commandes dans la tableCommande
-      //  refreshCommandeTable();
     }
 
     private void refreshCommandeTable() throws SQLException {
@@ -119,32 +114,68 @@ public class ClientController {
         tablecom.setItems(commandes);
     }
 
+    @FXML
+    public void afficherProduitsCommande() {
+        Commande commande = tablecom.getSelectionModel().getSelectedItem();
+        if (commande != null) {
+            try {
+                List<Produit> produits = serviceCommandeProduit.listerP("WHERE refCommande = '" + commande.getRefCommande() + "'");
+                // Afficher les produits dans la tablecom
+                tablecom.getItems().clear();
+                tablecom.getItems().addAll((Commande) produits);
+            } catch (SQLException e) {
+                System.out.println("Erreur lors de la récupération des produits de la commande : " + e.getMessage());
+            }
+        } else {
+            System.out.println("Veuillez sélectionner une commande.");
+        }}
+
     public void ajouterproduit(ActionEvent actionEvent) {
-        // Récupérer le produit sélectionné
         Produit produit = listeProduit.getSelectionModel().getSelectedItem();
         if (produit != null) {
-            // Ajouter le produit à la commande
-            Commande commande = new Commande();
-            commande.addProduit(produit);
-            // Mettre à jour le prix total de la commande
-            commande.setPrix(commande.getPrix() + produit.getPrix());
-            // Ajouter la commande à la table tablecom
-            tablecom.getItems().add(commande);
+            if (currentCommande == null) {
+                // Si aucune commande n'est sélectionnée, créer une nouvelle commande vide
+                currentCommande = new Commande();
+                currentCommande.setPrix(0.0); // Initialiser le prix total de la commande à 0
+                currentCommande.setStatus(Status.enAttente); // Status initial
+                currentCommande.setIdUser("dida16"); // ID de l'utilisateur actuel
+                try {
+                    // Ajouter la commande à la base de données
+                    serviceCommande.ajouter(currentCommande);
+                    // Rafraîchir la table des commandes
+                    refreshCommandeTable();
+                } catch (SQLException e) {
+                    System.out.println("Erreur lors de l'ajout de la commande : " + e.getMessage());
+                }
+            }
+            try {
+                // Ajouter le produit à la commande
+                serviceCommandeProduit.ajouterProduitACommande(currentCommande.getRefCommande(), produit.getRef());
+                // Mettre à jour le prix total de la commande
+                currentCommande.setPrix(currentCommande.getPrix() + produit.getPrix());
+                // Rafraîchir la table des commandes
+                refreshCommandeTable();
+            } catch (SQLException e) {
+                System.out.println("Erreur lors de l'ajout du produit à la commande : " + e.getMessage());
+            }
+        } else {
+            System.out.println("Veuillez sélectionner un produit.");
         }
     }
 
-    public void ajoutercommande(ActionEvent actionEvent) throws SQLException {
-        // Créer une nouvelle commande
-        Commande commande = new Commande();
-        commande.setRefCommande(0); // Laissez la base de données générer l'ID
-        commande.setPrix(0.0); // Prix initial
-        commande.setStatus(Status.enAttente); // Status initial
-        commande.setIdUser("idUser"); // ID de l'utilisateur actuel
 
-        // Ajouter la commande à la base de données
-        serviceCommande.ajouter(commande);
-
-        // Rafraîchir la table des commandes
-        refreshCommandeTable();
+    public void ajoutercommande(ActionEvent actionEvent) {
+        if (currentCommande != null) {
+            try {
+                // Enregistrer la commande dans la base de données
+                serviceCommande.ajouter(currentCommande);
+                // Rafraîchir la table des commandes
+                refreshCommandeTable();
+            } catch (SQLException e) {
+                System.out.println("Erreur lors de l'enregistrement de la commande : " + e.getMessage());
+            }
+        } else {
+            System.out.println("Aucune commande à enregistrer.");
+        }
     }
 }

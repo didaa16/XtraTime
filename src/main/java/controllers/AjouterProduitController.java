@@ -65,7 +65,8 @@ public class AjouterProduitController {
 
     @FXML
     private ComboBox<TypeSport> typeSport;
-
+    @FXML
+    private Button store;
     @FXML
     void initialize() {
         marque.getItems().addAll(Marque.values());
@@ -177,6 +178,15 @@ public class AjouterProduitController {
                 showAlert("Erreur", "Erreur lors de l'ajout.", "Veuillez sélectionner une image.", Alert.AlertType.ERROR);
                 return;
             }
+            if (serviceProduit.produitExistsWithSameName(nomProduit.getText())){
+                Alert eventExistsAlert = new Alert(Alert.AlertType.WARNING);
+                eventExistsAlert.setTitle(" \n" +
+                        "Produit  double");
+                eventExistsAlert.setHeaderText(null);
+                eventExistsAlert.setContentText("Un produit du même nom existe déjà !");
+                eventExistsAlert.showAndWait();
+                return;
+            }
             serviceProduit.ajouter(new Produit(refProduit.getText(), nomProduit.getText(), description.getText(), Double.parseDouble(prix.getText()), marque.getValue(), taille.getText(), typeSport.getValue(), Integer.parseInt(quantite.getText()), imageUrl));
             showAlert("Succès", "Produit ajouté", "Le produit a été ajouté avec succès.", Alert.AlertType.INFORMATION);
             refProduit.clear();
@@ -229,4 +239,24 @@ public class AjouterProduitController {
             showAlert("Erreur", "Erreur lors du retour à l'interface précédente", e.getMessage(), Alert.AlertType.ERROR);
         }
     }
+
+
+    @FXML
+    void store(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/store.fxml"));
+
+            Scene scene = store.getScene();
+            scene.setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Erreur", "Erreur lors du chargement de la page ", e.getMessage(), Alert.AlertType.ERROR);
+
+        }
+    }
+
+
+
+
+
 }

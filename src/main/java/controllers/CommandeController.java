@@ -7,11 +7,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import services.ServiceCommande;
 import services.ServiceCommandeProduit;
 import services.ServiceProduit;
@@ -24,6 +23,9 @@ public class CommandeController {
     private Button liv;
     @FXML
     private Button liv1;
+    @FXML
+    private HBox back;
+
 
     @FXML
     private TextField nbrCom;
@@ -128,8 +130,10 @@ public class CommandeController {
 
     @FXML
     private void afficherNombreCommandes() {
+
+        int nombreCommandes =0;
         try {
-            int nombreCommandes = serviceCommande.Count();
+            nombreCommandes = serviceCommande.Count();
             nbrCom.setText(String.valueOf(nombreCommandes));
         } catch (SQLException e) {
             e.printStackTrace();
@@ -158,5 +162,23 @@ public class CommandeController {
 
     }
 
+    private void showAlert(String title, String headerText, String contentText, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(headerText);
+        alert.setContentText(contentText);
+        alert.showAndWait();
+    }
+    @FXML
+    private void goBack() throws IOException {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/AjouterProduit.fxml"));
+            Scene scene = back.getScene();
+            scene.setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Erreur", "Erreur lors du retour à l'interface précédente", e.getMessage(), Alert.AlertType.ERROR);
+        }
+    }
 }
 

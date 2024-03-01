@@ -9,6 +9,7 @@ import java.util.List;
 
 public class ServiceCommande implements IService<Commande> {
 
+
     @Override
     public void ajouter(Commande commande) throws SQLException {
         Connection connection = DataBase.getInstance().getConnection();
@@ -131,7 +132,48 @@ public class ServiceCommande implements IService<Commande> {
         return countByStatus(Status.livrée);
     }
 
+    public Commande getCommande (String idUser) throws SQLException {
+        Connection connection = DataBase.getInstance().getConnection();
+        String req = "SELECT * FROM `commande` WHERE `iduser` = ?";
+        PreparedStatement ps = connection.prepareStatement(req);
+        ps.setString(1, idUser);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            Commande cmd = new Commande();
+            cmd.setRefCommande(rs.getInt("refCommande"));
+            cmd.setPrix(rs.getDouble("prix"));
+            cmd.setStatus(Status.valueOf(rs.getString("status")));
+            cmd.setIdUser(rs.getString("iduser"));
+            return cmd;
+        }
+        return null;
+    }
 
+
+    public boolean commandeExiste(Commande cmd) throws SQLException {
+        if (cmd != null) {
+            Connection connection = DataBase.getInstance().getConnection();
+            String req = "SELECT * FROM `commande` WHERE `iduser` = ?";
+            PreparedStatement ps = connection.prepareStatement(req);
+            ps.setString(1, cmd.getIdUser());
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+        } else {
+            return false;
+        }
+
+    }
+
+    public void updatePrixCommande(int refCommande, double nouveauPrix) throws SQLException {
+        Connection connection = DataBase.getInstance().getConnection();
+        String query = "UPDATE commande SET prix = ? WHERE refCommande = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setDouble(1, nouveauPrix);
+        preparedStatement.setString(2, String.valueOf(refCommande));
+        preparedStatement.executeUpdate();
+        preparedStatement.close();
+        connection.close();
+    }
 
 
 

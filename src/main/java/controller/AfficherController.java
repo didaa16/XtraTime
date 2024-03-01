@@ -3,9 +3,11 @@ package controller;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import java.io.IOException;
-
+import javafx.scene.control.TextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -19,7 +21,10 @@ import javafx.scene.control.TableView;
 import entities.complexe;
 import javafx.scene.control.cell.PropertyValueFactory;
 import services.ServiceComplexe;
-
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 public class AfficherController {
 
     ServiceComplexe ServiceComplexe = new ServiceComplexe();
@@ -45,6 +50,9 @@ public class AfficherController {
     private TableColumn<complexe, String> col_im;
     @FXML
     private Button back;
+    @FXML
+    private TextField searchField; // Ajoutez ce champ
+
     @FXML
     void back(ActionEvent event) {
         try {
@@ -118,10 +126,12 @@ public class AfficherController {
         }
     }
 
+
+
     @FXML
     void initialize() {
         try {
-            ObservableList<complexe> complexes= FXCollections.observableList(ServiceComplexe.afficher());
+            ObservableList<complexe> complexes = FXCollections.observableList(ServiceComplexe.afficher());
             tv_complexe.setItems(complexes);
             col_nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
             col_idl.setCellValueFactory(new PropertyValueFactory<>("idlocateur"));
@@ -132,7 +142,36 @@ public class AfficherController {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
-
     }
+
+    @FXML
+    void search() {
+        String keyword = searchField.getText().toLowerCase();
+        ObservableList<complexe> filteredList = FXCollections.observableArrayList();
+
+        // Si le champ de recherche est vide, rétablissez la liste complète
+        if (keyword.isEmpty()) {
+            try {
+                tv_complexe.setItems(FXCollections.observableList(ServiceComplexe.afficher()));
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            return;
+        }
+
+        // Filtrer la liste selon le mot-clé de recherche
+        for (complexe complex : tv_complexe.getItems()) {
+            if (complex.getNom().toLowerCase().contains(keyword) ||
+                    complex.getAdresse().toLowerCase().contains(keyword) ||
+                    complex.getPatente().toLowerCase().contains(keyword) ||
+                    complex.getIdlocateur().toLowerCase().contains(keyword) ||
+                    complex.getTel().toLowerCase().contains(keyword)) {
+                filteredList.add(complex);
+            }
+        }
+        tv_complexe.setItems(filteredList);
+    }
+
+
+
 }

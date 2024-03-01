@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="654.0" prefWidth="755.0" styleClass="gradient-background" stylesheets="@styless.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AfficherController">
@@ -27,12 +28,7 @@
             <String fx:value="shadow" />
          </styleClass>
       </TableView>
-      <Button layoutX="32.0" layoutY="395.0" mnemonicParsing="false" onAction="#modifier" prefHeight="81.0" prefWidth="96.0" stylesheets="@styless.css" text="modifier">
-         <styleClass>
-            <String fx:value="button-container-mouse-moved" />
-            <String fx:value="shadow" />
-         </styleClass>
-      </Button>
+      <Button layoutX="32.0" layoutY="395.0" mnemonicParsing="false" onAction="#modifier" prefHeight="81.0" prefWidth="96.0" text="modifier" />
       <Button layoutX="216.0" layoutY="395.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="81.0" prefWidth="96.0" text="supprimer" />
       <Button fx:id="back" layoutX="661.0" layoutY="411.0" mnemonicParsing="false" onAction="#back" stylesheets="@styless.css" text="back">
          <styleClass>
@@ -40,5 +36,7 @@
             <String fx:value="shadow" />
          </styleClass>
       </Button>
+      <TextField fx:id="searchField" layoutX="522.0" layoutY="537.0" promptText="Rechercher un complexe..." onKeyReleased="#search" />
+
    </children>
 </AnchorPane>

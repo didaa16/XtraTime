@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="746.0" prefWidth="841.0" styleClass="gradient-background" stylesheets="@styless.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.InscriptionController">
+   <children>
+      <Label layoutX="46.0" layoutY="112.0" stylesheets="@styless.css" text="nom" textFill="#f2f2f2">
+         <font>
+            <Font size="26.0" />
+         </font></Label>
+      <TextField fx:id="nom" layoutX="183.0" layoutY="114.0" styleClass="text-area" stylesheets="@styless.css" />
+      <Label layoutX="51.0" layoutY="266.0" stylesheets="@styless.css" text="adresse" textFill="WHITE">
+         <font>
+            <Font size="26.0" />
+         </font></Label>
+      <Label layoutX="86.0" layoutY="329.0" stylesheets="@styless.css" text="tel" textFill="WHITE">
+         <font>
+            <Font size="26.0" />
+         </font></Label>
+      <Label layoutX="81.0" layoutY="397.0" stylesheets="@styless.css" text="patente" textFill="WHITE">
+         <font>
+            <Font size="26.0" />
+         </font></Label>
+      <Label layoutX="68.0" layoutY="602.0" stylesheets="@styless.css" text="image" textFill="WHITE">
+         <font>
+            <Font size="26.0" />
+         </font></Label>
+      <TextField fx:id="adr" layoutX="183.0" layoutY="268.0" />
+      <TextField fx:id="tel" layoutX="183.0" layoutY="332.0" />
+      <Button layoutX="456.0" layoutY="155.0" mnemonicParsing="false" onAction="#addcomplexe" prefHeight="56.0" prefWidth="125.0" text="ajouter" />
+      <Button layoutX="456.0" layoutY="265.0" mnemonicParsing="false" onAction="#afficher" prefHeight="56.0" prefWidth="125.0" text="afficher" />
+      <Text fill="WHITE" layoutX="327.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ajouter une complexe">
+         <font>
+            <Font name="Gill Sans MT Condensed" size="37.0" />
+         </font>
+      </Text>
+      <Button layoutX="661.0" layoutY="31.0" mnemonicParsing="false" onAction="#addterrain" prefHeight="56.0" prefWidth="142.0" text="ajouter un terrain" textFill="#1b9425" />
+      <ImageView fitHeight="86.0" fitWidth="96.0" layoutY="3.0">
+         <image>
+            <Image url="@logo.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="pt" fitHeight="113.0" fitWidth="208.0" layoutX="183.0" layoutY="397.0" pickOnBounds="true" preserveRatio="true" styleClass="container" />
+      <ImageView fx:id="im" fitHeight="113.0" fitWidth="208.0" layoutX="192.0" layoutY="527.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="up" layoutX="432.0" layoutY="438.0" mnemonicParsing="false" text="upload" />
+      <Button fx:id="upp" layoutX="432.0" layoutY="584.0" mnemonicParsing="false" text="upload" />
+   </children>
+</AnchorPane>

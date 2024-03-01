@@ -28,7 +28,7 @@
             <Pane maxHeight="-Infinity" prefHeight="1.0" prefWidth="200.0" styleClass="line-color" stylesheets="@styless.css" HBox.hgrow="ALWAYS" />
             <ImageView fitHeight="32.0" fitWidth="35.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../Users/Guide%20Info/Downloads/icons8-setting-64.png" />
+                  <Image url="@icons8-setting-64.png" />
                </image>
             </ImageView>
          </children>
@@ -47,7 +47,7 @@
                <children>
                   <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../Users/Guide%20Info/Desktop/421386197_913323057052560_175060100800875911_n.png" />
+                        <Image url="@421386197_913323057052560_175060100800875911_n.png" />
                      </image>
                   </ImageView>
                   <VBox alignment="CENTER" prefHeight="100.0" prefWidth="129.0">
@@ -75,21 +75,21 @@
                      <children>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../Users/Guide%20Info/Downloads/icons8-accueil-50.png" />
+                              <Image url="@icons8-accueil-50.png" />
                            </image>
                         </ImageView>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="32.0" prefWidth="100.0" styleClass="shadow" stylesheets="@styless.css" text="Home" textFill="#c4bbbb" textOverrun="CENTER_WORD_ELLIPSIS">
+                        <Button mnemonicParsing="false" onAction="#switchToAjout" prefHeight="26.0" prefWidth="146.0" styleClass="transparent-button" stylesheets="@styless.css" text="Home">
                            <font>
-                              <Font name="Franklin Gothic Medium Cond" size="18.0" />
+                              <Font name="Franklin Gothic Medium Cond" size="21.0" />
                            </font>
-                        </Label>
+                        </Button>
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="60.0" prefWidth="60.0">
                      <children>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../Users/Guide%20Info/Downloads/icons8-abonnement-48.png" />
+                              <Image url="@icons8-abonnement-48.png" />
                            </image>
                         </ImageView>
                         <Button fx:id="AB" mnemonicParsing="false" onAction="#switchToAjoutC" prefHeight="30.0" prefWidth="121.0" styleClass="transparent-button" stylesheets="@styless.css" text="Abonnement" textFill="#b9b2b2">
@@ -103,7 +103,7 @@
                      <children>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../Users/Guide%20Info/Downloads/icons8-pile-de-papier-100.png" />
+                              <Image url="@icons8-pile-de-papier-100.png" />
                            </image>
                         </ImageView>
                         <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="61.0" styleClass="transparent-button" stylesheets="@styless.css" text="Pack">
@@ -117,12 +117,12 @@
                         <String fx:value="container" />
                      </styleClass>
                   </HBox>
-                  <Button mnemonicParsing="false" onAction="#ajouterPack" prefHeight="28.0" prefWidth="72.0" stylesheets="@styless.css" text="Save">
+                  <Button mnemonicParsing="false" onAction="#ajouterPack" prefHeight="28.0" prefWidth="97.0" stylesheets="@styless.css" text="Enregistrer">
                      <font>
                         <Font name="Franklin Gothic Medium" size="15.0" />
                      </font>
                      <VBox.margin>
-                        <Insets left="80.0" right="30.0" />
+                        <Insets left="70.0" right="30.0" />
                      </VBox.margin>
                      <styleClass>
                         <String fx:value="button-container-mouse-moved" />

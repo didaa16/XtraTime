@@ -1,6 +1,9 @@
 package Controllers;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+
+import com.itextpdf.layout.element.Image;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,8 +18,23 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import services.ServicePack;
 import entities.Pack;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+
+import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.kernel.geom.PageSize;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+
 import javafx.stage.Stage; // Importez la classe Stage depuis javafx.stage
+
+import javax.swing.*;
 
 
 public class AfficherPackController {
@@ -39,6 +57,9 @@ public class AfficherPackController {
 
     @FXML
     private TableView<Pack> tabV;
+    @FXML
+    private Button PDF_Button;
+
 
     @FXML
     private Button backButton;
@@ -146,6 +167,16 @@ public class AfficherPackController {
         } catch (IOException e) {
             e.printStackTrace();
             showAlert("Erreur", "Erreur lors du retour à l'interface précédente", e.getMessage(), Alert.AlertType.ERROR);
+        }
+    }
+    @FXML
+    void changeH(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/HomeStats.fxml"));
+            backButton.getScene().setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 

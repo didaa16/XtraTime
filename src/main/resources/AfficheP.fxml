@@ -30,7 +30,7 @@
                   <Pane maxHeight="-Infinity" prefHeight="1.0" prefWidth="200.0" styleClass="line-color" stylesheets="@styless.css" HBox.hgrow="ALWAYS" />
                   <ImageView fitHeight="32.0" fitWidth="35.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../Users/Guide%20Info/Downloads/icons8-setting-64.png" />
+                        <Image url="@icons8-setting-64.png" />
                      </image>
                   </ImageView>
                </children>
@@ -49,7 +49,7 @@
                      <children>
                         <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../Users/Guide%20Info/Desktop/421386197_913323057052560_175060100800875911_n.png" />
+                              <Image url="@421386197_913323057052560_175060100800875911_n.png" />
                            </image>
                         </ImageView>
                         <VBox alignment="CENTER" prefHeight="100.0" prefWidth="129.0">
@@ -75,38 +75,45 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="60.0" prefWidth="60.0">
                            <children>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" translateX="-40.0">
                                  <image>
-                                    <Image url="@../../../../Users/Guide%20Info/Downloads/icons8-accueil-50.png" />
+                                    <Image url="@icons8-accueil-50.png" />
                                  </image>
                               </ImageView>
-                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="32.0" prefWidth="100.0" styleClass="shadow" stylesheets="@styless.css" text="Home" textFill="#c4bbbb" textOverrun="CENTER_WORD_ELLIPSIS">
+                              <Button mnemonicParsing="false" onAction="#changeH" stylesheets="@styless.css" text="Home">
+                                 <styleClass>
+                                    <String fx:value="button-container-mouse-moved" />
+                                    <String fx:value="transparent-button" />
+                                 </styleClass>
                                  <font>
-                                    <Font name="Franklin Gothic Medium Cond" size="18.0" />
+                                    <Font name="Franklin Gothic Medium" size="18.0" />
                                  </font>
-                              </Label>
+                              </Button>
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="60.0" prefWidth="60.0">
                            <children>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../Users/Guide%20Info/Downloads/icons8-abonnement-48.png" />
+                                    <Image url="@icons8-abonnement-48.png" />
                                  </image>
                               </ImageView>
-                              <Button fx:id="ABB" mnemonicParsing="false" onAction="#Switch" prefHeight="30.0" prefWidth="113.0" stylesheets="@styless.css" text="Abonnement">
+                              <Button fx:id="ABB" mnemonicParsing="false" onAction="#Switch" prefHeight="35.0" prefWidth="142.0" stylesheets="@styless.css" text="Abonnement">
                                  <styleClass>
                                     <String fx:value="transparent-button" />
                                     <String fx:value="button-container-mouse-moved" />
                                  </styleClass>
+                                 <font>
+                                    <Font name="Franklin Gothic Medium" size="18.0" />
+                                 </font>
                               </Button>
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="60.0" prefWidth="60.0" stylesheets="@styless.css">
                            <children>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="41.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true" translateX="-20.0">
                                  <image>
-                                    <Image url="@../../../../Users/Guide%20Info/Downloads/icons8-pile-de-papier-100.png" />
+                                    <Image url="@icons8-pile-de-papier-100.png" />
                                  </image>
                               </ImageView>
                               <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="32.0" prefWidth="100.0" styleClass="shadow" stylesheets="@styless.css" text="Pack" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
@@ -120,34 +127,46 @@
                               <String fx:value="container" />
                            </styleClass>
                         </HBox>
-                        <Button mnemonicParsing="false" onAction="#supprimer" prefHeight="28.0" prefWidth="90.0" styleClass="button-container-mouse-moved" stylesheets="@styless.css" text="Supprimer">
+                        <Button mnemonicParsing="false" onAction="#supprimer" prefHeight="28.0" prefWidth="90.0" stylesheets="@styless.css" text="Supprimer">
                            <font>
                               <Font name="Franklin Gothic Medium" size="15.0" />
                            </font>
                            <VBox.margin>
                               <Insets left="70.0" right="30.0" />
                            </VBox.margin>
+                           <styleClass>
+                              <String fx:value="button-container-mouse-moved" />
+                              <String fx:value="container" />
+                           </styleClass>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#modifier" prefHeight="28.0" prefWidth="90.0" styleClass="button-container-mouse-moved" stylesheets="@styless.css" text="Modifier">
+                        <Button mnemonicParsing="false" onAction="#modifier" prefHeight="28.0" prefWidth="90.0" stylesheets="@styless.css" text="Modifier">
                            <font>
                               <Font name="Franklin Gothic Medium" size="15.0" />
                            </font>
                            <VBox.margin>
                               <Insets bottom="10.0" left="70.0" right="30.0" />
                            </VBox.margin>
+                           <styleClass>
+                              <String fx:value="button-container-mouse-moved" />
+                              <String fx:value="container" />
+                           </styleClass>
                         </Button>
                      </children>
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
                   </VBox>
-                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#goBack" styleClass="button-container-mouse-moved" stylesheets="@styless.css" text="Back">
+                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#goBack" stylesheets="@styless.css" text="Back">
                      <VBox.margin>
                         <Insets left="90.0" right="30.0" />
                      </VBox.margin>
                      <font>
                         <Font name="Franklin Gothic Medium Cond" size="15.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="button-container-mouse-moved" />
+                        <String fx:value="container" />
+                     </styleClass>
                   </Button>
                </children>
             </VBox>
@@ -165,8 +184,8 @@
                             <TableColumn fx:id="idP" prefWidth="83.99994051456451" text="IdP" />
                             <TableColumn fx:id="nom" prefWidth="94.39995574951172" text="Nom" />
                               <TableColumn fx:id="desc" prefWidth="123.99996948242188" text="Description" />
-                              <TableColumn fx:id="red" prefWidth="110.39996337890625" text="Reduction" />
-                              <TableColumn fx:id="img" prefWidth="313.6000671386719" text="image" />
+                              <TableColumn fx:id="red" minWidth="0.0" prefWidth="149.5999755859375" text="Reduction" />
+                              <TableColumn fx:id="img" prefWidth="276.8000793457031" text="image" />
                           </columns>
                         </TableView>
                      </children>

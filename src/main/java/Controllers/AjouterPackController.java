@@ -104,6 +104,11 @@ public class AjouterPackController {
 
     }
 
+
+
+
+
+
     private void clearFields() {
         nom.clear();
         desc.clear();
@@ -149,6 +154,17 @@ public class AjouterPackController {
         alert.setHeaderText(headerText);
         alert.setContentText(contentText);
         alert.showAndWait();
+    }
+
+    @FXML
+    void switchToAjout(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/HomeStats.fxml"));
+            nom.getScene().setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
     }
 
 

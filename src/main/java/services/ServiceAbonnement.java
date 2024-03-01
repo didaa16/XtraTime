@@ -37,12 +37,12 @@ public class ServiceAbonnement {
     public float calculerPrixApresReduction(float prixTotalAvantReduction, int packId, int terrainId, String nomPack) throws SQLException {
         // Obtenez la réduction du pack
        int reductionPack = getReductionPack(packId);
-
+       float prix= calculerPrixTotalAvantReduction( nomPack,  terrainId,  packId);
         // Calculez le montant de la réduction en multipliant le prix total avant réduction par le pourcentage de réduction
-        float montantReduction = prixTotalAvantReduction * (reductionPack/100);
+        float montantReduction = prix * ((float)reductionPack/100);
 
         // Calculez le prix total après réduction en soustrayant le montant de la réduction du prix total avant réduction
-        float prixTotalApresReduction = prixTotalAvantReduction - montantReduction;
+        float prixTotalApresReduction = prix - montantReduction;
 
         return prixTotalApresReduction;
     }
@@ -70,10 +70,13 @@ public class ServiceAbonnement {
             if (resultSet.next()) {
                 return resultSet.getFloat("prix");
             } else {
-                throw new SQLException("Terrain introuvable avec l'ID spécifié");
+                throw new SQLException("Terrain introuvable avec l'ID spécifié: " + terrainId);
             }
         }
     }
+
+
+
 
     private int getReductionPack(int packId) throws SQLException {
         String req = "SELECT reduction FROM pack WHERE idP = ?";
@@ -96,11 +99,11 @@ public class ServiceAbonnement {
         int packId = getPackIdByNom(nomPack);
 
         // Calculer le prix de l'abonnement
-        float prixTotalAvantReduction = calculerPrixTotalAvantReduction( nomPack ,terrainId, packId);
-        float prixTotal = calculerPrixApresReduction( prixTotalAvantReduction ,packId , terrainId ,nomPack);
+        float prixTotalAvantReduction = calculerPrixTotalAvantReduction(nomPack ,terrainId, packId);
+        float prixTotal = calculerPrixApresReduction(prixTotalAvantReduction ,packId , terrainId ,nomPack);
 
         // Insérer l'abonnement dans la base de données
-        String req = "INSERT INTO abonnement (date, prix, nomterrain, nomPack, nomUser, numtel,prixtotal,terrainId,packId ) VALUES (?, ?, ?, ?, ?, ?, ?,?,?)";
+        String req = "INSERT INTO abonnement (date, prix, nomterrain, nomPack, nomUser, numtel,prixTotal,terrainId,packId ) VALUES (?, ?, ?, ?, ?, ?, ?,?,?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(req)) {
             // Set parameters
             preparedStatement.setDate(1, java.sql.Date.valueOf(date)); // Conversion de LocalDate en java.sql.Date
@@ -322,6 +325,21 @@ public class ServiceAbonnement {
             }
         }
     }
+
+    public float getPrixTerrainPourPackPremium(int terrainId) throws SQLException {
+        String req = "SELECT prix FROM terrain WHERE id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(req)) {
+            preparedStatement.setInt(1, terrainId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getFloat("prix");
+            } else {
+                throw new SQLException("Terrain introuvable avec l'ID spécifié: " + terrainId);
+            }
+        }
+    }
+
+
 
 
 

@@ -171,7 +171,7 @@ void initialize() {
 
                 // Passer les données de l'abonnement sélectionné au contrôleur de modification
                 ModifierAbonnementController modifierAbonnementController = loader.getController();
-                modifierAbonnementController.initData( abonnement,serviceAbonnement);
+                modifierAbonnementController.initData(abonnement,serviceAbonnement);
 
                 // Afficher la nouvelle interface utilisateur dans une nouvelle fenêtre
                 Stage stage = new Stage();

@@ -67,40 +67,46 @@ public class ModifierAbonnementController {
         this.serviceAbonnement = serviceAbonnement;
     }
 
+    // La méthode initData est utilisée pour initialiser les données d'un objet Abonnement et d'un service ServiceAbonnement
     public void initData(Abonnement abonnement, ServiceAbonnement serviceAbonnement) {
+        // Assigner l'objet Abonnement et le service ServiceAbonnement aux variables de la classe
         this.abonnement = abonnement;
         this.serviceAbonnement = serviceAbonnement;
-        // Utilisez abonnement et serviceAbonnement selon vos besoins
-        idC.setText(String.valueOf(abonnement.getNomUser()));
-        idC1.setText(String.valueOf(abonnement.getNumtel()));
 
+        // Afficher les informations de l'abonnement dans les champs correspondants de l'interface utilisateur
+        idC.setText(String.valueOf(abonnement.getNomUser())); // Afficher le nom de l'utilisateur dans un champ de texte
+        idC1.setText(String.valueOf(abonnement.getNumtel())); // Afficher le numéro de téléphone dans un champ de texte
+
+        // Convertir la date de l'abonnement en java.sql.Date
         java.sql.Date sqlDate = new java.sql.Date(abonnement.getDate().getTime());
 
-        // Conversion de java.sql.Date en LocalDate
+        // Convertir java.sql.Date en LocalDate pour l'affichage dans un DatePicker
         LocalDate localDate = sqlDate.toLocalDate();
 
         // Définir la date dans le DatePicker
         date.setValue(localDate);
 
         // Initialisez les ComboBoxes avec les valeurs nécessaires
-        List<String> nomsTerrain = null; // Méthode fictive
-        try {
-            nomsTerrain = serviceAbonnement.getAllTerrainIds();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        idT.setValue(abonnement.getNomTerrain());
-        idT.setItems(FXCollections.observableArrayList(nomsTerrain));
 
-        // Remplir le ComboBox nomP avec les noms de pack
-        List<String> nomsPack = null; // Méthode fictive
+        // Récupérer les noms des terrains depuis le service
+        List<String> nomsTerrain = null; // Initialisation fictive
         try {
-            nomsPack = serviceAbonnement.getAllPackNames();
+            nomsTerrain = serviceAbonnement.getAllTerrainIds(); // Obtenir la liste des noms de terrain
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e); // Gérer l'exception s'il y a un problème lors de la récupération des noms des terrains
         }
-        nomP.setValue(abonnement.getNomPack());
-        nomP.setItems(FXCollections.observableArrayList(nomsPack));
+        idT.setValue(abonnement.getNomTerrain()); // Sélectionner le nom du terrain dans le ComboBox
+        idT.setItems(FXCollections.observableArrayList(nomsTerrain)); // Remplir le ComboBox avec les noms des terrains
+
+        // Récupérer les noms des packs depuis le service
+        List<String> nomsPack = null; // Initialisation fictive
+        try {
+            nomsPack = serviceAbonnement.getAllPackNames(); // Obtenir la liste des noms de pack
+        } catch (SQLException e) {
+            throw new RuntimeException(e); // Gérer l'exception s'il y a un problème lors de la récupération des noms des packs
+        }
+        nomP.setValue(abonnement.getNomPack()); // Sélectionner le nom du pack dans le ComboBox
+        nomP.setItems(FXCollections.observableArrayList(nomsPack)); // Remplir le ComboBox avec les noms des packs
 
         // Autres initialisations...
     }

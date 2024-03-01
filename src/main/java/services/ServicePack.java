@@ -83,12 +83,41 @@ public class ServicePack {
             throw e;
         }
     }
+    public List<Pack> afficherByName(String name) {
+      List <Pack> packs=new ArrayList<>();
+      String req="SELECT * FROM pack where nom=?";
+      try{
+          PreparedStatement ste=connection.prepareStatement(req);
+          ste.setString(1,name);
+          ResultSet rs= ste.executeQuery();
+          while(rs.next())
+          {
+              int id=rs.getInt(1);
+              String nom=rs.getString(2);
+              String description=rs.getString(3);
+              int red=rs.getInt(4);
+              String im=rs.getString(5);
+              Pack p=new Pack(nom,description,im,red);
+            packs.add(p);
+
+          }
+
+
+
+
+      } catch (SQLException e) {
+          throw new RuntimeException(e);
+      }
+      return packs;
+    }
 
     public List<Pack> afficher() {
         List<Pack> packs = new ArrayList<>();
         String req = "SELECT * FROM pack";
         try (Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(req)) {
+             ResultSet resultSet = statement.executeQuery(req)
+
+        ) {
 
             while (resultSet.next()) {
                 Pack pack = new Pack();

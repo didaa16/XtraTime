@@ -30,7 +30,7 @@
                   <Pane maxHeight="-Infinity" prefHeight="1.0" prefWidth="200.0" styleClass="line-color" stylesheets="@styless.css" HBox.hgrow="ALWAYS" />
                   <ImageView fitHeight="32.0" fitWidth="35.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../Users/Guide%20Info/Downloads/icons8-setting-64.png" />
+                        <Image url="@icons8-setting-64.png" />
                      </image>
                   </ImageView>
                </children>
@@ -49,7 +49,7 @@
                      <children>
                         <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../Users/Guide%20Info/Desktop/421386197_913323057052560_175060100800875911_n.png" />
+                              <Image url="@421386197_913323057052560_175060100800875911_n.png" />
                            </image>
                            <HBox.margin>
                               <Insets left="30.0" right="10.0" />
@@ -71,7 +71,7 @@
                            <children>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../Users/Guide%20Info/Downloads/icons8-accueil-50.png" />
+                                    <Image url="@icons8-accueil-50.png" />
                                  </image>
                               </ImageView>
                               <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="32.0" prefWidth="100.0" styleClass="shadow" stylesheets="@styless.css" text="Home" textFill="#c4bbbb" textOverrun="CENTER_WORD_ELLIPSIS">
@@ -88,7 +88,7 @@
                            <children>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../Users/Guide%20Info/Downloads/icons8-abonnement-48.png" />
+                                    <Image url="@icons8-abonnement-48.png" />
                                  </image>
                               </ImageView>
                               <Button fx:id="AB" mnemonicParsing="false" prefHeight="30.0" prefWidth="122.0" styleClass="transparent-button" stylesheets="@styless.css" text="Abonnement" textFill="#b9b2b2">
@@ -112,7 +112,7 @@
                            <children>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../Users/Guide%20Info/Downloads/icons8-pile-de-papier-100.png" />
+                                    <Image url="@icons8-pile-de-papier-100.png" />
                                  </image>
                               </ImageView>
                               <Button fx:id="AB1" mnemonicParsing="false" onAction="#switchToAjoutC" prefHeight="30.0" prefWidth="121.0" styleClass="transparent-button" stylesheets="@styless.css" text="Pack" textFill="#b9b2b2">

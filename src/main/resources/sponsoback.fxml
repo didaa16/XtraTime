@@ -24,9 +24,9 @@
             <String fx:value="disabled-label" />
          </styleClass>
       </TableView>
-      <TextField fx:id="tfnom" layoutX="123.0" layoutY="271.0" prefHeight="33.0" prefWidth="143.0" promptText="Nom" stylesheets="@styless.css" />
-      <TextField fx:id="tftel" layoutX="122.0" layoutY="308.0" prefHeight="33.0" prefWidth="143.0" promptText="Num_Telephone" stylesheets="@styless.css" />
-      <Button fx:id="bajouter" layoutX="72.0" layoutY="407.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="33.0" prefWidth="110.0" style="-fx-background-color: #008000;" stylesheets="@styless.css" text="Ajouter">
+      <TextField fx:id="tfnom" layoutX="136.0" layoutY="279.0" prefHeight="33.0" prefWidth="143.0" promptText="Nom" stylesheets="@styless.css" />
+      <TextField fx:id="tftel" layoutX="135.0" layoutY="316.0" prefHeight="33.0" prefWidth="143.0" promptText="Num_Telephone" stylesheets="@styless.css" />
+      <Button fx:id="bajouter" layoutX="85.0" layoutY="415.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="33.0" prefWidth="110.0" style="-fx-background-color: #008000;" stylesheets="@styless.css" text="Ajouter">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -35,7 +35,7 @@
             <String fx:value="transparent-button" />
          </styleClass>
       </Button>
-      <Button fx:id="bmodifier" layoutX="210.0" layoutY="407.0" mnemonicParsing="false" onAction="#modifier" prefHeight="33.0" prefWidth="110.0" style="-fx-background-color: #3b5998;" stylesheets="@styless.css" text="Modifier">
+      <Button fx:id="bmodifier" layoutX="215.0" layoutY="415.0" mnemonicParsing="false" onAction="#modifier" prefHeight="33.0" prefWidth="110.0" style="-fx-background-color: #3b5998;" stylesheets="@styless.css" text="Modifier" AnchorPane.bottomAnchor="58.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -44,7 +44,7 @@
             <String fx:value="transparent-button" />
          </styleClass>
       </Button>
-      <Button fx:id="bsupprimer" layoutX="330.0" layoutY="407.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="33.0" prefWidth="110.0" style="-fx-background-color: #FF0000;" stylesheets="@styless.css" text="Supprimer">
+      <Button fx:id="bsupprimer" layoutX="343.0" layoutY="415.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="33.0" prefWidth="110.0" style="-fx-background-color: #FF0000;" stylesheets="@styless.css" text="Supprimer">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -53,28 +53,28 @@
             <String fx:value="transparent-button" />
          </styleClass>
       </Button>
-      <TextField fx:id="tfmail" layoutX="122.0" layoutY="346.0" prefHeight="33.0" prefWidth="143.0" promptText="Nom" stylesheets="@styless.css" text="Mail" />
-      <Label layoutX="9.0" layoutY="271.0" prefHeight="32.0" prefWidth="118.0" styleClass="shadow" stylesheets="@styless.css" text="Nom">
+      <TextField fx:id="tfmail" layoutX="135.0" layoutY="354.0" prefHeight="33.0" prefWidth="143.0" promptText="Nom" stylesheets="@styless.css" text="Mail" />
+      <Label layoutX="22.0" layoutY="279.0" prefHeight="32.0" prefWidth="118.0" styleClass="shadow" stylesheets="@styless.css" text="Nom">
          <font>
             <Font name="Franklin Gothic Medium Cond" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="9.0" layoutY="309.0" prefHeight="32.0" prefWidth="118.0" styleClass="shadow" stylesheets="@styless.css" text="Telephone">
+      <Label layoutX="22.0" layoutY="317.0" prefHeight="32.0" prefWidth="118.0" styleClass="shadow" stylesheets="@styless.css" text="Telephone">
          <font>
             <Font name="Franklin Gothic Medium Cond" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="9.0" layoutY="347.0" prefHeight="32.0" prefWidth="118.0" styleClass="shadow" stylesheets="@styless.css" text="Mail">
+      <Label layoutX="22.0" layoutY="355.0" prefHeight="32.0" prefWidth="118.0" styleClass="shadow" stylesheets="@styless.css" text="Mail">
          <font>
             <Font name="Franklin Gothic Medium Cond" size="24.0" />
          </font>
       </Label>
-         <Button fx:id="bimporter" layoutX="332.0" layoutY="357.0" mnemonicParsing="false" onAction="#importer" prefHeight="25.0" prefWidth="108.0" style="-fx-background-color: #008000;" text="upload">
+         <Button fx:id="bimporter" layoutX="345.0" layoutY="365.0" mnemonicParsing="false" onAction="#importer" prefHeight="25.0" prefWidth="108.0" style="-fx-background-color: #008000;" text="upload">
          <font>
             <Font name="Franklin Gothic Demi Cond" size="14.0" />
          </font>
       </Button>
-      <ImageView fx:id="imageimport" fitHeight="91.0" fitWidth="118.0" layoutX="326.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true" />
-      <TextField fx:id="searchTF" layoutX="352.0" layoutY="14.0" onAction="#filter" prefHeight="32.0" prefWidth="153.0" promptText="Chercher_Sponsor" stylesheets="@styless.css" AnchorPane.bottomAnchor="431.0" AnchorPane.leftAnchor="352.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="5.0" />
+      <ImageView fx:id="imageimport" fitHeight="91.0" fitWidth="118.0" layoutX="339.0" layoutY="280.0" pickOnBounds="true" preserveRatio="true" />
+      <TextField fx:id="searchTF" layoutX="368.0" layoutY="14.0" onAction="#filter" prefHeight="32.0" prefWidth="137.0" promptText="Chercher_Sponsor" stylesheets="@styless.css" AnchorPane.bottomAnchor="468.0" AnchorPane.leftAnchor="368.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="5.0" />
    </children>
 </AnchorPane>

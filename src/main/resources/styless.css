@@ -110,6 +110,18 @@
     -fx-text-fill: white; /* Change the color of legend text to white */}
 
 
+.bar-chart-label, .pie-chart-label {
+    -fx-text-fill: white;
+}
+
+
+.label-style {
+    -fx-font-family: "Sitka Heading";
+    -fx-font-size: 18.0;
+    -fx-text-fill: #e82121;
+    -fx-wrap-text: true;
+}
+
 
 
 

@@ -69,11 +69,17 @@ public class backController {
 
     }
 
-    public void logout(ActionEvent actionEvent)  {
-        loadUi("/login");
+    public void logout(ActionEvent actionEvent) throws IOException {
+        loadFXML("/login.fxml");
 
     }
 
-
+    private void loadFXML(String fxmlPath) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
 
 }

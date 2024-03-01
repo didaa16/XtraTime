@@ -7,8 +7,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 public class frontController {
 
@@ -37,11 +39,19 @@ public class frontController {
 
     }
 
-    @FXML
-    void logout(ActionEvent event) {
-        loadUi("/login");
+    public void logout(ActionEvent actionEvent) throws IOException {
+        loadFXML("/login.fxml");
 
     }
+
+    private void loadFXML(String fxmlPath) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
 
     @FXML
     void sponsor(ActionEvent event) {

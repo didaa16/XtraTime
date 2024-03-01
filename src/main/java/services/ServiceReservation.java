@@ -1,11 +1,19 @@
 package services;
 
 import entities.Reservation;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import utils.MyDatabase;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import controllers.mesReservtions;
 
 public class ServiceReservation implements IService<Reservation> {
     static Connection connection;
@@ -49,6 +57,43 @@ public class ServiceReservation implements IService<Reservation> {
         System.out.println("Réservation supprimée avec succès");
     }
 
+
+    public List<Reservation> afficherParPseudo(String pseudo) throws SQLException {
+        List<Reservation> reservations = new ArrayList<>();
+        String req = "SELECT * FROM reservation WHERE clientPseudo = '"+pseudo+"'";
+        Statement st = connection.createStatement();
+        ResultSet rs = st.executeQuery(req);
+        while (rs.next()) {
+            Reservation r = new Reservation();
+            r.setId(rs.getInt("id"));
+            r.setTerrainId(rs.getInt("terrainid"));
+            r.setClientPseudo(rs.getString("clientPseudo"));
+            r.setEquipements(rs.getString("equipements"));
+            r.setPrix(rs.getInt("prix")); // Changement ici
+            r.setDate(rs.getString("date"));
+            r.setDuree(rs.getString("duree")); // Changement ici
+            reservations.add(r);
+        }
+        return reservations;
+    }
+
+    public Reservation afficherParId(int id) throws SQLException {
+        Reservation r = new Reservation();
+        String req = "SELECT * FROM reservation WHERE id = '"+ id +"' ";
+        Statement st = connection.createStatement();
+        ResultSet rs = st.executeQuery(req);
+        while (rs.next()) {
+            r.setId(rs.getInt("id"));
+            r.setTerrainId(rs.getInt("terrainid"));
+            r.setClientPseudo(rs.getString("clientPseudo"));
+            r.setEquipements(rs.getString("equipements"));
+            r.setPrix(rs.getInt("prix")); // Changement ici
+            r.setDate(rs.getString("date"));
+            r.setDuree(rs.getString("duree")); // Changement ici
+        }
+        return r;
+    }
+
     public List<Reservation> afficher() throws SQLException {
         List<Reservation> reservations = new ArrayList<>();
         String req = "SELECT * FROM reservation";
@@ -66,5 +111,17 @@ public class ServiceReservation implements IService<Reservation> {
             reservations.add(r);
         }
         return reservations;
+    }
+    public void changeScreen(ActionEvent event, String fxmlFile, String title){
+        try {
+            FXMLLoader loader = new FXMLLoader(mesReservtions.class.getResource(fxmlFile));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setTitle(title);
+            stage.setScene(new Scene(root));
+            stage.show();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 }

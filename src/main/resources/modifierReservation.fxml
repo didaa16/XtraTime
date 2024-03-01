@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.CustomMenuItem?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="561.0" prefWidth="679.0" styleClass="gradient-background" stylesheets="@styless.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ModifierReservationController">
+    <center>
+        <AnchorPane prefHeight="534.0" prefWidth="679.0" BorderPane.alignment="CENTER">
+            <children>
+                <GridPane layoutX="111.0" layoutY="71.0" prefHeight="321.0" prefWidth="474.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="232.20001220703125" minWidth="10.0" prefWidth="143.4000244140625" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="356.20001220703125" minWidth="10.0" prefWidth="330.5999755859375" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="40.200018310546874" minHeight="10.0" prefHeight="40.200018310546874" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="48.19998168945313" minHeight="9.600012207031249" prefHeight="36.39998779296876" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="96.6" minHeight="10.0" prefHeight="56.40001220703124" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="100.19999999999999" minHeight="9.20001831054688" prefHeight="39.80000000000001" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="199.39999389648438" minHeight="10.0" prefHeight="105.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="175.20001220703125" minHeight="7.399999999999977" prefHeight="50.600006103515625" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Label text="Date" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+                        <Label text="Duree" textFill="WHITE" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+                        <Label text="Equipements" textFill="WHITE" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+                        <Label fx:id="dateError" prefHeight="18.0" prefWidth="364.0" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="dureeError" prefHeight="18.0" prefWidth="336.0" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label fx:id="equipementsError" prefHeight="18.0" prefWidth="376.0" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <MenuButton fx:id="equipementsAjout" mnemonicParsing="false" text="Equipements" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                            <items>
+                                <CustomMenuItem mnemonicParsing="false" text="Unspecified Action">
+                                    <content>
+                                        <CheckBox text="Click Me" />
+                                    </content>
+                                </CustomMenuItem>
+                                <CustomMenuItem mnemonicParsing="false" text="Unspecified Action">
+                                    <content>
+                                        <CheckBox text="Click Me" />
+                                    </content>
+                                </CustomMenuItem>
+                                <CustomMenuItem mnemonicParsing="false" text="Unspecified Action">
+                                    <content>
+                                        <CheckBox text="Click Me" />
+                                    </content>
+                                </CustomMenuItem>
+                                <CustomMenuItem mnemonicParsing="false" text="Unspecified Action">
+                                    <content>
+                                        <CheckBox text="Click Me" />
+                                    </content>
+                                </CustomMenuItem>
+                                <CustomMenuItem mnemonicParsing="false" text="Unspecified Action">
+                                    <content>
+                                        <CheckBox text="Click Me" />
+                                    </content>
+                                </CustomMenuItem>
+                                <CustomMenuItem mnemonicParsing="false" text="Unspecified Action">
+                                    <content>
+                                        <CheckBox text="Click Me" />
+                                    </content>
+                                </CustomMenuItem>
+                            </items>
+                            <contextMenu>
+                                <ContextMenu>
+                                    <items>
+                                        <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                                    </items>
+                                </ContextMenu>
+                            </contextMenu>
+                        </MenuButton>
+                        <TextField fx:id="dateAjout" promptText="JJ/MM/YYYY" GridPane.columnIndex="1" />
+                        <TextField fx:id="dureeAjout" promptText="HH:MM" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    </children>
+                </GridPane>
+                <Button fx:id="confirmerRes" layoutX="517.0" layoutY="493.0" mnemonicParsing="false" onAction="#confirmerResOnClick" prefHeight="30.0" prefWidth="135.0" stylesheets="@styless.css" text="Confirmer">
+               <styleClass>
+                  <String fx:value="button-container-mouse-moved" />
+                  <String fx:value="button-container-mouse-moved" />
+               </styleClass></Button>
+                </children>
+        </AnchorPane>
+    </center>
+</BorderPane>

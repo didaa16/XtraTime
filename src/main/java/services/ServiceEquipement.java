@@ -124,6 +124,31 @@ public class ServiceEquipement implements  IService<Equipement>{
         return equipements;
     }
 
+    public List<Equipement>getEquipementByNom(String nom){
+        List<Equipement> equipements= new ArrayList<>();
+        String req="select * from `equipement` WHERE `nom` = "+nom+" ";
+        try {
+            Statement st  = connection.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            while (rs.next()){
+                Equipement p = new Equipement();
+                p.setId(rs.getInt(1));
+                p.setNom(rs.getString("nom"));
+                p.setDescription(rs.getString(3));
+                p.setType(rs.getString("type"));
+                p.setPrix(rs.getInt("prix"));
+                p.setImage(rs.getString("image"));
+                p.setStock(rs.getInt("stock"));
+
+                equipements.add(p);
+            }
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return equipements;
+    }
+
+
     public List<Equipement> recherche(String nom) throws SQLException {
 
         List<Equipement> equipements= new ArrayList<>();

@@ -1,16 +1,19 @@
 package controllers;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import entities.Equipement;
 import entities.Reservation;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import services.ServiceEquipement;
 import services.ServiceReservation;
@@ -55,6 +58,7 @@ public class listReservation {
     private ServiceReservation serviceReservation;
     private static int id;
     public static void setIdRes(int idRes){id = idRes ;}
+    private static List<Reservation>deletedReservations = new ArrayList<>();
     @FXML
     void initialize() {
         serviceReservation = new ServiceReservation();
@@ -74,6 +78,19 @@ public class listReservation {
         ObservableList<Reservation> observableList = FXCollections.observableArrayList(listeR);
         tableReservation.setItems(observableList);
 
+        tableReservation.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        tableReservation.getSelectionModel().getSelectedItems().addListener((ListChangeListener.Change<? extends Reservation> change) -> {
+            if (change.getList().size() > 0 && change.getList().get(0) != null && change.getList().get(0).equals(KeyCode.CONTROL)) {
+                recupererIds();
+            }
+        });
+
+    }
+    @FXML
+    private void recupererIds() {
+        List<Reservation> reservationsSelectionnes = tableReservation.getSelectionModel().getSelectedItems();
+        deletedReservations.clear();
+        deletedReservations.addAll(reservationsSelectionnes);
     }
     private void refreshTableView() {
         ObservableList<Reservation> liste = null;
@@ -86,7 +103,32 @@ public class listReservation {
     }
     @FXML
     public void suppReservationOnClick(ActionEvent actionEvent) {
-        if (index != -1) {
+        try {
+            List<Reservation> reservationsSelectionnes = tableReservation.getSelectionModel().getSelectedItems();
+            if (reservationsSelectionnes.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Aucun utilisateur sélectionné !");
+                return;
+            }
+            int choix = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment supprimer ces reservations ?", "Confirmation de suppression", JOptionPane.YES_NO_OPTION);
+            if (choix == JOptionPane.YES_OPTION) {
+                for (Reservation res : reservationsSelectionnes) {
+                    serviceReservation.supprimer(res.getId());
+                }
+                JOptionPane.showMessageDialog(null, "Utilisateurs supprimés avec succès !");
+                refreshTableView();
+                System.out.println("Utilisateurs supprimés avec succès !");
+            }
+        }catch (SQLException e) {
+            System.out.println("Erreur lors de la suppression des utilisateurs : " + e.getMessage());
+        }
+
+
+
+
+
+
+
+        /*if (index != -1) {
             try {
                 idSelected.setText(String.valueOf(id));
                 serviceReservation.supprimer(id);
@@ -97,7 +139,7 @@ public class listReservation {
             }
         } else {
             JOptionPane.showMessageDialog(null,"Veuillez sélectionner un équipement à supprimer !");
-        }
+        }*/
     }
     @FXML
     void getSelected(MouseEvent event) {

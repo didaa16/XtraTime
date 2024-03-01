@@ -4,28 +4,27 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import entities.Reservation;
 import entities.Terrain;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import entities.Equipement;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
@@ -131,6 +130,8 @@ public class equipements {
     String url;
     private ServiceEquipement serviceEquipement;
     int index = -1;
+
+    private static List<Equipement>deletedEquipements = new ArrayList<>();
     private boolean getErrors(){
         nomError.setText("");
         descriptionError.setText("");
@@ -238,17 +239,23 @@ public class equipements {
 
     @FXML
     void supprimerButtonOnClick(ActionEvent event) {
-        if (index != -1) {
-            Equipement equipementSelectionne = tableEquipements.getItems().get(index);
-            try {
-                serviceEquipement.supprimer(equipementSelectionne.getId());
-                JOptionPane.showMessageDialog(null,"Equipement Supprimé avec succès !");
-                refreshTableView(); // Rafraîchir la TableView après la suppression
-            } catch (SQLException ex) {
-                System.out.println("Erreur lors de la suppression de l'équipement : " + ex.getMessage());
+        try {
+            List<Equipement> equipementsSelectionnes = tableEquipements.getSelectionModel().getSelectedItems();
+            if (equipementsSelectionnes.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Aucun utilisateur sélectionné !");
+                return;
             }
-        } else {
-            JOptionPane.showMessageDialog(null,"Veuillez sélectionner un équipement à supprimer !");
+            int choix = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment supprimer ces reservations ?", "Confirmation de suppression", JOptionPane.YES_NO_OPTION);
+            if (choix == JOptionPane.YES_OPTION) {
+                for (Equipement eq : equipementsSelectionnes) {
+                    serviceEquipement.supprimer(eq.getId());
+                }
+                JOptionPane.showMessageDialog(null, "Utilisateurs supprimés avec succès !");
+                refreshTableView();
+                System.out.println("Utilisateurs supprimés avec succès !");
+            }
+        }catch (SQLException e) {
+            System.out.println("Erreur lors de la suppression des utilisateurs : " + e.getMessage());
         }
     }
 
@@ -310,6 +317,19 @@ public class equipements {
 
         // Lier la TableView à la FilteredList
         tableEquipements.setItems(filteredList);
+
+        tableEquipements.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        tableEquipements.getSelectionModel().getSelectedItems().addListener((ListChangeListener.Change<? extends Equipement> change) -> {
+            if (change.getList().size() > 0 && change.getList().get(0) != null && change.getList().get(0).equals(KeyCode.CONTROL)) {
+                recupererIds();
+            }
+        });
+    }
+    @FXML
+    private void recupererIds() {
+        List<Equipement> reservationsSelectionnes = tableEquipements.getSelectionModel().getSelectedItems();
+        deletedEquipements.clear();
+        deletedEquipements.addAll(reservationsSelectionnes);
     }
     @FXML
     void getSelected(MouseEvent event) {
@@ -338,25 +358,29 @@ public class equipements {
     }
 
     @FXML
-    private void navigateToListReservationInterface() {
+    void navigateToListReservationInterface(ActionEvent event) {
+
+
         try {
+            // Charger le fichier FXML à partir du chemin relatif
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListReservations.fxml"));
             Parent root = loader.load();
-            listReservation listReservation = loader.getController();
 
-            // Set the terrain ID in the Reservations controller
-            listReservation.toString();
+            // Récupérer le contrôleur de la vue chargée si nécessaire
+            listReservation listReservationController = loader.getController();
 
-            // Create a new scene with the loaded FXML file
+            // Créer une nouvelle scène avec la vue chargée
             Scene scene = new Scene(root);
 
-            // Get the stage (window) from the VBox and set the scene
-            Stage stage = (Stage) listedesreservations.getScene().getWindow();
+            // Récupérer la fenêtre principale (stage) à partir de n'importe quel nœud de la scène
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Mettre la nouvelle scène dans la fenêtre et l'afficher
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
-            // Handle any potential errors loading the FXML file
-            System.out.println(e.getMessage());
+            // Gérer les erreurs potentielles lors du chargement du fichier FXML
+            e.printStackTrace(); // Vous pouvez également imprimer ou gérer autrement l'erreur
         }
     }
 

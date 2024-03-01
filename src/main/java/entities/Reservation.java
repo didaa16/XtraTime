@@ -9,14 +9,36 @@ public class Reservation {
     private String date;
     private String duree;
 
-    public Reservation() {
-    }
 
 
     public Reservation(String equipements, String date, String duree) {
         this.equipements = equipements;
         this.date = date;
         this.duree = duree;
+    }
+
+    public Reservation(int id, String date, String duree, int prix, int terrainId, String clientPseudo, String equipements) {
+        this.id = id;
+        this.prix = prix;
+        this.terrainId = terrainId;
+        this.clientPseudo = clientPseudo;
+        this.equipements = equipements;
+        this.date = date;
+        this.duree = duree;
+    }
+
+    public Reservation(int prix, int terrainId, String clientPseudo, String equipements, String date, String duree) {
+        this.id = id;
+        this.prix = prix;
+        this.terrainId = terrainId;
+        this.clientPseudo = clientPseudo;
+        this.equipements = equipements;
+        this.date = date;
+        this.duree = duree;
+    }
+
+    public Reservation() {
+
     }
 
     public int getId() {

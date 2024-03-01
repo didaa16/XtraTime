@@ -13,10 +13,11 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="561.0" prefWidth="679.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Reservations">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="561.0" prefWidth="679.0" styleClass="gradient-background" stylesheets="@styless.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Reservations">
    <center>
-      <AnchorPane prefHeight="534.0" prefWidth="679.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="534.0" prefWidth="679.0" stylesheets="@styless.css" BorderPane.alignment="CENTER">
          <children>
             <GridPane layoutX="111.0" layoutY="71.0" prefHeight="321.0" prefWidth="474.0">
               <columnConstraints>
@@ -32,9 +33,18 @@
                 <RowConstraints maxHeight="175.20001220703125" minHeight="7.399999999999977" prefHeight="50.600006103515625" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Date" />
-                  <Label text="Duree" GridPane.rowIndex="2" />
-                  <Label text="Equipements" GridPane.rowIndex="4" />
+                  <Label text="Date" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+                  <Label text="Duree" textFill="WHITE" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+                  <Label text="Equipements" textFill="WHITE" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
                   <Label fx:id="dateError" prefHeight="18.0" prefWidth="364.0" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label fx:id="dureeError" prefHeight="18.0" prefWidth="336.0" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label fx:id="equipementsError" prefHeight="18.0" prefWidth="376.0" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="5" />
@@ -83,8 +93,8 @@
                   <TextField fx:id="dureeAjout" promptText="HH:MM" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
-            <Button fx:id="reserverButton" layoutX="371.0" layoutY="493.0" mnemonicParsing="false" onAction="#confirmerResOnClick" prefHeight="30.0" prefWidth="135.0" text="Reserver" />
-            <Button fx:id="annulerRes" layoutX="517.0" layoutY="493.0" mnemonicParsing="false" onAction="#annulerResOnClick" prefHeight="30.0" prefWidth="135.0" text="Annuler" />
+            <Button fx:id="reserverButton" layoutX="371.0" layoutY="493.0" mnemonicParsing="false" onAction="#confirmerrResOnClick" prefHeight="30.0" prefWidth="135.0" text="Reserver" />
+            <Button fx:id="annulerRes" layoutX="517.0" layoutY="493.0" mnemonicParsing="false" onAction="#annulerrResOnClick" prefHeight="30.0" prefWidth="135.0" styleClass="button-container-mouse-moved" stylesheets="@styless.css" text="Annuler" />
          </children>
       </AnchorPane>
    </center>

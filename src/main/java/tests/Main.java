@@ -6,10 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import services.ServiceEquipement;
-
-import java.io.IOException;
-import java.util.Date;
 
 public class Main extends Application {
 
@@ -19,7 +15,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/affichageTerrain.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/mesreservations.fxml"));
+        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/equipements.fxml"));
+        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/reservation.fxml"));
+        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/listReservations.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         stage.setTitle("Login");

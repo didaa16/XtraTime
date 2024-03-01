@@ -19,7 +19,6 @@ public class ServiceEquipement implements  IService<Equipement>{
 
     @Override
     public void ajouter(Equipement equi) throws SQLException {
-        // Vérifier si l'équipement existe déjà dans la base de données
         String checkReq = "SELECT COUNT(*) FROM equipement WHERE nom = ?";
         PreparedStatement checkStatement = connection.prepareStatement(checkReq);
         checkStatement.setString(1, equi.getNom());
@@ -28,10 +27,8 @@ public class ServiceEquipement implements  IService<Equipement>{
         int count = resultSet.getInt(1);
 
         if (count > 0) {
-            // L'équipement existe déjà, afficher un message d'erreur
             JOptionPane.showMessageDialog(null,"Erreur : L'équipement existe déjà dans la base de données !");
         } else {
-            // L'équipement n'existe pas, procéder à l'ajout
             String req ="INSERT INTO equipement (nom, description, type, prix, image, stock, terrainId)"+
                     " VALUES (?, ?, ?, ?, ?, ? , ?)";
             PreparedStatement st = connection.prepareStatement(req);
@@ -44,7 +41,7 @@ public class ServiceEquipement implements  IService<Equipement>{
             st.setInt(7, equi.getTerrainIdAjout());
 
             st.executeUpdate();
-//            JOptionPane.showMessageDialog(null,"Equipement Ajoutée avec succés !");
+            JOptionPane.showMessageDialog(null,"Equipement Ajoutée avec succés !");
         }
     }
 
@@ -63,7 +60,6 @@ public class ServiceEquipement implements  IService<Equipement>{
         ps.setInt(6, equi.getStock());
         ps.setInt(7, equi.getId());
         ps.executeUpdate();
-        System.out.println("Equipement modifie");
 
     }
 
@@ -73,7 +69,6 @@ public class ServiceEquipement implements  IService<Equipement>{
         PreparedStatement ps = connection.prepareStatement(req);
         ps.setInt(1,id);
         ps.executeUpdate();
-        System.out.println("supp avec succes !!");
 
     }
 

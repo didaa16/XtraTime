@@ -58,33 +58,21 @@ public class ModifierReservationController {
 
     @FXML
     void confirmerResOnClick(ActionEvent event) {
-        // Vérifiez d'abord si tous les champs sont remplis correctement
         if (!champsSontValides()) {
-            // Affichez un message d'erreur ou effectuez une action appropriée si les champs ne sont pas valides
             return;
         }
-
-        // Créez un objet Reservation avec les données modifiées à partir des champs de texte
-        Reservation reservationModifiee = new Reservation(reservation.getId(), dateAjout.getText(), dureeAjout.getText(),150, 12, "bohmid", equipementsAjout.getText() );
+        Reservation reservationModifiee = new Reservation(reservation.getId(), dateAjout.getText(), dureeAjout.getText(),reservation.getPrix(), reservation.getTerrainId(), reservation.getClientPseudo(), equipementsAjout.getText() );
         try {
-            // Appelez la méthode de service pour modifier la réservation dans la base de données
             serviceModifierReservation.modifier(reservationModifiee);
-
-            // Affichez un message de succès
             JOptionPane.showMessageDialog(null, "Réservation modifiée avec succès !");
             ser.changeScreen(event, "/mesreservations.fxml", "XTRATIME");
         } catch (SQLException ex) {
-            // Gérez les erreurs de modification de la réservation dans la base de données
-            ex.printStackTrace();
-            // Affichez un message d'erreur ou effectuez une action appropriée en cas d'erreur
+            System.out.println(ex.getMessage());
         }
     }
 
-    // Méthode pour valider les champs avant de modifier la réservation
     private boolean champsSontValides() {
-        // Vérifiez si tous les champs sont remplis correctement
-        // Vous pouvez ajouter ici toute logique de validation nécessaire pour vos champs
-        return !dateAjout.getText().isEmpty() && !dureeAjout.getText().isEmpty() && !equipementsAjout.getText().isEmpty();
+        return !dateAjout.getText().isEmpty() && !dureeAjout.getText().isEmpty();
     }
 
     private void afficher(){

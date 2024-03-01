@@ -77,7 +77,6 @@ public class listReservation {
         equReservation.setCellValueFactory(new PropertyValueFactory<>("equipements"));
         ObservableList<Reservation> observableList = FXCollections.observableArrayList(listeR);
         tableReservation.setItems(observableList);
-
         tableReservation.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         tableReservation.getSelectionModel().getSelectedItems().addListener((ListChangeListener.Change<? extends Reservation> change) -> {
             if (change.getList().size() > 0 && change.getList().get(0) != null && change.getList().get(0).equals(KeyCode.CONTROL)) {

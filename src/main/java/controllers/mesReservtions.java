@@ -1,26 +1,25 @@
 package controllers;
 import javafx.fxml.FXMLLoader;
-        import javafx.geometry.Insets;
-        import javafx.scene.Node;
-        import javafx.scene.Scene;
-        import javafx.scene.layout.AnchorPane;
-        import javafx.stage.Stage;
-        import entities.Reservation;
-        import services.ServiceReservation;
+import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import entities.Reservation;
+import services.ServiceReservation;
 import javafx.fxml.Initializable;
-        import javafx.event.ActionEvent;
-        import javafx.fxml.FXML;
-        import javafx.scene.Parent;
-        import javafx.scene.control.Button;
-        import javafx.scene.control.ScrollPane;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
-
 import java.io.IOException;
-        import java.net.URL;
-        import java.sql.SQLException;
-        import java.util.ArrayList;
-        import java.util.List;
-        import java.util.ResourceBundle;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 
 public class mesReservtions  implements Initializable{
     ServiceReservation serviceReservation = new ServiceReservation();
@@ -81,9 +80,7 @@ public class mesReservtions  implements Initializable{
                 }
                 grid.add(anchorPane, column++, row);
                 GridPane.setMargin(anchorPane,new Insets(10));
-
-                // Add horizontal space between columns
-                grid.setHgap(100); // Adjust the value as per your requirement
+                grid.setHgap(100);
             }} catch (IOException e) {
             throw new RuntimeException(e);
         } catch (SQLException e) {

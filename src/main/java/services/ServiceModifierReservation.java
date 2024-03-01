@@ -19,18 +19,6 @@ public class ServiceModifierReservation {
     }
 
 
-    // Méthode pour modifier une réservation dans la base de données
-//    public void modifier(Reservation reservationModifiee) throws SQLException {
-//        String req="UPDATE reservation SET duree=?, equipements=?, date=? WHERE id=?";
-//        PreparedStatement ps= connection.prepareStatement(req);
-//        ps.setString(1, reservationModifiee.getDuree());
-//        ps.setString(2, reservationModifiee.getEquipements());
-//        ps.setString(3, reservationModifiee.getDate());
-//        ps.setInt(4, reservationModifiee.getId());
-//        ps.executeUpdate();
-//        System.out.println("Equipement modifie");
-//
-//    }
     public void modifier(Reservation reservationModifiee) throws SQLException {
         if (reservationModifiee == null) {
             throw new IllegalArgumentException("La réservation à modifier ne peut pas être nulle.");
@@ -41,8 +29,8 @@ public class ServiceModifierReservation {
             ps.setString(1, reservationModifiee.getDuree());
             ps.setString(2, reservationModifiee.getEquipements());
             ps.setString(3, reservationModifiee.getDate());
-            ps.setInt(4, reservationModifiee.getPrix()); // Assurez-vous que getPrix() retourne un double
-            ps.setInt(5, reservationModifiee.getTerrainId()); // Assurez-vous que getTerrainId() retourne un int
+            ps.setInt(4, reservationModifiee.getPrix());
+            ps.setInt(5, reservationModifiee.getTerrainId());
             ps.setString(6, reservationModifiee.getClientPseudo());
             ps.setInt(7, reservationModifiee.getId());
 
@@ -54,7 +42,7 @@ public class ServiceModifierReservation {
             }
         } catch (SQLException e) {
             System.err.println("Erreur lors de la modification de la réservation : " + e.getMessage());
-            throw e; // Propagez l'exception pour que l'appelant puisse la gérer
+            throw e;
         }
     }
 

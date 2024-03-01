@@ -170,13 +170,10 @@ public class equipements {
             Equipement e = new Equipement(nomAjout.getText(),descriptionAjout.getText(),typeAjout.getValue().toString()
                     ,Integer.valueOf(prixAjout.getText()),url,Integer.valueOf(stockAjout.getText()),Integer.valueOf(TerrainIdAjout.getValue().toString()));
             try {
-                // Vérifier si l'équipement existe déjà dans la base de données
                 List<Equipement> equipementsExistant = serviceEquipement.recherche(e.getNom());
                 if (!equipementsExistant.isEmpty()) {
-                    // L'équipement existe déjà, afficher un message d'erreur
                     JOptionPane.showMessageDialog(null,"Erreur : L'équipement existe déjà dans la base de données !");
                 } else {
-                    // L'équipement n'existe pas, procéder à l'ajout
                     serviceEquipement.ajouter(e);
                     JOptionPane.showMessageDialog(null,"Equipement Ajoutée avec succés !");
                     refreshTableView();
@@ -213,7 +210,6 @@ public class equipements {
             try {
                 serviceEquipement.modifier(e);
                 JOptionPane.showMessageDialog(null,"Equipement Modifiée avec succès !");
-                // Rafraîchir la TableView après la modification
                 refreshTableView();
             } catch (SQLException ex) {
                 System.out.println("Erreur lors de la modification de l'équipement : " + ex.getMessage());
@@ -273,14 +269,10 @@ public class equipements {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
-        // Création d'une liste pour stocker les noms des terrains
         ObservableList<Integer> idTerrains = FXCollections.observableArrayList();
         for (Terrain terrain : listeTerrains) {
             idTerrains.add(terrain.getId());
         }
-
-        // Ajout des noms des terrains à la liste déroulante
         TerrainIdAjout.setItems(idTerrains);
         serviceEquipement = new ServiceEquipement();
         ObservableList<Equipement> liste = null;
@@ -295,29 +287,17 @@ public class equipements {
         typeEquipements.setCellValueFactory(new PropertyValueFactory<>("type"));
         stockEquipements.setCellValueFactory(new PropertyValueFactory<>("stock"));
         prixEquipements.setCellValueFactory(new PropertyValueFactory<>("prix"));
-
-        // Créer une FilteredList à partir de la liste observable
         FilteredList<Equipement> filteredList = new FilteredList<>(liste, p -> true);
-
-        // Ajouter un écouteur de modification de propriété sur le champ de recherche
         recherche.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredList.setPredicate(equipement -> {
-                // Si le texte de recherche est vide, afficher tous les éléments
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
-
-                // Convertir le texte de recherche en minuscules pour une recherche insensible à la casse
                 String searchTerm = newValue.toLowerCase();
-
-                // Vérifier si l'équipement correspond au texte de recherche
                 return equipement.getNom().toLowerCase().contains(searchTerm);
             });
         });
-
-        // Lier la TableView à la FilteredList
         tableEquipements.setItems(filteredList);
-
         tableEquipements.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         tableEquipements.getSelectionModel().getSelectedItems().addListener((ListChangeListener.Change<? extends Equipement> change) -> {
             if (change.getList().size() > 0 && change.getList().get(0) != null && change.getList().get(0).equals(KeyCode.CONTROL)) {
@@ -362,25 +342,15 @@ public class equipements {
 
 
         try {
-            // Charger le fichier FXML à partir du chemin relatif
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListReservations.fxml"));
             Parent root = loader.load();
-
-            // Récupérer le contrôleur de la vue chargée si nécessaire
             listReservation listReservationController = loader.getController();
-
-            // Créer une nouvelle scène avec la vue chargée
             Scene scene = new Scene(root);
-
-            // Récupérer la fenêtre principale (stage) à partir de n'importe quel nœud de la scène
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            // Mettre la nouvelle scène dans la fenêtre et l'afficher
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
-            // Gérer les erreurs potentielles lors du chargement du fichier FXML
-            e.printStackTrace(); // Vous pouvez également imprimer ou gérer autrement l'erreur
+            e.printStackTrace();
         }
     }
 

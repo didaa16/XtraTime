@@ -24,12 +24,16 @@ public class ServiceReservation implements IService<Reservation> {
 
     @Override
     public void ajouter(Reservation res) throws SQLException {
-        String req = "INSERT INTO reservation ( equipements, date, duree) " +
-                "VALUES (?, ?, ?)";
+        String req = "INSERT INTO `reservation`(`date`, `duree`, `prix`, `terrainId`, `clientPseudo`, `equipements`)" +
+                "VALUES (?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = connection.prepareStatement(req);
-        ps.setString(1, res.getEquipements());
-        ps.setString(2, res.getDate());
-        ps.setString(3, res.getDuree());
+        ps.setString(1, res.getDate());
+        ps.setString(2, res.getDuree());
+        ps.setInt(3, res.getPrix());
+        ps.setInt(4, res.getTerrainId());
+        ps.setString(5, res.getClientPseudo());
+        ps.setString(6, res.getEquipements());
+
         ps.executeUpdate();
     }
 
@@ -42,7 +46,7 @@ public class ServiceReservation implements IService<Reservation> {
         ps.setString(3, res.getEquipements());
         ps.setInt(4, res.getPrix());
         ps.setString(5, res.getDate());
-        ps.setString(6, res.getDuree()); // Changement ici
+        ps.setString(6, res.getDuree());
         ps.setInt(7, res.getId());
         ps.executeUpdate();
         System.out.println("Réservation modifiée");
@@ -69,9 +73,9 @@ public class ServiceReservation implements IService<Reservation> {
             r.setTerrainId(rs.getInt("terrainid"));
             r.setClientPseudo(rs.getString("clientPseudo"));
             r.setEquipements(rs.getString("equipements"));
-            r.setPrix(rs.getInt("prix")); // Changement ici
+            r.setPrix(rs.getInt("prix"));
             r.setDate(rs.getString("date"));
-            r.setDuree(rs.getString("duree")); // Changement ici
+            r.setDuree(rs.getString("duree"));
             reservations.add(r);
         }
         return reservations;
@@ -87,9 +91,9 @@ public class ServiceReservation implements IService<Reservation> {
             r.setTerrainId(rs.getInt("terrainid"));
             r.setClientPseudo(rs.getString("clientPseudo"));
             r.setEquipements(rs.getString("equipements"));
-            r.setPrix(rs.getInt("prix")); // Changement ici
+            r.setPrix(rs.getInt("prix"));
             r.setDate(rs.getString("date"));
-            r.setDuree(rs.getString("duree")); // Changement ici
+            r.setDuree(rs.getString("duree"));
         }
         return r;
     }
@@ -105,9 +109,9 @@ public class ServiceReservation implements IService<Reservation> {
             r.setTerrainId(rs.getInt("terrainid"));
             r.setClientPseudo(rs.getString("clientPseudo"));
             r.setEquipements(rs.getString("equipements"));
-            r.setPrix(rs.getInt("prix")); // Changement ici
+            r.setPrix(rs.getInt("prix"));
             r.setDate(rs.getString("date"));
-            r.setDuree(rs.getString("duree")); // Changement ici
+            r.setDuree(rs.getString("duree"));
             reservations.add(r);
         }
         return reservations;

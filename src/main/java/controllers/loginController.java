@@ -1,50 +1,38 @@
 package controllers;
-import com.google.api.client.http.javanet.NetHttpTransport;
-import controllers.motDePasseOublie;
+
+import com.restfb.*;
+import com.restfb.exception.FacebookOAuthException;
+import com.restfb.json.JsonObject;
 import entities.Utilisateur;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.event.ActionEvent;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import services.ServiceUtilisateurs;
+import utils.SendMail;
+import utils.SendSMS;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
-import java.awt.*;
-import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Array;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.Random;
-import java.util.ResourceBundle;
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import java.util.Properties;
-import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
-import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeRequestUrl;
-import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
-import com.google.api.client.json.JsonFactory;
-import utils.SendMail;
-import utils.SendSMS;
+
+;
 
 public class loginController {
     @FXML
@@ -59,10 +47,86 @@ public class loginController {
     private AnchorPane selectModeAnchor, anchorLogin;
 
 
+
+    private static Utilisateur loggedInUser;
+
     private static int rand;
     private static void setRand(int r) {
         rand = r;
     }
+
+    private String app_Id = "955260698794997";
+    private String app_Secret = "09f69797680c9e00fefb9b3b2050c7e4";
+    private String redirect_Url = "http://localhost:8181/";
+    private String redirect_url_encoded = "http%3A%2F%2Flocalhost%3A8181%2F";
+    private String state = "9812" ;
+    private String code = "";
+    private String authentication = "https://www.facebook.com/v19.0/dialog/oauth?client_id="+app_Id+"&redirect_uri="+redirect_url_encoded+"&state="+state;
+    private String graph = "https://graph.facebook.com/v19.0/oauth/access_token?client_id="+app_Id+"&redirect_uri="+redirect_url_encoded+"&client_secret="+app_Secret+"&code=";
+
+    @FXML
+    private void connectWithFacebook(ActionEvent event) {
+        WebView webView = new WebView();
+        WebEngine webEngine = webView.getEngine();
+        webEngine.load(authentication);
+
+        Pane webViewPane = new Pane();
+        webViewPane.getChildren().add(webView);
+
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(new Scene(webViewPane));
+        stage.show();
+
+        webEngine.locationProperty().addListener((obs, oldLocation, newLocation) -> {
+            if (newLocation != null && newLocation.startsWith("http://localhost")) {
+                URI uri = URI.create(newLocation);
+                String code = null;
+                for (String queryParam : uri.getQuery().split("&")) {
+                    String[] keyValue = queryParam.split("=");
+                    if (keyValue.length == 2 && keyValue[0].equals("code")) {
+                        code = keyValue[1];
+                        break;
+                    }
+                }
+                if (code != null) {
+                    try {
+                        DefaultFacebookClient facebookClient = new DefaultFacebookClient(Version.VERSION_19_0);
+                        AccessToken accessToken = facebookClient.obtainUserAccessToken(
+                                app_Id, app_Secret, redirect_Url, code);
+
+                        String access_token = accessToken.getAccessToken();
+
+                        FacebookClient fbClient = new DefaultFacebookClient(access_token, Version.VERSION_19_0);
+                        fbClient.createClientWithAccessToken(access_token);
+
+                        JsonObject profilePicJson = fbClient.fetchObject("me/picture", JsonObject.class,
+                                Parameter.with("redirect", "false"));
+
+                        JsonObject userProfileJson = fbClient.fetchObject("me", JsonObject.class);
+                        String userId = userProfileJson.getString("id", String.valueOf(String.class));
+                        String userName = userProfileJson.getString("name", String.valueOf(String.class));
+                        Utilisateur user = new Utilisateur();
+                        user.setPseudo(userId);
+                        user.setNom(userName);
+                        clientFrontController.setLoggedInUser(user);
+                        stage.close();
+                        serviceUtilisateurs.changeScreen(event, "/clientFront.fxml", "XTRATIME");
+
+                    } catch (FacebookOAuthException e) {
+                        System.err.println("Facebook authentication error: " + e.getMessage());
+                        // Handle Facebook authentication error
+                    }
+                } else {
+                    System.err.println("Invalid redirect URI or code not found in the URL");
+                    // Handle invalid redirect or other scenarios
+                }
+            }
+        });
+    }
+
+
+
     @FXML
     void initialize() {
     }

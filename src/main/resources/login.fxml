@@ -60,7 +60,7 @@
          <children>
             <AnchorPane fx:id="anchorLogin" layoutY="2.0" prefHeight="650.0" prefWidth="732.0">
                <children>
-                  <Pane layoutX="186.0" layoutY="83.0" prefHeight="484.0" prefWidth="434.0">
+                  <Pane layoutX="186.0" layoutY="83.0" prefHeight="541.0" prefWidth="434.0">
                      <children>
                         <TextField fx:id="pseudoLogin" layoutX="38.0" layoutY="81.0" prefHeight="36.0" prefWidth="359.0" promptText="Pseudo">
                            <font>
@@ -95,7 +95,7 @@
                               <Font name="Segoe UI" size="12.0" />
                            </font>
                         </Label>
-                        <Button fx:id="signupLogin" layoutX="36.0" layoutY="374.0" mnemonicParsing="false" onAction="#signupLoginButtonOnClick" prefHeight="35.0" prefWidth="359.0" style="-fx-background-color: #000000;" text="S'inscrire" textFill="WHITE">
+                        <Button fx:id="signupLogin" layoutX="36.0" layoutY="463.0" mnemonicParsing="false" onAction="#signupLoginButtonOnClick" prefHeight="35.0" prefWidth="359.0" style="-fx-background-color: #000000;" text="S'inscrire" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -108,6 +108,23 @@
                               <Font size="11.0" />
                            </font>
                         </Label>
+                        <Separator layoutX="41.0" layoutY="424.0" prefHeight="1.0" prefWidth="359.0" />
+                        <Label alignment="CENTER" layoutX="200.0" layoutY="409.0" prefHeight="23.0" prefWidth="31.0" style="-fx-background-color: #FFFFFF;" text="Or" textFill="#5b5a5a">
+                           <font>
+                              <Font name="Segoe UI" size="12.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="connectWithFacebookButton" layoutX="36.0" layoutY="356.0" mnemonicParsing="false" onAction="#connectWithFacebook" prefHeight="35.0" prefWidth="359.0" style="-fx-background-color: BLUE;" text="Se connecter avec Facebook" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="FACEBOOK_SQUARE" size="25" translateX="-10.0" />
+                           </graphic>
+                        </Button>
                      </children>
                   </Pane>
                </children>

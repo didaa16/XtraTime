@@ -15,7 +15,6 @@ public class ServiceCommandeProduit implements IService<Produit_Commande> {
     }
 
 
-
     /*public void ajouter1(Produit_Commande produitCommande) throws SQLException {
         Connection connection = DataBase.getInstance().getConnection();
         String req = "INSERT INTO `produitCommande` (`ref`, `refCommande`) VALUES (?,?);";
@@ -24,14 +23,13 @@ public class ServiceCommandeProduit implements IService<Produit_Commande> {
         ps.setInt(2, produitCommande.getRefCommande());
         ps.executeUpdate();
     }*/
-    public void delete(Produit_Commande produitCommande) throws SQLException {
-        Connection connection = DataBase.getInstance().getConnection();
-        String req = "DELETE FROM `produitCommande` WHERE `ref`= ? AND `refCommande`= ?" ;
-        PreparedStatement ps = connection.prepareStatement(req);
-        ps.setString(1, produitCommande.getRef());
-        ps.setInt(2, produitCommande.getRefCommande());
-        ps.executeUpdate();
-    }
+//    public void delete(Produit_Commande produitCommande) throws SQLException {
+//        String req = "DELETE FROM `produitCommande` WHERE `ref`= ? AND `refCommande`= ?" ;
+//        PreparedStatement ps = connection.prepareStatement(req);
+//        ps.setString(1, produitCommande.getRef());
+//        ps.setInt(2, produitCommande.getRefCommande());
+//        ps.executeUpdate();
+//    }
 
     @Override
     public List<Produit_Commande> afficher() throws SQLException {
@@ -40,7 +38,6 @@ public class ServiceCommandeProduit implements IService<Produit_Commande> {
 
     @Override
     public void ajouter(Produit_Commande produitCommande) throws SQLException {
-        this.connection = DataBase.getInstance().getConnection();
         String req = "INSERT INTO `produit_commande`(`ref`, `refCommande`) VALUES (?,?)";
         PreparedStatement ps = connection.prepareStatement(req);
         ps.setString(1, produitCommande.getRef());
@@ -51,7 +48,6 @@ public class ServiceCommandeProduit implements IService<Produit_Commande> {
 
     @Override
     public  void modifier(Produit_Commande produitCommande) throws SQLException {
-        Connection connection = DataBase.getInstance().getConnection();
         String req = "UPDATE  `produitCommande` SET `ref`= ?, `refCommande`= ? WHERE `id`= ?;";
         PreparedStatement ps = connection.prepareStatement(req);
         ps.setString(1, produitCommande.getRef());
@@ -66,7 +62,6 @@ public class ServiceCommandeProduit implements IService<Produit_Commande> {
     }
 
     public void delete(int refCom, String ref) throws SQLException {
-        this.connection = DataBase.getInstance().getConnection();
         String req = "DELETE FROM `produit_commande` WHERE `refCommande`= ?";
         PreparedStatement ps= connection.prepareStatement(req);
         ps.setInt(1, refCom);
@@ -74,19 +69,22 @@ public class ServiceCommandeProduit implements IService<Produit_Commande> {
         System.out.println("commande produit Supprimée");
     }
     public void deleteProduitFromCommande(String ref, int refCommande) throws SQLException {
-            String req = "DELETE FROM produit_commande WHERE ref = ? AND refCommande = ?";
-            PreparedStatement ps = connection.prepareStatement(req);
-            ps.setString(1, ref);
-            ps.setInt(2, refCommande);
+        Connection connection = DataBase.getInstance().getConnection(); // Obtenir une nouvelle connexion
+        String req = "DELETE FROM produit_commande WHERE ref = ? AND refCommande = ?";
+        PreparedStatement ps = connection.prepareStatement(req);
+        ps.setString(1, ref);
+        ps.setInt(2, refCommande);
             ps.executeUpdate();
-        System.out.println("commande produit Supprimée");
+            System.out.println("commande produit Supprimée");
+
     }
 
 
 
 
+
+
     public List<String> getProdId() throws SQLException {
-        this.connection = DataBase.getInstance().getConnection();
         String req= "Select DISTINCT ref from `produitCommande` ";
         List<String> listeP=new ArrayList<>();
         PreparedStatement ps = connection.prepareStatement(req);
@@ -99,10 +97,11 @@ public class ServiceCommandeProduit implements IService<Produit_Commande> {
         return listeP;
     }
     public static List<Produit> getProduitsByRefCommande(String refCommande) throws SQLException {
+        Connection connection = DataBase.getInstance().getConnection(); // Obtenir une nouvelle connexion
+
         List<Produit> produits = new ArrayList<>();
         String req = "SELECT p.* FROM produit_commande pc INNER JOIN produit p ON pc.ref = p.ref WHERE pc.refCommande = ?";
-        Connection connection;
-        connection= DataBase.getInstance().getConnection();
+
         PreparedStatement ps = connection.prepareStatement(req);
         ps.setString(1, refCommande);
         ResultSet rs = ps.executeQuery();
@@ -149,7 +148,8 @@ public class ServiceCommandeProduit implements IService<Produit_Commande> {
 
 
     public void ajouterProduitACommande(int refCommande, String ref) throws SQLException {
-        this.connection = DataBase.getInstance().getConnection();
+        Connection connection = DataBase.getInstance().getConnection(); // Obtenir une nouvelle connexion
+
         // Vérifiez si la commande existe, sinon créez-la
         if (!verifierExistenceCommande(refCommande)) {
             Commande commande = new Commande(refCommande, 0.0, Status.enAttente, "dida16");

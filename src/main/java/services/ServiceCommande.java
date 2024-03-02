@@ -171,8 +171,7 @@ public class ServiceCommande implements IService<Commande> {
         preparedStatement.setDouble(1, nouveauPrix);
         preparedStatement.setString(2, String.valueOf(refCommande));
         preparedStatement.executeUpdate();
-        preparedStatement.close();
-        connection.close();
+
     }
 
 

@@ -77,8 +77,10 @@ public class ServiceProduit implements IService<Produit>{
 
     @Override
     public List<Produit> afficher() throws SQLException {
-        this.connection = DataBase.getInstance().getConnection();
-
+        // Vérifiez si la connexion est fermée avant d'appeler la méthode afficher
+        if (connection.isClosed()) {
+            connection = DataBase.getInstance().getConnection();
+        }
         List<Produit> produits = new ArrayList<>();
         String req = "SELECT * FROM produit";
         Statement st = connection.createStatement();
@@ -96,10 +98,13 @@ public class ServiceProduit implements IService<Produit>{
             produit.setImage(rs.getString("image"));
             produits.add(produit);
         }
+        // Vérifiez si la connexion est fermée après avoir appelé la méthode afficher
+        if (connection.isClosed()) {
+            System.out.println("La connexion JDBC est fermée après avoir appelé la méthode afficher");
+        }
         return produits;
-
-
     }
+
     public Produit getProduit(String refProduit) throws SQLException {
 
         this.connection = DataBase.getInstance().getConnection();

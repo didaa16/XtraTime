@@ -3,9 +3,7 @@ package controllers;
 import entities.Commande;
 import entities.Produit;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -13,17 +11,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import services.ServiceCommande;
 import services.ServiceCommandeProduit;
+import services.ServiceProduit;
 import tests.IListener;
 
-
-import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Optional;
-import java.util.ResourceBundle;
 
-public class ProdCom implements Initializable {
+public class ProduitDansCom {
 
     @FXML
     private Label description;
@@ -58,32 +51,34 @@ public class ProdCom implements Initializable {
     private Label typeee;
     private ServiceCommande serviceCommande;
     private ServiceCommandeProduit serviceCommandeProduit;
+    private ServiceProduit serviceProduit;
     private Produit produit;
     private String currency = " DT";
-    private IListener iListener;
+    //private IListener iListener;
 
 
-    public ProdCom() throws SQLException {
+    public ProduitDansCom() throws SQLException {
         this.serviceCommande = new ServiceCommande();
         this.serviceCommandeProduit = new ServiceCommandeProduit();
+        this.serviceProduit= new ServiceProduit();
 
 
     }
-    @FXML
+//    @FXML
+//
+//    private void click(MouseEvent mouseEvent) {
+//        if (iListener != null) {
+//            iListener.onClickListener(produit);
+//        } else {
+//            System.out.println("iListener is null");
+//        }
+//    }
 
-    private void click(MouseEvent mouseEvent) {
-        if (iListener != null) {
-            iListener.onClickListener(produit);
-        } else {
-            System.out.println("iListener is null");
-        }
-    }
-
-    public void setData(Produit produit, IListener iListener) {
+    public void setData(Produit produit) {
         this.produit = produit;
-        this.iListener = iListener;
+        //this.iListener = iListener;
         nomProd.setText(produit.getNom());
-        prixProduit.setText(String.valueOf(produit.getPrix()) + currency);
+        prixProduit.setText(produit.getPrix() + currency);
         reffff.setText(produit.getRef());
         marque.setText(String.valueOf(produit.getMarque()));
         tailleeeee.setText(produit.getTaille());
@@ -104,28 +99,26 @@ public class ProdCom implements Initializable {
     }
 
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        supprimer.setOnMouseClicked(mouseEvent -> {
-            Connection connection = (Connection) utils.DataBase.getInstance();
-            try {
-                if (!connection.isClosed()) {
-                    try {
-                        int refCommande = serviceCommande.getCommande("dida16").getRefCommande();
-                        System.out.println("1");
-                        String refProduit = reffff.getText();
-                        System.out.println("2");
-                        serviceCommandeProduit.deleteProduitFromCommande(refProduit, refCommande);
-                        System.out.println("3");
-                        showAlert("Suppression réussie", "Le produit a été supprimé de la commande", "", Alert.AlertType.INFORMATION);
-                   
-                    } catch (SQLException e) {
-                        System.out.println(e.getMessage());
-                    }
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        });
+    @FXML
+    void deleteProd(MouseEvent event) {
+        try {
+            // Obtenez la référence de la commande actuelle à partir de la base de données
+            ServiceCommande serviceCommande = new ServiceCommande();
+            Commande commandeActuelle = serviceCommande.getCommande("dida16");
+            int refCommande = commandeActuelle.getRefCommande();
+
+            // Obtenez la référence du produit à partir de l'étiquette reffff
+            String refProduit = reffff.getText();
+
+            // Supprimez le produit de la commande
+            ServiceCommandeProduit serviceCommandeProduit = new ServiceCommandeProduit();
+            serviceCommandeProduit.deleteProduitFromCommande(refProduit, refCommande);
+
+
+            showAlert("Suppression réussie", "Le produit a été supprimé de la commande", "", Alert.AlertType.INFORMATION);
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la suppression du produit de la commande : " + e.getMessage());
+            showAlert("Erreur", "Erreur lors de la suppression du produit de la commande", e.getMessage(), Alert.AlertType.ERROR);
+        }
     }
 }

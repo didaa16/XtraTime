@@ -9,7 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class StripePaymentService {
-        public PaymentIntent createPayment(double amount, String currency, String description) throws StripeException {
+    public PaymentIntent createPayment(double amount, String currency, String description) {
+        try {
             Stripe.apiKey = "sk_test_51OqJbyP8fZ7mtZrf1ucCZuWgiG9TwaEZeDfFgVTC7dM2lapkIL1Hiq8LJKjLK2YVbdlYTFCHI3FgIthXHJgTxaa800QGib2xV2";
 
             PaymentIntentCreateParams params = PaymentIntentCreateParams.builder()
@@ -21,6 +22,12 @@ public class StripePaymentService {
             PaymentIntent paymentIntent = PaymentIntent.create(params);
 
             return paymentIntent;
+        } catch (StripeException e) {
+            // Gérer l'exception
+            e.printStackTrace();
+            return null;
         }
     }
+
+}
 

@@ -7,13 +7,20 @@ import com.stripe.param.PaymentIntentCreateParams;
 import entities.Commande;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import services.ServiceCommande;
 import services.StripePaymentService;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -39,6 +46,8 @@ public class PaymentFormController implements Initializable {
 
     @FXML
     private Label total;
+    @FXML
+    private ImageView back;
 
     private ServiceCommande serviceCommande;
 
@@ -52,6 +61,8 @@ public class PaymentFormController implements Initializable {
 
         // Vérifier que les champs ne sont pas vides
         if (cardNumber.isEmpty() || expMonthText.isEmpty() || expYearText.isEmpty() || cvc.isEmpty()) {
+            showAlert("Erreur", "", "Veuillez remplir tous les champs.", Alert.AlertType.ERROR);
+
             System.out.println("Veuillez remplir tous les champs.");
             return;
         }
@@ -64,6 +75,32 @@ public class PaymentFormController implements Initializable {
             expYear = Integer.parseInt(expYearText);
         } catch (NumberFormatException e) {
             System.out.println("Les champs mois et année doivent être des nombres.");
+            showAlert("Erreur", "", "Les champs mois et année doivent être des nombres.", Alert.AlertType.ERROR);
+
+            return;
+        }
+
+        // Vérifier la validité de la carte de crédit
+        if (!CreditCardValidator.isValid(cardNumber)) {
+            showAlert("Erreur", "", "Numéro de carte de crédit invalide.", Alert.AlertType.ERROR);
+
+            System.out.println("Numéro de carte de crédit invalide.");
+            return;
+        }
+
+        // Vérifier la date d'expiration de la carte de crédit
+        if (expYear < 2022 || (expYear == 2022 && expMonth < 3)) {
+            showAlert("Erreur", "", "Date d'expiration de la carte de crédit invalide.", Alert.AlertType.ERROR);
+
+            System.out.println("Date d'expiration de la carte de crédit invalide.");
+            return;
+        }
+
+        // Vérifier le code CVC
+        if (cvc.length() != 3) {
+            showAlert("Erreur", "", "Code CVC invalide.", Alert.AlertType.ERROR);
+
+            System.out.println("Code CVC invalide.");
             return;
         }
 
@@ -77,25 +114,30 @@ public class PaymentFormController implements Initializable {
             return;
         }
 
-        // Créer un objet de paiement avec les informations de paiement
-        Map<String, Object> params = new HashMap<>();
-        params.put("amount", commande.getPrix()); // Montant en centimes (120 $)
-        params.put("currency", " DT");
-        params.put("source", cardNumber);
-        params.put("description", "Example payment");
+        // Vérifier le montant de la commande
+        if (commande.getPrix() <= 0) {
+            showAlert("Erreur", "", "Montant de la commande invalide.", Alert.AlertType.ERROR);
 
-        try {
-            // Créer un paiement avec Stripe
-            PaymentIntent paymentIntent = PaymentIntent.create(params);
-            System.out.println("paiement reussi");
-
-        } catch (StripeException e) {
-            // Afficher un message d'erreur
-            System.out.println("Erreur lors du paiement : " + e.getMessage());
+            System.out.println("Montant de la commande invalide.");
+            return;
         }
+
+        // Créer un paiement avec Stripe
+        StripePaymentService stripePaymentService = new StripePaymentService();
+        PaymentIntent paymentIntent = stripePaymentService.createPayment(commande.getPrix(), "DT", "Example payment");
+        System.out.println("paiement réussi");
     }
 
 
+
+
+    private void showAlert(String title, String headerText, String contentText, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(headerText);
+        alert.setContentText(contentText);
+        alert.showAndWait();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -106,10 +148,24 @@ public class PaymentFormController implements Initializable {
             Commande commande = serviceCommande.getCommande("dida16");
 
             // Afficher le montant total de la commande dans l'interface utilisateur
-            total.setText(String.valueOf(commande.getPrix()));
+            total.setText(String.valueOf(commande.getPrix())+ "DT");
         } catch (SQLException e) {
             // Afficher un message d'erreur
             System.out.println("Erreur lors de la récupération de la commande : " + e.getMessage());
+            showAlert("Erreur", "", "Erreur lors de la récupération de la commande .", Alert.AlertType.ERROR);
+
         }
+    }
+    @FXML
+    void goBack(MouseEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/AjoutCom.fxml"));
+            Scene scene = back.getScene();
+            scene.setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+
     }
 }

@@ -1,12 +1,15 @@
 package controllers;
+import com.itextpdf.kernel.colors.Color;
 
 import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.kernel.colors.ColorConstants;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.properties.TextAlignment;
 import entities.Marque;
 import entities.Produit;
 import entities.TypeSport;
@@ -25,13 +28,12 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.*;
 import services.ServiceProduit;
-
+import com.itextpdf.layout.element.Cell;
 import java.awt.*;
+//import java.awt.Color;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -39,8 +41,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import com.itextpdf.kernel.colors.Color;
 
 import static com.itextpdf.layout.properties.TextAlignment.CENTER;
+import static java.awt.Color.red;
 
 public class AfficherProduitController {
 
@@ -236,21 +240,44 @@ public class AfficherProduitController {
                 cell.setCellValue(columns.get(i).getText());
             }
 
+            // Appliquer le style à la première ligne
+            XSSFCellStyle headerStyle = workbook.createCellStyle();
+            headerStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+            headerStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+            headerStyle.setAlignment(HorizontalAlignment.CENTER);
+            headerStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+            XSSFFont font = workbook.createFont();
+            font.setFontHeightInPoints((short) 10);
+            font.setBold(true);
+            headerStyle.setFont(font);
+            headerStyle.setBorderTop(BorderStyle.THICK);
+            headerStyle.setBorderBottom(BorderStyle.THICK);
+            headerStyle.setBorderLeft(BorderStyle.THICK);
+            headerStyle.setBorderRight(BorderStyle.THICK);
+            headerStyle.setTopBorderColor(IndexedColors.BLACK.getIndex());
+            headerStyle.setBottomBorderColor(IndexedColors.BLACK.getIndex());
+            headerStyle.setLeftBorderColor(IndexedColors.BLACK.getIndex());
+            headerStyle.setRightBorderColor(IndexedColors.BLACK.getIndex());
+            for (int i = 0; i < columns.size(); i++) {
+                headerRow.getCell(i).setCellStyle(headerStyle);
+            }
+
             // Remplir les données
             ObservableList<Produit> produits = listeProduit.getItems();
             for (int i = 0; i < produits.size(); i++) {
                 XSSFRow row = sheet.createRow(i + 1);
                 for (int j = 0; j < columns.size(); j++) {
                     XSSFCell cell = row.createCell(j);
-
-                        cell.setCellValue(columns.get(j).getCellData(produits.get(i)).toString());
-                    }
-
+                    cell.setCellValue(columns.get(j).getCellData(produits.get(i)).toString());
+                }
             }
 
             // Ajuster la largeur des colonnes
             for (int i = 0; i < columns.size(); i++) {
-                sheet.autoSizeColumn(i);
+                if (columns.get(i).equals(c_image) || columns.get(i).equals(c_description)) {
+                    sheet.setColumnWidth(i, 40 * 256); // Définir la largeur de la colonne en unités de 1/256 de caractère
+                } else {
+                    sheet.setColumnWidth(i, 20 * 256);                }
             }
 
             // Enregistrer le classeur Excel dans un fichier
@@ -281,22 +308,22 @@ public class AfficherProduitController {
             Document document = new Document(pdfDocument, PageSize.A3.rotate());
 
             // Ajouter un titre
-
             Paragraph title = new Paragraph("Liste des produits");
             title.setFontSize(24);
             title.setBold();
-            title.setTextAlignment(CENTER);
+            title.setTextAlignment(TextAlignment.CENTER);
+            title.setFontColor(ColorConstants.RED); // Set the title color to red
             document.add(title);
-
-            // Ajouter un bloc de texte pour centrer le tableau
-            Paragraph centeredText = new Paragraph();
-            centeredText.setTextAlignment(CENTER);
 
             // Ajouter un tableau pour les données
             Table table = new Table(listeProduit.getColumns().size());
             ObservableList<TableColumn<Produit, ?>> columns = listeProduit.getColumns();
+
+            // Ajouter une ligne de cellules de titre en gras et en couleur
             for (TableColumn<Produit, ?> column : columns) {
-                table.addHeaderCell(column.getText());
+                Cell cell = new Cell();
+                cell.add(new Paragraph(column.getText()).setBold().setBackgroundColor(ColorConstants.LIGHT_GRAY).setFontSize(20));
+                table.addHeaderCell(cell);
             }
 
             // Remplir les données
@@ -312,29 +339,24 @@ public class AfficherProduitController {
                     } else if (column.equals(c_description)) {
                         // Si la colonne est celle de la description, ajouter une cellule avec un retour à la ligne
                         String cellValue = column.getCellData(produit).toString();
-                        table.addCell(new Paragraph(cellValue));
+                        table.addCell(new Paragraph(cellValue).setMinWidth(50));
                     } else {
-                        // Sinon, ajouter la valeur de la cellule
-                        String cellValue = column.getCellData(produit).toString();
-                        table.addCell(cellValue);
+                        Object cellValue = column.getCellData(produit);
+                        Cell cell = new Cell();
+                        cell.add(new Paragraph(cellValue.toString()));
+                        cell.setWidth(100); // Ajuster la largeur de la cellule à 100 pixels
+                        table.addCell(cell);
                     }
                 }
             }
-            // Ajuster la taille des autres colonnes
 
-            c_nom.setPrefWidth(100); // Ajuster la largeur de la colonne "Nom" à 100 pixels
-            c_reference.setPrefWidth(100); // Ajuster la largeur de la colonne "Référence" à 100 pixels
-            c_description.setPrefWidth(100); // Ajuster la largeur de la colonne "Description" à 200 pixels
-            c_prix.setPrefWidth(100); // Ajuster la largeur de la colonne "Prix" à 100 pixels
-            c_taille.setPrefWidth(100); // Ajuster la largeur de la colonne "Taille" à 100 pixels
-            c_typesport.setPrefWidth(100); // Ajuster la largeur de la colonne "Type de sport" à 100 pixels
-            c_marque.setPrefWidth(100); // Ajuster la largeur de la colonne "Marque" à 100 pixels
-            c_quantite.setPrefWidth(100); // Ajuster la largeur de la colonne "Quantité" à 100 pixels
-
+            // Ajuster la taille des colonnes
+            for (TableColumn<Produit, ?> column : columns) {
+                column.setPrefWidth(100); // Ajuster la largeur de chaque colonne à 100 pixels
+            }
 
             // Ajouter le tableau au document
             document.add(table);
-            document.add(centeredText);
 
             // Fermer le document
             document.close();

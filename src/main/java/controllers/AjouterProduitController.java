@@ -71,6 +71,7 @@ public class AjouterProduitController {
     void initialize() {
         marque.getItems().addAll(Marque.values());
         typeSport.getItems().addAll(TypeSport.values());
+
     }
 
     @FXML

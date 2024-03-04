@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controllers.chatbotController"
+      spacing="10" alignment="center">
+
+    <Label text="Chat Bot" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+
+    <TextField fx:id="inputTextField" promptText="Enter your message..." />
+
+    <Button text="Send" onAction="#processInput" />
+
+    <TextArea fx:id="outputLabel" prefHeight="200" prefWidth="400" editable="false" wrapText="true" />
+
+    <!-- Ajout des boutons "Oui" et "Non" -->
+    <HBox alignment="CENTER">
+        <Button fx:id="yesButton" text="Oui" onAction="#handleYes" />
+        <Button fx:id="noButton" text="Non" onAction="#handleNo" />
+    </HBox>
+
+</VBox>

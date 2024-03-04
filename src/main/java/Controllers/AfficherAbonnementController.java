@@ -197,6 +197,11 @@ void initialize() {
             System.out.println(e.getMessage());
         }
     }
+    @FXML
+    void sortByNomUser(ActionEvent event) {
+        // Tri de la TableView par nomUser
+        tabA.getItems().sort((abonnement1, abonnement2) -> abonnement1.getNomUser().compareTo(abonnement2.getNomUser()));
+    }
 
 
 

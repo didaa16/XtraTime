@@ -71,7 +71,7 @@
             </Pane>
             <VBox prefHeight="322.0" prefWidth="218.0" spacing="20.0">
                <children>
-                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="60.0">
+                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="60.0" styleClass="button-container-mouse-moved" stylesheets="@styless.css">
                      <children>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>

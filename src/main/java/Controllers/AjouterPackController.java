@@ -79,9 +79,19 @@ public class AjouterPackController {
             showAlert("Erreur", "Réduction invalide", "La réduction doit être un nombre entier entre 0 et 100.", Alert.AlertType.ERROR);
             return;
         }
+        ServicePack servicePack = new ServicePack();
+
+        if (servicePack.packExistsWithSameName(nom.getText())){
+            Alert eventExistsAlert = new Alert(Alert.AlertType.WARNING);
+        eventExistsAlert.setTitle(" \n" +
+                "Pack  double");
+        eventExistsAlert.setHeaderText(null);
+        eventExistsAlert.setContentText("Un Pack du même Nom existe déjà !");
+        eventExistsAlert.showAndWait();
+        return;
+    }
         if (validerNomPack(packNom)) {
             try {
-                ServicePack servicePack = new ServicePack();
                 servicePack.ajouter(new Pack(packNom, packDescription, imagePath, Integer.parseInt(reductionString)));
                 clearFields();
             } catch (SQLException e) {

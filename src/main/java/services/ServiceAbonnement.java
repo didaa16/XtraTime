@@ -338,6 +338,26 @@ public class ServiceAbonnement {
             }
         }
     }
+    public boolean abonnementExistsWithSameName(String nomuser, Date date) {
+        String req = "SELECT COUNT(*) FROM abonnement WHERE nomUser = ? AND  date = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(req);
+            ps.setString(1, nomuser);
+            // Convertir java.util.Date en java.sql.Date
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+            ps.setDate(2, sqlDate); // Utiliser setDate pour définir une date dans la requête préparée
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
+
+
 
 
 

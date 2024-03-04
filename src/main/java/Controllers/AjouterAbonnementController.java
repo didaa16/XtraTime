@@ -6,10 +6,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
 import services.ServiceAbonnement;
 
 import java.io.IOException;
@@ -19,8 +18,9 @@ import javafx.collections.FXCollections;
 import java.sql.SQLException;
 import java.sql.Date;
 
-import javafx.scene.control.Alert;
+import services.ServicePack;
 
+import javax.security.auth.callback.ConfirmationCallback;
 import java.time.LocalDate;
 
 import java.util.regex.Matcher;
@@ -148,10 +148,37 @@ public class AjouterAbonnementController {
             }
 
             float prixAbonnement = serviceAbonnement.calculerPrixApresReduction(prixTotalAvantReduction, packId, terrainId, nomPack);
+            ServicePack servicePack = new ServicePack();
+
+
 
             if (validerNomUser(nomUser)) {
                 try {
                     serviceAbonnement.ajouterAbonnement(nomUser, selectedDate, nomTerrain, nomPack, numtel);
+
+                    afficherDetailsAbonnement(nomUser,selectedDate, nomTerrain, nomPack, numtel, prixAbonnement);
+
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("Jouer à X/O");
+                        alert.setHeaderText("Voulez-vous jouer à un jeu X/O avec nous ?");
+                        alert.setContentText("Cliquez sur OK pour jouer ou Annuler pour ignorer.");
+
+                    ButtonType result = alert.showAndWait().orElse(ButtonType.CANCEL);
+
+                    alert.showAndWait().ifPresent(response -> {
+                        ConfirmationCallback ButtonType = null;
+                        if (response == result.OK) {
+                            TicTacToeGame ticTacToeGame = new TicTacToeGame();
+                            Stage gameStage = new Stage();
+                            try {
+                                ticTacToeGame.start(gameStage);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+
+
                     Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 
                     Message message = Message
@@ -164,7 +191,8 @@ public class AjouterAbonnementController {
 
                     System.out.println(message.getSid());
                     clearFields();
-                    afficherDetailsAbonnement(nomUser,selectedDate, nomTerrain, nomPack, numtel, prixAbonnement);
+
+
                 } catch (SQLException e) {
                     e.printStackTrace();
                     System.out.println("Erreur lors de l'ajout de l'abonnement.");

@@ -168,6 +168,14 @@
                         <String fx:value="container" />
                      </styleClass>
                   </Button>
+                  <Button fx:id="excel" mnemonicParsing="false" onAction="#exportToExcel" prefHeight="35.0" prefWidth="86.0" styleClass="container" stylesheets="@styless.css" text="Excel">
+                     <VBox.margin>
+                        <Insets bottom="-1.0" left="160.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Franklin Gothic Medium" size="11.0" />
+                     </font>
+                  </Button>
                </children>
             </VBox>
          </left>
@@ -179,13 +187,13 @@
                <children>
                   <VBox prefHeight="452.0" prefWidth="570.0">
                      <children>
-                        <TableView fx:id="tabV" prefHeight="478.0" prefWidth="574.0">
+                        <TableView fx:id="tabV" prefHeight="453.0" prefWidth="568.0">
                           <columns>
-                            <TableColumn fx:id="idP" prefWidth="83.99994051456451" text="IdP" />
+                            <TableColumn fx:id="idP" editable="false" prefWidth="83.99994051456451" sortable="false" text="IdP" visible="false" />
                             <TableColumn fx:id="nom" prefWidth="94.39995574951172" text="Nom" />
-                              <TableColumn fx:id="desc" prefWidth="123.99996948242188" text="Description" />
-                              <TableColumn fx:id="red" minWidth="0.0" prefWidth="149.5999755859375" text="Reduction" />
-                              <TableColumn fx:id="img" prefWidth="276.8000793457031" text="image" />
+                              <TableColumn fx:id="desc" prefWidth="143.99999237060547" text="Description" />
+                              <TableColumn fx:id="red" minWidth="0.0" prefWidth="148.00003051757812" text="Reduction" />
+                              <TableColumn fx:id="img" prefWidth="259.9999694824219" text="image" />
                           </columns>
                         </TableView>
                      </children>

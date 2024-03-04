@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="398.0" prefWidth="266.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CardController">
+<AnchorPane prefHeight="398.0" prefWidth="266.0" stylesheets="@styless.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CardController">
    <children>
       <VBox alignment="TOP_CENTER" layoutX="3.0" layoutY="14.0" prefHeight="348.0" prefWidth="254.0" spacing="10" styleClass="card" stylesheets="@styless.css">
          <children>
@@ -33,7 +33,7 @@
                </image>
             </ImageView>
             <Label fx:id="description" prefHeight="64.0" prefWidth="214.0" text="Rejoignez l'élite avec notre abonnement premium et débloquez une expérience inégalée. Profitez d'un accès exclusif à une gamme complète de fonctionnalités et de privilèges conçus pour améliorer votre expérience utilisateur et maximiser les avantages de notre service." wrapText="true" />
-            <Button fx:id="selectBtn2" onAction="#Abonnement" styleClass="subscribe-button" stylesheets="@styless.css" text="Choose" />
+            <Button fx:id="selectBtn2" onAction="#Abonnement" styleClass="subscribe-buttonC" stylesheets="@styless.css" text="Choisir" />
          </children>
          <padding>
             <Insets bottom="10.0" right="10.0" top="10.0" />

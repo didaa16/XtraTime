@@ -28,11 +28,15 @@
                      </font>
                   </Label>
                   <Pane maxHeight="-Infinity" prefHeight="1.0" prefWidth="200.0" styleClass="line-color" stylesheets="@styless.css" HBox.hgrow="ALWAYS" />
-                  <ImageView fitHeight="32.0" fitWidth="35.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@icons8-setting-64.png" />
-                     </image>
-                  </ImageView>
+                  <Button fx:id="trie" mnemonicParsing="false" onAction="#sortByNomUser" prefHeight="45.0" prefWidth="56.0" styleClass="transparent-button" stylesheets="@styless.css">
+                     <graphic>
+                        <ImageView fitHeight="33.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons8-setting-64.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
                <BorderPane.margin>
                   <Insets left="20.0" right="20.0" />
@@ -177,16 +181,16 @@
                      <children>
                         <TableView fx:id="tabA" prefHeight="481.0" prefWidth="622.0">
                           <columns>
-                            <TableColumn fx:id="id" prefWidth="40.799989342689514" text="id" />
+                            <TableColumn fx:id="id" editable="false" prefWidth="40.799989342689514" sortable="false" text="id" visible="false" />
                             <TableColumn fx:id="date" prefWidth="56.0" text="date" />
                               <TableColumn fx:id="prix" prefWidth="71.99999237060547" text="prix" />
                               <TableColumn fx:id="terrainId" prefWidth="56.79998779296875" text="terrainId" />
                               <TableColumn fx:id="nomPack" minWidth="4.0" prefWidth="69.60003662109375" text="nomPack" />
                               <TableColumn fx:id="nomTerrain" minWidth="0.0" prefWidth="77.60000610351562" text="nomTerrain" />
                               <TableColumn fx:id="nomUser" prefWidth="72.79986572265625" text="nomUser" />
-                              <TableColumn fx:id="nomTel" prefWidth="55.200042724609375" text="nomTel" />
-                              <TableColumn fx:id="prixTotal" minWidth="0.0" prefWidth="66.39990234375" text="prixTotal" />
-                              <TableColumn fx:id="packId" minWidth="0.0" prefWidth="74.4000244140625" text="packId" />
+                              <TableColumn fx:id="nomTel" prefWidth="64.0" text="nomTel" />
+                              <TableColumn fx:id="prixTotal" minWidth="0.0" prefWidth="58.4000244140625" text="prixTotal" />
+                              <TableColumn fx:id="packId" editable="false" minWidth="0.0" prefWidth="74.4000244140625" sortable="false" text="packId" visible="false" />
                           </columns>
                         </TableView>
                      </children>

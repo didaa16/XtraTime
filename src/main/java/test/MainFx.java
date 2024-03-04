@@ -17,14 +17,13 @@ public class MainFx extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        FXMLLoader fxmlLoader= new FXMLLoader(getClass().getResource("/Ajout.fxml"));
+        FXMLLoader fxmlLoader= new FXMLLoader(getClass().getResource("/frontC.fxml"));
         try {
             Parent root= fxmlLoader.load();
             Scene scene= new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.setTitle("Gestion Abonnement");
             primaryStage.show();
-
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

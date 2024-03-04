@@ -127,8 +127,17 @@
     -fx-font-size: 14px;
     -fx-text-fill: white;
 }
-
 .subscribe-button {
+    -fx-background-color:  #f00020, linear-gradient( #f00020, #ad1328), linear-gradient( #f00020 0%, #ad1328 20%,  #f00020 100%);
+    -fx-background-radius: 5;
+    -fx-background-insets: 0,1,2;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20;
+    -fx-font-size: 12px;
+}
+
+.subscribe-buttonC {
     -fx-background-color:  #00694e, linear-gradient( #00694e, #026900), linear-gradient( #00694e 0%, #026900 20%,  #00694e 100%);
     -fx-background-radius: 5;
     -fx-background-insets: 0,1,2;
@@ -137,6 +146,8 @@
     -fx-padding: 10 20;
     -fx-font-size: 12px;
 }
+
+
 
 .subscribe-button:hover {
     -fx-background-color: #00694e, linear-gradient(#00694e, #026900), linear-gradient(#00694e 0%, #026900 20%, #00694e 100%);

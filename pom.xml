@@ -41,18 +41,35 @@
             <artifactId>jfreechart</artifactId>
             <version>1.5.3</version> <!-- Or the latest version available -->
         </dependency>
+
+
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>5.3.13</version> <!-- Assurez-vous d'utiliser la version appropriée -->
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>5.2.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-io</groupId>
+                    <artifactId>commons-io</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
+
         <dependency>
-            <groupId>com.itextpdf</groupId>
-            <artifactId>itext7-core</artifactId>
-            <version>7.2.0</version>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId>
+            <version>17.0.1</version>
         </dependency>
 
 
+
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>5.2.0</version>
+        </dependency>
+
+        <!-- Apache Commons IO -->
 
 
     </dependencies>
@@ -68,6 +85,17 @@
     </plugin>
     </plugins>
     </build>
+
+    <repositories>
+
+
+        <repository>
+            <id>central</id>
+            <name>Maven Central Repository</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+
+    </repositories>
 
 
 

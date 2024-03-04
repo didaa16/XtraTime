@@ -1,18 +1,29 @@
 package Controllers;
 
+import com.sun.javafx.stage.EmbeddedWindow;
 import entities.Pack;
+import javafx.concurrent.Worker;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
+import javafx.stage.Stage;
 import services.ServicePack;
 
-import java.awt.event.ActionEvent;
+import java.awt.*;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.io.IOException;
@@ -27,6 +38,9 @@ public class PackControllerClient {
     @FXML
     private TextField SearchField;
 
+    @FXML
+    private WebView webview;
+
     public void SetDataModules() throws IOException {
         ServicePack servicePack= new ServicePack();
         List<Pack> packs = servicePack.afficher();
@@ -40,19 +54,26 @@ public class PackControllerClient {
         }
 
     }
+
     @FXML
-    void initialize()  {
+    void initialize() {
         try {
             this.SetDataModules();
-        } catch (IOException exception ) {
+        } catch (IOException exception) {
             throw new RuntimeException();
         }
 
+        loadVideo(); // Charger la vidéo une première fois
 
-       // ScrollPane.setVbarPolicy(javafx.scene.control.ScrollPane.ScrollBarPolicy.AS_NEEDED);
 
+
+        SearchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            // Déclenche la recherche à chaque fois que le texte du champ de recherche change
+            HandleSearch(null);
+        });
     }
-        private void showAlert (String title, String header, String content){
+
+    private void showAlert (String title, String header, String content){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle(title);
             alert.setHeaderText(header);
@@ -82,47 +103,132 @@ public class PackControllerClient {
         }
     @FXML
     void HandleSearch(KeyEvent event) {
-        // Obtient le texte saisi dans le champ de recherche et le met en minuscules
-        String searchtext= SearchField.getText().toLowerCase().trim();
+        String searchText = SearchField.getText().trim();
+        ServicePack servicePack = new ServicePack();
 
-        // Crée une instance du service Pack pour effectuer des opérations sur les packs
-        ServicePack servicePack=new ServicePack();
-
-        // Efface tous les enfants du conteneur packFlowPane
         packFlowPane.getChildren().clear();
 
-        // Vérifie si le champ de recherche est vide
-        if(searchtext.isEmpty()) {
-            // Si le champ de recherche est vide, rafraîchit l'affichage des packs
-            refreshFlow();
-        } else {
-            // Si le champ de recherche n'est pas vide, effectue une recherche par nom
-            // pour trouver les packs correspondants
-            List<Pack> packs = servicePack.afficherByName(searchtext);
+        // Vérifier si le texte de recherche n'est pas vide
+        if (!searchText.isEmpty()) {
+            List<Pack> packs;
 
-            // Parcourt la liste des packs trouvés
+            // Vérifier si le texte de recherche est un nombre (réduction)
+            if (isNumeric(searchText)) {
+                // Si le texte saisi est un nombre, recherche par réduction
+                int reduction = Integer.parseInt(searchText);
+                packs = servicePack.afficherByPartialReduction(searchText);
+            } else {
+                // Sinon, recherche par nom de pack
+                packs = servicePack.afficherByNameStartingWith(searchText);
+            }
+
+            // Afficher les packs trouvés dans l'interface utilisateur
             for (Pack p : packs) {
-                // Charge la vue Pack.fxml à l'aide de FXMLLoader
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/Pack.fxml"));
-                AnchorPane pane = null;
+                AnchorPane pane;
                 try {
                     pane = loader.load();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
 
-                // Obtient le contrôleur associé à la vue chargée
                 CardController cardController = loader.getController();
-
-                // Initialise les données du contrôleur avec les informations du pack
                 cardController.initializeData(p);
-
-                // Définit le pack associé au contrôleur
                 cardController.setPack(p);
-
-                // Ajoute le panneau (contenant les informations du pack) au conteneur packFlowPane
                 packFlowPane.getChildren().add(pane);
             }
         }
     }
+
+
+    // Vérifie si une chaîne est numérique
+    private boolean isNumeric(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
+
+    @FXML
+    void switchW(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/WebView.fxml"));
+            Scene scene = ((Button) event.getSource()).getScene();
+            scene.setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+    }
+
+@FXML
+    private void handleLoadWebsite(ActionEvent event) {
+        String url = "https://www.nike.com/";
+        openWebpage(url);
+    }
+
+    private void openWebpage(String url) {
+        try {
+            Desktop.getDesktop().browse(new URI(url));
+        } catch (IOException | URISyntaxException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadVideo() {
+        String gifUrl = getClass().getResource("/nike.gif").toExternalForm();
+        String htmlContent = "<!DOCTYPE html>"
+                + "<html>"
+                + "<head>"
+                + "<style>"
+                + "html, body {"
+                + "    margin: 0;"
+                + "    padding: 0;"
+                + "    height: 100%;"
+                + "}"
+                + "body {"
+                + "    display: flex;"
+                + "    justify-content: center;"
+                + "    align-items: center;"
+                + "}"
+                + "img {"
+                + "    width: 100%; /* L'image s'étendra sur toute la largeur de WebView */"
+                + "    height: auto; /* La hauteur s'ajustera automatiquement pour maintenir le rapport d'aspect */"
+                + "}"
+                + "</style>"
+                + "</head>"
+                + "<body>"
+                + "<img src='" + gifUrl + "' alt='GIF'>"
+                + "</body>"
+                + "</html>";
+
+        webview.getEngine().loadContent(htmlContent);
+
+// Désactiver la barre de défilement
+        webview.setContextMenuEnabled(false);
+        webview.setZoom(1);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+

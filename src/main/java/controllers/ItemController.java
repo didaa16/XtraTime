@@ -7,9 +7,7 @@ import entities.Produit;
 import entities.Produit_Commande;
 import entities.Status;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -69,6 +67,8 @@ public class ItemController {
     private Commande currentCommande;
     private ServiceCommande serviceCommande;
     private ServiceCommandeProduit serviceCommandeProduit;
+    @FXML
+    private Spinner<Integer> spinner;
 
 
     public ItemController() throws SQLException {
@@ -100,6 +100,7 @@ public class ItemController {
             Image image = new Image(imageUrl);
             imageProduit.setImage(image);
         }
+        spinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 0)); // Remplacez 100 par le nombre maximum de produits que vous pouvez ajouter
     }
 
             /*//currentCommande = serviceCommande.getCommande("dida16");
@@ -146,6 +147,7 @@ public class ItemController {
             try {
                 // Ajouter la commande à la base de données
                 serviceCommande.ajouter(currentCommande);
+
                 System.out.println("khatfet");
                 // Rafraîchir la table des commandes
                 refreshCommandeTable();
@@ -159,9 +161,15 @@ public class ItemController {
             serviceCommandeProduit.ajouterProduitACommande(currentCommande.getRefCommande(), produit.getRef());
             System.out.println("khatfet");
             // Mettre à jour le prix total de la commande
-            currentCommande.setPrix(currentCommande.getPrix() + produit.getPrix());
-            // Rafraîchir la table des commandes
-            refreshCommandeTable();
+            for (int i = 0; i < spinner.getValue(); i++) {
+                // Ajouter le produit à la commande
+                serviceCommandeProduit.ajouterProduitACommande(currentCommande.getRefCommande(), produit.getRef());
+                System.out.println("khatfet");
+                // Mettre à jour le prix total de la commande
+                currentCommande.setPrix(currentCommande.getPrix() + produit.getPrix());
+                // Rafraîchir la table des commandes
+                refreshCommandeTable();
+            }
         } catch (SQLException e) {
             System.out.println("Erreur lors de l'ajout du produit à la commande : " + e.getMessage());
         }

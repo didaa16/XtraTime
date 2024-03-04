@@ -4,9 +4,11 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.Rating?>
@@ -42,14 +44,23 @@
                      </font>
                   </Label>
                   <Rating fx:id="rating" onMouseClicked="#handleRatingClick" prefHeight="0.0" prefWidth="32.0" />
-                  <ImageView fx:id="addBtn" fitHeight="56.0" fitWidth="40.0" onMouseClicked="#AjouterACommande" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@imagesss/add.png" />
-                     </image>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Spinner fx:id="spinner" editable="true" initialValue="1" max="10" min="1" prefHeight="27.0" prefWidth="60.0">
+                           <HBox.margin>
+                              <Insets left="30.0" right="12.0" top="7.0" />
+                           </HBox.margin>
+                        </Spinner>
+                        <ImageView fx:id="addBtn" fitHeight="56.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#AjouterACommande" >
+                           <image>
+                              <Image url="@imagesss/add.png" />
+                           </image>
+                        </ImageView>
+                     </children>
                      <VBox.margin>
-                        <Insets bottom="5.0" top="5.0" />
+                        <Insets top="4.0" />
                      </VBox.margin>
-                  </ImageView>
+                  </HBox>
                </children>
             </VBox>
          </children>

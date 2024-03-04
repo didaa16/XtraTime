@@ -11,7 +11,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import services.ServiceCommande;
 import services.ServiceCommandeProduit;
-import services.ServiceProduit;
 import tests.IListener;
 
 import java.sql.SQLException;
@@ -51,7 +50,6 @@ public class ProduitDansCom {
     private Label typeee;
     private ServiceCommande serviceCommande;
     private ServiceCommandeProduit serviceCommandeProduit;
-    private ServiceProduit serviceProduit;
     private Produit produit;
     private String currency = " DT";
     //private IListener iListener;
@@ -60,7 +58,7 @@ public class ProduitDansCom {
     public ProduitDansCom() throws SQLException {
         this.serviceCommande = new ServiceCommande();
         this.serviceCommandeProduit = new ServiceCommandeProduit();
-        this.serviceProduit= new ServiceProduit();
+
 
 
     }
@@ -113,7 +111,6 @@ public class ProduitDansCom {
             // Supprimez le produit de la commande
             ServiceCommandeProduit serviceCommandeProduit = new ServiceCommandeProduit();
             serviceCommandeProduit.deleteProduitFromCommande(refProduit, refCommande);
-
 
             showAlert("Suppression réussie", "Le produit a été supprimé de la commande", "", Alert.AlertType.INFORMATION);
         } catch (SQLException e) {

@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="677.0" prefWidth="1061.0" styleClass="gradient-background" stylesheets="@styless.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StoreController">
+<AnchorPane maxHeight="1.7976931348623157E308" prefHeight="810.0" prefWidth="1242.0" styleClass="gradient-background" stylesheets="@styless.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StoreController">
     <children>
         <BorderPane layoutX="6.0" prefHeight="655.0" prefWidth="1061.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <left>
@@ -152,7 +152,7 @@
                 </VBox>
             </left>
          <center>
-            <VBox prefHeight="200.0" prefWidth="100.0" stylesheets="@styless.css" BorderPane.alignment="CENTER">
+            <VBox prefHeight="698.0" prefWidth="758.0" stylesheets="@styless.css" BorderPane.alignment="CENTER">
                <children>
                   <HBox alignment="CENTER" prefHeight="81.0" prefWidth="719.0">
                      <VBox.margin>
@@ -193,15 +193,15 @@
                         </ImageView>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="582.0" prefWidth="698.0">
+                  <HBox alignment="CENTER" prefHeight="710.0" prefWidth="879.0">
                      <children>
-                        <ScrollPane fx:id="scroll" hbarPolicy="ALWAYS" prefHeight="574.0" prefWidth="658.0" vbarPolicy="ALWAYS" HBox.hgrow="ALWAYS">
+                        <ScrollPane fx:id="scroll" hbarPolicy="ALWAYS" prefHeight="667.0" prefWidth="839.0" vbarPolicy="ALWAYS" HBox.hgrow="ALWAYS">
                             <style>-: ;</style>
                             <HBox.margin>
                               <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
                            </HBox.margin>
                            <content>
-                              <GridPane fx:id="grid" prefHeight="2.0" prefWidth="3.0">
+                              <GridPane fx:id="grid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="33.0">
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" />
                                  </rowConstraints>

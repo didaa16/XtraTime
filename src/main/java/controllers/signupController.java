@@ -1,34 +1,36 @@
 package controllers;
+
+import entities.Img;
 import entities.Utilisateur;
-import javafx.scene.control.*;
-import javafx.scene.effect.BlendMode;
-import javafx.scene.input.InputMethodEvent;
-import javafx.scene.text.Font;
-import utils.Encryptor;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import javafx.scene.effect.BlendMode;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
-import javafx.event.ActionEvent;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
+import javafx.stage.FileChooser;
+import services.ServiceImg;
 import services.ServiceUtilisateurs;
+import utils.Encryptor;
 import utils.SendMail;
 
-import javax.mail.Message;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.swing.*;
+import java.io.File;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.Objects;
-import java.util.Properties;
 import java.util.Random;
 import java.util.ResourceBundle;
 
 public class signupController implements Initializable {
     ServiceUtilisateurs serviceUtilisateurs = new ServiceUtilisateurs();
+    ServiceImg serviceImg = new ServiceImg();
     Encryptor encryptor = new Encryptor();
 
     /**
@@ -44,6 +46,7 @@ public class signupController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         getComplexite();
         setupRandomCaptcha();
+        pdp.setFill(new ImagePattern(new Image("/Design/pdpVide.jpg")));
     }
     @FXML
     private TextField pseudoSignup, cinSignup, nomSignup, prenomSignup, ageSignup, numtelSignup, emailSignup, codeVerification, captchaField;
@@ -65,7 +68,9 @@ public class signupController implements Initializable {
     private TextArea conditionsText;
     @FXML
     private ScrollPane scrollConditions;
-
+    @FXML
+    private Circle pdp;
+    private static String url;
 
 
     private static int rand;
@@ -166,6 +171,23 @@ public class signupController implements Initializable {
         return false;
     }
 
+    @FXML
+    void importerOnClick(ActionEvent event) {
+        FileChooser fileChooser1 = new FileChooser();
+        fileChooser1.setTitle("Open Image File");
+        File file = fileChooser1.showOpenDialog(null);
+        if (file != null) {
+            String absolutePath = file.getAbsolutePath();
+            url=absolutePath;
+            javafx.scene.image.Image image = new javafx.scene.image.Image(file.toURI().toString());
+            pdp.setFill(new ImagePattern(image));
+        }
+    }
+    @FXML
+    void supprimerPdp(ActionEvent event) {
+        pdp.setFill(new ImagePattern(new Image("/Design/pdpVide.jpg")));
+    }
+
     public void signUpButtonButtonOnClick(ActionEvent event) throws NoSuchAlgorithmException {
         if (!getErrors()) {
             Random rd = new Random();
@@ -186,8 +208,10 @@ public class signupController implements Initializable {
             Utilisateur newUser = new Utilisateur(pseudoSignup.getText(), Integer.parseInt(cinSignup.getText()), nomSignup.getText(),
                     prenomSignup.getText(), Integer.parseInt(ageSignup.getText()), Integer.parseInt(numtelSignup.getText()), emailSignup.getText(),
                     encryptor.encryptString(mdpSignup.getText()), (roleClientSignup.isSelected() ? "Client" : "Locateur"));
+            Img img = new Img(pseudoSignup.getText(), url);
             try {
                 serviceUtilisateurs.ajouter(newUser);
+                serviceImg.ajouter(img);
                 System.out.println("Utilisateur ajouté avec succès !");
                 JOptionPane.showMessageDialog(null,"Vous etes inscris avec succès ! Veuillez connecter maintenant.");
                 serviceUtilisateurs.changeScreen(event, "/login.fxml", "LOGIN");

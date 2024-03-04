@@ -76,7 +76,6 @@ public class ServiceUtilisateurs implements IService <Utilisateur> {
         ps.setString(9, utilisateur.getPseudo());
         ps.executeUpdate();
         System.out.println("Personne modifie");
-
     }
 
     @Override
@@ -182,24 +181,6 @@ public class ServiceUtilisateurs implements IService <Utilisateur> {
         }catch (IOException e){
             e.printStackTrace();
         }
-    }
-
-    public Utilisateur rechercher(String chose) throws SQLException {
-        Utilisateur u = new Utilisateur();
-        String req = "SELECT * FROM `utilisateurs` WHERE pseudo=? OR cin =? OR nom =? OR prenom =? OR age =? OR numTel =? OR email =?";
-        PreparedStatement ps= cnx.prepareStatement(req);
-        ps.setString(1, chose);
-        ps.setString(2, chose);
-        ps.setString(3, chose);
-        ps.setString(4, chose);
-        ps.setString(5, chose);
-        ps.setString(6, chose);
-        ps.setString(7, chose);
-        ResultSet rs = ps.executeQuery(); // Remove req from executeQuery
-        while (rs.next()){
-            u = new Utilisateur(rs.getString("PSEUDO"), rs.getInt("CIN"), rs.getString("NOM"), rs.getString("PRENOM"), rs.getInt("AGE"), rs.getInt("NUMTEL"), rs.getString("EMAIL"), rs.getString("MDP"), rs.getString("ROLE"));
-        }
-        return u;
     }
 
     public List<Utilisateur> recherche(String data){

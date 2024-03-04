@@ -14,10 +14,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import services.ServiceImg;
 import services.ServiceUtilisateurs;
 import utils.SendMail;
 import utils.SendSMS;
@@ -25,7 +27,13 @@ import utils.SendSMS;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import javax.swing.*;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
+import java.net.URL;
+import java.net.URLConnection;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -48,6 +56,8 @@ public class loginController {
 
 
 
+    @FXML
+    private Circle circle;
     private static Utilisateur loggedInUser;
 
     private static int rand;
@@ -55,14 +65,13 @@ public class loginController {
         rand = r;
     }
 
-    private String app_Id = "955260698794997";
-    private String app_Secret = "09f69797680c9e00fefb9b3b2050c7e4";
+    private String app_Id = "369482289342418";
+    private String app_Secret = "17671719e3b5ec51f557f3c4e880a9e9";
     private String redirect_Url = "http://localhost:8181/";
     private String redirect_url_encoded = "http%3A%2F%2Flocalhost%3A8181%2F";
     private String state = "9812" ;
     private String code = "";
     private String authentication = "https://www.facebook.com/v19.0/dialog/oauth?client_id="+app_Id+"&redirect_uri="+redirect_url_encoded+"&state="+state;
-    private String graph = "https://graph.facebook.com/v19.0/oauth/access_token?client_id="+app_Id+"&redirect_uri="+redirect_url_encoded+"&client_secret="+app_Secret+"&code=";
 
     @FXML
     private void connectWithFacebook(ActionEvent event) {
@@ -98,28 +107,50 @@ public class loginController {
                         String access_token = accessToken.getAccessToken();
 
                         FacebookClient fbClient = new DefaultFacebookClient(access_token, Version.VERSION_19_0);
-                        fbClient.createClientWithAccessToken(access_token);
 
-                        JsonObject profilePicJson = fbClient.fetchObject("me/picture", JsonObject.class,
-                                Parameter.with("redirect", "false"));
-
-                        JsonObject userProfileJson = fbClient.fetchObject("me", JsonObject.class);
+                        // Récupération des informations du profil de l'utilisateur
+                        JsonObject userProfileJson = fbClient.fetchObject("me", JsonObject.class, Parameter.with("fields", "id,name,email,picture"));
                         String userId = userProfileJson.getString("id", String.valueOf(String.class));
                         String userName = userProfileJson.getString("name", String.valueOf(String.class));
+                        String userEmail = userProfileJson.getString("email", String.valueOf(String.class));
+
+                        // Récupération de l'URL de l'image de profil de l'utilisateur
+                        String profilePicUrl = "https://graph.facebook.com/" + userId + "/picture?type=large";
+
+                        // Définition du chemin d'enregistrement de l'image
+                        String folderPath = "C:\\Users\\PC\\OneDrive\\Bureau\\STUDY\\SEMESTRE 2\\PI\\XtraTime\\src\\main\\resources\\uploads";
+                        String imagePath = folderPath + "\\" + userId + "_profile_pic.jpg";
+
+                        // Téléchargement et enregistrement de l'image
+                        URL url = new URL(profilePicUrl);
+                        URLConnection connection = url.openConnection();
+                        InputStream inputStream = connection.getInputStream();
+                        FileOutputStream outputStream = new FileOutputStream(imagePath);
+                        byte[] buffer = new byte[4096];
+                        int bytesRead;
+                        while ((bytesRead = inputStream.read(buffer)) != -1) {
+                            outputStream.write(buffer, 0, bytesRead);
+                        }
+                        inputStream.close();
+                        outputStream.close();
+
+                        // Création de l'objet Utilisateur et définition des attributs
                         Utilisateur user = new Utilisateur();
                         user.setPseudo(userId);
                         user.setNom(userName);
+                        user.setEmail(userEmail);
                         clientFrontController.setLoggedInUser(user);
+
+                        // Fermeture de la fenêtre de connexion et changement d'écran
+                        JOptionPane.showMessageDialog(null,"Vous avez connecté avec succès! Si vous souhaitez garder votre compte persistant, allez à modifier et mettez vos autres informations.");
                         stage.close();
                         serviceUtilisateurs.changeScreen(event, "/clientFront.fxml", "XTRATIME");
 
-                    } catch (FacebookOAuthException e) {
-                        System.err.println("Facebook authentication error: " + e.getMessage());
-                        // Handle Facebook authentication error
+                    } catch (FacebookOAuthException | IOException e) {
+                        System.err.println("Error: " + e.getMessage());
                     }
                 } else {
                     System.err.println("Invalid redirect URI or code not found in the URL");
-                    // Handle invalid redirect or other scenarios
                 }
             }
         });
@@ -127,12 +158,16 @@ public class loginController {
 
 
 
+
+
     @FXML
     void initialize() {
+        circle = new Circle();
     }
 
 
     ServiceUtilisateurs serviceUtilisateurs = new ServiceUtilisateurs();
+    ServiceImg serviceImg = new ServiceImg();
 
     private void handleLogin(ActionEvent event) throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         try {

@@ -1,34 +1,36 @@
 package controllers;
 
-import java.net.URL;
-import java.security.NoSuchAlgorithmException;
-import java.sql.SQLException;
-import java.util.Objects;
-import java.util.Random;
-import java.util.ResourceBundle;
-
+import entities.Img;
 import entities.Utilisateur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.effect.BlendMode;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import services.ServiceImg;
 import services.ServiceUtilisateurs;
 import utils.Encryptor;
 import utils.SendMail;
 import utils.SendSMS;
 
 import javax.swing.*;
+import java.io.File;
+import java.net.URL;
+import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
+import java.util.Objects;
+import java.util.Random;
+import java.util.ResourceBundle;
 
 public class clientFrontController {
 
@@ -78,7 +80,7 @@ public class clientFrontController {
     private PasswordField confirmerNouveauMdpTF;
 
     @FXML
-    private Button deconnecterButton;
+    private Button deconnecterButton, voir, supprimer;
 
     @FXML
     private TextField emailTF;
@@ -156,16 +158,22 @@ public class clientFrontController {
     private VBox vboxUp;
     @FXML
     private AnchorPane selectModeAnchor;
-
+    private static boolean exist;
     private static Utilisateur loggedInUser;
     public static void setLoggedInUser(Utilisateur user) {
         loggedInUser = user;
     }
+    @FXML
+    private Circle pdp;
+    private static String url;
+    private static Img loggedInImage;
     private static int rand;
     private static void setRand(int r) {
         rand = r;
     }
+    private static boolean deleted;
     ServiceUtilisateurs serviceUtilisateurs;
+    ServiceImg serviceImg;
     Encryptor encryptor = new Encryptor();
 
     @FXML
@@ -454,6 +462,17 @@ public class clientFrontController {
                     confirmerAdresseCode.setVisible(true);
                 }else {
                     serviceUtilisateurs.modifier(newUser);
+                    Img img = new Img(newUser.getPseudo(), url);
+                    System.out.println(img);
+                    if(serviceImg.imgExiste(img.getPseudoU())){
+                        if (deleted){
+                            serviceImg.supprimer(img);
+                        }else {
+                            serviceImg.modifier(img);
+                        }
+                    }else {
+                        serviceImg.ajouter(img);
+                    }
                     JOptionPane.showMessageDialog(null,"Modification effectuée! ");
                     System.out.println("Utilisateur modifié avec succès !");
                 }
@@ -504,6 +523,17 @@ public class clientFrontController {
                     emailTF.getText(), loggedInUser.getMdp(), loggedInUser.getRole());
             try {
                 serviceUtilisateurs.modifier(newUser);
+                Img img = new Img(newUser.getPseudo(), url);
+                System.out.println(img);
+                if(serviceImg.imgExiste(img.getPseudoU())){
+                    if (deleted){
+                        serviceImg.supprimer(img);
+                    }else {
+                        serviceImg.modifier(img);
+                    }
+                }else {
+                    serviceImg.ajouter(img);
+                }
                 JOptionPane.showMessageDialog(null,"Modification effectuée! ");
                 System.out.println("Utilisateur modifié avec succès !");
                 changementPane.setVisible(false);
@@ -518,7 +548,7 @@ public class clientFrontController {
     }
 
     @FXML
-    void initialize() {
+    void initialize() throws SQLException {
         pseudoTF.setStyle("-fx-text-fill: white;");
         cinTF.setStyle("-fx-text-fill: white;");
         nomTF.setStyle("-fx-text-fill: white;");
@@ -531,7 +561,11 @@ public class clientFrontController {
         nouveauMdpTF.setStyle("-fx-text-fill: white;");
         codeVerification.setStyle("-fx-text-fill: white;");
         serviceUtilisateurs = new ServiceUtilisateurs();
+        serviceImg = new ServiceImg();
+        exist = serviceImg.imgExiste(loggedInUser.getPseudo());
+        deleted = false;
         if (loggedInUser!=null){
+            loggedInImage = serviceImg.afficherImageParPseudo(loggedInUser.getPseudo());
             pseudoTF.setText(loggedInUser.getPseudo());
             cinTF.setText(String.valueOf(loggedInUser.getCin()));
             nomTF.setText(loggedInUser.getNom());
@@ -539,8 +573,59 @@ public class clientFrontController {
             ageTF.setText(String.valueOf(loggedInUser.getAge()));
             numTelTF.setText(String.valueOf(loggedInUser.getNumtel()));
             emailTF.setText(loggedInUser.getEmail());
+            if (exist) {
+                String absolutePath = loggedInImage.getImg();
+                Image image = new Image(new File(absolutePath).toURI().toString());
+                pdp.setFill(new ImagePattern(image));
+            } else {
+                String absolutePath = "/Design/pdpVide.jpg";
+                Image image = new Image(getClass().getResourceAsStream(absolutePath));
+                pdp.setFill(new ImagePattern(image));
+            }
+            getComplexite();
         }
-        getComplexite();
     }
+
+    public void importerOnClick(ActionEvent event) {
+        FileChooser fileChooser1 = new FileChooser();
+        fileChooser1.setTitle("Open Image File");
+        File file = fileChooser1.showOpenDialog(null);
+        if (file != null) {
+            String absolutePath = file.getAbsolutePath();
+            url=absolutePath;
+            javafx.scene.image.Image image = new javafx.scene.image.Image(file.toURI().toString());
+            pdp.setFill(new ImagePattern(image));
+        }
+    }
+
+    public void supprimerPdp(ActionEvent event) {
+        pdp.setFill(new ImagePattern(new Image("/Design/pdpVide.jpg")));
+        deleted = true;
+    }
+    public void voirPdp(ActionEvent event) throws SQLException {
+        Stage stage = new Stage();
+        AnchorPane pane = new AnchorPane();
+        Scene scene = new Scene(pane);
+        ImageView imageView = new ImageView();
+        if (serviceImg.imgExiste(loggedInUser.getPseudo())) {
+            String absolutePath = loggedInImage.getImg();
+            Image image = new Image(new File(absolutePath).toURI().toString());
+            imageView.setImage(image);
+        } else {
+            String absolutePath = "/Design/pdpVide.jpg";
+            Image image = new Image(getClass().getResourceAsStream(absolutePath));
+            imageView.setImage(image);
+        }
+        imageView.setFitWidth(650); // Set desired width
+        imageView.setFitHeight(650);
+        imageView.setPreserveRatio(true); // Preserve aspect ratio
+        pane.getChildren().add(imageView);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+
+
 
 }

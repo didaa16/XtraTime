@@ -174,12 +174,12 @@
     <center>
         <AnchorPane prefHeight="694.0" prefWidth="1322.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane fx:id="statsAnchor" layoutX="671.0" layoutY="153.0" prefHeight="388.0" prefWidth="545.0" style="-fx-background-color: #FFFFFF;" />
+            <AnchorPane fx:id="statsAnchor" layoutX="466.0" layoutY="27.0" prefHeight="539.0" prefWidth="748.0" style="-fx-background-color: #FFFFFF;" />
             <AnchorPane fx:id="utilisateursAnchorPane" layoutX="1.0" prefHeight="694.0" prefWidth="1341.0" visible="false">
                <children>
                   <HBox layoutX="1.0" layoutY="32.0" prefHeight="37.0" prefWidth="778.0">
                      <children>
-                        <TextField fx:id="rechercheDashboard" prefHeight="32.0" prefWidth="221.0" promptText="Rechercher un Utilisateur">
+                        <TextField fx:id="rechercheDashboard" onKeyPressed="#recherche" prefHeight="32.0" prefWidth="221.0" promptText="Rechercher un Utilisateur">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>

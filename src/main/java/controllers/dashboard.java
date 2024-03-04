@@ -1,41 +1,38 @@
 package controllers;
 
+import entities.Utilisateur;
+import javafx.animation.TranslateTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.BlendMode;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+import services.ServiceUtilisateurs;
+import utils.Encryptor;
+
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
-
-import javafx.collections.ListChangeListener;
-import javafx.scene.chart.PieChart;
-import javafx.scene.effect.BlendMode;
-import javafx.scene.input.KeyCode;
-import utils.Encryptor;
-import entities.Utilisateur;
-import javafx.animation.TranslateTransition;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-import javafx.util.Duration;
-import services.ServiceUtilisateurs;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import javax.swing.*;
 
 public class dashboard {
 
@@ -243,41 +240,59 @@ public class dashboard {
     }
     @FXML
     void getSelected(MouseEvent event) {
-        index = TableView.getSelectionModel().getSelectedIndex();
-        if (index <= -1){
-            return;
+        if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
+            index = TableView.getSelectionModel().getSelectedIndex();
+            if (index <= -1){
+                return;
+            }
+            Utilisateur utilisateurSelectionne = TableView.getItems().get(index);
+            pseudoDashboard.setText(utilisateurSelectionne.getPseudo());
+            cinDashboard.setText(String.valueOf(utilisateurSelectionne.getCin()));
+            nomDashboard.setText(utilisateurSelectionne.getNom());
+            prenomDashboard.setText(utilisateurSelectionne.getPrenom());
+            ageDashboard.setText(String.valueOf(utilisateurSelectionne.getAge()));
+            numtelDashboard.setText(String.valueOf(utilisateurSelectionne.getNumtel()));
+            emailDashboard.setText(utilisateurSelectionne.getEmail());
+            switch (utilisateurSelectionne.getRole()){
+                case "Admin", "Livreur":
+                    roleClientDashboard.setSelected(false);
+                    roleLocateurDashboard.setSelected(false);
+                    roleClientDashboard.setDisable(true);
+                    roleLocateurDashboard.setDisable(true);
+                    break;
+                case "Client":
+                    roleClientDashboard.setDisable(false);
+                    roleLocateurDashboard.setDisable(false);
+                    roleClientDashboard.setSelected(true);
+                    cardClient.setLoggedInUser(utilisateurSelectionne);
+                    // Open the new scene if the role is "Client"
+                    openCardClientScene();
+                    break;
+                case "Locateur":
+                    roleClientDashboard.setDisable(false);
+                    roleLocateurDashboard.setDisable(false);
+                    roleLocateurDashboard.setSelected(true);
+                    break;
+                default:
+                    break;
+            }
+            modifierButton.setDisable(false);
+            supprimerButton.setDisable(false);
         }
-        Utilisateur utilisateurSelectionne = TableView.getItems().get(index);
-        pseudoDashboard.setText(utilisateurSelectionne.getPseudo());
-        cinDashboard.setText(String.valueOf(utilisateurSelectionne.getCin()));
-        nomDashboard.setText(utilisateurSelectionne.getNom());
-        prenomDashboard.setText(utilisateurSelectionne.getPrenom());
-        ageDashboard.setText(String.valueOf(utilisateurSelectionne.getAge()));
-        numtelDashboard.setText(String.valueOf(utilisateurSelectionne.getNumtel()));
-        emailDashboard.setText(utilisateurSelectionne.getEmail());
-        switch (utilisateurSelectionne.getRole()){
-            case "Admin", "Livreur":
-                roleClientDashboard.setSelected(false);
-                roleLocateurDashboard.setSelected(false);
-                roleClientDashboard.setDisable(true);
-                roleLocateurDashboard.setDisable(true);
-                break;
-            case "Client":
-                roleClientDashboard.setDisable(false);
-                roleLocateurDashboard.setDisable(false);
-                roleClientDashboard.setSelected(true);
-                break;
-            case "Locateur":
-                roleClientDashboard.setDisable(false);
-                roleLocateurDashboard.setDisable(false);
-                roleLocateurDashboard.setSelected(true);
-                break;
-            default:
-                break;
-        }
-        modifierButton.setDisable(false);
-        supprimerButton.setDisable(false);
     }
+
+    private void openCardClientScene() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cardClient.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public boolean getErrors(){
         pseudoDashboardError.setText("");
         cinDashboardError.setText("");
@@ -430,6 +445,7 @@ public class dashboard {
         modifierButton.setDisable(true);
         supprimerButton.setDisable(true);
     }
+
     @FXML
     private void utilisateursButtonOnClick(ActionEvent event){
         utilisateursAnchorPane.setVisible(true);
@@ -774,4 +790,30 @@ public class dashboard {
         statsAnchor.getChildren().clear();
         pieChart();
     }
+    @FXML
+    void recherche(){
+        String keyword = rechercheDashboard.getText().toLowerCase();
+        ObservableList<Utilisateur> filteredList = FXCollections.observableArrayList();
+        if (keyword.isEmpty()) {
+            TableView.setItems(FXCollections.observableList(serviceUtilisateurs.afficher()));
+            return;
+        }
+        for (Utilisateur utilisateur : TableView.getItems()) {
+            String cin = String.valueOf(utilisateur.getCin());
+            String age = String.valueOf(utilisateur.getAge());
+            String numTel = String.valueOf(utilisateur.getNumtel());
+            if (    utilisateur.getPseudo().toLowerCase().contains(keyword) ||
+                    cin.toLowerCase().contains(keyword) ||
+                    utilisateur.getNom().toLowerCase().contains(keyword) ||
+                    utilisateur.getPrenom().toLowerCase().contains(keyword)||
+                    age.toLowerCase().contains(keyword) ||
+                    utilisateur.getEmail().toLowerCase().contains(keyword) ||
+                    numTel.toLowerCase().contains(keyword)
+            ){
+                filteredList.add(utilisateur);
+            }
+        }
+        TableView.setItems(filteredList);
+    }
+
 }

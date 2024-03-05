@@ -9,7 +9,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.chart.AreaChart;
+import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import org.jfree.chart.ChartFactory;
@@ -21,6 +23,7 @@ import services.ServiceAbonnement;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -36,7 +39,8 @@ public class HomeStatsController implements Initializable {
     @javafx.fxml.FXML
     private Button PK;
 
-
+    @FXML
+    private LineChart<String, Integer> stat;
     private ChartPanel weightChartPanel;
     ServiceAbonnement sa = new ServiceAbonnement();
 
@@ -74,8 +78,36 @@ public class HomeStatsController implements Initializable {
 
         // Add the pie chart to the chart container
         chartContainer.getChildren().add(pieChart);
+        afficherAbonnementsParDate();
     }
+    private void afficherAbonnementsParDate() {
+        // Obtenez la liste de tous les abonnements
+        List<Abonnement> abonnements = null;
+        try {
+            abonnements = sa.getAllAbonnements();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
+        // Créez une carte pour compter le nombre d'abonnements par date
+        Map<String, Integer> abonnementsParDate = new HashMap<>();
+        for (Abonnement abonnement : abonnements) {
+            String date = abonnement.getDate().toString(); // Vous devez adapter cela selon le format de votre date
+            abonnementsParDate.put(date, abonnementsParDate.getOrDefault(date, 0) + 1);
+        }
+
+        // Créez une série de données pour le LineChart
+        XYChart.Series<String, Integer> series = new XYChart.Series<>();
+        series.setName("Nombre d'abonnements par date");
+
+        // Ajoutez les données de la carte à la série
+        for (Map.Entry<String, Integer> entry : abonnementsParDate.entrySet()) {
+            series.getData().add(new XYChart.Data<>(entry.getKey(), entry.getValue()));
+        }
+
+        // Ajoutez la série au LineChart
+        stat.getData().add(series);
+    }
     @FXML
     void changeA(ActionEvent event) {
         try {

@@ -9,6 +9,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.util.Random;
+
 public class TicTacToeGame extends Application {
 
     private static final int SIZE = 3;
@@ -30,15 +32,22 @@ public class TicTacToeGame extends Application {
                 button.setMinSize(100, 100);
                 button.setOnAction(event -> {
                     if (button.getText().equals(EMPTY)) {
-                        button.setText(currentPlayer);
-                        if (isWinner()) {
-                            showAlert("Félicitations !", "Joueur " + currentPlayer + " a gagné !");
+                        button.setText(PLAYER_X);
+                        if (isWinner(PLAYER_X)) {
+                            showAlert("Félicitations !", "Vous avez gagné !");
                             resetGame();
                         } else if (isBoardFull()) {
                             showAlert("Match nul !", "La grille est pleine. Match nul !");
                             resetGame();
                         } else {
-                            currentPlayer = (currentPlayer.equals(PLAYER_X)) ? PLAYER_O : PLAYER_X;
+                            computerMove();
+                            if (isWinner(PLAYER_O)) {
+                                showAlert("Dommage !", "L'ordinateur a gagné !");
+                                resetGame();
+                            } else if (isBoardFull()) {
+                                showAlert("Match nul !", "La grille est pleine. Match nul !");
+                                resetGame();
+                            }
                         }
                     }
                 });
@@ -54,7 +63,7 @@ public class TicTacToeGame extends Application {
         primaryStage.show();
     }
 
-    private boolean isWinner() {
+    private boolean isWinner(String player) {
         String[][] board = new String[SIZE][SIZE];
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
@@ -64,23 +73,23 @@ public class TicTacToeGame extends Application {
 
         // Vérifier les lignes
         for (int i = 0; i < SIZE; i++) {
-            if (!board[i][0].equals(EMPTY) && board[i][0].equals(board[i][1]) && board[i][1].equals(board[i][2])) {
+            if (!board[i][0].equals(EMPTY) && board[i][0].equals(board[i][1]) && board[i][1].equals(board[i][2]) && board[i][0].equals(player)) {
                 return true;
             }
         }
 
         // Vérifier les colonnes
         for (int i = 0; i < SIZE; i++) {
-            if (!board[0][i].equals(EMPTY) && board[0][i].equals(board[1][i]) && board[1][i].equals(board[2][i])) {
+            if (!board[0][i].equals(EMPTY) && board[0][i].equals(board[1][i]) && board[1][i].equals(board[2][i]) && board[0][i].equals(player)) {
                 return true;
             }
         }
 
         // Vérifier les diagonales
-        if (!board[0][0].equals(EMPTY) && board[0][0].equals(board[1][1]) && board[1][1].equals(board[2][2])) {
+        if (!board[0][0].equals(EMPTY) && board[0][0].equals(board[1][1]) && board[1][1].equals(board[2][2]) && board[0][0].equals(player)) {
             return true;
         }
-        if (!board[0][2].equals(EMPTY) && board[0][2].equals(board[1][1]) && board[1][1].equals(board[2][0])) {
+        if (!board[0][2].equals(EMPTY) && board[0][2].equals(board[1][1]) && board[1][1].equals(board[2][0]) && board[0][2].equals(player)) {
             return true;
         }
 
@@ -104,7 +113,6 @@ public class TicTacToeGame extends Application {
                 buttons[row][col].setText(EMPTY);
             }
         }
-        currentPlayer = PLAYER_X;
     }
 
     private void showAlert(String title, String message) {
@@ -113,6 +121,16 @@ public class TicTacToeGame extends Application {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    private void computerMove() {
+        Random rand = new Random();
+        int row, col;
+        do {
+            row = rand.nextInt(SIZE);
+            col = rand.nextInt(SIZE);
+        } while (!buttons[row][col].getText().equals(EMPTY));
+        buttons[row][col].setText(PLAYER_O);
     }
 
     public static void main(String[] args) {

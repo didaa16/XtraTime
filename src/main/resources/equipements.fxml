@@ -35,7 +35,7 @@
          <children>
             <TableView fx:id="tableEquipements" layoutX="14.0" layoutY="167.0" onMouseClicked="#getSelected" prefHeight="470.0" prefWidth="547.0">
               <columns>
-                <TableColumn fx:id="idEquipements" prefWidth="42.4000244140625" text="ID" />
+                <TableColumn fx:id="idEquipements" editable="false" prefWidth="42.4000244140625" sortable="false" text="ID" visible="false" />
                 <TableColumn fx:id="nomEquipements" prefWidth="85.5999755859375" text="NOM" />
                   <TableColumn fx:id="descriptionEquipements" prefWidth="171.99993896484375" text="DESCRIPTION" />
                   <TableColumn fx:id="typeEquipements" prefWidth="97.5999755859375" text="TYPE" />

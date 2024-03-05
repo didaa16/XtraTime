@@ -132,9 +132,9 @@ public class Reservations {
                 System.out.println(e.getMessage());
             }
         }else {
-                equipementsError.setTextFill(Color.RED);
-                equipementsError.setText("Veullez remplir tous les champs !");
-            }
+            equipementsError.setTextFill(Color.RED);
+            equipementsError.setText("Veullez remplir tous les champs !");
+        }
 
 
     }

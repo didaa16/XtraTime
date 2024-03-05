@@ -27,7 +27,7 @@ public class mesReservtions  implements Initializable{
 
     private List<Reservation> getlist() throws SQLException {
 
-        return serviceReservation.afficherParPseudo("bohmid");
+        return serviceReservation.afficherParPseudo("dida");
     }
     private Parent parent;
     private Stage stage;

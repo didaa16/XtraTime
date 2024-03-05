@@ -27,7 +27,7 @@
          <children>
             <TableView fx:id="tableReservation" layoutX="24.0" layoutY="107.0" onMouseClicked="#getSelected" prefHeight="445.0" prefWidth="686.0">
               <columns>
-                <TableColumn fx:id="idReservation" prefWidth="75.0" text="ID" />
+                <TableColumn fx:id="idReservation" editable="false" prefWidth="75.0" sortable="false" text="ID" visible="false" />
                 <TableColumn fx:id="dateReservation" prefWidth="75.0" text="DATE" />
                   <TableColumn fx:id="dureeReservation" prefWidth="75.0" text="DUREE" />
                   <TableColumn fx:id="prixReservation" prefWidth="75.0" text="PRIX" />

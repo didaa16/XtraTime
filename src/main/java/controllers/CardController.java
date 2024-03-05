@@ -68,10 +68,22 @@ public class CardController {
     }
     @FXML
     void modifierResOnClick(ActionEvent actionEvent) {
-            ModifierReservationController.setReservation(reservationE);
-            ser.changeScreen(actionEvent, "/modifierReservation.fxml", "XTRATIME");
+        ModifierReservationController.setReservation(reservationE);
+        ser.changeScreen(actionEvent, "/modifierReservation.fxml", "XTRATIME");
     }
 
+
+    public void voirTemperatureOnClick(ActionEvent actionEvent) {
+        try {
+            String date = reservationE.getDate(); // Assuming this gets the date from somewhere
+            TimelineApiForecastSample.setCountry("tunisia"); // Set country dynamically if needed
+            TimelineApiForecastSample.downloadWeatherExcel(date, (Stage) affDate.getScene().getWindow());
+            System.out.println("Weather Excel file downloaded for date: " + date);
+        } catch (IOException | InterruptedException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+    }
 
 }
 

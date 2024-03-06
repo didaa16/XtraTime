@@ -2,6 +2,7 @@ package controllers;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import javafx.scene.Scene;
 
 import javafx.event.ActionEvent;
 import java.io.IOException;
@@ -151,7 +152,15 @@ public class AffTController {
             System.out.println("An error occurred while refreshing table: " + e.getMessage());
         }
     }
-
+    @FXML
+    void afficherT(ActionEvent event) {
+        try {
+            Parent root= FXMLLoader.load(getClass().getResource("/Stat.fxml"));
+            back.getScene().setRoot(root);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
     @FXML
     void initialize() {
         try {

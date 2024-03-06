@@ -49,6 +49,12 @@
                   <String fx:value="shadow" />
                </styleClass>
             </Button>
+            <Button layoutX="497.0" layoutY="553.0" mnemonicParsing="false" onAction="#afficherT" stylesheets="@styless.css" text="Statistiques">
+               <styleClass>
+                  <String fx:value="button-container-mouse-moved" />
+                  <String fx:value="shadow" />
+               </styleClass>
+            </Button>
          </children>
       </AnchorPane>
    </children>

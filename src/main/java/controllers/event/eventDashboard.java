@@ -510,7 +510,7 @@ public class eventDashboard {
     @FXML
     void calendrier(ActionEvent event) throws IOException {
 
-        loadFXML("/FullCalendar.fxml");
+        loadFXML("/fxmlevent/FullCalendar.fxml");
 
     }
 

@@ -37,7 +37,7 @@ public class backController {
 
     @FXML
     void chatbox(ActionEvent event) {
-        loadUi("/chatbot");
+        loadUi("/fxmlevent/chatbot");
 
     }
 
@@ -53,18 +53,18 @@ public class backController {
 
     @FXML
     void events(ActionEvent event) {
-        loadUi("/eventback");
+        loadUi("/fxmlevent/eventback");
 
     }
 
     @FXML
     void sponsor(ActionEvent event) {
-        loadUi("/sponsoback");
+        loadUi("/fxmlevent/sponsoback");
 
     }
     @FXML
     void stat(ActionEvent event) {
-        loadUi("/BarChartEvent");
+        loadUi("/fxmlevent/BarChartEvent");
 
     }
 
@@ -76,7 +76,7 @@ public class backController {
     }
 
     public void logout(ActionEvent actionEvent) throws IOException {
-        loadFXML("/login.fxml");
+        loadFXML("/fxmlevent/login.fxml");
 
     }
 

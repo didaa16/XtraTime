@@ -261,7 +261,7 @@ public class ListeventsController {
 
 
                 try {System.out.print(id);
-                    loadFXML("/eventdetails.fxml");
+                    loadFXML("/fxmlevent/eventdetails.fxml");
                 } catch (IOException var7) {
                     var7.printStackTrace();
                 }
@@ -278,7 +278,7 @@ public class ListeventsController {
                 ListeventsController.this.es.readById(id);;
                 try {
                     System.out.print(id);
-                    loadFXML("/eventdetails.fxml");
+                    loadFXML("/fxmlevent/eventdetails.fxml");
                 } catch (IOException var7) {
                     var7.printStackTrace();
                 }
@@ -295,7 +295,7 @@ public class ListeventsController {
                 ListeventsController.this.es.readById(id);
                 try {
                     System.out.print(id);
-                    loadFXML("/eventdetails.fxml");
+                    loadFXML("/fxmlevent/eventdetails.fxml");
                 } catch (IOException var7) {
                     var7.printStackTrace();
                 }

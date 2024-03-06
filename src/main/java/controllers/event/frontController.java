@@ -30,17 +30,26 @@ public class frontController {
     private Button bout;
 
     @FXML
+    private Button chatbox;
+
+    @FXML
     private Button bsponsor;
 
     @FXML
+    void chatbox(ActionEvent event) {
+        loadUi("/fxmlevent/chatbot");
+
+    }
+
+    @FXML
     void events(ActionEvent event) {
-        loadUi("/listevents");
+        loadUi("/fxmlevent/listevents");
 
 
     }
 
     public void logout(ActionEvent actionEvent) throws IOException {
-        loadFXML("/login.fxml");
+        loadFXML("/fxmlevent/login.fxml");
 
     }
 
@@ -55,7 +64,7 @@ public class frontController {
 
     @FXML
     void sponsor(ActionEvent event) {
-        loadUi("/listsponso");
+        loadUi("/fxmlevent/listsponso");
 
     }
     private void loadUi(String ui) {

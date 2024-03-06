@@ -51,9 +51,9 @@ public class loginController {
                 loginStage.close();
 
                 if ("Admin".equals(role)) {
-                    loadFXML("/base.fxml");
+                    loadFXML("/fxmlevent/base.fxml");
                 } else {
-                    loadFXML("/baseFront.fxml");
+                    loadFXML("/fxmlevent/baseFront.fxml");
                 }
             } else {
                 Alert alert = new Alert(Alert.AlertType.WARNING, "Login error", ButtonType.OK);

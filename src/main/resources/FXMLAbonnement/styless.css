@@ -1,0 +1,153 @@
+.gradient-background{
+    -fx-background-color:linear-gradient(from 25% 25% to 100% 100%, #000000 , #416D19);
+}
+.line-color{
+    -fx-background-color: #F6F5F5;
+}
+
+.container{
+    -fx-background-color:rgba(255,255,255,0.2);
+    -fx-background-radius: 10;
+}
+
+.shadow{
+    -fx-effect: dropShadow(three-pass-box, rgba(0,0,0,0.2), 10.0, 0.0, 0.0, 10.0);
+}
+.button-container-mouse-moved:hover{
+    -fx-background-color: rgba(255,255,255,0.1);}
+
+.text-field{
+    -fx-font-family: "Quicksand";
+    -fx-font-size: 18;
+    -fx-padding: 1,1,1,1;
+    -fx-border-color: grey;
+    -fx-border-width: 2;
+    -fx-border-radius: 1;
+    -fx-border: gone;
+    -fx-background-color: transparent;
+    -fx-text-fill: grey;
+}
+.text-area .content{
+    -fx-background-color: rgba(0,0,0,0.7);
+    -fx-border-color: grey;
+    -fx-font-family: "Quicksand";
+    -fx-font-size: 18;
+    -fx-padding: 1,1,1,1;
+    -fx-border-width: 2;
+    -fx-border-radius: 1;
+    -fx-border: gone;
+    -fx-text-fill: grey;
+
+}
+.disabled-label:disabled {
+    -fx-background-color: rgb(252,252,252);
+    -fx-opacity: 1;
+}
+
+.transparent-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white; /* Pour changer la couleur du texte si nécessaire */
+}
+
+
+.header-label {
+    -fx-font-size: 24px;
+    -fx-text-fill: #ecf0f1;
+    -fx-padding: 20px;
+}
+.card {
+    -fx-background-color: #34495e;
+    -fx-background-radius: 15;
+    -fx-padding: 15px;
+    -fx-spacing: 10;
+    -fx-alignment: center;
+
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 10);
+}
+
+.card > ImageView {
+    -fx-fit-width: 150px;
+    -fx-fit-height: 100px;
+    -fx-preserve-ratio: true;
+    -fx-padding: 10px;
+}
+
+.card > Label {
+    -fx-text-fill: #ecf0f1;
+    -fx-font-weight: bold;
+}
+
+.card > Button {
+    -fx-background-color: #e67e22;
+    -fx-text-fill: #ecf0f1;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-padding: 10px 20px;
+}
+
+.card > Button:hover {
+    -fx-background-color: #d35400;
+}
+/*
+.root {
+    -fx-background-color: #34495e;
+}
+
+ */
+
+.card {
+    -fx-background-color:  #001706
+
+
+
+
+
+
+
+
+    #00694e
+
+    #026900 ;
+    -fx-background-radius: 8;
+    -fx-padding: 20;
+    -fx-spacing: 10; /* Adjust spacing between elements in VBox */
+    -fx-alignment: center;
+}
+
+.card-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.card-value {
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+}
+.subscribe-button {
+    -fx-background-color:  #f00020, linear-gradient( #f00020, #ad1328), linear-gradient( #f00020 0%, #ad1328 20%,  #f00020 100%);
+    -fx-background-radius: 5;
+    -fx-background-insets: 0,1,2;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20;
+    -fx-font-size: 12px;
+}
+
+.subscribe-buttonC {
+    -fx-background-color:  #00694e, linear-gradient( #00694e, #026900), linear-gradient( #00694e 0%, #026900 20%,  #00694e 100%);
+    -fx-background-radius: 5;
+    -fx-background-insets: 0,1,2;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20;
+    -fx-font-size: 12px;
+}
+
+
+
+.subscribe-button:hover {
+    -fx-background-color: #00694e, linear-gradient(#00694e, #026900), linear-gradient(#00694e 0%, #026900 20%, #00694e 100%);
+}
+
+

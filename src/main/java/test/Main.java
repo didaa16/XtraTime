@@ -1,14 +1,10 @@
 package test;
 
-import entities.Abonnement;
-import entities.Pack;
-import services.ServiceAbonnement;
-import services.ServicePack;
+import services.Abonnement.ServiceAbonnement;
+import services.Abonnement.ServicePack;
 import utils.MyDatabase;
 
-import java.sql.SQLException;
 import java.util.Date;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {

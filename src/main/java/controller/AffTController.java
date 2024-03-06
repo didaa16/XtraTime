@@ -1,6 +1,8 @@
 package controller;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -19,12 +21,19 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import entities.terrain;
 import javafx.scene.control.cell.PropertyValueFactory;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import services.ServiceTerrain;
+import utils.MyDatabase;
 public class AffTController {
     ServiceTerrain ServiceTerrain = new ServiceTerrain();
 
-
-
+    private MyDatabase myDatabase = MyDatabase.getInstance();
     @FXML
     private TableView<terrain> tv_t;
 
@@ -50,6 +59,32 @@ public class AffTController {
     private TableColumn<terrain, String> col_i;
     @FXML
     private Button back;
+
+    @FXML
+    private void pdf_user(ActionEvent event) {
+        System.out.println("hello");
+        try{
+
+            JasperDesign jDesign = JRXmlLoader.load("C:\\Users\\MSI\\IdeaProjects\\firsttry\\src\\main\\resources\\report.jrxml");
+
+            JasperReport jReport = JasperCompileManager.compileReport(jDesign);
+            Connection connection = myDatabase.getConnection();
+
+
+
+            JasperPrint jPrint = JasperFillManager.fillReport(jReport, null, connection);
+
+            JasperViewer viewer = new JasperViewer(jPrint, false);
+
+            viewer.setTitle("Liste des terrains");
+            viewer.show();
+            System.out.println("hello");
+
+
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
     @FXML
     void back(ActionEvent event) {
         try {

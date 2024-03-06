@@ -1,12 +1,18 @@
 package controller;
 
+import java.io.FileOutputStream;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
-
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import java.io.IOException;
+import java.util.stream.Collectors;
+
 import javafx.scene.control.TextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,7 +32,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 public class AfficherController {
-
+complexe complexe;
     ServiceComplexe ServiceComplexe = new ServiceComplexe();
     @FXML
     private TableView<complexe> tv_complexe;
@@ -63,6 +69,67 @@ public class AfficherController {
             e.printStackTrace();
             showAlert("Erreur", "Erreur lors du retour à l'interface précédente", e.getMessage(), Alert.AlertType.ERROR);
         }
+    }
+    @FXML
+    private void ExportExcel(ActionEvent event) {
+        try {
+            Workbook workbook = new XSSFWorkbook();
+            Sheet sheet = workbook.createSheet("Liste des complexes");
+
+            // En-tête
+            Row headerRow = sheet.createRow(0);
+            headerRow.createCell(0).setCellValue("nom");
+            headerRow.createCell(1).setCellValue("adresse");
+            headerRow.createCell(2).setCellValue("tel");
+            headerRow.createCell(3).setCellValue("patente");
+            headerRow.createCell(4).setCellValue("image");
+
+            // Données
+            ObservableList<complexe> complexes = FXCollections.observableList(ServiceComplexe.afficher());
+            for (int i = 0; i < complexes.size(); i++) {
+                Row row = sheet.createRow(i + 1);
+                row.createCell(0).setCellValue(complexes.get(i).getNom());
+                row.createCell(1).setCellValue(complexes.get(i).getAdresse());
+                row.createCell(2).setCellValue(complexes.get(i).getTel());
+                row.createCell(3).setCellValue(complexes.get(i).getPatente());
+                row.createCell(4).setCellValue(complexes.get(i).getImage());
+
+            }
+
+            // Sauvegarde du fichier
+            String fileName = "Liste des Complexes.xlsx";
+            try (FileOutputStream fileOut = new FileOutputStream(fileName)) {
+                workbook.write(fileOut);
+                fileOut.flush();
+            }
+
+            System.out.println("Export Excel réussi.");
+        } catch (IOException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<complexe> triEmail() throws SQLException {
+
+        List<complexe> list1 = new ArrayList<>();
+        List<complexe> list2 = ServiceComplexe.afficher();
+
+        list1 = list2.stream().sorted((o1, o2) -> o1.getNom().compareTo(o2.getNom())).collect(Collectors.toList());
+        return list1;
+
+    }
+    @FXML
+    private void Trie() throws SQLException {
+        ServiceComplexe serviceComplexe = new ServiceComplexe();
+        complexe complexe = new complexe();
+        List<complexe> a = triEmail();
+        col_nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        col_adr.setCellValueFactory(new PropertyValueFactory<>("adresse"));
+        col_tel.setCellValueFactory(new PropertyValueFactory<>("tel"));
+        col_pt.setCellValueFactory(new PropertyValueFactory<>("patente"));
+        col_im.setCellValueFactory(new PropertyValueFactory<>("image"));
+        tv_complexe.getItems().setAll(a);
+
     }
     @FXML
 

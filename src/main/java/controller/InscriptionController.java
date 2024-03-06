@@ -7,6 +7,8 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
+
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser.ExtensionFilter;
 import entities.complexe;
 import javafx.event.ActionEvent;
@@ -21,6 +23,9 @@ import javafx.stage.Stage;
 import services.ServiceComplexe;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import org.controlsfx.control.Notifications;
+import javafx.util.Duration;
+import javafx.scene.control.Label;
 
 public class InscriptionController {
     private Image image;
@@ -28,7 +33,7 @@ public class InscriptionController {
 
     @FXML
     private TextField nom;
-
+private  Label label;
 
     @FXML
     private TextField adr;
@@ -72,7 +77,14 @@ public class InscriptionController {
         // La regex ^[a-zA-Z0-9\s.,'-]+$ vérifie que la chaîne contient uniquement des lettres, chiffres, espaces et caractères spéciaux couramment utilisés dans les adresses
         return Pattern.matches("^[a-zA-Z0-9\\s.,'-]+$", adresse);
     }
-
+  /*  private void showNotification(String message) {
+        message="succes ";
+        Notifications.create()
+                .title("Notification")
+                .text(message)
+                .hideAfter(Duration.seconds(5)) // Masquer la notification après 5 secondes
+                .show();
+    }*/
     @FXML
     void addcomplexe(ActionEvent event) {
         String nomC = nom.getText();
@@ -100,7 +112,16 @@ public class InscriptionController {
 
         try {
             ServiceComplexe.ajouter(new complexe(nomC,idlC, adrC, telC,  imagePath, imagePath1));
+//showNotification("ajout complexe avec succes");
+           boolean  oeuvreAdded = true;
 
+            if (oeuvreAdded) {
+                Notifications.create()
+                        .title("Notification Title")
+                        .text("COMPLEXE AJOUTEE")
+                        .hideAfter(Duration.seconds(9))
+                        .showInformation();
+            }
         Alert alert =new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("succes");
         alert.setContentText("personne ajoute");
@@ -117,6 +138,13 @@ public class InscriptionController {
         alert.setContentText(contentText);
         alert.showAndWait();
     }
+
+    /**
+     *
+     */
+
+
+
     @FXML
     void addterrain(ActionEvent event) {
         try {
@@ -130,7 +158,7 @@ public class InscriptionController {
     @FXML
     void initialize() {
 
-            // Event listener for upload button
+        // Event listener for upload button
             up.setOnAction((ActionEvent event) -> {
                 FileChooser fileChooser = new FileChooser();
                 fileChooser.setTitle("Choisir une image");

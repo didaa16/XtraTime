@@ -12,11 +12,11 @@
       <TableView fx:id="tv_complexe" layoutX="6.0" layoutY="23.0" prefHeight="362.0" prefWidth="722.0" stylesheets="@styless.css">
         <columns>
           <TableColumn fx:id="col_nom" prefWidth="112.0" text="nom" />
-          <TableColumn fx:id="col_idl" prefWidth="86.0" text="idLocateur" />
-            <TableColumn fx:id="col_adr" prefWidth="123.0" text="adresse" />
-            <TableColumn fx:id="col_tel" prefWidth="79.0" text="tel" />
-            <TableColumn fx:id="col_pt" prefWidth="148.0" text="patente" />
-            <TableColumn fx:id="col_im" prefWidth="173.0" text="image" />
+          <TableColumn fx:id="col_idl" editable="false" prefWidth="86.0" sortable="false" text="idLocateur" visible="false" />
+            <TableColumn fx:id="col_adr" prefWidth="179.0" text="adresse" />
+            <TableColumn fx:id="col_tel" prefWidth="130.0" text="tel" />
+            <TableColumn fx:id="col_pt" prefWidth="146.0" text="patente" />
+            <TableColumn fx:id="col_im" prefWidth="154.0" text="image" />
         </columns>
          <styleClass>
             <String fx:value="line-color" />
@@ -36,7 +36,19 @@
             <String fx:value="shadow" />
          </styleClass>
       </Button>
-      <TextField fx:id="searchField" layoutX="522.0" layoutY="537.0" promptText="Rechercher un complexe..." onKeyReleased="#search" />
+      <TextField fx:id="searchField" layoutX="522.0" layoutY="537.0" onKeyReleased="#search" promptText="Rechercher un complexe..." />
+      <Button layoutX="514.0" layoutY="420.0" mnemonicParsing="false" onAction="#ExportExcel" stylesheets="@styless.css" text="EXCEL">
+         <styleClass>
+            <String fx:value="button-container-mouse-moved" />
+            <String fx:value="shadow" />
+         </styleClass>
+      </Button>
+      <Button layoutX="384.0" layoutY="436.0" mnemonicParsing="false" onAction="#Trie" stylesheets="@styless.css" text="Trie par nom">
+         <styleClass>
+            <String fx:value="button-container-mouse-moved" />
+            <String fx:value="shadow" />
+         </styleClass>
+      </Button>
 
    </children>
 </AnchorPane>

@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1920.0" styleClass="primary-color" stylesheets="@../Styles/front.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.utilisateur.clientFrontController">
+   <center>
+      <AnchorPane prefHeight="750.0" prefWidth="1462.0" stylesheets="@../Styles/front.css" BorderPane.alignment="CENTER">
+         <children>
+            <Pane fx:id="profilePane" prefHeight="750.0" prefWidth="1571.0" visible="false">
+               <children>
+                  <Text fill="WHITE" fontSmoothingType="LCD" layoutX="180.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Paramétres de profile">
+                     <font>
+                        <Font name="System Bold" size="25.0" />
+                     </font>
+                  </Text>
+                  <GridPane layoutX="306.0" layoutY="155.0" prefHeight="253.0" prefWidth="593.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="636.5999755859375" minWidth="10.0" prefWidth="485.20002441406245" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="460.4000244140625" minWidth="10.0" prefWidth="412.39997558593745" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Text fill="WHITE" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Pseudo">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Prenom" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Age" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="CIN" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="pseudoTF" editable="false" GridPane.columnIndex="1">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></TextField>
+                        <TextField fx:id="cinTF" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></TextField>
+                        <TextField fx:id="nomTF" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></TextField>
+                        <TextField fx:id="prenomTF" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></TextField>
+                        <TextField fx:id="ageTF" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></TextField>
+                     </children>
+                  </GridPane>
+                  <Text fill="WHITE" fontSmoothingType="LCD" layoutX="180.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Informations de contact">
+                     <font>
+                        <Font name="System Bold" size="25.0" />
+                     </font>
+                  </Text>
+                  <GridPane layoutX="307.0" layoutY="503.0" prefHeight="109.0" prefWidth="600.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="636.5999755859375" minWidth="10.0" prefWidth="480.79999999999995" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="460.4000244140625" minWidth="10.0" prefWidth="420.79999999999995" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Text fill="WHITE" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="N°Téléphone">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse E-mail" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="numTelTF" GridPane.columnIndex="1">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></TextField>
+                        <TextField fx:id="emailTF" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></TextField>
+                     </children>
+                  </GridPane>
+                  <Button fx:id="sauvegarderModificationsButton" alignment="CENTER" layoutX="543.0" layoutY="655.0" mnemonicParsing="false" onAction="#sauvegarderModificationsButtonOnClick" prefHeight="38.0" prefWidth="209.0" stylesheets="@../Styles/front.css" text="Sauvegarder les modifications" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="selected" />
+                        <String fx:value="button" />
+                     </styleClass>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="SAVE" size="20" translateX="-5.0" />
+                     </graphic>
+                  </Button>
+               </children>
+            </Pane>
+            <Pane fx:id="changementPane" prefHeight="750.0" prefWidth="1573.0" visible="false">
+               <children>
+                  <Label fx:id="messageLabel" layoutX="218.0" layoutY="213.0" prefHeight="25.0" prefWidth="1125.0" text=" " textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="codeVerification" layoutX="605.0" layoutY="297.0" prefWidth="254.0" promptText="Code de verification">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </TextField>
+                  <Label fx:id="errorCodeVerificationLabel" alignment="CENTER" layoutX="586.0" layoutY="399.0" prefHeight="22.0" prefWidth="293.0" textFill="RED">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="confirmerAdresseCode" alignment="CENTER" layoutX="628.0" layoutY="456.0" mnemonicParsing="false" onAction="#confirmerAdresseCodeOnClick" prefHeight="38.0" prefWidth="209.0" stylesheets="@../Styles/front.css" text="Confirmer" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="selected" />
+                        <String fx:value="button" />
+                     </styleClass>
+                  </Button>
+                  <Button fx:id="retourToProfile" alignment="CENTER" layoutX="628.0" layoutY="574.0" mnemonicParsing="false" onAction="#retourToProfileOnClick" prefHeight="38.0" prefWidth="209.0" stylesheets="@../Styles/front.css" text="Retour" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="selected" />
+                        <String fx:value="button" />
+                     </styleClass>
+                  </Button>
+                  <Button fx:id="confirmerAdresseCode1" alignment="CENTER" layoutX="628.0" layoutY="456.0" mnemonicParsing="false" onAction="#confirmerAdresseCodeOnClick1" prefHeight="38.0" prefWidth="209.0" stylesheets="@../Styles/front.css" text="Confirmer" textFill="WHITE" visible="false">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="selected" />
+                        <String fx:value="button" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </Pane>
+            <Pane fx:id="parametresMdpPane" prefHeight="750.0" prefWidth="1575.0" visible="false">
+               <children>
+                  <GridPane layoutX="427.0" layoutY="201.0" prefHeight="349.0" prefWidth="679.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="320.8" minWidth="10.0" prefWidth="212.7999755859375" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="395.999951171875" minWidth="0.0" prefWidth="366.40002441406256" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="84.20001831054688" minHeight="10.0" prefHeight="81.00000610351563" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="84.20001831054688" minHeight="10.0" prefHeight="39.20001831054688" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="84.20001831054688" minHeight="10.0" prefHeight="39.20001831054688" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="84.20001831054688" minHeight="10.0" prefHeight="39.20001831054688" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="100.6" minHeight="10.0" prefHeight="54.20000000000002" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="63.600012207031256" minHeight="10.0" prefHeight="32.600012207031256" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="97.19995117187497" minHeight="10.0" prefHeight="74.19998779296876" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="83.59998168945313" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Label prefHeight="22.0" prefWidth="176.0" text="Ancien Mot de passe" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <PasswordField fx:id="ancienMdpTF" promptText="Ancien Mot de Passe" GridPane.columnIndex="1" />
+                        <Hyperlink fx:id="mdpOublieHL" onAction="#mdpOublieHLOnClick" text="Mot de passe oublié ?" GridPane.rowIndex="1" />
+                        <Label fx:id="acienMdpErrorLabel" prefHeight="18.0" prefWidth="401.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label prefHeight="22.0" prefWidth="176.0" text="Nouveau Mot de passe" textFill="WHITE" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <PasswordField fx:id="nouveauMdpTF" promptText="Nouveau Mot de Passe" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <ProgressBar fx:id="complexiteBar" blendMode="COLOR_DODGE" prefHeight="26.0" prefWidth="366.0" progress="0.25" style="-fx-background-color: transparent;" visible="false" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5" />
+                        <Label fx:id="complexiteLabel" prefHeight="18.0" prefWidth="196.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+                           <padding>
+                              <Insets right="25.0" />
+                           </padding>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="22.0" prefWidth="184.0" text="Confirmer Mot de passe" textFill="WHITE" GridPane.rowIndex="6">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <PasswordField fx:id="confirmerNouveauMdpTF" prefHeight="26.0" prefWidth="130.0" promptText="Confirmer Mot de Passe" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Label fx:id="confirmerMdpErrorLabel" prefHeight="18.0" prefWidth="401.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                     </children>
+                  </GridPane>
+                  <Button fx:id="sauvegarderMdpChangement" alignment="CENTER" layoutX="662.0" layoutY="614.0" mnemonicParsing="false" onAction="#sauvegarderMdpChangementOnClick" prefHeight="38.0" prefWidth="209.0" stylesheets="@../Styles/front.css" text="Sauvegarder les modifications" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="selected" />
+                        <String fx:value="button" />
+                     </styleClass>
+                  </Button>
+                  <Text fill="WHITE" fontSmoothingType="LCD" layoutX="201.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Paramétres de mot de passe">
+                     <font>
+                        <Font name="System Bold" size="25.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <ScrollPane fx:id="politiqueConfidentialiteScroll" layoutX="183.0" layoutY="74.0" prefHeight="661.0" prefWidth="890.0" visible="false">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="902.0" prefWidth="1148.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="58.0" prefWidth="818.0" text="XtraTime">
+                           <font>
+                              <Font name="System Bold" size="40.0" />
+                           </font>
+                           <textFill>
+                              <LinearGradient cycleMethod="REFLECT" endY="1.0">
+                                 <stops>
+                                    <Stop>
+                                       <color>
+                                          <Color red="1.0" green="1.0" blue="1.0" />
+                                       </color>
+                                    </Stop>
+                                    <Stop offset="1.0">
+                                       <color>
+                                          <Color red="0.04288499057292938" green="0.5263158082962036" blue="0.13151396811008453" />
+                                       </color>
+                                    </Stop>
+                                 </stops>
+                              </LinearGradient>
+                           </textFill>
+                        </Label>
+                        <TextArea fx:id="politiquesText" blendMode="HARD_LIGHT" editable="false" layoutY="59.0" prefHeight="844.0" prefWidth="1150.0">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </TextArea>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
+            <AnchorPane fx:id="selectModeAnchor" prefHeight="750.0" prefWidth="1586.0" visible="false">
+               <children>
+                  <Button fx:id="verifierEmail" layoutX="465.0" layoutY="222.0" mnemonicParsing="false" onAction="#verifierEmailOnClick" prefHeight="56.0" prefWidth="294.0" style="-fx-background-color: #000000;" text="Se vérifier avec votre email" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="ENVELOPE" translateX="-10.0" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="verifierNumTel" layoutX="466.0" layoutY="353.0" mnemonicParsing="false" onAction="#verifierNumTelOnClick" prefHeight="54.0" prefWidth="294.0" style="-fx-background-color: #000000;" text="Se vérifier avec votre N°Tel" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="PHONE" translateX="-10.0" />
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="retourButton" layoutX="558.0" layoutY="489.0" mnemonicParsing="false" onAction="#retourButtonOnClick" prefHeight="32.0" prefWidth="91.0" style="-fx-cursor: hand;" text="Retour">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Button>
+                  <Separator layoutX="433.0" layoutY="322.0" prefHeight="1.0" prefWidth="359.0" />
+                  <Label alignment="CENTER" layoutX="597.0" layoutY="310.0" prefHeight="23.0" prefWidth="31.0" style="-fx-background-color: #FFFFFF;" text="Or" textFill="#5b5a5a">
+                     <font>
+                        <Font name="Segoe UI" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+         <styleClass>
+            <String fx:value="primary-color" />
+            <String fx:value="selected-border" />
+         </styleClass>
+      </AnchorPane>
+   </center>
+   <top>
+      <Pane prefHeight="109.0" prefWidth="1920.0" stylesheets="@../Styles/front.css" BorderPane.alignment="CENTER">
+         <styleClass>
+            <String fx:value="selected-border" />
+            <String fx:value="third-color" />
+         </styleClass>
+         <children>
+            <Text fx:id="nomEtPrenom" fill="WHITE" layoutX="1176.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ahmed Habib Mezny" textAlignment="RIGHT" wrappingWidth="254.1365966796875">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Text>
+            <Button fx:id="profileButton" layoutX="1434.0" layoutY="8.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
+               <graphic>
+                  <Circle fx:id="pdp1" fill="WHITE" radius="44.0" stroke="BLACK" strokeType="INSIDE" />
+               </graphic>
+            </Button>
+            <Button fx:id="politiqueDeConfidentialiteButton" alignment="CENTER" layoutX="967.0" layoutY="43.0" mnemonicParsing="false" onAction="#politiqueDeConfidentialiteButtonOnClick" prefHeight="32.0" prefWidth="209.0" stylesheets="@../Styles/front.css" text="Politique de confidentialité" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="LOCK" size="25" translateX="-10.0" />
+               </graphic>
+               <styleClass>
+                  <String fx:value="selected" />
+                  <String fx:value="button" />
+               </styleClass>
+            </Button>
+         </children>
+      </Pane>
+   </top>
+   <left>
+      <AnchorPane fx:id="slider" prefHeight="200.0" prefWidth="200.0" styleClass="third-color" stylesheets="@../Styles/front.css" BorderPane.alignment="CENTER">
+         <children>
+            <Separator layoutY="495.0" prefWidth="200.0" />
+            <Button fx:id="motDePasseButton1" alignment="CENTER" layoutX="11.0" layoutY="312.0" mnemonicParsing="false" onAction="#modifierProfileOnClick" prefHeight="25.0" prefWidth="180.0" stylesheets="@../Styles/front.css" text="Modifier Le Profile" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="COG" size="25" translateX="-10.0" />
+               </graphic>
+               <styleClass>
+                  <String fx:value="selected" />
+                  <String fx:value="button" />
+               </styleClass>
+            </Button>
+            <Separator layoutY="294.0" prefWidth="200.0" />
+            <Button fx:id="motDePasseButton" alignment="CENTER" layoutX="10.0" layoutY="375.0" mnemonicParsing="false" onAction="#motDePasseButtonOnClick" prefHeight="25.0" prefWidth="180.0" stylesheets="@../Styles/front.css" text="Mot de passe" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="KEY" size="25" translateX="-10.0" />
+               </graphic>
+               <styleClass>
+                  <String fx:value="selected" />
+                  <String fx:value="button" />
+               </styleClass>
+            </Button>
+            <Separator layoutY="362.0" prefWidth="200.0" />
+            <Button fx:id="notificationsButton" alignment="CENTER" layoutX="10.0" layoutY="440.0" mnemonicParsing="false" onAction="#notificationsButtonOnClick" prefHeight="25.0" prefWidth="180.0" stylesheets="@../Styles/front.css" text="Notifications" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="BELL" size="25" translateX="-10.0" />
+               </graphic>
+               <styleClass>
+                  <String fx:value="selected" />
+                  <String fx:value="button" />
+               </styleClass>
+            </Button>
+            <Separator layoutY="423.0" prefWidth="200.0" />
+            <Button fx:id="deconnecterButton" alignment="CENTER" layoutX="11.0" layoutY="583.0" mnemonicParsing="false" onAction="#deconnecterButtonOnClick" prefHeight="25.0" prefWidth="180.0" stylesheets="@../Styles/front.css" text="Déconnecter" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="ARROW_CIRCLE_LEFT" size="25" translateX="-10.0" />
+               </graphic>
+               <styleClass>
+                  <String fx:value="selected" />
+                  <String fx:value="button" />
+               </styleClass>
+            </Button>
+            <Circle fx:id="pdp" fill="WHITE" layoutX="101.0" layoutY="96.0" radius="82.0" stroke="BLACK" strokeType="INSIDE" />
+            <MenuButton fx:id="pdpMenu" layoutX="31.0" layoutY="191.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="139.0" styleClass="selected" stylesheets="@../Styles/front.css" text="Photo de Profil">
+               <items>
+                  <MenuItem mnemonicParsing="false">
+                     <graphic>
+                        <Button mnemonicParsing="false" onAction="#importerOnClick" prefHeight="20.0" prefWidth="120.0" styleClass="selected" stylesheets="@../Styles/front.css" text="Modifier" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="11.0" />
+                           </font>
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="EDIT" size="20" translateX="-5.0" />
+                           </graphic>
+                        </Button>
+                     </graphic>
+                  </MenuItem>
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false">
+                     <graphic>
+                        <Button fx:id="supprimer" mnemonicParsing="false" onAction="#supprimerPdp" prefHeight="20.0" prefWidth="120.0" styleClass="selected" stylesheets="@../Styles/front.css" text="Supprimer" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="11.0" />
+                           </font>
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="MINUS" size="20" translateX="-5.0" />
+                           </graphic>
+                        </Button>
+                     </graphic>
+                  </MenuItem>
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false">
+                     <graphic>
+                        <Button fx:id="voir" mnemonicParsing="false" onAction="#voirPdp" prefHeight="20.0" prefWidth="120.0" styleClass="selected" stylesheets="@../Styles/front.css" text="Afficher" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="11.0" />
+                           </font>
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="EYE" size="20" translateX="-5.0" />
+                           </graphic>
+                        </Button>
+                     </graphic>
+                  </MenuItem>
+                  <SeparatorMenuItem mnemonicParsing="false" />
+               </items>
+               <graphic>
+                  <FontAwesomeIconView glyphName="IMAGE" translateX="-5.0" />
+               </graphic>
+            </MenuButton>
+         </children>
+      </AnchorPane>
+   </left>
+</BorderPane>

@@ -1,0 +1,645 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="791.0" prefWidth="1561.0" styleClass="gradient-background" stylesheets="@../Styles/styless.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.utilisateur.dashboard">
+    <top>
+        <AnchorPane prefHeight="86.0" prefWidth="998.0" style="-fx-background-color: #000000;" styleClass="container" stylesheets="@../Styles/styless.css" BorderPane.alignment="CENTER">
+            <children>
+                <HBox layoutX="2.0" layoutY="6.0" prefHeight="90.0" prefWidth="1561.0">
+                    <children>
+                  <Button fx:id="Menu" mnemonicParsing="false" prefHeight="46.0" prefWidth="50.0" style="-fx-background-color: TRANSPARENT;">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="BARS" size="30" />
+                     </graphic>
+                     <HBox.margin>
+                        <Insets left="8.0" top="17.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="MenuClose" layoutX="18.0" layoutY="27.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="50.0" style="-fx-background-color: TRANSPARENT;" visible="false">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="BACKWARD" size="30" />
+                     </graphic>
+                     <HBox.margin>
+                        <Insets top="16.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="logo" mnemonicParsing="false" style="-fx-background-color: transparent;">
+                     <graphic>
+                              <ImageView fitHeight="85.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
+                                  <image>
+                                      <Image url="@../Design/LOGO.png" />
+                                  </image>
+                              </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets left="107.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Label text="XtraTime">
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color green="0.6315789222717285" blue="0.27368420362472534" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="1.0" green="1.0" blue="1.0" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                     <font>
+                        <Font name="System Bold" size="31.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets top="21.0" />
+                     </HBox.margin>
+                  </Label>
+                  <MenuButton mnemonicParsing="false" prefHeight="40.0" prefWidth="186.0" style="-fx-background-color: transparent;" text="Paramétres" textFill="WHITE">
+                    <items>
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <Menu mnemonicParsing="false" text="Profile">
+                          <items>
+                              <SeparatorMenuItem mnemonicParsing="false" />
+                            <MenuItem mnemonicParsing="false" onAction="#profileButtonOnClick" text="Voir profile">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="USER" size="20" />
+                                 </graphic>
+                              </MenuItem>
+                              <SeparatorMenuItem mnemonicParsing="false" />
+                            <MenuItem mnemonicParsing="false" onAction="#modifierMdpOnClick" text="Modifier Mot de passe">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="KEY" size="20" />
+                                 </graphic>
+                              </MenuItem>
+                              <SeparatorMenuItem mnemonicParsing="false" />
+                          </items>
+                           <graphic>
+                              <FontAwesomeIconView glyphName="USER" size="20" />
+                           </graphic>
+                        </Menu>
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                      <MenuItem fx:id="deconnecterButton" mnemonicParsing="false" onAction="#deconnecterButtonOnClick" text="Déconnecter">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="ARROW_CIRCLE_LEFT" size="20" />
+                           </graphic>
+                        </MenuItem>
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                    </items>
+                     <HBox.margin>
+                        <Insets left="850.0" top="25.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="29.0" />
+                     </padding>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="COGS" size="20" textOrigin="BOTTOM" translateX="-7.0" />
+                     </graphic>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </MenuButton>
+                    </children>
+                </HBox>
+            </children>
+        </AnchorPane>
+    </top>
+    <left>
+        <AnchorPane fx:id="slider" prefHeight="722.0" prefWidth="222.0" style="-fx-background-color: #000000;" styleClass="container" stylesheets="@../Styles/styless.css" BorderPane.alignment="CENTER">
+            <children>
+                <VBox layoutX="-1.0" layoutY="34.0" prefHeight="484.0" prefWidth="222.0" styleClass="selected-border" stylesheets="@../Styles/front.css">
+                    <children>
+                        <Button fx:id="utilisateursButton" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#utilisateursButtonOnClick" prefHeight="40.0" prefWidth="228.0" style="-fx-background-color: transparent;" text="Utilisateurs" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="21.0" />
+                            </font>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                            <padding>
+                                <Insets left="30.0" />
+                            </padding>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="USERS" selectionFill="BLACK" />
+                     </graphic>
+                     <stylesheets>
+                        <URL value="@../Styles/styless.css" />
+                        <URL value="@../Styles/front.css" />
+                     </stylesheets>
+                     <styleClass>
+                        <String fx:value="selected" />
+                        <String fx:value="selected" />
+                     </styleClass>
+                        </Button>
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+    </left>
+    <center>
+        <AnchorPane prefHeight="694.0" prefWidth="1322.0" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane fx:id="statsAnchor" layoutX="466.0" layoutY="27.0" prefHeight="539.0" prefWidth="748.0" style="-fx-background-color: #FFFFFF;" />
+            <AnchorPane fx:id="utilisateursAnchorPane" layoutX="1.0" prefHeight="694.0" prefWidth="1341.0" visible="false">
+               <children>
+                  <HBox layoutX="1.0" layoutY="32.0" prefHeight="37.0" prefWidth="778.0">
+                     <children>
+                        <TextField fx:id="rechercheDashboard" onKeyPressed="#recherche" prefHeight="32.0" prefWidth="221.0" promptText="Rechercher un Utilisateur">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <HBox.margin>
+                              <Insets left="11.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </TextField>
+                      <Button fx:id="rechercheButton" mnemonicParsing="false" onAction="#rechercheButtonOnClick" prefHeight="13.0">
+                           <graphic>
+                              <FontAwesomeIconView fontSmoothingType="LCD" glyphName="SEARCH" selectionEnd="30" selectionStart="10" size="23" />
+                           </graphic>
+                           <HBox.margin>
+                              <Insets left="9.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="supprimerButton" mnemonicParsing="false" onAction="#SupprimerButtonButtonOnClick">
+                           <HBox.margin>
+                              <Insets left="310.0" />
+                           </HBox.margin>
+                           <graphic>
+                              <FontAwesomeIconView glyphName="TRASH" size="23" />
+                           </graphic>
+                        </Button>
+                        <Button fx:id="modifierButton" mnemonicParsing="false" onAction="#ModifierButtonButtonOnClick">
+                           <HBox.margin>
+                              <Insets left="30.0" />
+                           </HBox.margin>
+                           <graphic>
+                              <FontAwesomeIconView glyphName="EDIT" size="23" />
+                           </graphic>
+                        </Button>
+                        <Button fx:id="ajouterButton" layoutX="668.0" layoutY="10.0" mnemonicParsing="false" onAction="#ajouterButtonOnClick">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="USER_PLUS" size="23" wrappingWidth="20.68573760986328" />
+                           </graphic>
+                           <HBox.margin>
+                              <Insets left="30.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <GridPane layoutX="834.0" layoutY="118.0" prefHeight="457.0" prefWidth="463.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="38.200018310546874" minHeight="10.0" prefHeight="35.000006103515624" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="24.599996948242186" minHeight="10.0" prefHeight="23.799993896484374" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="36.60001220703124" minHeight="10.0" prefHeight="36.60001220703124" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="24.600012207031256" minHeight="10.0" prefHeight="22.199987792968756" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="39.00001831054689" minHeight="10.0" prefHeight="37.40001220703127" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="24.600012207031256" minHeight="10.0" prefHeight="19.79998779296875" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="37.400000000000006" minHeight="10.0" prefHeight="37.400000000000006" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="24.59998168945313" minHeight="10.0" prefHeight="21.400000000000006" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="39.0000061035156" minHeight="10.0" prefHeight="36.60001220703123" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="24.599981689453102" minHeight="10.0" prefHeight="20.59998779296876" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="41.39999999999998" minHeight="10.0" prefHeight="36.60001220703123" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="24.600012207031227" minHeight="10.0" prefHeight="20.59998779296876" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="39.19998779296873" minHeight="10.0" prefHeight="39.19998779296873" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="25.600012207031227" minHeight="10.0" prefHeight="21.600012207031227" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="38.19998779296873" minHeight="10.0" prefHeight="29.399999999999977" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="31.800024414062477" minHeight="10.0" prefHeight="29.399999999999977" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Label prefHeight="22.0" prefWidth="67.0" text="Pseudo" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font></Label>
+                        <TextField fx:id="pseudoDashboard" promptText="Pseudo" GridPane.columnIndex="1">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></TextField>
+                        <Label fx:id="pseudoDashboardError" prefHeight="26.0" prefWidth="381.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label prefHeight="22.0" prefWidth="67.0" text="CIN" textFill="WHITE" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font></Label>
+                        <TextField fx:id="cinDashboard" promptText="Cin" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></TextField>
+                        <Label fx:id="cinDashboardError" prefHeight="26.0" prefWidth="384.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label prefHeight="22.0" prefWidth="67.0" text="Nom" textFill="WHITE" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font></Label>
+                        <TextField fx:id="nomDashboard" promptText="Nom" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></TextField>
+                        <Label fx:id="nomDashboardError" prefHeight="26.0" prefWidth="386.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label prefHeight="22.0" prefWidth="67.0" text="Prénom" textFill="WHITE" GridPane.rowIndex="6">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font></Label>
+                        <TextField fx:id="prenomDashboard" promptText="Prénom" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></TextField>
+                        <Label fx:id="prenomDashboardError" prefHeight="26.0" prefWidth="385.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <Label prefHeight="22.0" prefWidth="77.0" text="Age" textFill="WHITE" GridPane.rowIndex="8">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font></Label>
+                        <TextField fx:id="ageDashboard" promptText="Age" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></TextField>
+                        <Label fx:id="ageDashboardError" prefHeight="26.0" prefWidth="387.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                        <Label prefHeight="26.0" prefWidth="117.0" text="N°Téléphone" textFill="WHITE" GridPane.rowIndex="10">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font></Label>
+                        <TextField fx:id="numtelDashboard" promptText="N°Téléphone" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></TextField>
+                        <Label fx:id="numtelDashboardError" prefHeight="26.0" prefWidth="385.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                        <Label prefHeight="22.0" prefWidth="67.0" text="E-mail" textFill="WHITE" GridPane.rowIndex="12">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font></Label>
+                        <TextField fx:id="emailDashboard" promptText="E-mail" GridPane.columnIndex="1" GridPane.rowIndex="12">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></TextField>
+                        <Label fx:id="emailDashboardError" prefHeight="26.0" prefWidth="386.0" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+                        <RadioButton fx:id="roleClientDashboard" mnemonicParsing="false" text="Client" textFill="WHITE" GridPane.rowIndex="14">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="role" />
+                           </toggleGroup>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </RadioButton>
+                        <RadioButton fx:id="roleLocateurDashboard" mnemonicParsing="false" text="Locateur" textFill="WHITE" toggleGroup="$role" GridPane.columnIndex="1" GridPane.rowIndex="14">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font></RadioButton>
+                        <Label fx:id="roleDashboardError" prefHeight="26.0" prefWidth="210.0" GridPane.columnIndex="1" GridPane.rowIndex="15" />
+                     </children>
+                  </GridPane>
+                  <TableView fx:id="TableView" layoutX="1.0" layoutY="137.0" onMouseClicked="#getSelected" prefHeight="485.0" prefWidth="779.0">
+                     <columns>
+                        <TableColumn fx:id="pseudoC" prefWidth="119.20004272460938" text="PSEUDO" />
+                        <TableColumn fx:id="cinC" minWidth="5.60003662109375" prefWidth="126.39996337890625" text="CIN" />
+                        <TableColumn fx:id="nomC" prefWidth="84.00003051757812" text="NOM" />
+                        <TableColumn fx:id="prenomC" prefWidth="112.00006103515625" text="PRENOM" />
+                        <TableColumn fx:id="ageC" prefWidth="72.800048828125" text="AGE" />
+                        <TableColumn fx:id="numTelC" prefWidth="108.800048828125" text="N°TEL" />
+                        <TableColumn fx:id="emailC" prefWidth="155.99993896484375" text="EMAIL" />
+                     </columns>
+                  </TableView>
+                  <HBox layoutX="173.0" layoutY="91.0" prefHeight="26.0" prefWidth="434.0">
+                     <children>
+                        <RadioButton fx:id="admins" mnemonicParsing="false" selected="true" text="Admins" textFill="WHITE">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="roles" />
+                           </toggleGroup>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </RadioButton>
+                        <RadioButton fx:id="clients" mnemonicParsing="false" text="Clients" textFill="WHITE" toggleGroup="$roles">
+                           <padding>
+                              <Insets left="20.0" />
+                           </padding>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </RadioButton>
+                        <RadioButton fx:id="locateurs" mnemonicParsing="false" text="Locateurs" textFill="WHITE" toggleGroup="$roles">
+                           <padding>
+                              <Insets left="20.0" />
+                           </padding>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </RadioButton>
+                        <RadioButton fx:id="livreurs" mnemonicParsing="false" text="Livreurs" textFill="WHITE" toggleGroup="$roles">
+                           <padding>
+                              <Insets left="20.0" />
+                           </padding>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </RadioButton>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="ajouterAnchorPane" prefHeight="694.0" prefWidth="1341.0" visible="false">
+               <children>
+                  <GridPane layoutX="175.0" layoutY="24.0" prefHeight="638.0" prefWidth="988.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="51.79996337890623" minHeight="10.0" prefHeight="51.79996337890623" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="24.600012207031227" minHeight="7.000036621093727" prefHeight="7.000036621093727" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Label prefHeight="22.0" prefWidth="67.0" stylesheets="@../Styles/styless.css" text="Pseudo" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="shadow" />
+                              <String fx:value="disabled-label" />
+                           </styleClass></Label>
+                        <TextField fx:id="pseudoAjout" promptText="Pseudo" GridPane.columnIndex="1" />
+                        <Label fx:id="pseudoError" prefHeight="26.0" prefWidth="381.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label prefHeight="22.0" prefWidth="67.0" stylesheets="@../Styles/styless.css" text="CIN" textFill="WHITE" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="shadow" />
+                              <String fx:value="disabled-label" />
+                           </styleClass></Label>
+                        <TextField fx:id="cinAjout" promptText="Cin" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label fx:id="cinError" prefHeight="26.0" prefWidth="384.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label prefHeight="22.0" prefWidth="67.0" stylesheets="@../Styles/styless.css" text="Nom" textFill="WHITE" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="shadow" />
+                              <String fx:value="disabled-label" />
+                           </styleClass></Label>
+                        <TextField fx:id="nomAjouter" promptText="Nom" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label fx:id="nomError" prefHeight="26.0" prefWidth="386.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label prefHeight="22.0" prefWidth="67.0" stylesheets="@../Styles/styless.css" text="Prénom" textFill="WHITE" GridPane.rowIndex="6">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="shadow" />
+                              <String fx:value="disabled-label" />
+                           </styleClass></Label>
+                        <TextField fx:id="prenomAjout" promptText="Prénom" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Label fx:id="prenomError" prefHeight="26.0" prefWidth="385.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <Label prefHeight="22.0" prefWidth="77.0" stylesheets="@../Styles/styless.css" text="Age" textFill="WHITE" GridPane.rowIndex="8">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="shadow" />
+                              <String fx:value="disabled-label" />
+                           </styleClass></Label>
+                        <TextField fx:id="ageAjout" promptText="Age" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <Label fx:id="ageError" prefHeight="26.0" prefWidth="387.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                        <Label prefHeight="26.0" prefWidth="218.0" stylesheets="@../Styles/styless.css" text="N°Téléphone" textFill="WHITE" GridPane.rowIndex="10">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="shadow" />
+                              <String fx:value="disabled-label" />
+                           </styleClass></Label>
+                        <TextField fx:id="numtelAjout" promptText="N°Téléphone" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                        <Label fx:id="numtelError" prefHeight="26.0" prefWidth="385.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                        <Label prefHeight="22.0" prefWidth="67.0" stylesheets="@../Styles/styless.css" text="E-mail" textFill="WHITE" GridPane.rowIndex="12">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="shadow" />
+                              <String fx:value="disabled-label" />
+                           </styleClass></Label>
+                        <TextField fx:id="emailAjout" promptText="E-mail" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+                        <Label fx:id="emailError" prefHeight="26.0" prefWidth="386.0" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+                        <Label fx:id="mdpLabel" prefHeight="26.0" prefWidth="108.0" stylesheets="@../Styles/styless.css" text="Mot de passe" textFill="WHITE" GridPane.rowIndex="14">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="shadow" />
+                              <String fx:value="disabled-label" />
+                           </styleClass></Label>
+                        <PasswordField fx:id="mdpAjout" promptText="Mot de passe" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+                        <Label fx:id="confirmMdpLabel" prefHeight="26.0" prefWidth="190.0" stylesheets="@../Styles/styless.css" text="Confirmer Mot de passe" textFill="WHITE" GridPane.rowIndex="16">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="shadow" />
+                              <String fx:value="disabled-label" />
+                           </styleClass></Label>
+                        <PasswordField fx:id="confirmMdpAjout" promptText="Confirmer Mot de passe" GridPane.columnIndex="1" GridPane.rowIndex="16" />
+                        <Label fx:id="confirmMdpError" prefHeight="26.0" prefWidth="390.0" GridPane.columnIndex="1" GridPane.rowIndex="17" />
+                        <Label fx:id="mdpError" prefHeight="26.0" prefWidth="390.0" GridPane.columnIndex="1" GridPane.rowIndex="15" />
+                        <Button fx:id="ajoutAdminButton" mnemonicParsing="false" onAction="#ajoutAdminButtonOnClick" prefHeight="33.0" prefWidth="178.0" style="-fx-background-color: #2daa67;" text="Ajouter" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="19">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="annulerButton" mnemonicParsing="false" onAction="#utilisateursButtonOnClick" prefHeight="26.0" prefWidth="168.0" text="Annuler" GridPane.columnIndex="1" GridPane.rowIndex="21">
+                           <GridPane.margin>
+                              <Insets left="5.0" />
+                           </GridPane.margin>
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Button>
+                        <ProgressBar fx:id="complexiteBar1" blendMode="COLOR_DODGE" prefHeight="26.0" prefWidth="366.0" progress="0.0" style="-fx-background-color: transparent;" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="14" />
+                        <Label fx:id="complexiteLabel1" prefHeight="18.0" prefWidth="196.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="14">
+                           <padding>
+                              <Insets right="25.0" />
+                           </padding>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <RadioButton fx:id="roleAdminSignup" mnemonicParsing="false" styleClass="shadow" text="Admin" textFill="WHITE" GridPane.rowIndex="18">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <stylesheets>
+                              <URL value="@../Styles/styless.css" />
+                              <URL value="@../Styles/styless.css" />
+                           </stylesheets>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="role2" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="roleLivreurSignup" mnemonicParsing="false" styleClass="shadow" text="Livreur" textFill="WHITE" toggleGroup="$role2" GridPane.columnIndex="1" GridPane.rowIndex="18">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <stylesheets>
+                              <URL value="@../Styles/styless.css" />
+                              <URL value="@../Styles/styless.css" />
+                           </stylesheets>
+                        </RadioButton>
+                        <Label fx:id="roleAddError" prefHeight="26.0" prefWidth="301.0" GridPane.columnIndex="2" GridPane.rowIndex="18" />
+                     </children>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="anchorPaneModifierMdp" prefHeight="693.0" prefWidth="1342.0" visible="false">
+               <children>
+                  <GridPane layoutX="151.0" layoutY="74.0" prefHeight="546.0" prefWidth="1064.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.199951171875" minWidth="10.0" prefWidth="209.5999755859375" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="390.4000244140625" minWidth="10.0" prefWidth="390.4000244140625" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Label prefHeight="27.0" prefWidth="181.0" text="Ancien Mot de passe" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font></Label>
+                        <Label fx:id="ancienError" prefHeight="26.0" prefWidth="386.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="mdpLabel1" prefHeight="27.0" prefWidth="217.0" text="Nouveau Mot de passe" textFill="WHITE" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font></Label>
+                        <PasswordField fx:id="nouveauMdp" promptText="Nouveau Mot de passe" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label fx:id="confirmMdpLabel1" prefHeight="27.0" prefWidth="217.0" text="Confirmer Mot de passe" textFill="WHITE" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font></Label>
+                        <PasswordField fx:id="confirmNouveauMdp" promptText="Confirmer Mot de passe" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label fx:id="confirmNouveauMdpError" prefHeight="34.0" prefWidth="390.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label fx:id="nouveauMdpError" prefHeight="26.0" prefWidth="390.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Button fx:id="confirmerNouveauMdp" mnemonicParsing="false" onAction="#confirmerNouveauMdpOnClick" prefHeight="33.0" prefWidth="178.0" style="-fx-background-color: #2daa67;" text="Confirmer" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="annulerButton1" mnemonicParsing="false" onAction="#utilisateursButtonOnClick" prefHeight="26.0" prefWidth="168.0" text="Annuler" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8">
+                           <GridPane.margin>
+                              <Insets left="5.0" />
+                           </GridPane.margin>
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Button>
+                        <PasswordField fx:id="ancienText" promptText="Ancien Mot de passe" GridPane.columnIndex="1" />
+                        <ProgressBar fx:id="complexiteBar" blendMode="COLOR_DODGE" prefHeight="26.0" prefWidth="366.0" progress="0.0" style="-fx-background-color: transparent;" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets left="10.0" />
+                           </GridPane.margin>
+                        </ProgressBar>
+                        <Label fx:id="complexiteLabel" prefHeight="18.0" prefWidth="196.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                           <padding>
+                              <Insets right="25.0" />
+                           </padding>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+         </children>
+        </AnchorPane>
+    </center>
+</BorderPane>

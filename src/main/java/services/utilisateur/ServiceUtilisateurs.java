@@ -1,8 +1,9 @@
-package services;
+package services.utilisateur;
 
-import controllers.loginController;
+import controllers.utilisateur.loginController;
+import services.IService;
 import utils.Encryptor;
-import entities.Utilisateur;
+import entities.utilisateur.Utilisateur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -22,7 +23,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServiceUtilisateurs implements IService <Utilisateur> {
+public class ServiceUtilisateurs implements IService<Utilisateur> {
     Encryptor encryptor = new Encryptor();
 
     byte[] encryptionKey = {65, 12, 12, 12, 12, 12, 12, 12, 12,

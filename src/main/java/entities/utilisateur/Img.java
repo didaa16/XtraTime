@@ -1,4 +1,4 @@
-package entities;
+package entities.utilisateur;
 
 import java.util.Objects;
 

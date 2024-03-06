@@ -1,13 +1,14 @@
-package services;
+package services.utilisateur;
 
-import entities.Img;
+import entities.utilisateur.Img;
+import services.IService;
 import utils.MyDataBase;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServiceImg implements IService <Img> {
+public class ServiceImg implements IService<Img> {
     private Connection cnx;
     private Statement st;
     private PreparedStatement pst;

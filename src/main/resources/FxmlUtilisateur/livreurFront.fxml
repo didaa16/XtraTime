@@ -28,11 +28,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.locateurFrontController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.utilisateur.livreurFrontController">
    <left>
-      <VBox fx:id="slider" prefHeight="750.0" prefWidth="350.0" styleClass="third-color" stylesheets="@front.css" BorderPane.alignment="CENTER">
+      <VBox fx:id="slider" prefHeight="750.0" prefWidth="350.0" styleClass="third-color" stylesheets="@../Styles/front.css" BorderPane.alignment="CENTER">
          <children>
-            <VBox fx:id="vboxUp" prefHeight="312.0" prefWidth="350.0" styleClass="selected-border" stylesheets="@front.css">
+            <VBox fx:id="vboxUp" prefHeight="312.0" prefWidth="350.0" styleClass="selected-border" stylesheets="@../Styles/front.css">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
@@ -52,20 +52,20 @@
                      <graphic>
                         <ImageView fitHeight="194.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@Design/locateur.png" />
+                              <Image url="@../Design/Livreur.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Label text="Locateur" textAlignment="CENTER">
+                  <Label text="Livreur" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                      <VBox.margin>
-                        <Insets left="135.0" top="5.0" />
+                        <Insets left="140.0" top="5.0" />
                      </VBox.margin>
                   </Label>
-                  <Button fx:id="modifierProfile" alignment="CENTER" mnemonicParsing="false" onAction="#modifierProfileOnClick" stylesheets="@front.css" text="Modifier Profile" textFill="WHITE" VBox.vgrow="ALWAYS">
+                  <Button fx:id="modifierProfile" alignment="CENTER" mnemonicParsing="false" onAction="#modifierProfileOnClick" stylesheets="@../Styles/front.css" text="Modifier Profile" textFill="WHITE" VBox.vgrow="ALWAYS">
                      <VBox.margin>
                         <Insets left="110.0" top="5.0" />
                      </VBox.margin>
@@ -82,10 +82,10 @@
                   </Button>
                </children>
             </VBox>
-            <VBox fx:id="vboxDown" alignment="TOP_CENTER" prefHeight="418.0" prefWidth="350.0" spacing="15.0" styleClass="selected-border" stylesheets="@front.css">
+            <VBox fx:id="vboxDown" alignment="TOP_CENTER" prefHeight="418.0" prefWidth="350.0" spacing="15.0" styleClass="selected-border" stylesheets="@../Styles/front.css">
                <children>
                   <Separator prefWidth="200.0" />
-                  <Button fx:id="profileButton" alignment="CENTER" mnemonicParsing="false" onAction="#profileButtonOnClick" prefHeight="39.0" prefWidth="220.0" stylesheets="@front.css" text="Profile" textFill="WHITE" VBox.vgrow="ALWAYS">
+                  <Button fx:id="profileButton" alignment="CENTER" mnemonicParsing="false" onAction="#profileButtonOnClick" prefHeight="39.0" prefWidth="220.0" stylesheets="@../Styles/front.css" text="Profile" textFill="WHITE" VBox.vgrow="ALWAYS">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -101,7 +101,7 @@
                      </styleClass>
                   </Button>
                   <Separator prefWidth="200.0" />
-                  <Button fx:id="motDePasseButton" alignment="CENTER" mnemonicParsing="false" onAction="#motDePasseButtonOnClick" prefHeight="39.0" prefWidth="220.0" stylesheets="@front.css" text="Mot de passe" textFill="WHITE">
+                  <Button fx:id="motDePasseButton" alignment="CENTER" mnemonicParsing="false" onAction="#motDePasseButtonOnClick" prefHeight="39.0" prefWidth="220.0" stylesheets="@../Styles/front.css" text="Mot de passe" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -114,7 +114,7 @@
                      </styleClass>
                   </Button>
                   <Separator prefWidth="200.0" />
-                  <Button fx:id="notificationsButton" alignment="CENTER" mnemonicParsing="false" onAction="#notificationsButtonOnClick" prefHeight="39.0" prefWidth="220.0" stylesheets="@front.css" text="Notifications" textFill="WHITE">
+                  <Button fx:id="notificationsButton" alignment="CENTER" mnemonicParsing="false" onAction="#notificationsButtonOnClick" prefHeight="39.0" prefWidth="220.0" stylesheets="@../Styles/front.css" text="Notifications" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -127,7 +127,7 @@
                      </styleClass>
                   </Button>
                   <Separator prefWidth="200.0" />
-                  <Button fx:id="politiqueDeConfidentialiteButton" alignment="CENTER" mnemonicParsing="false" onAction="#politiqueDeConfidentialiteButtonOnClick" prefHeight="39.0" prefWidth="220.0" stylesheets="@front.css" text="Politique de confidentialité" textFill="WHITE">
+                  <Button fx:id="politiqueDeConfidentialiteButton" alignment="CENTER" mnemonicParsing="false" onAction="#politiqueDeConfidentialiteButtonOnClick" prefHeight="39.0" prefWidth="220.0" stylesheets="@../Styles/front.css" text="Politique de confidentialité" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -140,7 +140,7 @@
                      </styleClass>
                   </Button>
                   <Separator prefWidth="200.0" />
-                  <Button fx:id="deconnecterButton" alignment="CENTER" mnemonicParsing="false" onAction="#deconnecterButtonOnClick" prefHeight="39.0" prefWidth="220.0" stylesheets="@front.css" text="Déconnecter" textFill="WHITE">
+                  <Button fx:id="deconnecterButton" alignment="CENTER" mnemonicParsing="false" onAction="#deconnecterButtonOnClick" prefHeight="39.0" prefWidth="220.0" stylesheets="@../Styles/front.css" text="Déconnecter" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -164,7 +164,7 @@
       </VBox>
    </left>
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" stylesheets="@front.css" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" stylesheets="@../Styles/front.css" BorderPane.alignment="CENTER">
          <children>
             <Pane fx:id="profilePane" prefHeight="750.0" prefWidth="1571.0" visible="false">
                <children>
@@ -268,7 +268,7 @@
                            </font></TextField>
                      </children>
                   </GridPane>
-                  <Button fx:id="sauvegarderModificationsButton" alignment="CENTER" layoutX="543.0" layoutY="655.0" mnemonicParsing="false" onAction="#sauvegarderModificationsButtonOnClick" prefHeight="38.0" prefWidth="209.0" stylesheets="@front.css" text="Sauvegarder les modifications" textFill="WHITE">
+                  <Button fx:id="sauvegarderModificationsButton" alignment="CENTER" layoutX="543.0" layoutY="655.0" mnemonicParsing="false" onAction="#sauvegarderModificationsButtonOnClick" prefHeight="38.0" prefWidth="209.0" stylesheets="@../Styles/front.css" text="Sauvegarder les modifications" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
@@ -296,7 +296,7 @@
                         <Font size="11.0" />
                      </font>
                   </Label>
-                  <Button fx:id="confirmerAdresseCode" alignment="CENTER" layoutX="446.0" layoutY="457.0" mnemonicParsing="false" onAction="#confirmerAdresseCodeOnClick" prefHeight="38.0" prefWidth="209.0" stylesheets="@front.css" text="Confirmer" textFill="WHITE">
+                  <Button fx:id="confirmerAdresseCode" alignment="CENTER" layoutX="446.0" layoutY="457.0" mnemonicParsing="false" onAction="#confirmerAdresseCodeOnClick" prefHeight="38.0" prefWidth="209.0" stylesheets="@../Styles/front.css" text="Confirmer" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
@@ -305,7 +305,7 @@
                         <String fx:value="button" />
                      </styleClass>
                   </Button>
-                  <Button fx:id="retourToProfile" alignment="CENTER" layoutX="446.0" layoutY="575.0" mnemonicParsing="false" onAction="#retourToProfileOnClick" prefHeight="38.0" prefWidth="209.0" stylesheets="@front.css" text="Retour" textFill="WHITE">
+                  <Button fx:id="retourToProfile" alignment="CENTER" layoutX="446.0" layoutY="575.0" mnemonicParsing="false" onAction="#retourToProfileOnClick" prefHeight="38.0" prefWidth="209.0" stylesheets="@../Styles/front.css" text="Retour" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
@@ -314,7 +314,7 @@
                         <String fx:value="button" />
                      </styleClass>
                   </Button>
-                  <Button fx:id="confirmerAdresseCode1" alignment="CENTER" layoutX="446.0" layoutY="457.0" mnemonicParsing="false" onAction="#confirmerAdresseCodeOnClick1" prefHeight="38.0" prefWidth="209.0" stylesheets="@front.css" text="Confirmer" textFill="WHITE" visible="false">
+                  <Button fx:id="confirmerAdresseCode1" alignment="CENTER" layoutX="446.0" layoutY="457.0" mnemonicParsing="false" onAction="#confirmerAdresseCodeOnClick1" prefHeight="38.0" prefWidth="209.0" stylesheets="@../Styles/front.css" text="Confirmer" textFill="WHITE" visible="false">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
@@ -375,7 +375,7 @@
                         <Label fx:id="confirmerMdpErrorLabel" prefHeight="18.0" prefWidth="401.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                      </children>
                   </GridPane>
-                  <Button fx:id="sauvegarderMdpChangement" alignment="CENTER" layoutX="531.0" layoutY="583.0" mnemonicParsing="false" onAction="#sauvegarderMdpChangementOnClick" prefHeight="38.0" prefWidth="209.0" stylesheets="@front.css" text="Sauvegarder les modifications" textFill="WHITE">
+                  <Button fx:id="sauvegarderMdpChangement" alignment="CENTER" layoutX="531.0" layoutY="583.0" mnemonicParsing="false" onAction="#sauvegarderMdpChangementOnClick" prefHeight="38.0" prefWidth="209.0" stylesheets="@../Styles/front.css" text="Sauvegarder les modifications" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>

@@ -1,4 +1,4 @@
-package controllers;
+package controllers.utilisateur;
 
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.ResourceBundle;
 
-import entities.Utilisateur;
+import entities.utilisateur.Utilisateur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -23,14 +23,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import services.ServiceUtilisateurs;
+import services.utilisateur.ServiceUtilisateurs;
 import utils.Encryptor;
 import utils.SendMail;
 import utils.SendSMS;
 
 import javax.swing.*;
 
-public class livreurFrontController {
+public class locateurFrontController {
 
     @FXML
     private ResourceBundle resources;
@@ -178,7 +178,7 @@ public class livreurFrontController {
     @FXML
     void deconnecterButtonOnClick(ActionEvent event) {
         loggedInUser = null;
-        serviceUtilisateurs.changeScreen(event, "/login.fxml", "LOGIN");
+        serviceUtilisateurs.changeScreen(event, "/FxmlUtilisateur/login.fxml", "LOGIN");
     }
 
     @FXML
@@ -194,7 +194,7 @@ public class livreurFrontController {
         int Rand = rd.nextInt(1000000 + 1);
         motDePasseOublie.setLoggedInUser(loggedInUser);
         motDePasseOublie.setRand(Rand);
-        serviceUtilisateurs.changeScreen(event, "/motDePasseOublie.fxml", "Vérifier le code");
+        serviceUtilisateurs.changeScreen(event, "/FxmlUtilisateur/motDePasseOublie.fxml", "Vérifier le code");
         SendMail.SendMail(event, Rand, loggedInUser);
     }
 
@@ -209,7 +209,7 @@ public class livreurFrontController {
         System.out.println(num);
         SendSMS.SendSMS(message, num);
         motDePasseOublie.setLoggedInUser(loggedInUser);
-        serviceUtilisateurs.changeScreen(event, "/motDePasseOublie.fxml", "Vérifier le code");
+        serviceUtilisateurs.changeScreen(event, "/FxmlUtilisateur/motDePasseOublie.fxml", "Vérifier le code");
 
     }
     @FXML

@@ -1,9 +1,9 @@
-package controllers;
+package controllers.utilisateur;
 
 import com.restfb.*;
 import com.restfb.exception.FacebookOAuthException;
 import com.restfb.json.JsonObject;
-import entities.Utilisateur;
+import entities.utilisateur.Utilisateur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -19,8 +19,8 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import services.ServiceImg;
-import services.ServiceUtilisateurs;
+import services.utilisateur.ServiceImg;
+import services.utilisateur.ServiceUtilisateurs;
 import utils.SendMail;
 import utils.SendSMS;
 
@@ -144,7 +144,7 @@ public class loginController {
                         // Fermeture de la fenêtre de connexion et changement d'écran
                         JOptionPane.showMessageDialog(null,"Vous avez connecté avec succès! Si vous souhaitez garder votre compte persistant, allez à modifier et mettez vos autres informations.");
                         stage.close();
-                        serviceUtilisateurs.changeScreen(event, "/clientFront.fxml", "XTRATIME");
+                        serviceUtilisateurs.changeScreen(event, "/FxmlUtilisateur/clientFront.fxml", "XTRATIME");
 
                     } catch (FacebookOAuthException | IOException e) {
                         System.err.println("Error: " + e.getMessage());
@@ -186,19 +186,19 @@ public class loginController {
                 switch (utilisateur.getRole()) {
                     case "Admin":
                         dashboard.setLoggedInUser(utilisateur);
-                        serviceUtilisateurs.changeScreen(event, "/dashboard.fxml", "XTRATIME");
+                        serviceUtilisateurs.changeScreen(event, "/FxmlUtilisateur/dashboard.fxml", "XTRATIME");
                         break;
                     case "Client":
                         clientFrontController.setLoggedInUser(utilisateur);
-                        serviceUtilisateurs.changeScreen(event, "/clientFront.fxml", "xtratime");
+                        serviceUtilisateurs.changeScreen(event, "/FxmlUtilisateur/clientFront.fxml", "xtratime");
                         break;
                     case "Locateur":
                         locateurFrontController.setLoggedInUser(utilisateur);
-                        serviceUtilisateurs.changeScreen(event, "/locateurFront.fxml", "Locateur");
+                        serviceUtilisateurs.changeScreen(event, "/FxmlUtilisateur/locateurFront.fxml", "Locateur");
                         break;
                     case "Livreur":
                         livreurFrontController.setLoggedInUser(utilisateur);
-                        serviceUtilisateurs.changeScreen(event, "/livreurFront.fxml", "Livreur");
+                        serviceUtilisateurs.changeScreen(event, "/FxmlUtilisateur/livreurFront.fxml", "Livreur");
                         break;
                     default:
                         break;
@@ -233,7 +233,7 @@ public class loginController {
     }
 
     public void signupLoginButtonOnClick(ActionEvent event){
-        serviceUtilisateurs.changeScreen(event, "/signup.fxml", "Sign Up");
+        serviceUtilisateurs.changeScreen(event, "/FxmlUtilisateur/signup.fxml", "Sign Up");
     }
     @FXML
     void eyeIconLoginButtonOnClick(ActionEvent event) {
@@ -270,7 +270,7 @@ public class loginController {
         Utilisateur newUser = serviceUtilisateurs.afficherParPseudo(pseudoLogin.getText());
         motDePasseOublie.setLoggedInUser(newUser);
         motDePasseOublie.setRand(Rand);
-        serviceUtilisateurs.changeScreen(event, "/motDePasseOublie.fxml", "Vérifier le code");
+        serviceUtilisateurs.changeScreen(event, "/FxmlUtilisateur/motDePasseOublie.fxml", "Vérifier le code");
         SendMail.SendMail(event, Rand, newUser);
     }
 
@@ -288,7 +288,7 @@ public class loginController {
             System.out.println(num);
             SendSMS.SendSMS(message, num);
             motDePasseOublie.setLoggedInUser(serviceUtilisateurs.afficherParPseudo(newUser.getPseudo()));
-            serviceUtilisateurs.changeScreen(event, "/motDePasseOublie.fxml", "Vérifier le code");
+            serviceUtilisateurs.changeScreen(event, "/FxmlUtilisateur/motDePasseOublie.fxml", "Vérifier le code");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

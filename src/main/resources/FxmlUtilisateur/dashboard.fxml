@@ -32,9 +32,9 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="791.0" prefWidth="1561.0" styleClass="gradient-background" stylesheets="@styless.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.dashboard">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="791.0" prefWidth="1561.0" styleClass="gradient-background" stylesheets="@../Styles/styless.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.utilisateur.dashboard">
     <top>
-        <AnchorPane prefHeight="86.0" prefWidth="998.0" style="-fx-background-color: #000000;" styleClass="container" stylesheets="@styless.css" BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="86.0" prefWidth="998.0" style="-fx-background-color: #000000;" styleClass="container" stylesheets="@../Styles/styless.css" BorderPane.alignment="CENTER">
             <children>
                 <HBox layoutX="2.0" layoutY="6.0" prefHeight="90.0" prefWidth="1561.0">
                     <children>
@@ -58,7 +58,7 @@
                      <graphic>
                               <ImageView fitHeight="85.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
                                   <image>
-                                      <Image url="@Design/LOGO.png" />
+                                      <Image url="@../Design/LOGO.png" />
                                   </image>
                               </ImageView>
                      </graphic>
@@ -140,9 +140,9 @@
         </AnchorPane>
     </top>
     <left>
-        <AnchorPane fx:id="slider" prefHeight="722.0" prefWidth="222.0" style="-fx-background-color: #000000;" styleClass="container" stylesheets="@styless.css" BorderPane.alignment="CENTER">
+        <AnchorPane fx:id="slider" prefHeight="722.0" prefWidth="222.0" style="-fx-background-color: #000000;" styleClass="container" stylesheets="@../Styles/styless.css" BorderPane.alignment="CENTER">
             <children>
-                <VBox layoutX="-1.0" layoutY="34.0" prefHeight="484.0" prefWidth="222.0" styleClass="selected-border" stylesheets="@front.css">
+                <VBox layoutX="-1.0" layoutY="34.0" prefHeight="484.0" prefWidth="222.0" styleClass="selected-border" stylesheets="@../Styles/front.css">
                     <children>
                         <Button fx:id="utilisateursButton" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#utilisateursButtonOnClick" prefHeight="40.0" prefWidth="228.0" style="-fx-background-color: transparent;" text="Utilisateurs" textFill="WHITE">
                             <font>
@@ -158,8 +158,8 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="USERS" selectionFill="BLACK" />
                      </graphic>
                      <stylesheets>
-                        <URL value="@styless.css" />
-                        <URL value="@front.css" />
+                        <URL value="@../Styles/styless.css" />
+                        <URL value="@../Styles/front.css" />
                      </stylesheets>
                      <styleClass>
                         <String fx:value="selected" />
@@ -421,7 +421,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Label prefHeight="22.0" prefWidth="67.0" stylesheets="@styless.css" text="Pseudo" textFill="WHITE">
+                        <Label prefHeight="22.0" prefWidth="67.0" stylesheets="@../Styles/styless.css" text="Pseudo" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -431,7 +431,7 @@
                            </styleClass></Label>
                         <TextField fx:id="pseudoAjout" promptText="Pseudo" GridPane.columnIndex="1" />
                         <Label fx:id="pseudoError" prefHeight="26.0" prefWidth="381.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label prefHeight="22.0" prefWidth="67.0" stylesheets="@styless.css" text="CIN" textFill="WHITE" GridPane.rowIndex="2">
+                        <Label prefHeight="22.0" prefWidth="67.0" stylesheets="@../Styles/styless.css" text="CIN" textFill="WHITE" GridPane.rowIndex="2">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -441,7 +441,7 @@
                            </styleClass></Label>
                         <TextField fx:id="cinAjout" promptText="Cin" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <Label fx:id="cinError" prefHeight="26.0" prefWidth="384.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label prefHeight="22.0" prefWidth="67.0" stylesheets="@styless.css" text="Nom" textFill="WHITE" GridPane.rowIndex="4">
+                        <Label prefHeight="22.0" prefWidth="67.0" stylesheets="@../Styles/styless.css" text="Nom" textFill="WHITE" GridPane.rowIndex="4">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -451,7 +451,7 @@
                            </styleClass></Label>
                         <TextField fx:id="nomAjouter" promptText="Nom" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                         <Label fx:id="nomError" prefHeight="26.0" prefWidth="386.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <Label prefHeight="22.0" prefWidth="67.0" stylesheets="@styless.css" text="Prénom" textFill="WHITE" GridPane.rowIndex="6">
+                        <Label prefHeight="22.0" prefWidth="67.0" stylesheets="@../Styles/styless.css" text="Prénom" textFill="WHITE" GridPane.rowIndex="6">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -461,7 +461,7 @@
                            </styleClass></Label>
                         <TextField fx:id="prenomAjout" promptText="Prénom" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                         <Label fx:id="prenomError" prefHeight="26.0" prefWidth="385.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                        <Label prefHeight="22.0" prefWidth="77.0" stylesheets="@styless.css" text="Age" textFill="WHITE" GridPane.rowIndex="8">
+                        <Label prefHeight="22.0" prefWidth="77.0" stylesheets="@../Styles/styless.css" text="Age" textFill="WHITE" GridPane.rowIndex="8">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -471,7 +471,7 @@
                            </styleClass></Label>
                         <TextField fx:id="ageAjout" promptText="Age" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                         <Label fx:id="ageError" prefHeight="26.0" prefWidth="387.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                        <Label prefHeight="26.0" prefWidth="218.0" stylesheets="@styless.css" text="N°Téléphone" textFill="WHITE" GridPane.rowIndex="10">
+                        <Label prefHeight="26.0" prefWidth="218.0" stylesheets="@../Styles/styless.css" text="N°Téléphone" textFill="WHITE" GridPane.rowIndex="10">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -481,7 +481,7 @@
                            </styleClass></Label>
                         <TextField fx:id="numtelAjout" promptText="N°Téléphone" GridPane.columnIndex="1" GridPane.rowIndex="10" />
                         <Label fx:id="numtelError" prefHeight="26.0" prefWidth="385.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-                        <Label prefHeight="22.0" prefWidth="67.0" stylesheets="@styless.css" text="E-mail" textFill="WHITE" GridPane.rowIndex="12">
+                        <Label prefHeight="22.0" prefWidth="67.0" stylesheets="@../Styles/styless.css" text="E-mail" textFill="WHITE" GridPane.rowIndex="12">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -491,7 +491,7 @@
                            </styleClass></Label>
                         <TextField fx:id="emailAjout" promptText="E-mail" GridPane.columnIndex="1" GridPane.rowIndex="12" />
                         <Label fx:id="emailError" prefHeight="26.0" prefWidth="386.0" GridPane.columnIndex="1" GridPane.rowIndex="13" />
-                        <Label fx:id="mdpLabel" prefHeight="26.0" prefWidth="108.0" stylesheets="@styless.css" text="Mot de passe" textFill="WHITE" GridPane.rowIndex="14">
+                        <Label fx:id="mdpLabel" prefHeight="26.0" prefWidth="108.0" stylesheets="@../Styles/styless.css" text="Mot de passe" textFill="WHITE" GridPane.rowIndex="14">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -500,7 +500,7 @@
                               <String fx:value="disabled-label" />
                            </styleClass></Label>
                         <PasswordField fx:id="mdpAjout" promptText="Mot de passe" GridPane.columnIndex="1" GridPane.rowIndex="14" />
-                        <Label fx:id="confirmMdpLabel" prefHeight="26.0" prefWidth="190.0" stylesheets="@styless.css" text="Confirmer Mot de passe" textFill="WHITE" GridPane.rowIndex="16">
+                        <Label fx:id="confirmMdpLabel" prefHeight="26.0" prefWidth="190.0" stylesheets="@../Styles/styless.css" text="Confirmer Mot de passe" textFill="WHITE" GridPane.rowIndex="16">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -544,8 +544,8 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                            <stylesheets>
-                              <URL value="@styless.css" />
-                              <URL value="@styless.css" />
+                              <URL value="@../Styles/styless.css" />
+                              <URL value="@../Styles/styless.css" />
                            </stylesheets>
                            <toggleGroup>
                               <ToggleGroup fx:id="role2" />
@@ -556,8 +556,8 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                            <stylesheets>
-                              <URL value="@styless.css" />
-                              <URL value="@styless.css" />
+                              <URL value="@../Styles/styless.css" />
+                              <URL value="@../Styles/styless.css" />
                            </stylesheets>
                         </RadioButton>
                         <Label fx:id="roleAddError" prefHeight="26.0" prefWidth="301.0" GridPane.columnIndex="2" GridPane.rowIndex="18" />

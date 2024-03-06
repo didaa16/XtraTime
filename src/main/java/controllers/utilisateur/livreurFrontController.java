@@ -1,5 +1,20 @@
-package controllers;
+package controllers.utilisateur;
 
+import entities.utilisateur.Utilisateur;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.scene.effect.BlendMode;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import services.utilisateur.ServiceUtilisateurs;
+import utils.Encryptor;
+import utils.SendMail;
+import utils.SendSMS;
+
+import javax.swing.*;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
@@ -7,30 +22,7 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.ResourceBundle;
 
-import entities.Utilisateur;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.effect.BlendMode;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import services.ServiceUtilisateurs;
-import utils.Encryptor;
-import utils.SendMail;
-import utils.SendSMS;
-
-import javax.swing.*;
-
-public class locateurFrontController {
+public class livreurFrontController {
 
     @FXML
     private ResourceBundle resources;
@@ -178,7 +170,7 @@ public class locateurFrontController {
     @FXML
     void deconnecterButtonOnClick(ActionEvent event) {
         loggedInUser = null;
-        serviceUtilisateurs.changeScreen(event, "/login.fxml", "LOGIN");
+        serviceUtilisateurs.changeScreen(event, "/FxmlUtilisateur/login.fxml", "LOGIN");
     }
 
     @FXML
@@ -194,7 +186,7 @@ public class locateurFrontController {
         int Rand = rd.nextInt(1000000 + 1);
         motDePasseOublie.setLoggedInUser(loggedInUser);
         motDePasseOublie.setRand(Rand);
-        serviceUtilisateurs.changeScreen(event, "/motDePasseOublie.fxml", "Vérifier le code");
+        serviceUtilisateurs.changeScreen(event, "/FxmlUtilisateur/motDePasseOublie.fxml", "Vérifier le code");
         SendMail.SendMail(event, Rand, loggedInUser);
     }
 
@@ -209,7 +201,7 @@ public class locateurFrontController {
         System.out.println(num);
         SendSMS.SendSMS(message, num);
         motDePasseOublie.setLoggedInUser(loggedInUser);
-        serviceUtilisateurs.changeScreen(event, "/motDePasseOublie.fxml", "Vérifier le code");
+        serviceUtilisateurs.changeScreen(event, "/FxmlUtilisateur/motDePasseOublie.fxml", "Vérifier le code");
 
     }
     @FXML

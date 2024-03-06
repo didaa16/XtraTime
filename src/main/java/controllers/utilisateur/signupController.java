@@ -1,7 +1,7 @@
-package controllers;
+package controllers.utilisateur;
 
-import entities.Img;
-import entities.Utilisateur;
+import entities.utilisateur.Img;
+import entities.utilisateur.Utilisateur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,14 +14,19 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
-import services.ServiceImg;
-import services.ServiceUtilisateurs;
+import services.utilisateur.ServiceImg;
+import services.utilisateur.ServiceUtilisateurs;
 import utils.Encryptor;
 import utils.SendMail;
 
 import javax.swing.*;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.Objects;
@@ -80,7 +85,7 @@ public class signupController implements Initializable {
     private static String randomString;
 
     public void loginSignupButtonOnClick(ActionEvent event){
-        serviceUtilisateurs.changeScreen(event, "/login.fxml", "Login");
+        serviceUtilisateurs.changeScreen(event, "/FxmlUtilisateur/login.fxml", "Login");
     }
 
     public boolean getErrors(){
@@ -208,21 +213,31 @@ public class signupController implements Initializable {
             Utilisateur newUser = new Utilisateur(pseudoSignup.getText(), Integer.parseInt(cinSignup.getText()), nomSignup.getText(),
                     prenomSignup.getText(), Integer.parseInt(ageSignup.getText()), Integer.parseInt(numtelSignup.getText()), emailSignup.getText(),
                     encryptor.encryptString(mdpSignup.getText()), (roleClientSignup.isSelected() ? "Client" : "Locateur"));
-            Img img = new Img(pseudoSignup.getText(), url);
             try {
+                // Add user to database
                 serviceUtilisateurs.ajouter(newUser);
+
+                // Copy image to destination directory
+                Path source = Paths.get(url); // Assuming url is the path to the image
+                Path destination = Paths.get("C:\\Users\\PC\\OneDrive\\Bureau\\STUDY\\SEMESTRE 2\\PI\\XtraTime\\src\\main\\resources\\uploads\\" + pseudoSignup.getText() + ".jpg");
+                Files.copy(source, destination, StandardCopyOption.REPLACE_EXISTING);
+
+                // Add image path to database
+                Img img = new Img(pseudoSignup.getText(), destination.toString());
                 serviceImg.ajouter(img);
+
                 System.out.println("Utilisateur ajouté avec succès !");
-                JOptionPane.showMessageDialog(null,"Vous etes inscris avec succès ! Veuillez connecter maintenant.");
-                serviceUtilisateurs.changeScreen(event, "/login.fxml", "LOGIN");
-            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null,"Vous êtes inscrit avec succès ! Veuillez vous connecter maintenant.");
+                serviceUtilisateurs.changeScreen(event, "/FxmlUtilisateur/login.fxml", "LOGIN");
+            } catch (SQLException | IOException e) {
                 System.out.println("Erreur lors de l'ajout de l'utilisateur : " + e.getMessage());
             }
         }
         else {
-            JOptionPane.showMessageDialog(null,"Code incorrecte! ");
+            JOptionPane.showMessageDialog(null,"Code incorrect !");
         }
     }
+
 
     @FXML
     private void returnButtonOnClick(ActionEvent event){

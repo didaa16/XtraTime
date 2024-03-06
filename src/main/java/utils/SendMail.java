@@ -1,8 +1,6 @@
 package utils;
 
-import com.twilio.rest.chat.v1.service.User;
-import controllers.signupController;
-import entities.Utilisateur;
+import entities.utilisateur.Utilisateur;
 import javafx.event.ActionEvent;
 
 import javax.mail.Message;

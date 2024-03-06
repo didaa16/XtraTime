@@ -1,22 +1,21 @@
-package controllers;
+package controllers.utilisateur;
 
+import entities.utilisateur.Utilisateur;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.scene.effect.BlendMode;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import services.utilisateur.ServiceUtilisateurs;
+import utils.Encryptor;
+
+import javax.swing.*;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
-
-import javafx.scene.control.*;
-import javafx.scene.effect.BlendMode;
-import utils.Encryptor;
-import entities.Utilisateur;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-import services.ServiceUtilisateurs;
-
-import javax.swing.*;
 
 public class motDePasseOublie {
 
@@ -67,11 +66,11 @@ public class motDePasseOublie {
     void retourButtonOnClick(ActionEvent event) {
         switch (loggedInUser.getRole()){
             case "Admin":
-                serviceUtilisateurs.changeScreen(event, "/login.fxml", "LOGIN");
+                serviceUtilisateurs.changeScreen(event, "/FxmlUtilisateur/login.fxml", "LOGIN");
                 break;
             case "Client":
                 clientFrontController.setLoggedInUser(loggedInUser);
-                serviceUtilisateurs.changeScreen(event, "/clientFront.fxml", "xtratime");
+                serviceUtilisateurs.changeScreen(event, "/FxmlUtilisateur/clientFront.fxml", "xtratime");
                 break;
         }
     }
@@ -112,7 +111,7 @@ public class motDePasseOublie {
             try {
                 serviceUtilisateurs.modifierMdp(loggedInUser, encryptor.encryptString(nouveauMdp.getText()));
                 JOptionPane.showMessageDialog(null,"Mot de Passe modifié avec succès !");
-                serviceUtilisateurs.changeScreen(event, "/login.fxml", "LOGIN");
+                serviceUtilisateurs.changeScreen(event, "/FxmlUtilisateur/login.fxml", "LOGIN");
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }

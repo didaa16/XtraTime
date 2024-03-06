@@ -1,7 +1,7 @@
-package controllers;
+package controllers.utilisateur;
 
-import entities.Img;
-import entities.Utilisateur;
+import entities.utilisateur.Img;
+import entities.utilisateur.Utilisateur;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,15 +20,20 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import services.ServiceImg;
-import services.ServiceUtilisateurs;
+import services.utilisateur.ServiceImg;
+import services.utilisateur.ServiceUtilisateurs;
 import utils.Encryptor;
 import utils.SendMail;
 import utils.SendSMS;
 
 import javax.swing.*;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.Objects;
@@ -194,7 +199,7 @@ public class clientFrontController {
     @FXML
     void deconnecterButtonOnClick(ActionEvent event) {
         loggedInUser = null;
-        serviceUtilisateurs.changeScreen(event, "/login.fxml", "LOGIN");
+        serviceUtilisateurs.changeScreen(event, "/FxmlUtilisateur/login.fxml", "LOGIN");
     }
 
     @FXML
@@ -210,7 +215,7 @@ public class clientFrontController {
         int Rand = rd.nextInt(1000000 + 1);
         motDePasseOublie.setLoggedInUser(loggedInUser);
         motDePasseOublie.setRand(Rand);
-        serviceUtilisateurs.changeScreen(event, "/motDePasseOublie.fxml", "Vérifier le code");
+        serviceUtilisateurs.changeScreen(event, "/FxmlUtilisateur/motDePasseOublie.fxml", "Vérifier le code");
         SendMail.SendMail(event, Rand, loggedInUser);
     }
 
@@ -225,7 +230,7 @@ public class clientFrontController {
         System.out.println(num);
         SendSMS.SendSMS(message, num);
         motDePasseOublie.setLoggedInUser(loggedInUser);
-        serviceUtilisateurs.changeScreen(event, "/motDePasseOublie.fxml", "Vérifier le code");
+        serviceUtilisateurs.changeScreen(event, "/FxmlUtilisateur/motDePasseOublie.fxml", "Vérifier le code");
 
     }
     @FXML
@@ -465,7 +470,10 @@ public class clientFrontController {
                     if (serviceUtilisateurs.pseudoExiste(newUser.getPseudo())) {
                         // Si l'utilisateur existe, appeler la méthode modifier
                         serviceUtilisateurs.modifier(newUser);
-                        Img img = new Img(loggedInUser.getPseudo(), url);
+                        Path source = Paths.get(url); // Assuming url is the path to the image
+                        Path destination = Paths.get("C:\\Users\\PC\\OneDrive\\Bureau\\STUDY\\SEMESTRE 2\\PI\\XtraTime\\src\\main\\resources\\uploads\\" + newUser.getPseudo() + ".jpg");
+                        Files.copy(source, destination, StandardCopyOption.REPLACE_EXISTING);
+                        Img img = new Img(loggedInUser.getPseudo(), destination.toString());
                         System.out.println(img);
                         System.out.println(img);
                         if (serviceImg.imgExiste(img.getPseudoU())) {
@@ -491,7 +499,10 @@ public class clientFrontController {
                         ancienMdpTF.setText(String.valueOf(Rdd));
                         loggedInUser = newUser;
                         JOptionPane.showMessageDialog(null,"Inscription avec succés! Bienvenue à XtraTime \n Voici votre nouveau mot de passe : "+Rdd+" \n vous pouvez le modifier quand tu veux.");
-                        Img img = new Img(newUser.getPseudo(), url);
+                        Path source = Paths.get(url); // Assuming url is the path to the image
+                        Path destination = Paths.get("C:\\Users\\PC\\OneDrive\\Bureau\\STUDY\\SEMESTRE 2\\PI\\XtraTime\\src\\main\\resources\\uploads\\" + newUser.getPseudo() + ".jpg");
+                        Files.copy(source, destination, StandardCopyOption.REPLACE_EXISTING);
+                        Img img = new Img(newUser.getPseudo(), destination.toString());
                         System.out.println(img);
                         if (serviceImg.imgExiste(img.getPseudoU())) {
                             if (deleted) {
@@ -507,7 +518,7 @@ public class clientFrontController {
                         System.out.println("Utilisateur ajouté avec succès !");
                     }
                 }
-            } catch (SQLException | NoSuchAlgorithmException e) {
+            } catch (SQLException | NoSuchAlgorithmException | IOException e) {
                 System.out.println("Erreur lors de la modification de l'utilisateur : " + e.getMessage());
             }
         }
@@ -553,7 +564,10 @@ public class clientFrontController {
                     emailTF.getText(), loggedInUser.getMdp(), loggedInUser.getRole());
             try {
                 serviceUtilisateurs.modifier(newUser);
-                Img img = new Img(newUser.getPseudo(), url);
+                Path source = Paths.get(url); // Assuming url is the path to the image
+                Path destination = Paths.get("C:\\Users\\PC\\OneDrive\\Bureau\\STUDY\\SEMESTRE 2\\PI\\XtraTime\\src\\main\\resources\\uploads\\" + newUser.getPseudo() + ".jpg");
+                Files.copy(source, destination, StandardCopyOption.REPLACE_EXISTING);
+                Img img = new Img(newUser.getPseudo(), destination.toString());
                 System.out.println(img);
                 if(serviceImg.imgExiste(img.getPseudoU())){
                     if (deleted){
@@ -569,7 +583,7 @@ public class clientFrontController {
                 System.out.println("Utilisateur modifié avec succès !");
                 changementPane.setVisible(false);
                 profilePane.setVisible(true);
-            } catch (SQLException e) {
+            } catch (SQLException | IOException e) {
                 System.out.println(e.getMessage());
             }
         }

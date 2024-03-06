@@ -1,13 +1,13 @@
-package controllers;
+package controllers.utilisateur;
 
-import entities.Img;
-import entities.Utilisateur;
+import entities.utilisateur.Img;
+import entities.utilisateur.Utilisateur;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-import services.ServiceImg;
+import services.utilisateur.ServiceImg;
 
 import java.io.File;
 import java.net.URL;

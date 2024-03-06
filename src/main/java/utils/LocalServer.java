@@ -25,7 +25,7 @@ public class LocalServer {
         @Override
         public void handle(String target, org.eclipse.jetty.server.Request baseRequest, HttpServletRequest request, HttpServletResponse response) throws IOException {
             response.setStatus(HttpServletResponse.SC_FOUND);
-            response.setHeader("Location", "/clientFront.fxml");
+            response.setHeader("Location", "/FxmlUtilisateur/clientFront.fxml");
             baseRequest.setHandled(true);
         }
     }

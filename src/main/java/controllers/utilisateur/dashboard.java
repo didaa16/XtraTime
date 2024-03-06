@@ -1,6 +1,6 @@
-package controllers;
+package controllers.utilisateur;
 
-import entities.Utilisateur;
+import entities.utilisateur.Utilisateur;
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -21,7 +21,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import services.ServiceUtilisateurs;
+import services.utilisateur.ServiceUtilisateurs;
 import utils.Encryptor;
 
 import javax.swing.*;
@@ -169,7 +169,7 @@ public class dashboard {
         deconnecterButton.setOnAction(event -> {
             try {
                 loggedInUser = null;
-                Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/FxmlUtilisateur/login.fxml"));
                 TableView.getScene().setRoot(root);
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -283,7 +283,7 @@ public class dashboard {
 
     private void openCardClientScene() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cardClient.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FxmlUtilisateur/cardClient.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
@@ -608,7 +608,7 @@ public class dashboard {
     @FXML
     private void deconnecterButtonOnClick(ActionEvent event){
         loggedInUser = null;
-        serviceUtilisateurs.changeScreen(event, "/login.fxml", "LOGIN");
+        serviceUtilisateurs.changeScreen(event, "/FxmlUtilisateur/login.fxml", "LOGIN");
     }
     @FXML
     private void modifierMdpOnClick(ActionEvent event){

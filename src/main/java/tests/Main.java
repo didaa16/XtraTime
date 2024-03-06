@@ -19,7 +19,7 @@ public class Main extends Application {
 
         // Set the icon of the stage to your logo
         stage.getIcons().add(logo);
-        Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/FxmlUtilisateur/login.fxml"));
         stage.setTitle("XTRATIME");
         stage.setScene(new Scene(root));
         stage.show();

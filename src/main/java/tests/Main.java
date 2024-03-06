@@ -1,13 +1,11 @@
 package tests;
 
-import entities.*;
-import services.ServiceCommande;
-import services.ServiceCommandeProduit;
-import services.ServiceProduit;
-import utils.DataBase;
+import entities.store.*;
+import services.store.ServiceCommande;
+import services.store.ServiceCommandeProduit;
+import services.store.ServiceProduit;
 
 import java.sql.SQLException;
-import java.util.List;
 
 public class Main {
 

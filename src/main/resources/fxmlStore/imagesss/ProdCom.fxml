@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="285.0" prefWidth="182.0" stylesheets="@styless.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.store.ProduitDansCom">
+   <children>
+      <VBox alignment="TOP_CENTER" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="284.0" prefWidth="182.0" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
+         <children>
+            <ImageView fx:id="imageProduit" fitHeight="105.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../xml-xtratime/nike-air-zoom-sructure-22.jpg" />
+               </image>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </ImageView>
+            <VBox fx:id="produitDetails" alignment="TOP_CENTER" prefHeight="70.0" prefWidth="182.0">
+               <children>
+                  <Separator prefHeight="4.0" prefWidth="211.0" />
+                  <Label fx:id="nomProd" alignment="CENTER" prefHeight="27.0" prefWidth="202.0" text="Nike Air Zoom Sructure 22">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="reffff" alignment="CENTER" prefHeight="27.0" prefWidth="202.0" text="REEFF" textFill="#949090">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="tailleeeee" alignment="CENTER" prefHeight="27.0" prefWidth="202.0" text="taileeeeeeeeee" textFill="#949090">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="prixProduit" alignment="CENTER" prefHeight="29.0" prefWidth="191.0" text="450DT">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="supprimer" fitHeight="62.0" fitWidth="53.0" onMouseClicked="#deleteProd" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@signe-moins.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <Label fx:id="description" layoutX="118.0" layoutY="-69.0" styleClass="labelll" text="Label" />
+      <Label fx:id="taille" layoutX="128.0" layoutY="-59.0" styleClass="labelll" text="Label" />
+      <Label fx:id="marque" layoutX="138.0" layoutY="-49.0" styleClass="labelll" text="Label" />
+      <Label fx:id="typeee" layoutX="128.0" layoutY="-59.0" styleClass="labelll" text="type" />
+   </children>
+   <styleClass>
+      <String fx:value="produit-item" />
+      <String fx:value="shadow" />
+   </styleClass>
+</AnchorPane>

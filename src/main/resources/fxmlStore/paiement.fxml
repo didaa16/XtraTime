@@ -94,7 +94,7 @@
                   </HBox>
                   <ImageView fitHeight="124.0" fitWidth="342.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@téléchargement-removebg-preview.png" />
+                        <Image url="@imagesss/téléchargement-removebg-preview.png" />
                      </image>
                   </ImageView>
                   </children>
@@ -106,7 +106,7 @@
          <top>
             <ImageView fx:id="back" fitHeight="56.0" fitWidth="58.0" onMouseClicked="#goBack" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="TOP_RIGHT">
                <image>
-                  <Image url="@en-arriere.png" />
+                  <Image url="@imagesss/en-arriere.png" />
                </image>
                <BorderPane.margin>
                   <Insets right="10.0" />
@@ -133,7 +133,7 @@
                         </Label>
                         <ImageView fitHeight="97.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@7510522.png" />
+                              <Image url="@imagesss/7510522.png" />
                            </image>
                            <VBox.margin>
                               <Insets left="80.0" />

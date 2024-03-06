@@ -16,18 +16,21 @@ public class StripePaymentService {
         if (usdAmount > 999999.99) {
             System.out.println("Error: Amount exceeds the maximum allowed by Stripe.");
         } else {
+            try{
             Stripe.apiKey = "sk_test_51OqJbyP8fZ7mtZrf1ucCZuWgiG9TwaEZeDfFgVTC7dM2lapkIL1Hiq8LJKjLK2YVbdlYTFCHI3FgIthXHJgTxaa800QGib2xV2";
-            Map<String, Object> params = new HashMap<>();
-            params.put("amount", (long) amount);
-            params.put("currency", "usd");
 
-            PaymentIntentCreateParams createParams = PaymentIntentCreateParams.builder()
+            PaymentIntentCreateParams params = PaymentIntentCreateParams.builder()
                     .setAmount((long) amount)
                     .setCurrency("usd")
+                    .setPaymentMethod("pm_card_visa")
                     .build();
-
-            PaymentIntent paymentIntent = PaymentIntent.create(createParams);
-            System.out.println(paymentIntent);
+                PaymentIntent intent = PaymentIntent.create(params);
+            // If the payment was successful, display a success message
+            System.out.println("Payment successful. PaymentIntent ID: " + intent.getId());
+        } catch (StripeException e) {
+// If there was an error processing the payment, display the error message
+            System.out.println("Payment failed. Error: " + e.getMessage());
+        }
         }
     }
 }

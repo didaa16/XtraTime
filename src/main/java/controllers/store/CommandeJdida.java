@@ -105,7 +105,7 @@ public class CommandeJdida implements Initializable {
 
         for (int i = 0; i < this.produits.size(); ++i) {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/fxmlStore/imagesss/ProdCom.fxml")); // Chemin vers le fichier FXML de l'élément
+            fxmlLoader.setLocation(getClass().getResource("/fxmlStore/ProdCom.fxml")); // Chemin vers le fichier FXML de l'élément
             AnchorPane anchorPane = null;
             try {
                 anchorPane = (AnchorPane) fxmlLoader.load();
@@ -142,7 +142,7 @@ public class CommandeJdida implements Initializable {
     @FXML
     void goBack(MouseEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/imagesss/store.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/store.fxml"));
             Scene scene = back.getScene();
             scene.setRoot(root);
         } catch (IOException e) {
@@ -162,7 +162,7 @@ public class CommandeJdida implements Initializable {
 
         // Redirigez l'utilisateur vers la page d'accueil ou une autre page appropriée
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/imagesss/store.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/store.fxml"));
             Scene scene = annuler.getScene();
             scene.setRoot(root);
         } catch (IOException e) {
@@ -182,7 +182,7 @@ public class CommandeJdida implements Initializable {
         this.produits.addAll(this.getData());
         for (int i = 0; i < this.produits.size(); ++i) {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/fxmlStore/imagesss/ProdCom.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("/fxmlStore/ProdCom.fxml"));
             AnchorPane anchorPane = null;
             try {
                 anchorPane = (AnchorPane) fxmlLoader.load();
@@ -215,7 +215,7 @@ public class CommandeJdida implements Initializable {
     @FXML
     void payment(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/imagesss/paiement.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/paiement.fxml"));
             Scene scene = back.getScene();
             scene.setRoot(root);
         } catch (IOException e) {

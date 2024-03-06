@@ -17,7 +17,7 @@
          <children>
             <ImageView fx:id="imageProduit" fitHeight="105.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../xml-xtratime/nike-air-zoom-sructure-22.jpg" />
+                  <Image url="@../../../../../xml-xtratime/nike-air-zoom-sructure-22.jpg" />
                </image>
                <VBox.margin>
                   <Insets bottom="5.0" left="10.0" right="10.0" top="10.0" />
@@ -50,7 +50,7 @@
                      <children>
                         <ImageView fx:id="supprimer" fitHeight="62.0" fitWidth="53.0" onMouseClicked="#deleteProd" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@signe-moins.png" />
+                              <Image url="@imagesss/signe-moins.png" />
                            </image>
                         </ImageView>
                      </children>

@@ -77,7 +77,7 @@ public class AjouterProduitController {
     @FXML
     void afficherProduit(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/imagesss/AfficherProduit.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/AfficherProduit.fxml"));
             refProduit.getScene().setRoot(root);
 
         } catch (IOException e) {
@@ -232,7 +232,7 @@ public class AjouterProduitController {
     @FXML
     private void goBack() throws IOException {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/imagesss/GestionCommande.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/GestionCommande.fxml"));
             Scene scene = back.getScene();
             scene.setRoot(root);
         } catch (IOException e) {
@@ -245,7 +245,7 @@ public class AjouterProduitController {
     @FXML
     void store(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/imagesss/store.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/store.fxml"));
 
             Scene scene = store.getScene();
             scene.setRoot(root);

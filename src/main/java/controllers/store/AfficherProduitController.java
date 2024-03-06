@@ -179,7 +179,7 @@ public class AfficherProduitController {
         Produit produit = listeProduit.getSelectionModel().getSelectedItem();
         if (produit != null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlStore/imagesss/ModifierProduit.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlStore/ModifierProduit.fxml"));
                 Parent root = loader.load();
                 ModifierProduitController controller = loader.getController();
 
@@ -223,7 +223,7 @@ public class AfficherProduitController {
     @FXML
     void ajouterProduit(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/imagesss/AjouterProduit.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/AjouterProduit.fxml"));
 
             Scene scene = btnAjouter.getScene();
             scene.setRoot(root);
@@ -384,7 +384,7 @@ public class AfficherProduitController {
     @FXML
     private void goBack() throws IOException {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/imagesss/GestionCommande.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/GestionCommande.fxml"));
             Scene scene = back.getScene();
             scene.setRoot(root);
         } catch (IOException e) {

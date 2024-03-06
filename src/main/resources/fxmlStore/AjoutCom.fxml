@@ -89,7 +89,7 @@
                         <Insets left="2.0" right="3.0" top="10.0" />
                      </HBox.margin>
                      <image>
-                        <Image url="@en-arriere.png" />
+                        <Image url="@imagesss/en-arriere.png" />
                      </image>
                   </ImageView>
                </children>

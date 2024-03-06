@@ -28,7 +28,7 @@
                      <children>
                         <ImageView fitHeight="91.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@logo.png" />
+                              <Image url="@imagesss/logo.png" />
                            </image>
                         </ImageView>
                         <Label prefHeight="56.0" prefWidth="173.0" text="Xtratime" textFill="WHITE">
@@ -52,7 +52,7 @@
                             <children>
                         <ImageView fitHeight="30.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@search-interface-symbol.png" />
+                              <Image url="@imagesss/search-interface-symbol.png" />
                            </image>
                         </ImageView>
                                 <TextField fx:id="recherche" alignment="TOP_LEFT" onKeyReleased="#handleSearch" prefHeight="40.0" prefWidth="202.0" promptText="Rechercher un produit" styleClass="search-box">
@@ -110,7 +110,7 @@
                               </VBox>
                                       <ImageView fx:id="imageProd" fitHeight="150.0" fitWidth="163.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
                                           <image>
-                                              <Image url="@../../../../../../../Downloads/nike-air-zoom-sructure-22.jpg" />
+                                              <Image url="@../../../../../../Downloads/nike-air-zoom-sructure-22.jpg" />
                                           </image>
                                  <HBox.margin>
                                     <Insets />
@@ -173,7 +173,7 @@
                               </VBox>
                               <ImageView fitHeight="49.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@shopping-list.png" />
+                                    <Image url="@imagesss/shopping-list.png" />
                                  </image>
                               </ImageView>
                            </children>
@@ -186,7 +186,7 @@
                         </HBox>
                         <ImageView fx:id="back" fitHeight="57.0" fitWidth="46.0" onMouseClicked="#goBack" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@en-arriere.png" />
+                              <Image url="@imagesss/en-arriere.png" />
                            </image>
                            <HBox.margin>
                               <Insets left="30.0" />

@@ -280,7 +280,7 @@ public class ModifierProduitController {
     @FXML
     private void goBack() throws IOException {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/imagesss/AjouterProduit.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/AjouterProduit.fxml"));
             Scene scene = back.getScene();
             scene.setRoot(root);
         } catch (IOException e) {
@@ -291,7 +291,7 @@ public class ModifierProduitController {
     @FXML
     private void goBackCom() throws IOException {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/imagesss/GestionCommande.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/GestionCommande.fxml"));
             Scene scene = back.getScene();
             scene.setRoot(root);
         } catch (IOException e) {

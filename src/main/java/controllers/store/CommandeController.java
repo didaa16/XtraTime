@@ -161,7 +161,7 @@ public class CommandeController {
     @FXML
     void livCom(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/imagesss/LivreurCommande.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/LivreurCommande.fxml"));
             liv.getScene().setRoot(root);
 
         } catch (IOException e) {
@@ -172,7 +172,7 @@ public class CommandeController {
     @FXML
     void livCom2(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/imagesss/Client.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/Client.fxml"));
             liv.getScene().setRoot(root);
 
         } catch (IOException e) {
@@ -191,7 +191,7 @@ public class CommandeController {
     @FXML
     private void goBack() throws IOException {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/imagesss/AjouterProduit.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/AjouterProduit.fxml"));
             Scene scene = back.getScene();
             scene.setRoot(root);
         } catch (IOException e) {

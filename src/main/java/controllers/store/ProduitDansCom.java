@@ -121,7 +121,7 @@ public class ProduitDansCom {
             // Supprimez le produit de la commande en fonction du nombre (nbr) dans la commande
             if (nbrProduitDansCommande > 0) {
                 serviceCommandeProduit.supprimerProduitCommande(nbrProduitDansCommande);
-                Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/imagesss/AjoutCom.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/AjoutCom.fxml"));
                 description.getScene().setRoot(root);
                 showAlert("Suppression réussie", "Le produit a été supprimé de la commande", "", Alert.AlertType.INFORMATION);
             } else {

@@ -21,7 +21,7 @@
                <children>
                   <ImageView fx:id="imageProduit" fitHeight="144.0" fitWidth="152.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../xml-xtratime/nike-air-zoom-sructure-22.jpg" />
+                        <Image url="@../../../../../xml-xtratime/nike-air-zoom-sructure-22.jpg" />
                      </image>
                      <VBox.margin>
                         <Insets />
@@ -65,7 +65,7 @@
                         </Spinner>
                         <ImageView fx:id="addBtn" fitHeight="56.0" fitWidth="40.0" onMouseClicked="#AjouterACommande" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@add.png" />
+                              <Image url="@imagesss/add.png" />
                            </image>
                         </ImageView>
                      </children>

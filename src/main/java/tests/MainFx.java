@@ -17,7 +17,7 @@ public class MainFx extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        FXMLLoader fxmlLoaderAjouter = new FXMLLoader(getClass().getResource("/fxmlStore/imagesss/AjouterProduit.fxml"));
+        FXMLLoader fxmlLoaderAjouter = new FXMLLoader(getClass().getResource("/fxmlStore/AjouterProduit.fxml"));
 
         try {
             Parent rootAjouter = fxmlLoaderAjouter.load();

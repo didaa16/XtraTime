@@ -110,7 +110,7 @@ public class StoreController implements Initializable {
         try {
             for(int i = 0; i < this.produits.size(); ++i) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("/fxmlStore/imagesss/item.fxml")); // Chemin vers le fichier FXML de l'élément
+                fxmlLoader.setLocation(getClass().getResource("/fxmlStore/item.fxml")); // Chemin vers le fichier FXML de l'élément
                 AnchorPane anchorPane = (AnchorPane)fxmlLoader.load();
                 ItemController itemController = fxmlLoader.getController();
                 itemController.setData(this.produits.get(i),iListener);
@@ -159,7 +159,7 @@ public class StoreController implements Initializable {
     @FXML
     void goBack(MouseEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/imagesss/AjouterProduit.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/AjouterProduit.fxml"));
             Scene scene = back.getScene();
             scene.setRoot(root);
         } catch (IOException e) {
@@ -172,7 +172,7 @@ public class StoreController implements Initializable {
     @FXML
     void consulter(MouseEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/imagesss/AjoutCom.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/AjoutCom.fxml"));
             Scene scene = consulter.getScene();
             scene.setRoot(root);
         } catch (IOException e) {
@@ -192,7 +192,7 @@ private void handleSearch(KeyEvent event) throws IOException {
 
     for (Produit produit : produits) {
         if (produit.getNom().toLowerCase().contains(searchText)) {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlStore/imagesss/item.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlStore/item.fxml"));
             AnchorPane anchorPane = fxmlLoader.load();
             ItemController itemController = fxmlLoader.getController();
             itemController.setData(produit, iListener);
@@ -247,7 +247,7 @@ private void handleSearch(KeyEvent event) throws IOException {
         int column = 0;
         int row = 1;
         for (Produit produit : produits) {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlStore/imagesss/item.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlStore/item.fxml"));
             AnchorPane anchorPane = fxmlLoader.load();
             ItemController itemController = fxmlLoader.getController();
             itemController.setData(produit, iListener);

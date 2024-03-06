@@ -127,7 +127,7 @@ public class PaymentFormController implements Initializable {
     @FXML
     void goBack(MouseEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/imagesss/AjoutCom.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/AjoutCom.fxml"));
             Scene scene = back.getScene();
             scene.setRoot(root);
         } catch (IOException e) {

@@ -201,7 +201,7 @@ public class LivreurCommandeController {
     @FXML
     void retourner(MouseEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/imagesss/GestionCommande.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/GestionCommande.fxml"));
             Scene scene = retour.getScene();
             scene.setRoot(root);
         } catch (IOException e) {

@@ -2,17 +2,23 @@ package controllers;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 import java.util.regex.Pattern;
+import javafx.fxml.Initializable;
 
 import entities.complexe;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import services.ServiceComplexe;
@@ -21,15 +27,17 @@ import javafx.scene.image.ImageView;
 import org.controlsfx.control.Notifications;
 import javafx.util.Duration;
 import javafx.scene.control.Label;
-
-public class InscriptionController {
+import java.net.URL;
+import java.util.ResourceBundle;
+public class InscriptionController implements Initializable {
     private Image image;
   ServiceComplexe ServiceComplexe = new ServiceComplexe();
 
     @FXML
     private TextField nom;
 private  Label label;
-
+    @FXML
+    private WebView mapWebView;
     @FXML
     private TextField adr;
 
@@ -67,19 +75,19 @@ private  Label label;
         // La regex ^[a-zA-Z]+$ vérifie que la chaîne contient uniquement des lettres (minuscules ou majuscules)
         return Pattern.matches("^[a-zA-Z]+$", nom);
     }
-    private static boolean isValidAdresse(String adresse) {
-        // Utiliser une expression régulière pour vérifier si la chaîne de caractères de l'adresse est valide
-        // La regex ^[a-zA-Z0-9\s.,'-]+$ vérifie que la chaîne contient uniquement des lettres, chiffres, espaces et caractères spéciaux couramment utilisés dans les adresses
-        return Pattern.matches("^[a-zA-Z0-9\\s.,'-]+$", adresse);
-    }
-  /*  private void showNotification(String message) {
-        message="succes ";
-        Notifications.create()
-                .title("Notification")
-                .text(message)
-                .hideAfter(Duration.seconds(5)) // Masquer la notification après 5 secondes
-                .show();
-    }*/
+    /*   private static boolean isValidAdresse(String adresse) {
+          // Utiliser une expression régulière pour vérifier si la chaîne de caractères de l'adresse est valide
+          // La regex ^[a-zA-Z0-9\s.,'-]+$ vérifie que la chaîne contient uniquement des lettres, chiffres, espaces et caractères spéciaux couramment utilisés dans les adresses
+          return Pattern.matches("^[a-zA-Z0-9\\s.,'-]+$", adresse);
+   }
+    /*  private void showNotification(String message) {
+          message="succes ";
+          Notifications.create()
+                  .title("Notification")
+                  .text(message)
+                  .hideAfter(Duration.seconds(5)) // Masquer la notification après 5 secondes
+                  .show();
+      }*/
     @FXML
     void addcomplexe(ActionEvent event) {
         String nomC = nom.getText();
@@ -100,11 +108,11 @@ private  Label label;
             showAlert("Erreur", "Nom invalide", "Veuillez saisir un nom valide.", Alert.AlertType.ERROR);
             return;
         }
-        if (!isValidAdresse(adr.getText())) {
+      /*  if (!isValidAdresse(adr.getText())) {
             showAlert("Erreur", "adresse invalide", "Veuillez saisir une adresse valide.", Alert.AlertType.ERROR);
             return;
         }
-
+*/
         try {
             ServiceComplexe.ajouter(new complexe(nomC,idlC, adrC, telC,  imagePath, imagePath1));
 //showNotification("ajout complexe avec succes");
@@ -151,7 +159,7 @@ private  Label label;
     }
 
     @FXML
-    void initialize() {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
 
         // Event listener for upload button
             up.setOnAction((ActionEvent event) -> {
@@ -178,7 +186,83 @@ private  Label label;
                 im.setImage(image);
             }
         });
-
+        WebEngine webEngine = mapWebView.getEngine();
+        webEngine.load(getClass().getResource("/Maps.html").toExternalForm());
         }
+    @FXML
+    private void loadMap( String governorate, String city) {
+        WebView mapWebView;
+        mapWebView = null;
+        WebEngine webEngine = mapWebView.getEngine();
+        String htmlContent = generateMapHtml( governorate, city);
+        webEngine.loadContent(htmlContent);
+
+    }
+
+    private String generateMapHtml( String governorate, String city) {
+        String mapUrl = "https://maps.google.com/maps?q=" +
+
+                governorate.replace(" ", "%20") + ",%20" +
+                city.replace(" ", "%20") + "&t=k&z=16&output=embed";
+        return mapUrl;
+    }
+    private void loadMap(String localisation) {
+        WebEngine webEngine = mapWebView.getEngine();
+
+        // Generate HTML content with the correct map URL
+        String htmlContent = generateMapHtml(String.valueOf(adr));
+
+        // Load the HTML content into the WebView
+        webEngine.loadContent(htmlContent);
+    }
+
+    private String generateMapHtml(String localisation) {
+        // Construct the map URL based on the club name, governorate, and city
+        String mapUrl = "https://maps.google.com/maps?q=" +
+
+                localisation.replace(" ", "%20") + "&t=k&z=16&output=embed";
+
+        // Generate HTML content with the correct map URL
+        return "<!DOCTYPE html>\n" +
+                "<html>\n" +
+                "<head>\n" +
+                "    <title>Google Maps Example</title>\n" +
+                "    <style>\n" +
+                "        /* Adjust the size and position of the map */\n" +
+                "        #mapouter {\n" +
+                "            position: relative;\n" +
+                "            text-align: right;\n" +
+                "            height: 500px; /* Adjust the height as needed */\n" +
+                "            width: 500px; /* Adjust the width as needed */\n" +
+                "        }\n" +
+                "\n" +
+                "        #gmap_canvas2 {\n" +
+                "            overflow: hidden;\n" +
+                "            background: none !important;\n" +
+                "            height: 500px; /* Adjust the height as needed */\n" +
+                "            width: 500px; /* Adjust the width as needed */\n" +
+                "        }\n" +
+                "\n" +
+                "        #gmap_canvas {\n" +
+                "            width: 100%;\n" +
+                "            height: 100%;\n" +
+                "            border: 0;\n" +
+                "            margin: 0;\n" +
+                "            padding: 0;\n" +
+                "        }\n" +
+                "    </style>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "<div id=\"mapouter\">\n" +
+                "    <div id=\"gmap_canvas2\">\n" +
+                "        <iframe id=\"gmap_canvas\"\n" +
+                "                src=\"" + mapUrl + "\" frameborder=\"0\" scrolling=\"no\" marginheight=\"0\" marginwidth=\"0\"></iframe>\n" +
+                "    </div>\n" +
+                "</div>\n" +
+                "</body>\n" +
+                "</html>";
+    }
+
+
 
 }

@@ -1,30 +1,22 @@
-package controllers;
+package controllers.event;
 
-import java.awt.*;
-import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.scene.control.Button;
-import entities.event;
-import entities.sponso;
+import entities.event.sponso;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import services.sponsoService;
-import utils.DataSource;
+import services.event.sponsoService;
+import utils.event.DataSource;
 
 public class Listsponsocontroller {
 
@@ -65,7 +57,7 @@ public class Listsponsocontroller {
     public ArrayList<ImageView> ListImagese;
     public ArrayList<Label> Listlabeltitleevent;
 
-    private services.sponsoService sponsoService;
+    private services.event.sponsoService sponsoService;
 
     private ObservableList<sponso> sponsoData;
     int i = 0;

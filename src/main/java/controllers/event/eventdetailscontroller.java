@@ -1,22 +1,17 @@
-package controllers;
+package controllers.event;
 
-import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
-import services.eventService;
-import entities.event;
+import services.event.eventService;
+import entities.event.event;
 import javafx.scene.image.Image;
 
 
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 
-import static controllers.ListeventsController.holdIDs;
+import static controllers.event.ListeventsController.holdIDs;
 
 public class eventdetailscontroller {
 

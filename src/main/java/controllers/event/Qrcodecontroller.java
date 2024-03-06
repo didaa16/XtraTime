@@ -1,4 +1,4 @@
-package controllers;
+package controllers.event;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -10,13 +10,12 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
-import entities.event;
+import entities.event.event;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
 import java.awt.image.BufferedImage;
 import java.util.logging.Level;
-import javafx.scene.image.WritableImage;
 import java.util.logging.Logger;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="liste_events" prefHeight="387.0" prefWidth="533.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ListeventsController">
+<AnchorPane fx:id="liste_events" prefHeight="387.0" prefWidth="533.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.event.ListeventsController">
    <children>
       <AnchorPane fx:id="Paneeventsfx" layoutY="80.0" prefHeight="445.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="383.0" AnchorPane.topAnchor="80.0">
          <children>
@@ -274,7 +274,7 @@
 
 
 
-            
+
             <ImageView fx:id="qrcode11" fitHeight="103.0" fitWidth="166.0" layoutX="14.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="87.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="255.0" />
             <Label fx:id="label11" layoutX="17.0" layoutY="385.0" maxWidth="173.0" prefHeight="32.0" prefWidth="173.0" style="-fx-background-color: #fffff0; -fx-background-radius: 30;" styleClass="shadow" stylesheets="@styless.css" textFill="#e1ad01" wrapText="true" AnchorPane.bottomAnchor="28.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="385.0">
                <font>

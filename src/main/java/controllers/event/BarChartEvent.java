@@ -1,10 +1,9 @@
-package controllers;
+package controllers.event;
 
-import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
@@ -13,12 +12,11 @@ import javafx.scene.chart.PieChart;
 import javafx.collections.ObservableList;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
-import services.eventService;
-import utils.DataSource;
+import services.event.eventService;
+import utils.event.DataSource;
 import java.sql.ResultSet;
 import javafx.scene.control.Tooltip;
 import javafx.scene.Node;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.scene.chart.XYChart;
 

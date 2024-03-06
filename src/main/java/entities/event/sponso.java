@@ -1,4 +1,4 @@
-package entities;
+package entities.event;
 
 public class sponso {
     private int idsponso;

@@ -1,16 +1,5 @@
 package tests;
 
-import entities.event;
-import entities.sponso;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import services.eventService;
-import services.sponsoService;
-
-import java.sql.Timestamp;
-
 import static javafx.application.Application.launch;
 /*
 public class Main  {

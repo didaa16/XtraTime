@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="bb" prefHeight="385.0" prefWidth="506.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.sponsoDashboard">
+<AnchorPane fx:id="bb" prefHeight="385.0" prefWidth="506.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.event.sponsoDashboard">
    <children>
       <TableView fx:id="tvsponso" layoutY="68.0" onMouseClicked="#slecteddata" prefHeight="197.0" prefWidth="506.0" stylesheets="@styless.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="68.0">
          <columns>

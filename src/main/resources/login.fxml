@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.loginController">
+<AnchorPane prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.event.loginController">
    <children>
       <TextField fx:id="tfpseudo" layoutX="406.0" layoutY="127.0" prefHeight="51.0" prefWidth="189.0" promptText="Pseudo">
          <font>
@@ -34,7 +34,6 @@
          <children>
             <ImageView fitHeight="321.0" fitWidth="136.0" layoutX="39.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@/images/logoxtra.png" />
                </image>
             </ImageView>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="227.0" text="XtraTime Desktop Application" textAlignment="CENTER" textFill="WHITE">

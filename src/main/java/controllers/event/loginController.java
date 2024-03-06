@@ -1,4 +1,4 @@
-package controllers;
+package controllers.event;
 
 import java.io.IOException;
 import java.net.URL;
@@ -14,7 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import utils.DataSource;
+import utils.event.DataSource;
 
 public class loginController {
 

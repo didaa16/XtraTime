@@ -1,7 +1,7 @@
-package services;
+package services.event;
 
-import entities.sponso;
-import utils.DataSource;
+import entities.event.sponso;
+import utils.event.DataSource;
 
 import java.sql.*;
 import java.util.ArrayList;

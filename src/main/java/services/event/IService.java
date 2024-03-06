@@ -1,4 +1,4 @@
-package services;
+package services.event;
 
 import java.util.List;
 

@@ -1,17 +1,11 @@
-package controllers;
+package controllers.event;
 
-import java.awt.*;
-import java.awt.Label;
-import java.awt.event.MouseEvent;
 import java.io.File;
 import java.net.URL;
-import java.sql.Timestamp;
-import java.time.LocalTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import entities.event;
-import entities.sponso;
+import entities.event.sponso;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,10 +16,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
-import services.sponsoService;
-import java.awt.Label;
+import services.event.sponsoService;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;

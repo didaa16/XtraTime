@@ -1,8 +1,7 @@
-package controllers;
+package controllers.event;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.EventObject;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,7 +11,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import org.w3c.dom.Node;
 
 public class backController {
 

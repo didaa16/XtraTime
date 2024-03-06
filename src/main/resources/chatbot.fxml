@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="561.0" prefWidth="844.0" styleClass="gradient-background" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.chatbotController">
+<BorderPane prefHeight="561.0" prefWidth="844.0" styleClass="gradient-background" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.event.chatbotController">
     <!-- En-tête -->
     <top>
         <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="589.0" spacing="20.0" BorderPane.alignment="CENTER">

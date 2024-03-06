@@ -1,4 +1,4 @@
-package controllers;
+package controllers.event;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -10,16 +10,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import okhttp3.*;
-import utils.DataSource;
+import utils.event.DataSource;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.concurrent.CompletableFuture;
 
 public class chatbotController {

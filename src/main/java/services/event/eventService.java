@@ -1,10 +1,9 @@
-package services;
+package services.event;
 
-import entities.event;
-import utils.DataSource;
+import entities.event.event;
+import utils.event.DataSource;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

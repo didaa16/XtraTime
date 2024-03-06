@@ -1,4 +1,4 @@
-package entities;
+package entities.event;
 
 public class chatbot {
     public static String processInput(String input) {

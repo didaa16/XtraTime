@@ -1,4 +1,4 @@
-package entities;
+package entities.event;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 

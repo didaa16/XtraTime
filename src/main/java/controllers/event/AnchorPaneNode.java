@@ -1,10 +1,8 @@
-package controllers;
+package controllers.event;
 
 import java.time.LocalDate;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
-
-import java.time.LocalDate;
 
 public class AnchorPaneNode extends AnchorPane {
     // Date associated with this pane

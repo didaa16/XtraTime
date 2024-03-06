@@ -1,6 +1,5 @@
-package controllers;
+package controllers.event;
 
-import java.awt.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -19,13 +18,12 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
-import entities.sponso;
 import javafx.beans.property.SimpleStringProperty;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import entities.event;
+import entities.event.event;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -39,12 +37,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import services.eventService;
-import services.sponsoService;
-import utils.DataSource;
+import services.event.eventService;
+import services.event.sponsoService;
+import utils.event.DataSource;
 
 
 import javax.swing.*;

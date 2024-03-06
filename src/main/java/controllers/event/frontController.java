@@ -1,4 +1,4 @@
-package controllers;
+package controllers.event;
 
 import java.io.IOException;
 import java.net.URL;

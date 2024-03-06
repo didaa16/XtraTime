@@ -1,10 +1,10 @@
-package controllers;
+package controllers.event;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
-import entities.event;
+import entities.event.event;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
@@ -20,8 +20,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import services.eventService;
-import utils.DataSource;
+import services.event.eventService;
+import utils.event.DataSource;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -37,7 +37,6 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 import javafx.scene.input.MouseEvent;
 

@@ -1,6 +1,6 @@
-package controllers;
+package controllers.event;
 
-import entities.event;
+import entities.event.event;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
@@ -10,17 +10,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 import java.time.LocalDate;
-import java.time.Month;
 import java.time.YearMonth;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import javafx.geometry.Insets;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.paint.Color;
-import services.eventService;
+
+import services.event.eventService;
 
 
 

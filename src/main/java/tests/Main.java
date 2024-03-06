@@ -1,11 +1,15 @@
 package tests;
 
+import entities.local.complexe;
+import entities.local.terrain;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import services.local.ServiceComplexe;
+import services.local.ServiceTerrain;
 
 public class Main extends Application {
 

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.local.AffTController">
+   <children>
+      <AnchorPane prefHeight="795.0" prefWidth="909.0" styleClass="gradient-background" stylesheets="@styless.css">
+         <children>
+            <TableView fx:id="tv_t" layoutX="6.0" layoutY="18.0" prefHeight="468.0" prefWidth="795.0" stylesheets="@styless.css">
+               <columns>
+                  <TableColumn fx:id="col_r" editable="false" prefWidth="69.0" sortable="false" text="ref" visible="false" />
+                  <TableColumn fx:id="col_n" prefWidth="97.0" text="nom" />
+                  <TableColumn fx:id="col_c" prefWidth="125.0" text="capacite" />
+                  <TableColumn fx:id="col_t" prefWidth="133.0" text="type" />
+                  <TableColumn fx:id="col_p" prefWidth="99.0" text="prix" />
+                  <TableColumn fx:id="col_d" prefWidth="142.0" text="disponibilite" />
+                  <TableColumn fx:id="col_i" prefWidth="198.0" text="image" />
+               </columns>
+               <styleClass>
+                  <String fx:value="line-color" />
+                  <String fx:value="button-container-mouse-moved" />
+                  <String fx:value="container" />
+                  <String fx:value="content" />
+                  <String fx:value="disabled-label" />
+                  <String fx:value="line-color" />
+                  <String fx:value="shadow" />
+               </styleClass>
+            </TableView>
+            <Button layoutX="118.0" layoutY="516.0" mnemonicParsing="false" onAction="#modt" prefHeight="73.0" prefWidth="109.0" stylesheets="@styless.css" text="modifier">
+               <styleClass>
+                  <String fx:value="button-container-mouse-moved" />
+                  <String fx:value="shadow" />
+               </styleClass>
+            </Button>
+            <Button layoutX="315.0" layoutY="516.0" mnemonicParsing="false" onAction="#supt" prefHeight="73.0" prefWidth="109.0" text="supprimer" />
+            <Button fx:id="back" layoutX="750.0" layoutY="545.0" mnemonicParsing="false" onAction="#back" stylesheets="@styless.css" text="back">
+               <styleClass>
+                  <String fx:value="button-container-mouse-moved" />
+                  <String fx:value="shadow" />
+               </styleClass>
+            </Button>
+            <Button layoutX="633.0" layoutY="553.0" mnemonicParsing="false" onAction="#pdf_user" stylesheets="@styless.css" text="pdf">
+               <styleClass>
+                  <String fx:value="button-container-mouse-moved" />
+                  <String fx:value="shadow" />
+               </styleClass>
+            </Button>
+            <Button layoutX="497.0" layoutY="553.0" mnemonicParsing="false" onAction="#afficherT" stylesheets="@styless.css" text="Statistiques">
+               <styleClass>
+                  <String fx:value="button-container-mouse-moved" />
+                  <String fx:value="shadow" />
+               </styleClass>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="735.0" prefWidth="889.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.local.AddTController">
+   <children>
+      <AnchorPane prefHeight="758.0" prefWidth="903.0" styleClass="gradient-background" stylesheets="@styless.css">
+         <children>
+            <Label layoutX="135.0" layoutY="99.0" stylesheets="@styless.css" textFill="#f2f2f2">
+               <font>
+                  <Font size="26.0" />
+               </font></Label>
+            <Label layoutX="124.0" layoutY="163.0" stylesheets="@styless.css" text="nom" textFill="WHITE">
+               <font>
+                  <Font size="26.0" />
+               </font></Label>
+            <TextField fx:id="no" layoutX="296.0" layoutY="165.0" />
+            <Label layoutX="111.0" layoutY="237.0" prefHeight="38.0" prefWidth="111.0" stylesheets="@styless.css" text="capacite" textFill="WHITE">
+               <font>
+                  <Font size="26.0" />
+               </font></Label>
+            <Label layoutX="125.0" layoutY="306.0" stylesheets="@styless.css" text="type" textFill="WHITE">
+               <font>
+                  <Font size="26.0" />
+               </font></Label>
+            <Label layoutX="129.0" layoutY="367.0" stylesheets="@styless.css" text="prix" textFill="WHITE">
+               <font>
+                  <Font size="26.0" />
+               </font></Label>
+            <Label layoutX="106.0" layoutY="455.0" stylesheets="@styless.css" text="disponibilite" textFill="WHITE">
+               <font>
+                  <Font size="26.0" />
+               </font></Label>
+            <TextField fx:id="cp" layoutX="296.0" layoutY="239.0" />
+            <TextField fx:id="tp" layoutX="296.0" layoutY="308.0" />
+            <TextField fx:id="pr" layoutX="296.0" layoutY="370.0" />
+            <TextField fx:id="dp" layoutX="296.0" layoutY="443.0" prefHeight="82.0" prefWidth="208.0" />
+            <Button layoutX="583.0" layoutY="157.0" mnemonicParsing="false" onAction="#addT" prefHeight="82.0" prefWidth="149.0" text="ajouter" />
+            <Button layoutX="583.0" layoutY="341.0" mnemonicParsing="false" onAction="#afficherT" prefHeight="90.0" prefWidth="149.0" text="afficher" />
+            <Text fill="WHITE" layoutX="286.0" layoutY="55.0" strokeMiterLimit="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ajouter un terrain" textAlignment="CENTER" wrappingWidth="272.0205078125">
+               <font>
+                  <Font name="Gill Sans MT Condensed" size="40.0" />
+               </font>
+            </Text>
+            <Label layoutX="128.0" layoutY="619.0" stylesheets="@styless.css" text="img" textFill="WHITE">
+               <font>
+                  <Font size="26.0" />
+               </font></Label>
+            <Button fx:id="back" layoutX="732.0" layoutY="14.0" mnemonicParsing="false" onAction="#back" text="back" />
+            <ImageView fitHeight="106.0" fitWidth="111.0">
+               <image>
+                  <Image url="@logo.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img" fitHeight="150.0" fitWidth="200.0" layoutX="300.0" layoutY="571.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="upload" layoutX="540.0" layoutY="627.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="87.0" text="upload" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

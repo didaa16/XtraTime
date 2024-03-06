@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@styless.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.event.BarChartEvent">
+    <children>
+        <PieChart fx:id="piechart" layoutX="14.0" layoutY="44.0" prefHeight="312.0" prefWidth="253.0" styleClass="shadow" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="353.0" AnchorPane.topAnchor="44.0" />
+        <BarChart fx:id="piechart1" layoutX="266.0" layoutY="32.0" prefHeight="336.0" prefWidth="354.0">
+            <xAxis>
+                <CategoryAxis label="Months" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis side="LEFT" />
+            </yAxis>
+        </BarChart>
+    </children>
+</AnchorPane>

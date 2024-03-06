@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="385.0" prefWidth="506.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.event.eventDashboard">
+   <children>
+      <TableView fx:id="tvevent" layoutY="41.0" onMouseClicked="#slecteddata" prefHeight="197.0" prefWidth="506.0" stylesheets="@styless.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="41.0">
+         <columns>
+            <TableColumn fx:id="coltitre" minWidth="0.0" prefWidth="58.0" text="Titre" />
+            <TableColumn fx:id="coldescrition" prefWidth="73.0" text="Description" />
+            <TableColumn fx:id="colfin" minWidth="0.0" prefWidth="102.0" text="Datefin" />
+            <TableColumn fx:id="coldebut" minWidth="1.66668701171875" prefWidth="78.0" text="Datedebut" />
+            <TableColumn fx:id="colimage" minWidth="0.0" prefWidth="67.0" text="Image" />
+            <TableColumn fx:id="colsponso" prefWidth="74.0" text="Sponsor" />
+            <TableColumn fx:id="colterrain" prefWidth="53.0" text="Terrain" />
+         </columns>
+         <styleClass>
+            <String fx:value="container" />
+            <String fx:value="disabled-label" />
+         </styleClass>
+      </TableView>
+      <TextField fx:id="tftitre" layoutX="17.0" layoutY="244.0" prefHeight="25.0" prefWidth="124.0" promptText="Titre" stylesheets="@styless.css" />
+      <TextField fx:id="tfdescription" layoutX="17.0" layoutY="359.0" prefHeight="61.0" prefWidth="268.0" promptText="Description" stylesheets="@styless.css" />
+      <ComboBox fx:id="tfterrain" layoutX="17.0" layoutY="322.0" prefHeight="25.0" prefWidth="124.0" promptText="Choisir_Terrain" stylesheets="@styless.css" />
+      <DatePicker fx:id="tfdd" layoutX="164.0" layoutY="245.0" prefHeight="25.0" prefWidth="124.0" promptText="Date_Debut" stylesheets="@styless.css" />
+      <ComboBox fx:id="tfsponso" layoutX="17.0" layoutY="282.0" prefHeight="25.0" prefWidth="124.0" promptText="choisirsponso" stylesheets="@styless.css" />
+      <Button fx:id="bajouter" layoutX="37.0" layoutY="436.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="33.0" prefWidth="110.0" style="-fx-background-color: #008000;" stylesheets="@styless.css" text="Ajouter">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <styleClass>
+            <String fx:value="button-container-mouse-moved" />
+            <String fx:value="transparent-button" />
+         </styleClass>
+      </Button>
+      <Button fx:id="bmodifier" layoutX="191.0" layoutY="436.0" mnemonicParsing="false" onAction="#modifier" prefHeight="33.0" prefWidth="110.0" style="-fx-background-color: #3b5998;" stylesheets="@styless.css" text="Modifier">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <styleClass>
+            <String fx:value="button-container-mouse-moved" />
+            <String fx:value="transparent-button" />
+         </styleClass>
+      </Button>
+      <Button fx:id="bsupprimer" layoutX="323.0" layoutY="436.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="33.0" prefWidth="110.0" style="-fx-background-color: #FF0000;" stylesheets="@styless.css" text="Supprimer">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <styleClass>
+            <String fx:value="button-container-mouse-moved" />
+            <String fx:value="transparent-button" />
+         </styleClass>
+      </Button>
+      <Button fx:id="bimporter" layoutX="332.0" layoutY="376.0" mnemonicParsing="false" onAction="#importer" prefHeight="25.0" prefWidth="108.0" style="-fx-background-color: #008000;" stylesheets="@styless.css" text="Importer_Image">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <ImageView fx:id="imageimport" fitHeight="128.0" fitWidth="118.0" layoutX="326.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true" />
+      <TextField fx:id="tfhd" layoutX="163.0" layoutY="286.0" prefHeight="25.0" prefWidth="124.0" promptText="Heure_Debut" stylesheets="@styless.css" />
+      <TextField fx:id="tfhf" layoutX="161.0" layoutY="324.0" prefHeight="25.0" prefWidth="124.0" promptText="Heure_Fin" stylesheets="@styless.css" />
+      <TextField fx:id="searchTF" layoutX="369.0" layoutY="5.0" onAction="#filter" prefHeight="33.0" prefWidth="136.0" promptText="Chercher_Event" stylesheets="@styless.css" />
+      <Button layoutX="17.0" layoutY="7.0" mnemonicParsing="false" onAction="#pdf" style="-fx-background-color: #FF0000;" stylesheets="@styless.css" text="PDF" textFill="GREEN">
+         <styleClass>
+            <String fx:value="transparent-button" />
+            <String fx:value="button-container-mouse-moved" />
+            <String fx:value="day-name" />
+         </styleClass></Button>
+      <Button layoutX="79.0" layoutY="4.0" mnemonicParsing="false" onAction="#calendrier" prefHeight="35.0" prefWidth="124.0" style="-fx-background-color: #008000;" stylesheets="@styless.css" text="Calendrier" textFill="#10b510">
+         <styleClass>
+            <String fx:value="transparent-button" />
+            <String fx:value="button-container-mouse-moved" />
+            <String fx:value="event-title" />
+         </styleClass>
+      </Button>
+   </children>
+</AnchorPane>

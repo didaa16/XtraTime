@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="561.0" prefWidth="844.0" styleClass="gradient-background" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.event.backController">
+   <top>
+      <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="801.0" spacing="20.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" prefHeight="62.0" prefWidth="138.0" text="XtraTime" textFill="WHITE">
+               <font>
+                  <Font name="Franklin Gothic Medium Cond" size="22.0" />
+               </font>
+            </Label>
+            <Pane maxHeight="-Infinity" prefHeight="1.0" prefWidth="200.0" styleClass="line-color" stylesheets="@styless.css" HBox.hgrow="ALWAYS" />
+            <ImageView fitHeight="32.0" fitWidth="35.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/icons-setting.png" />
+               </image>
+            </ImageView>
+         </children>
+         <BorderPane.margin>
+            <Insets left="20.0" right="20.0" />
+         </BorderPane.margin>
+      </HBox>
+   </top>
+   <left>
+      <VBox prefHeight="479.0" prefWidth="203.0" styleClass="container" stylesheets="@styless.css" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="93.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/logoxtra.png" />
+                     </image>
+                  </ImageView>
+                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="129.0">
+                     <children>
+                        <Label prefHeight="32.0" prefWidth="118.0" styleClass="shadow" stylesheets="@styless.css" text="  XtraTime" textFill="WHITE">
+                           <font>
+                              <Font name="Franklin Gothic Medium Cond" size="27.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets top="1.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </HBox>
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1.0" prefWidth="190.0" styleClass="line-color" stylesheets="@styless.css">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+               </VBox.margin>
+            </Pane>
+            <VBox prefHeight="322.0" prefWidth="169.0" spacing="20.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="60.0" styleClass="button-container-mouse-moved">
+                     <children>
+                        <ButtonBar prefHeight="40.0" prefWidth="200.0">
+                          <buttons>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/icons-accueil.png" />
+                                 </image>
+                              </ImageView>
+                            <Button fx:id="bstat" mnemonicParsing="false" onAction="#stat" styleClass="transparent-button" stylesheets="@styless.css" text="Statisqtique">
+                                 <font>
+                                    <Font name="Franklin Gothic Medium Cond" size="24.0" />
+                                 </font>
+                              </Button>
+                          </buttons>
+                        </ButtonBar>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="60.0" styleClass="button-container-mouse-moved">
+                     <children>
+                        <ButtonBar prefHeight="60.0" prefWidth="203.0">
+                          <buttons>
+                              <ImageView fitHeight="19.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/icone-eventpng.png" />
+                                 </image>
+                              </ImageView>
+                            <Button fx:id="bevents" alignment="CENTER" cancelButton="true" contentDisplay="CENTER" mnemonicParsing="false" onAction="#events" prefHeight="25.0" prefWidth="139.0" styleClass="transparent-button" stylesheets="@styless.css" text="Event">
+                                 <font>
+                                    <Font name="Franklin Gothic Medium Cond" size="24.0" />
+                                 </font>
+                              </Button>
+                          </buttons>
+                        </ButtonBar>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="201.0" styleClass="button-container-mouse-moved" stylesheets="@styless.css">
+                     <children>
+                        <ButtonBar prefHeight="40.0" prefWidth="200.0">
+                          <buttons>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/icons-setting.png" />
+                                 </image>
+                              </ImageView>
+                            <Button fx:id="bsponsor" minWidth="54.0" mnemonicParsing="false" onAction="#sponsor" prefHeight="25.0" prefWidth="178.0" styleClass="transparent-button" text="sponsor">
+                                 <font>
+                                    <Font name="Franklin Gothic Medium Cond" size="24.0" />
+                                 </font>
+                              </Button>
+                          </buttons>
+                        </ButtonBar>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="60.0" styleClass="button-container-mouse-moved">
+                     <children>
+                        <ButtonBar prefHeight="40.0" prefWidth="200.0">
+                           <buttons>
+                              <Button fx:id="chatbox" minWidth="54.0" mnemonicParsing="false" onAction="#chatbox" prefHeight="25.0" prefWidth="178.0" styleClass="transparent-button" text="ChatBox">
+                                 <font>
+                                    <Font name="Franklin Gothic Medium Cond" size="24.0" />
+                                 </font>
+                              </Button>
+                           </buttons>
+                        </ButtonBar>
+                     </children></HBox>
+               </children>
+            </VBox>
+            <Button fx:id="bout" mnemonicParsing="false" onAction="#logout" text="Deconnecter">
+               <styleClass>
+                  <String fx:value="button-container-mouse-moved" />
+                  <String fx:value="container" />
+               </styleClass>
+            </Button>
+         </children>
+      </VBox>
+   </left>
+   <stylesheets>
+      <URL value="@styless.css" />
+      <URL value="@styless.css" />
+   </stylesheets>
+   <center>
+      <BorderPane fx:id="border" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>

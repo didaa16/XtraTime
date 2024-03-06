@@ -1,0 +1,165 @@
+.gradient-background{
+    -fx-background-color:linear-gradient(from 25% 25% to 100% 100%, #000000 , #416D19);
+}
+.line-color{
+    -fx-background-color: #F6F5F5;
+}
+
+.container{
+    -fx-background-color:rgba(255,255,255,0.2);
+    -fx-background-radius: 10;
+}
+
+.shadow{
+    -fx-effect: dropShadow(three-pass-box, rgba(0,0,0,0.2), 10.0, 0.0, 0.0, 10.0);
+}
+.button-container-mouse-moved:hover{
+    -fx-background-color: rgba(255,255,255,0.1);}
+
+.text-field{
+    -fx-font-family: "Quicksand";
+    -fx-font-size: 18;
+    -fx-padding: 1,1,1,1;
+    -fx-border-color: grey;
+    -fx-border-width: 2;
+    -fx-border-radius: 1;
+    -fx-border: gone;
+    -fx-background-color: transparent;
+    -fx-text-fill: grey;
+}
+.text-area .content{
+    -fx-background-color: rgba(0,0,0,0.7);
+    -fx-border-color: grey;
+    -fx-font-family: "Quicksand";
+    -fx-font-size: 18;
+    -fx-padding: 1,1,1,1;
+    -fx-border-width: 2;
+    -fx-border-radius: 1;
+    -fx-border: gone;
+    -fx-text-fill: grey;
+
+}
+.disabled-label:disabled {
+    -fx-background-color: rgb(252,252,252);
+    -fx-opacity: 1;
+}
+
+.transparent-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white; /* Pour changer la couleur du texte si nécessaire */
+}
+.produit-item{
+    -fx-border-color: white; /* Couleur de la bordure */
+    -fx-border-width: 1px; /* Largeur de la bordure */
+    -fx-border-radius: 10px; /* Rayon de la bordure */
+
+}
+.produit-item .image-container {
+    -fx-alignment: center;
+}
+
+
+
+.day-name {
+    -fx-alignment: center; /* Alignement central des textes */
+    -fx-font-size: 14px; /* Taille de la police */
+    -fx-font-weight: bold; /* Texte en gras */
+}
+
+.event-container {
+    -fx-padding: 10px; /* Espacement intérieur */
+    -fx-spacing: 5px; /* Espacement entre les éléments */
+}
+
+.event-title {
+    -fx-font-size: 16px; /* Taille de la police pour le titre */
+    -fx-font-weight: bold; /* Texte en gras */
+}
+
+.event-details {
+    -fx-font-size: 18px; /* Augmente la taille de la police */
+    -fx-effect: dropShadow(three-pass-box, rgba(0, 0, 0, 0.2), 10, 0, 0, 0); /* Ombre portée par défaut */
+    -fx-transition: transform 0.8s; /* Ajuste la durée de la transition */
+}
+
+
+.event-details:hover {
+    -fx-scale-x: 1.1; /* Redimensionnement horizontal au survol */
+    -fx-scale-y: 1.1; /* Redimensionnement vertical au survol */
+}
+
+
+
+/* Définition de différentes couleurs de fond pour chaque événement */
+.event-color-1 {
+    -fx-background-color:linear-gradient(from 25% 25% to 100% 100%, #ffffff , #416D19); /* Couleur de fond pour le premier événement */
+}
+
+.event-color-2 {
+    -fx-background-color:linear-gradient(from 25% 25% to 100% 100%, #416D19, #ffffff); /* Couleur de fond pour le deuxième événement */
+}
+.default-color0.chart-bar {
+    -fx-bar-fill: green; /* Change the color to green */
+}
+
+.axis {
+    -fx-tick-label-fill: white; /* Change the color of axis tick labels to white */
+}
+
+.chart-legend {
+    -fx-text-fill: white; /* Change the color of legend text to white */}
+
+
+.bar-chart-label, .pie-chart-label {
+    -fx-text-fill: white;
+}
+
+
+.label-style {
+    -fx-font-family: "Sitka Heading";
+    -fx-font-size: 18.0;
+    -fx-text-fill: #e82121;
+    -fx-wrap-text: true;
+}
+
+
+
+
+/* Styles pour les labels affichant le temps restant */
+
+.label-style {
+    -fx-font-family: "Arial";
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-alignment: center;
+    -fx-wrap-text: true; /* Retour à la ligne */
+
+}
+
+#label, #label1, #label11 {
+    -fx-background-color: #e1ad01; /* Couleur de fond */
+    -fx-background-radius: 20px; /* Bord arrondi */
+    -fx-padding: 8px; /* Espacement intérieur */
+    -fx-min-width: 120px; /* Largeur minimale */
+    -fx-text-fill: black; /* Couleur du texte */
+    -fx-wrap-text: true; /* Retour à la ligne */
+}
+
+#label1 {
+    -fx-background-color: #0084ff; /* Couleur de fond */
+    -fx-wrap-text: true; /* Retour à la ligne */
+
+}
+
+#label11 {
+    -fx-background-color: #ff6600; /* Couleur de fond */
+    -fx-wrap-text: true; /* Retour à la ligne */
+
+}
+
+
+
+
+
+

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="gradient-background" stylesheets="@styless.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.event.eventdetailscontroller">
+   <children>
+      <ImageView fx:id="imagedetails" fitHeight="150.0" fitWidth="213.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="377.0" AnchorPane.topAnchor="125.0" />
+      <VBox layoutX="236.0" layoutY="15.0" prefHeight="370.0" prefWidth="357.0" styleClass="container" stylesheets="@styless.css" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="15.0">
+         <children>
+            <Label prefHeight="50.0" prefWidth="144.0" styleClass="shadow" stylesheets="@styless.css" text="  Description" textFill="WHITE">
+               <font>
+                  <Font name="Franklin Gothic Medium Cond" size="27.0" />
+               </font>
+            </Label>
+            <Label fx:id="descriptiondetails" prefHeight="0.0" prefWidth="353.0" styleClass="container" stylesheets="@styless.css" textFill="#d0fc1f">
+               <font>
+                  <Font name="Franklin Gothic Demi Cond" size="20.0" />
+               </font>
+            </Label>
+            <Label prefHeight="50.0" prefWidth="144.0" styleClass="shadow" stylesheets="@styless.css" text="  Date" textFill="WHITE">
+               <font>
+                  <Font name="Franklin Gothic Medium Cond" size="27.0" />
+               </font>
+            </Label>
+            <Label fx:id="datedetails" prefHeight="17.0" prefWidth="334.0" styleClass="container" stylesheets="@styless.css" textFill="#d0fc1f">
+               <font>
+                  <Font name="Franklin Gothic Demi Cond" size="20.0" />
+               </font>
+            </Label>
+            <Label prefHeight="50.0" prefWidth="196.0" styleClass="shadow" stylesheets="@styless.css" text="  Nom_du_Terrain" textFill="WHITE">
+               <font>
+                  <Font name="Franklin Gothic Medium Cond" size="27.0" />
+               </font>
+            </Label>
+            <Label fx:id="terraindetails" prefHeight="17.0" prefWidth="334.0" styleClass="container" stylesheets="@styless.css" textFill="#d0fc1f">
+               <font>
+                  <Font name="Franklin Gothic Demi Cond" size="20.0" />
+               </font>
+            </Label>
+            <Label prefHeight="50.0" prefWidth="213.0" styleClass="shadow" stylesheets="@styless.css" text="  Notre_Sponsor_est" textFill="WHITE">
+               <font>
+                  <Font name="Franklin Gothic Medium Cond" size="27.0" />
+               </font>
+            </Label>
+            <Label fx:id="sponsodetails" prefHeight="17.0" prefWidth="334.0" styleClass="container" stylesheets="@styless.css" textFill="#d0fc1f">
+               <font>
+                  <Font name="Franklin Gothic Demi Cond" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <Label fx:id="titredetails" layoutX="106.0" layoutY="301.0" textFill="#e1ad01" AnchorPane.rightAnchor="494.0">
+         <font>
+            <Font name="Bernard MT Condensed" size="24.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" prefHeight="61.0" prefWidth="161.0">
+         <children>
+            <ImageView fitHeight="61.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/logoxtra.png" />
+               </image>
+            </ImageView>
+            <VBox alignment="CENTER" prefHeight="100.0" prefWidth="129.0">
+               <children>
+                  <Label prefHeight="32.0" prefWidth="118.0" styleClass="shadow" stylesheets="@styless.css" text="  XtraTime" textFill="WHITE">
+                     <font>
+                        <Font name="Franklin Gothic Medium Cond" size="27.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets top="1.0" />
+               </padding>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

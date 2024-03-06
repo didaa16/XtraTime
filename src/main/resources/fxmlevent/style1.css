@@ -1,0 +1,31 @@
+/* Styles pour le thème de la messagerie Facebook */
+
+/* Styles pour le titre de la messagerie Facebook */
+.fb-messenger-title {
+    -fx-text-fill: #1877f2; /* Couleur du texte */
+    -fx-font-size: 36px; /* Taille de la police */
+    -fx-font-weight: bold; /* Texte en gras */
+    -fx-alignment: center; /* Centrage horizontal */
+    -fx-padding: 20px; /* Espacement autour du titre */
+}
+.fb-messenger-title {
+    -fx-text-fill: #1877f2; /* Couleur du titre */
+    -fx-font-size: 24px; /* Taille de police */
+    -fx-font-weight: bold; /* Texte en gras */
+}
+
+.fb-messenger-chat-area {
+    -fx-background-color: #ffffff; /* Couleur de fond de la zone de chat */
+    -fx-text-fill: #000000; /* Couleur du texte */
+}
+
+.fb-messenger-text-field {
+    -fx-background-color: #ffffff; /* Couleur de fond du champ de texte */
+    -fx-text-fill: #000000; /* Couleur du texte */
+}
+
+.fb-messenger-send-button {
+    -fx-background-color: #1877f2; /* Couleur de fond du bouton Send */
+    -fx-text-fill: #ffffff; /* Couleur du texte */
+    -fx-font-weight: bold; /* Texte en gras */
+}

@@ -1,7 +1,7 @@
 package services.Abonnement;
 
 import entities.Abonnement.Abonnement;
-import utils.MyDatabase;
+import utils.MyDataBase;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +17,7 @@ public class ServiceAbonnement {
     private float prixTotalAvantReduction;
 
     public ServiceAbonnement() {
-        connection = MyDatabase.getInstance().getConnection();
+        connection = MyDataBase.getInstance().getConnection();
     }
 /*
     public float calculerPrixAbonnement(int terrainId, int packId) throws SQLException {

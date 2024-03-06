@@ -1,7 +1,7 @@
 package services.local;
 
 import entities.local.complexe;
-import utils.MyDatabase;
+import utils.MyDataBase;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.List;
 public class ServiceComplexe implements  Iservice<complexe>{
     Connection connection;
     public ServiceComplexe(){
-        connection= MyDatabase.getInstance().getConnection();
+        connection= MyDataBase.getInstance().getConnection();
 
     }
     @Override

@@ -33,7 +33,7 @@ public class ServiceUtilisateurs implements IService<Utilisateur> {
     private PreparedStatement pst;
 
     public ServiceUtilisateurs() {
-        cnx = MyDataBase.getInstance().getCnx();
+        cnx = MyDataBase.getInstance().getConnection();
     }
 
     @Override

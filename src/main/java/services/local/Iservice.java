@@ -1,8 +1,8 @@
-package services;
-import entities.complexe;
-import entities.terrain;
+package services.local;
+
 import java.sql.SQLException;
 import java.util.List;
+
 public interface Iservice<T> {
 
     public  void ajouter(T t) throws SQLException;

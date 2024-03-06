@@ -26,11 +26,11 @@ import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 import services.local.ServiceTerrain;
-import utils.MyDatabase;
+import utils.MyDataBase;
 public class AffTController {
     ServiceTerrain ServiceTerrain = new ServiceTerrain();
 
-    private MyDatabase myDatabase = MyDatabase.getInstance();
+    private MyDataBase myDatabase = MyDataBase.getInstance();
     @FXML
     private TableView<terrain> tv_t;
 

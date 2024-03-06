@@ -14,7 +14,7 @@ public class ServiceImg implements IService<Img> {
     private PreparedStatement pst;
 
     public ServiceImg() {
-        cnx = MyDataBase.getInstance().getCnx();
+        cnx = MyDataBase.getInstance().getConnection();
     }
 
     @Override

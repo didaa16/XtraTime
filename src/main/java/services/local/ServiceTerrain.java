@@ -1,8 +1,7 @@
 package services.local;
 
 import entities.local.terrain;
-import services.local.ServiceComplexe;
-import utils.MyDatabase;
+import utils.MyDataBase;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,7 +10,7 @@ public class ServiceTerrain  implements  Iservice<terrain>{
     ServiceComplexe serviceComplexe = new ServiceComplexe();
     Connection connection;
     public ServiceTerrain(){
-        connection= MyDatabase.getInstance().getConnection();
+        connection= MyDataBase.getInstance().getConnection();
 
     }
 @Override

@@ -1,7 +1,7 @@
 package services.Abonnement;
 
 import entities.Abonnement.Pack;
-import utils.MyDatabase;
+import utils.MyDataBase;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ public class ServicePack {
     Connection connection;
 
     public ServicePack() {
-        connection = MyDatabase.getInstance().getConnection();
+        connection = MyDataBase.getInstance().getConnection();
     }
 
     public void ajouter(Pack pack) throws SQLException {

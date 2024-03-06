@@ -1,10 +1,9 @@
-package controller;
+package controllers;
 
 
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
-import controller.AffTController;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,7 +12,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

@@ -7,7 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="gradient-background" stylesheets="@styless.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ModifierController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="gradient-background" stylesheets="@styless.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ModifierController">
    <children>
       <AnchorPane prefHeight="693.0" prefWidth="752.0" stylesheets="@styless.css">
          <children>

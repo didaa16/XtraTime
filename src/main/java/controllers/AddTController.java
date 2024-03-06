@@ -1,10 +1,8 @@
-package controller;
+package controllers;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
 
 import entities.terrain;
 import javafx.event.ActionEvent;
@@ -19,7 +17,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import services.ServiceComplexe;
 import services.ServiceTerrain;
 
 public class AddTController {

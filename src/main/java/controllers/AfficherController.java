@@ -1,14 +1,12 @@
-package controller;
+package controllers;
 
 import java.io.FileOutputStream;
-import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
+
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import java.io.IOException;
 import java.util.stream.Collectors;
@@ -27,10 +25,7 @@ import javafx.scene.control.TableView;
 import entities.complexe;
 import javafx.scene.control.cell.PropertyValueFactory;
 import services.ServiceComplexe;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
+
 public class AfficherController {
 complexe complexe;
     ServiceComplexe ServiceComplexe = new ServiceComplexe();

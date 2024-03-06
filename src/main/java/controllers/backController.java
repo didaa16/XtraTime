@@ -34,6 +34,14 @@ public class backController {
 
     @FXML
     private Button bsponsor;
+    @FXML
+    private Button chatbox;
+
+    @FXML
+    void chatbox(ActionEvent event) {
+        loadUi("/chatbot");
+
+    }
 
     private void loadUi(String ui) {
         Parent root = null;

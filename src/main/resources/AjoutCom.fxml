@@ -50,7 +50,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="70.0" prefWidth="618.0" spacing="5.0">
                      <children>
-                        <Button fx:id="annuler" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#annulerCommande" prefHeight="35.0" prefWidth="178.0" style="-fx-background-radius: 20;" text="Anuller">
+                        <Button fx:id="annuler" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#annulerCommande" prefHeight="35.0" prefWidth="178.0" style="-fx-background-radius: 20;" text="Annuller">
                            <font>
                               <Font size="25.0" />
                            </font>
@@ -77,7 +77,7 @@
          <top>
             <HBox alignment="CENTER" prefHeight="74.0" prefWidth="503.0" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fx:id="refresh" fitHeight="43.0" fitWidth="43.0" onMouseClicked="#refresh" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="refresh" fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@imagesss/option-dactualisation-de-la-page.png" />
                      </image>

@@ -128,9 +128,10 @@ public class CommandeJdida implements Initializable {
         }
         refCommandeDesProd.setText("Réference de commande: "+refCommande);
         total.setText(String.valueOf(totalPrix)+" Dt");
-        refresh.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> refresh());
+        //refresh.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> refresh());
     }else { showAlert("", "Vous n'avez pas de commande pour le moment", "commandez chez nous et vous ne le regretterez pas!", Alert.AlertType.INFORMATION);
         }
+        refresh();
     }
 
     private void showAlert(String title, String headerText, String contentText, Alert.AlertType alertType) {
@@ -173,10 +174,12 @@ public class CommandeJdida implements Initializable {
             e.printStackTrace();
         }
     }
-    @FXML
+
+
+
     private void refresh() {
 
-        grid.getChildren().clear(); // Effacez tous les éléments actuels de la grille
+        this.grid.getChildren().clear(); // Effacez tous les éléments actuels de la grille
         this.produits.clear(); // Effacez toutes les données actuelles
 
 

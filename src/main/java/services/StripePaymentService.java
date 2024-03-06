@@ -9,25 +9,25 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class StripePaymentService {
-    public PaymentIntent createPayment(double amount, String currency, String description) {
-        try {
-            Stripe.apiKey = "sk_test_51OqJbyP8fZ7mtZrf1ucCZuWgiG9TwaEZeDfFgVTC7dM2lapkIL1Hiq8LJKjLK2YVbdlYTFCHI3FgIthXHJgTxaa800QGib2xV2";
+    public static void createPayment(double amount) throws StripeException {
+        double exchangeRate = 0.032f;
+        double usdAmount = amount * exchangeRate;
 
-            PaymentIntentCreateParams params = PaymentIntentCreateParams.builder()
-                    .setAmount((long) (amount * 100))
-                    .setCurrency(currency)
-                    .setDescription(description)
+        if (usdAmount > 999999.99) {
+            System.out.println("Error: Amount exceeds the maximum allowed by Stripe.");
+        } else {
+            Stripe.apiKey = "sk_test_51OqJbyP8fZ7mtZrf1ucCZuWgiG9TwaEZeDfFgVTC7dM2lapkIL1Hiq8LJKjLK2YVbdlYTFCHI3FgIthXHJgTxaa800QGib2xV2";
+            Map<String, Object> params = new HashMap<>();
+            params.put("amount", (long) amount);
+            params.put("currency", "usd");
+
+            PaymentIntentCreateParams createParams = PaymentIntentCreateParams.builder()
+                    .setAmount((long) amount)
+                    .setCurrency("usd")
                     .build();
 
-            PaymentIntent paymentIntent = PaymentIntent.create(params);
-
-            return paymentIntent;
-        } catch (StripeException e) {
-            // Gérer l'exception
-            e.printStackTrace();
-            return null;
+            PaymentIntent paymentIntent = PaymentIntent.create(createParams);
+            System.out.println(paymentIntent);
         }
     }
-
 }
-

@@ -19,7 +19,7 @@
          <center>
               <VBox alignment="TOP_CENTER" fillWidth="false" prefHeight="496.0" prefWidth="465.0" spacing="20.0" style="-fx-border-color: grey;" stylesheets="@styless.css" BorderPane.alignment="CENTER">
                   <children>
-                      <Label alignment="CENTER" prefHeight="51.0" prefWidth="622.0" text="Paiement en ligne via Stripe" textFill="#e8665f">
+                      <Label alignment="CENTER" prefHeight="51.0" prefWidth="622.0" text="Paiement via Stripe" textFill="#e8665f">
                      <font>
                         <Font name="System Bold" size="22.0" />
                      </font>
@@ -123,7 +123,7 @@
                   </VBox>
                   <VBox prefHeight="618.0" prefWidth="266.0">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="244.0" text="Notre paiement !" textAlignment="CENTER" textFill="#e8665f">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="244.0" text="Votre paiement !" textAlignment="CENTER" textFill="#e8665f">
                            <font>
                               <Font name="System Bold Italic" size="24.0" />
                            </font>

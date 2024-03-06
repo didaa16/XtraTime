@@ -16,6 +16,8 @@ import entities.TypeSport;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,9 +25,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import org.apache.poi.ss.usermodel.*;
@@ -41,6 +45,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 import com.itextpdf.kernel.colors.Color;
 
 import static com.itextpdf.layout.properties.TextAlignment.CENTER;
@@ -96,11 +102,14 @@ public class AfficherProduitController {
 
     @FXML
     private TableView<Produit> listeProduit;
+    @FXML
+    private TextField recherche;
 
     private static List<Produit> deletedProducts = new ArrayList<>();
+    private FilteredList<Produit> filteredProduits;
 
     @FXML
-    void initialize(){
+    void initialize() {
         try {
             ObservableList<Produit> produits = FXCollections.observableList(serviceProduit.afficher());
             listeProduit.setItems(produits);
@@ -124,7 +133,6 @@ public class AfficherProduitController {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
     }
 
     @FXML
@@ -383,6 +391,29 @@ public class AfficherProduitController {
             e.printStackTrace();
             showAlert("Erreur", "Erreur lors du retour à l'interface précédente", e.getMessage(), Alert.AlertType.ERROR);
         }
+    }
+
+
+    ObservableList<Produit> produits;
+
+    {
+        try {
+            produits = FXCollections.observableList(serviceProduit.afficher());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    @FXML
+    private void handleSearch(KeyEvent event) {
+        ObservableList<Produit> filteredSponsors = FXCollections.observableArrayList();
+        filteredSponsors.addAll(produits.stream()
+                .filter(sponsor -> sponsor.getNom().toLowerCase().contains(recherche.getText().toLowerCase()))
+                .collect(Collectors.toList()));
+
+        // Update the TableView with the filtered list
+        listeProduit.setItems(filteredSponsors);
     }
 
 

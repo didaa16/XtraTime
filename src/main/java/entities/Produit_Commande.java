@@ -4,15 +4,15 @@ public class Produit_Commande {
 
     private String ref;
     private int refCommande;
-    private int quantitProd;
+    private int nbr ;
 
 
     public Produit_Commande() {}
 
-    public Produit_Commande(String ref, int refCommande,int quantitProd) {
+    public Produit_Commande(String ref, int refCommande,int nbr ) {
         this.ref = ref;
         this.refCommande = refCommande;
-        this.quantitProd = quantitProd;
+        this.nbr  = nbr ;
     }
 
 
@@ -32,12 +32,12 @@ public class Produit_Commande {
         this.refCommande = refCommande;
     }
 
-    public int getQuantitProd() {
-        return quantitProd;
+    public int getNbr() {
+        return nbr ;
     }
 
-    public void setQuantitProd(int quantitProd) {
-        this.quantitProd = quantitProd;
+    public void setNbr (int nbr ) {
+        this.nbr  = nbr ;
     }
 
     @Override
@@ -45,7 +45,7 @@ public class Produit_Commande {
         return "Produit_Commande{" +
                 "ref='" + ref + '\'' +
                 ", refCommande=" + refCommande +
-                ", quantitProd=" + quantitProd +
+                ", nbr =" + nbr  +
                 '}';
     }
 }

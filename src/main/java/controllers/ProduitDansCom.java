@@ -2,9 +2,14 @@ package controllers;
 
 import entities.Commande;
 import entities.Produit;
+import entities.Produit_Commande;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -13,7 +18,10 @@ import services.ServiceCommande;
 import services.ServiceCommandeProduit;
 import tests.IListener;
 
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProduitDansCom {
 
@@ -22,6 +30,8 @@ public class ProduitDansCom {
 
     @FXML
     private ImageView imageProduit;
+    @FXML
+    private ScrollPane scroll;
 
     @FXML
     private Label marque;
@@ -108,14 +118,30 @@ public class ProduitDansCom {
             // Obtenez la référence du produit à partir de l'étiquette reffff
             String refProduit = reffff.getText();
 
-            // Supprimez le produit de la commande
-            ServiceCommandeProduit serviceCommandeProduit = new ServiceCommandeProduit();
-            serviceCommandeProduit.deleteProduitFromCommande(refProduit, refCommande);
+            // Obtenez le nombre de ce produit dans la commande actuelle
+            Produit_Commande produitCommande = serviceCommandeProduit.getProduitCommande(refProduit, refCommande);
+            int nbrProduitDansCommande = produitCommande != null ? produitCommande.getNbr() : 0;
 
-            showAlert("Suppression réussie", "Le produit a été supprimé de la commande", "", Alert.AlertType.INFORMATION);
-        } catch (SQLException e) {
+            // Supprimez le produit de la commande en fonction du nombre (nbr) dans la commande
+            if (nbrProduitDansCommande > 0) {
+                serviceCommandeProduit.supprimerProduitCommande(nbrProduitDansCommande);
+                Parent root = FXMLLoader.load(getClass().getResource("/AjoutCom.fxml"));
+                description.getScene().setRoot(root);
+                showAlert("Suppression réussie", "Le produit a été supprimé de la commande", "", Alert.AlertType.INFORMATION);
+            } else {
+                showAlert("Aucune suppression", "Le produit n'existe pas dans la commande", "", Alert.AlertType.WARNING);
+            }
+        } catch (SQLException | IOException e) {
             System.out.println("Erreur lors de la suppression du produit de la commande : " + e.getMessage());
             showAlert("Erreur", "Erreur lors de la suppression du produit de la commande", e.getMessage(), Alert.AlertType.ERROR);
         }
     }
+
+
+
+
+
 }
+
+
+

@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import services.ServiceCommande;
 import services.ServiceCommandeProduit;
@@ -61,6 +62,7 @@ public class CommandeController {
     private TableColumn<Produit, Double> c_prix;
 
     @FXML
+
     private TableColumn<Produit, Integer> c_quantite;
 
     @FXML
@@ -77,6 +79,10 @@ public class CommandeController {
 
     private ServiceCommande serviceCommande;
     private ServiceCommandeProduit serviceCommandeProduit;
+    @FXML
+    private ComboBox<Status> statusFilterComboBox;
+    @FXML
+    private AnchorPane page;
 
 
     @FXML
@@ -95,6 +101,19 @@ public class CommandeController {
             c_pseudo.setCellValueFactory(new PropertyValueFactory<>("idUser"));
             c_status.setCellValueFactory(new PropertyValueFactory<>("status"));
             c_total.setCellValueFactory(new PropertyValueFactory<>("prix"));
+
+            // Ajouter un élément vide à la liste des éléments du ComboBox
+            statusFilterComboBox.getItems().add(null);
+            // Ajouter tous les autres éléments de l'énumération Status
+            statusFilterComboBox.getItems().addAll(Status.values());
+
+            // Sélectionner l'élément vide par défaut
+            statusFilterComboBox.getSelectionModel().selectFirst();
+
+            // Ajoutez un gestionnaire d'événements pour le ComboBox
+            statusFilterComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+                filterCommandes();
+            });
 
             // Charger les produits dans la tableProduits lorsque la commande est sélectionnée
             tableCommande.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -126,6 +145,7 @@ public class CommandeController {
             System.out.println(e.getMessage());
         }
     }
+
 
 
     @FXML
@@ -180,5 +200,33 @@ public class CommandeController {
             showAlert("Erreur", "Erreur lors du retour à l'interface précédente", e.getMessage(), Alert.AlertType.ERROR);
         }
     }
+
+    @FXML
+    private void filterCommandes() {
+        // Récupérez le statut sélectionné
+        Status selectedStatus = statusFilterComboBox.getValue();
+
+        // Appliquez le filtre sur la liste des commandes
+        ObservableList<Commande> filteredCommandes = FXCollections.observableArrayList();
+        try {
+            if (selectedStatus == null) {
+                // Si aucun statut n'est sélectionné, affichez toutes les commandes
+                filteredCommandes.addAll(serviceCommande.afficher());
+            } else {
+                // Sinon, affichez uniquement les commandes avec le statut sélectionné
+                for (Commande commande : serviceCommande.afficher()) {
+                    if (commande.getStatus() == selectedStatus) {
+                        filteredCommandes.add(commande);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        // Mettez à jour la table des commandes avec les commandes filtrées
+        tableCommande.setItems(filteredCommandes);
+    }
+
 }
 

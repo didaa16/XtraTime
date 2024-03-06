@@ -79,7 +79,14 @@ public class ServiceCommandeProduit implements IService<Produit_Commande> {
 
     }
 
-
+    public void supprimerProduitCommande(int nbr) throws SQLException {
+        Connection connection = DataBase.getInstance().getConnection();
+        String req = "DELETE FROM produit_commande WHERE nbr = ?";
+        PreparedStatement ps = connection.prepareStatement(req);
+        ps.setInt(1, nbr);
+        ps.executeUpdate();
+        System.out.println("Produit supprimé de la commande en fonction du nombre");
+    }
 
 
 
@@ -184,6 +191,25 @@ public class ServiceCommandeProduit implements IService<Produit_Commande> {
         return prixTotal;
     }
 
+    public Produit_Commande getProduitCommande(String refProduit, int refCommande) throws SQLException {
+        Connection connection = DataBase.getInstance().getConnection();
+        String req = "SELECT * FROM produit_commande WHERE ref = ? AND refCommande = ?";
+        PreparedStatement ps = connection.prepareStatement(req);
+        ps.setString(1, refProduit);
+        ps.setInt(2, refCommande);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            Produit_Commande produitCommande = new Produit_Commande();
+            produitCommande.setRef(rs.getString("ref"));
+            produitCommande.setRefCommande(rs.getInt("refCommande"));
+            produitCommande.setNbr(rs.getInt("nbr"));
+            // Autres attributs du produit commande
+            return produitCommande;
+        } else {
+            return null; // Aucun produit correspondant n'a été trouvé dans la commande
+        }
+    }
 
 
 

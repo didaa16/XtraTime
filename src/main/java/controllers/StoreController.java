@@ -1,6 +1,8 @@
 package controllers;
 
 import entities.Produit;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,10 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -24,6 +23,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -67,7 +67,8 @@ public class StoreController implements Initializable {
     private TextField recherche;
     @FXML
     private HBox consulter;
-
+    @FXML
+    private ComboBox<String> sortComboBox;
 
     private List<Produit> produits = new ArrayList<>();
 
@@ -95,6 +96,7 @@ public class StoreController implements Initializable {
     }
 
     public void initialize(URL location, ResourceBundle resources) {
+        
         this.produits.addAll(this.getData());
         if (this.produits.size() > 0) {
             this.setProd((Produit)this.produits.get(0));
@@ -134,6 +136,11 @@ public class StoreController implements Initializable {
             var9.printStackTrace();
         }
         scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        // Initialiser les options de tri dans le ComboBox
+        ObservableList<String> sortOptions = FXCollections.observableArrayList(
+                " ","Prix croissant", "Prix décroissant", "Nom (A-Z)", "Nom (Z-A)", "Taille croissante", "Taille décroissante"
+        );
+        sortComboBox.setItems(sortOptions);
 
     }
 
@@ -212,7 +219,63 @@ private void handleSearch(KeyEvent event) throws IOException {
     }
 }
 
+    @FXML
+    private void handleSortSelection(ActionEvent event) throws IOException {
+        String selectedSort = sortComboBox.getValue();
+        switch (selectedSort) {
+            case "Prix croissant":
+                produits.sort(Comparator.comparingDouble(Produit::getPrix));
+                break;
+            case "Prix décroissant":
+                produits.sort(Comparator.comparingDouble(Produit::getPrix).reversed());
+                break;
+            case "Nom (A-Z)":
+                produits.sort(Comparator.comparing(Produit::getNom));
+                break;
+            case "Nom (Z-A)":
+                produits.sort(Comparator.comparing(Produit::getNom).reversed());
+                break;
+            case "Taille croissante":
+                produits.sort(Comparator.comparing(Produit::getTaille));
+                break;
+            case "Taille décroissante":
+                produits.sort(Comparator.comparing(Produit::getTaille).reversed());
+                break;
+        }
+        refreshGrid();
+    }
+
+    private void refreshGrid() throws IOException {
+        grid.getChildren().clear();
+        int column = 0;
+        int row = 1;
+        for (Produit produit : produits) {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/item.fxml"));
+            AnchorPane anchorPane = fxmlLoader.load();
+            ItemController itemController = fxmlLoader.getController();
+            itemController.setData(produit, iListener);
+
+            grid.add(anchorPane, column++, row);
+            if (column == 3) {
+                column = 0;
+                row++;
+            }
+            grid.setMinWidth(-1.0);
+            grid.setPrefWidth(-1.0);
+            grid.setMaxWidth(Double.NEGATIVE_INFINITY);
+            grid.setMinHeight(-1.0);
+            grid.setPrefHeight(-1.0);
+            grid.setMaxHeight(Double.NEGATIVE_INFINITY);
+            grid.setHgap(5);
+            grid.setVgap(5);
+
+            GridPane.setMargin(anchorPane, new Insets(10));
+        }
+    }
+
+
 }
+
 
 
 

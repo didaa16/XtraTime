@@ -16,6 +16,7 @@ import org.controlsfx.control.Rating;
 import services.ServiceCommande;
 import services.ServiceCommandeProduit;
 import services.ServiceProduit;
+import services.ServiceRating;
 import tests.IListener;
 
 import javafx.event.ActionEvent;
@@ -67,6 +68,7 @@ public class ItemController {
     private Commande currentCommande;
     private ServiceCommande serviceCommande;
     private ServiceCommandeProduit serviceCommandeProduit;
+    private ServiceRating serviceRating ;
     @FXML
     private Spinner<Integer> spinner;
 
@@ -74,6 +76,8 @@ public class ItemController {
     public ItemController() throws SQLException {
         this.serviceCommande = new ServiceCommande();
         this.serviceCommandeProduit = new ServiceCommandeProduit();
+        this.serviceRating = new ServiceRating();
+
     }
     @FXML
 
@@ -101,8 +105,21 @@ public class ItemController {
             imageProduit.setImage(image);
         }
         spinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 0)); // Remplacez 100 par le nombre maximum de produits que vous pouvez ajouter
-    }
+        initialize();
 
+    }
+    @FXML
+    public void initialize() {
+        if (produit != null) {
+            try {
+                double averageRating = serviceRating.getAverageRating(produit.getRef());
+                rating.setRating(averageRating);
+            } catch (SQLException e) {
+                e.printStackTrace();
+                // Gérer l'erreur, par exemple afficher un message à l'utilisateur
+            }
+        }
+    }
             /*//currentCommande = serviceCommande.getCommande("dida16");
         if (produit != null) {
             if (!serviceCommande.commandeExiste(currentCommande)) {
@@ -185,13 +202,22 @@ public class ItemController {
 
     @FXML
     private void handleRatingClick(MouseEvent event) {
-        // Code à exécuter lorsque le composant de notation est cliqué
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information Dialog");
-        alert.setHeaderText(null);
-        alert.setContentText("Merci pour la note!");
-
-        alert.showAndWait();
+        double ratingValue = rating.getRating();
+        try {
+            serviceRating.addOrUpdateRating("yassine", produit.getRef(), (int) ratingValue);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText(null);
+            alert.setContentText("Votre évaluation a été enregistrée avec succès!");
+            alert.showAndWait();
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText(null);
+            alert.setContentText("Une erreur s'est produite lors de l'enregistrement de votre évaluation.");
+            alert.showAndWait();
+            e.printStackTrace();
+        }
     }
 
 

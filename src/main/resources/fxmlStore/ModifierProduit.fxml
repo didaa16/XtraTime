@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="634.0" prefWidth="960.0" styleClass="gradient-background" stylesheets="@styless.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.store.ModifierProduitController">
+   <children>
+      <BorderPane prefHeight="583.0" prefWidth="882.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <left>
+            <VBox prefHeight="512.0" prefWidth="234.0" styleClass="container" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox prefHeight="130.0" prefWidth="258.0">
+                     <children>
+                        <ImageView fitHeight="83.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagesss/logo.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="15.0" top="20.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label prefHeight="35.0" prefWidth="127.0" text="Xtratime" textFill="WHITE">
+                           <font>
+                              <Font name="Microsoft YaHei" size="28.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="8.0" top="50.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <Separator prefHeight="18.0" prefWidth="218.0">
+                     <VBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </VBox.margin>
+                  </Separator>
+                  <HBox prefHeight="60.0" prefWidth="260.0" styleClass="button-container-mouse-moved">
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                     <children>
+                        <ImageView fitHeight="59.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagesss/home.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label prefHeight="60.0" prefWidth="80.0" text="Home" textFill="WHITE">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="back" onMouseClicked="#goBack" prefHeight="60.0" prefWidth="260.0">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <children>
+                        <ImageView fitHeight="59.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagesss/product.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label prefHeight="60.0" prefWidth="162.0" text="Produits" textFill="WHITE">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="15.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <styleClass>
+                        <String fx:value="container" />
+                        <String fx:value="button-container-mouse-moved" />
+                     </styleClass>
+                  </HBox>
+                  <HBox fx:id="backCom" onMouseClicked="#goBackCom" prefHeight="60.0" prefWidth="260.0" styleClass="button-container-mouse-moved">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <children>
+                        <ImageView fitHeight="59.0" fitWidth="93.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagesss/order-delivery.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label prefHeight="60.0" prefWidth="141.0" text="Commandes" textFill="WHITE">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <BorderPane.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </BorderPane.margin>
+            </VBox>
+         </left>
+         <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox prefHeight="503.0" prefWidth="661.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="24.0" prefWidth="363.0" style="-fx-background-color: #769476; -fx-background-radius: 20;">
+                           <children>
+                              <Label prefHeight="23.0" prefWidth="354.0" text="Modifier un produit" textFill="WHITE">
+                                 <font>
+                                    <Font size="36.0" />
+                                 </font>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <HBox.margin>
+                                    <Insets left="30.0" top="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets left="100.0" right="100.0" top="20.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <Separator prefHeight="51.0" prefWidth="691.0" />
+                        <HBox alignment="CENTER" prefHeight="70.0" prefWidth="659.0">
+                           <children>
+                              <Label text="Nom" textFill="WHITE">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="nomProduit" prefHeight="34.0" prefWidth="196.0">
+                                 <HBox.margin>
+                                    <Insets left="50.0" />
+                                 </HBox.margin>
+                              </TextField>
+                              <Label prefHeight="27.0" prefWidth="103.0" text="Quantité" textFill="#ece0e0">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <TextField fx:id="quantite" prefHeight="34.0" prefWidth="189.0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="62.0" prefWidth="659.0">
+                           <children>
+                              <Label text="Reférence" textFill="#ece0e0">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="refProduit" prefHeight="34.0" prefWidth="196.0">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </TextField>
+                              <Label prefHeight="27.0" prefWidth="90.0" text="Marque" textFill="#ece0e0">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <ComboBox fx:id="marque" prefHeight="26.0" prefWidth="190.0">
+                                 <HBox.margin>
+                                    <Insets left="12.0" />
+                                 </HBox.margin>
+                              </ComboBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="54.0" prefWidth="659.0">
+                           <children>
+                              <Label text="Type" textFill="WHITE">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <ComboBox fx:id="typeSport" prefHeight="26.0" prefWidth="197.0">
+                                 <HBox.margin>
+                                    <Insets left="51.0" />
+                                 </HBox.margin>
+                              </ComboBox>
+                              <Label text="Taille" textFill="#ece0e0">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <TextField fx:id="taille" prefHeight="34.0" prefWidth="189.0">
+                                 <HBox.margin>
+                                    <Insets left="60.0" />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="58.0" prefWidth="597.0">
+                           <children>
+                              <Label text="Prix" textFill="#ece0e0">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="prix" prefHeight="34.0" prefWidth="196.0">
+                                 <HBox.margin>
+                                    <Insets left="60.0" />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="162.0" prefWidth="652.0">
+                           <children>
+                              <StackPane prefHeight="118.0" prefWidth="162.0">
+                                 <children>
+                                    <ImageView fx:id="imageView" fitHeight="99.0" fitWidth="102.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff38" height="130.0" stroke="BLACK" strokeType="INSIDE" width="127.0" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="30.0" />
+                                 </HBox.margin>
+                              </StackPane>
+                              <Button fx:id="chargerI" mnemonicParsing="false" onAction="#upload" prefHeight="35.0" prefWidth="127.0" text="charger une photo">
+                                 <HBox.margin>
+                                    <Insets top="60.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <VBox prefHeight="166.0" prefWidth="234.0">
+                                 <children>
+                                    <Label alignment="CENTER" prefHeight="27.0" prefWidth="171.0" text="Description" textFill="#ece0e0">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="description" alignment="TOP_LEFT" prefHeight="129.0" prefWidth="233.0">
+                                       <opaqueInsets>
+                                          <Insets top="200.0" />
+                                       </opaqueInsets>
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </TextField>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="80.0" />
+                                 </HBox.margin>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="btnsave" mnemonicParsing="false" onAction="#sauvegarder" prefHeight="35.0" prefWidth="90.0" styleClass="switch_button" text="save">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets bottom="20.0" top="20.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

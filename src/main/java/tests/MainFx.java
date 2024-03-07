@@ -15,7 +15,8 @@ public class MainFx extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        FXMLLoader fxmlLoader= new FXMLLoader(getClass().getResource("/fxmlevent/base.fxml"));
+
+        FXMLLoader fxmlLoader= new FXMLLoader(getClass().getResource("/fxmlStore/AjouterProduit.fxml"));
         try {
             Parent root= fxmlLoader.load();
             Scene scene= new Scene(root);
@@ -26,7 +27,5 @@ public class MainFx extends Application {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-
-
     }
 }

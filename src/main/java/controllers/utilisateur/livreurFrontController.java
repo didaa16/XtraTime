@@ -1,21 +1,39 @@
 package controllers.utilisateur;
 
+import entities.utilisateur.Img;
 import entities.utilisateur.Utilisateur;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.BlendMode;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+import services.utilisateur.ServiceImg;
 import services.utilisateur.ServiceUtilisateurs;
 import utils.Encryptor;
 import utils.SendMail;
 import utils.SendSMS;
 
 import javax.swing.*;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.Objects;
@@ -70,7 +88,7 @@ public class livreurFrontController {
     private PasswordField confirmerNouveauMdpTF;
 
     @FXML
-    private Button deconnecterButton;
+    private Button deconnecterButton, voir, supprimer;
 
     @FXML
     private TextField emailTF;
@@ -112,6 +130,9 @@ public class livreurFrontController {
     private Button politiqueDeConfidentialiteButton;
 
     @FXML
+    private Text nomEtPrenom;
+
+    @FXML
     private TextArea politiquesText;
 
     @FXML
@@ -138,27 +159,35 @@ public class livreurFrontController {
     @FXML
     private Button sauvegarderModificationsButton;
 
-    @FXML
-    private VBox slider;
+
 
     @FXML
     private VBox vboxDown;
+    @FXML
+    private AnchorPane slider;
 
     @FXML
     private VBox vboxUp;
     @FXML
     private AnchorPane selectModeAnchor;
-
+    private static boolean exist;
     private static Utilisateur loggedInUser;
     public static void setLoggedInUser(Utilisateur user) {
         loggedInUser = user;
     }
+    @FXML
+    private Circle pdp, pdp1;
+    private static String url;
+    private static Img loggedInImage;
     private static int rand;
     private static void setRand(int r) {
         rand = r;
     }
+    private static boolean deleted;
     ServiceUtilisateurs serviceUtilisateurs;
+    ServiceImg serviceImg;
     Encryptor encryptor = new Encryptor();
+    private boolean sliderVisible = false;
 
     @FXML
     void notificationsButtonOnClick(ActionEvent event) {
@@ -282,15 +311,6 @@ public class livreurFrontController {
                 "Si vous avez des questions ou des préoccupations concernant notre utilisation de vos informations personnelles ou si vous souhaitez exercer vos droits en matière de confidentialité, veuillez nous contacter à l'adresse suivante : [adresse e-mail de contact].\n" +
                 "\n" +
                 "Merci d'utiliser XtraTime !");
-    }
-
-    @FXML
-    void profileButtonOnClick(ActionEvent event) {
-        changementPane.setVisible(false);
-        parametresMdpPane.setVisible(false);
-        politiqueConfidentialiteScroll.setVisible(false);
-        profilePane.setVisible(true);
-        sauvegarderModificationsButton.setVisible(false);
     }
 
     private boolean getErrorsMdp() throws NoSuchAlgorithmException {
@@ -433,7 +453,8 @@ public class livreurFrontController {
                 Utilisateur newUser = new Utilisateur(loggedInUser.getPseudo(), Integer.parseInt(cinTF.getText()), nomTF.getText(),
                         prenomTF.getText(), Integer.parseInt(ageTF.getText()), Integer.parseInt(numTelTF.getText()),
                         emailTF.getText(), loggedInUser.getMdp(), loggedInUser.getRole());
-                if (!oldEmail.equals(emailTF.getText())){
+
+                if (!oldEmail.equals(emailTF.getText())) {
                     Random rd = new Random();
                     int Ra = rd.nextInt(1000000+1);
                     setRand(Ra);
@@ -444,15 +465,62 @@ public class livreurFrontController {
                     messageLabel.setText("Vous avez modifié votre adresse e-mail c'est pour cela vous avez reçu un code de vérification dans votre ancien email pour vérifier votre identité!");
                     confirmerAdresseCode1.setVisible(false);
                     confirmerAdresseCode.setVisible(true);
-                }else {
-                    serviceUtilisateurs.modifier(newUser);
-                    JOptionPane.showMessageDialog(null,"Modification effectuée! ");
-                    System.out.println("Utilisateur modifié avec succès !");
+                } else {
+                    // Vérifie si l'utilisateur existe déjà dans la base de données
+                    if (serviceUtilisateurs.pseudoExiste(newUser.getPseudo())) {
+                        // Si l'utilisateur existe, appeler la méthode modifier
+                        serviceUtilisateurs.modifier(newUser);
+                        Path source = Paths.get(url); // Assuming url is the path to the image
+                        Path destination = Paths.get("C:\\Users\\PC\\OneDrive\\Bureau\\STUDY\\SEMESTRE 2\\PI\\XtraTime\\src\\main\\resources\\uploads\\" + newUser.getPseudo() + ".jpg");
+                        Files.copy(source, destination, StandardCopyOption.REPLACE_EXISTING);
+                        Img img = new Img(loggedInUser.getPseudo(), destination.toString());
+                        System.out.println(img);
+                        System.out.println(img);
+                        if (serviceImg.imgExiste(img.getPseudoU())) {
+                            if (deleted) {
+                                serviceImg.supprimer(img);
+                            } else {
+                                serviceImg.modifier(img);
+                            }
+                        } else {
+                            serviceImg.ajouter(img);
+                        }
+                        setData();
+                        JOptionPane.showMessageDialog(null,"Modification effectuée! ");
+                        System.out.println("Utilisateur modifié avec succès !");
+                    } else {
+                        // Si l'utilisateur n'existe pas, appeler la méthode ajouter
+                        newUser.setRole("Client");
+                        Random rd = new Random();
+                        int Rdd = rd.nextInt(1000000+1);
+                        String newMdp = encryptor.encryptString(String.valueOf(Rdd));
+                        newUser.setMdp(newMdp);
+                        serviceUtilisateurs.ajouter(newUser);
+                        ancienMdpTF.setText(String.valueOf(Rdd));
+                        loggedInUser = newUser;
+                        JOptionPane.showMessageDialog(null,"Inscription avec succés! Bienvenue à XtraTime \n Voici votre nouveau mot de passe : "+Rdd+" \n vous pouvez le modifier quand tu veux.");
+                        Path source = Paths.get(url); // Assuming url is the path to the image
+                        Path destination = Paths.get("C:\\Users\\PC\\OneDrive\\Bureau\\STUDY\\SEMESTRE 2\\PI\\XtraTime\\src\\main\\resources\\uploads\\" + newUser.getPseudo() + ".jpg");
+                        Files.copy(source, destination, StandardCopyOption.REPLACE_EXISTING);
+                        Img img = new Img(newUser.getPseudo(), destination.toString());
+                        System.out.println(img);
+                        if (serviceImg.imgExiste(img.getPseudoU())) {
+                            if (deleted) {
+                                serviceImg.supprimer(img);
+                            } else {
+                                serviceImg.modifier(img);
+                            }
+                        } else {
+                            serviceImg.ajouter(img);
+                        }
+                        setData();
+                        JOptionPane.showMessageDialog(null,"Utilisateur ajouté! ");
+                        System.out.println("Utilisateur ajouté avec succès !");
+                    }
                 }
-            } catch (SQLException e) {
+            } catch (SQLException | NoSuchAlgorithmException | IOException e) {
                 System.out.println("Erreur lors de la modification de l'utilisateur : " + e.getMessage());
             }
-
         }
     }
 
@@ -496,11 +564,26 @@ public class livreurFrontController {
                     emailTF.getText(), loggedInUser.getMdp(), loggedInUser.getRole());
             try {
                 serviceUtilisateurs.modifier(newUser);
+                Path source = Paths.get(url); // Assuming url is the path to the image
+                Path destination = Paths.get("C:\\Users\\PC\\OneDrive\\Bureau\\STUDY\\SEMESTRE 2\\PI\\XtraTime\\src\\main\\resources\\uploads\\" + newUser.getPseudo() + ".jpg");
+                Files.copy(source, destination, StandardCopyOption.REPLACE_EXISTING);
+                Img img = new Img(newUser.getPseudo(), destination.toString());
+                System.out.println(img);
+                if(serviceImg.imgExiste(img.getPseudoU())){
+                    if (deleted){
+                        serviceImg.supprimer(img);
+                    }else {
+                        serviceImg.modifier(img);
+                    }
+                }else {
+                    serviceImg.ajouter(img);
+                }
+                setData();
                 JOptionPane.showMessageDialog(null,"Modification effectuée! ");
                 System.out.println("Utilisateur modifié avec succès !");
                 changementPane.setVisible(false);
                 profilePane.setVisible(true);
-            } catch (SQLException e) {
+            } catch (SQLException | IOException e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -509,8 +592,82 @@ public class livreurFrontController {
         }
     }
 
+    private void setData() throws SQLException {
+        serviceUtilisateurs = new ServiceUtilisateurs();
+        serviceImg = new ServiceImg();
+        exist = serviceImg.imgExiste(loggedInUser.getPseudo());
+        deleted = false;
+        if (loggedInUser!=null){
+            loggedInImage = serviceImg.afficherImageParPseudo(loggedInUser.getPseudo());
+            if (serviceUtilisateurs.pseudoExiste(loggedInUser.getPseudo())){
+                Utilisateur user = serviceUtilisateurs.afficherParPseudo(loggedInUser.getPseudo());
+                nomEtPrenom.setText(user.getNom() + " " + user.getPrenom());
+                pseudoTF.setText(user.getPseudo());
+                cinTF.setText(String.valueOf(user.getCin()));
+                nomTF.setText(user.getNom());
+                prenomTF.setText(user.getPrenom());
+                ageTF.setText(String.valueOf(user.getAge()));
+                numTelTF.setText(String.valueOf(user.getNumtel()));
+                emailTF.setText(user.getEmail());
+            }
+            else {
+                if (loggedInUser.getPrenom() == null && loggedInUser.getNom() != null) {
+                    nomEtPrenom.setText(loggedInUser.getNom());
+                } else if (loggedInUser.getPrenom() != null && loggedInUser.getNom() == null) {
+                    nomEtPrenom.setText(loggedInUser.getPrenom());
+                } else if (loggedInUser.getPrenom() == null && loggedInUser.getNom() == null) {
+                    nomEtPrenom.setText("XtraTime");
+                } else {
+                    nomEtPrenom.setText(loggedInUser.getNom() + " " + loggedInUser.getPrenom());
+                }
+                pseudoTF.setText(loggedInUser.getPseudo());
+                cinTF.setText(String.valueOf(loggedInUser.getCin()));
+                nomTF.setText(loggedInUser.getNom());
+                prenomTF.setText(loggedInUser.getPrenom());
+                ageTF.setText(String.valueOf(loggedInUser.getAge()));
+                numTelTF.setText(String.valueOf(loggedInUser.getNumtel()));
+                emailTF.setText(loggedInUser.getEmail());
+            }
+            if (exist) {
+                String absolutePath = loggedInImage.getImg();
+                Image image = new Image(new File(absolutePath).toURI().toString());
+                pdp.setFill(new ImagePattern(image));
+                pdp1.setFill(new ImagePattern(image));
+            } else {
+                String absolutePath = "/Design/pdpVide.jpg";
+                Image image = new Image(getClass().getResourceAsStream(absolutePath));
+                pdp.setFill(new ImagePattern(image));
+                pdp1.setFill(new ImagePattern(image));
+            }
+        }
+    }
+
     @FXML
-    void initialize() {
+    void initialize() throws SQLException {
+        slider.setTranslateX(-200);
+
+        // Ajoutez un écouteur d'événements pour profileButton
+        profileButton.setOnMouseClicked(event -> {
+            if (!sliderVisible) {
+                profilePane.setVisible(true);
+                sauvegarderModificationsButton.setVisible(false);
+                // Si le slider n'est pas déjà visible, l'afficher
+                TranslateTransition slide = new TranslateTransition();
+                slide.setDuration(Duration.seconds(0.4));
+                slide.setNode(slider);
+                slide.setToX(0);
+                slide.play();
+                sliderVisible = true;
+            } else {
+                // Sinon, le cacher
+                TranslateTransition slide = new TranslateTransition();
+                slide.setDuration(Duration.seconds(0.4));
+                slide.setNode(slider);
+                slide.setToX(-200);
+                slide.play();
+                sliderVisible = false;
+            }
+        });
         pseudoTF.setStyle("-fx-text-fill: white;");
         cinTF.setStyle("-fx-text-fill: white;");
         nomTF.setStyle("-fx-text-fill: white;");
@@ -522,17 +679,50 @@ public class livreurFrontController {
         confirmerNouveauMdpTF.setStyle("-fx-text-fill: white;");
         nouveauMdpTF.setStyle("-fx-text-fill: white;");
         codeVerification.setStyle("-fx-text-fill: white;");
-        serviceUtilisateurs = new ServiceUtilisateurs();
-        if (loggedInUser!=null){
-            pseudoTF.setText(loggedInUser.getPseudo());
-            cinTF.setText(String.valueOf(loggedInUser.getCin()));
-            nomTF.setText(loggedInUser.getNom());
-            prenomTF.setText(loggedInUser.getPrenom());
-            ageTF.setText(String.valueOf(loggedInUser.getAge()));
-            numTelTF.setText(String.valueOf(loggedInUser.getNumtel()));
-            emailTF.setText(loggedInUser.getEmail());
-        }
+        setData();
         getComplexite();
     }
+
+    public void importerOnClick(ActionEvent event) {
+        FileChooser fileChooser1 = new FileChooser();
+        fileChooser1.setTitle("Open Image File");
+        File file = fileChooser1.showOpenDialog(null);
+        if (file != null) {
+            String absolutePath = file.getAbsolutePath();
+            url=absolutePath;
+            javafx.scene.image.Image image = new javafx.scene.image.Image(file.toURI().toString());
+            pdp.setFill(new ImagePattern(image));
+        }
+    }
+
+    public void supprimerPdp(ActionEvent event) {
+        pdp.setFill(new ImagePattern(new Image("/Design/pdpVide.jpg")));
+        deleted = true;
+    }
+    public void voirPdp(ActionEvent event) throws SQLException {
+        Stage stage = new Stage();
+        AnchorPane pane = new AnchorPane();
+        Scene scene = new Scene(pane);
+        ImageView imageView = new ImageView();
+        if (serviceImg.imgExiste(loggedInUser.getPseudo())) {
+            String absolutePath = loggedInImage.getImg();
+            Image image = new Image(new File(absolutePath).toURI().toString());
+            imageView.setImage(image);
+        } else {
+            String absolutePath = "/Design/pdpVide.jpg";
+            Image image = new Image(getClass().getResourceAsStream(absolutePath));
+            imageView.setImage(image);
+        }
+        imageView.setFitWidth(650); // Set desired width
+        imageView.setFitHeight(650);
+        imageView.setPreserveRatio(true); // Preserve aspect ratio
+        pane.getChildren().add(imageView);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+
+
 
 }

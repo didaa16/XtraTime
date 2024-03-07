@@ -78,14 +78,9 @@ public class eventService implements IService<event>{
         List<event> events = new ArrayList<>();
         String req = "SELECT * FROM event";
         try {
-
-
             ste = conn.createStatement();
             ResultSet resultSet = ste.executeQuery(req);
             while (resultSet.next()) {
-
-
-
                 event event = new event(
                         resultSet.getInt("idevent"),
                         resultSet.getString("titre"),

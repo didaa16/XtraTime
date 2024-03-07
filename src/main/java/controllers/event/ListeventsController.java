@@ -18,11 +18,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import services.event.eventService;
 import utils.event.DataSource;
 
+import javax.xml.ws.Holder;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -37,10 +39,6 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javafx.scene.input.MouseEvent;
-
-import javax.xml.ws.Holder;
 
 
 
@@ -218,7 +216,7 @@ public class ListeventsController {
             // Set date to subjecteventspanefx2, subjecteventspanefx22, subjecteventspanefx222
             ((Label) this.Listlabeldateevent.get(this.i)).setText(dateTime.toLocalDate().format(dateFormatter));
 
-           // Set time (hour) to heureeventspanefx, heureeventspanefx1, heureeventspanefx11
+            // Set time (hour) to heureeventspanefx, heureeventspanefx1, heureeventspanefx11
             ((Label) this.Listlabelheurevent.get(this.i)).setText(dateTime.toLocalTime().format(timeFormatter));
             ImageView qrImageView = this.ListImageseQrcode.get(this.i);
             event ev = this.data.get(this.i);

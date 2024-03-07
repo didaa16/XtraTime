@@ -1,31 +1,31 @@
 package controllers.local;
 
+import entities.local.complexe;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
+import services.local.ServiceComplexe;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
-import javafx.fxml.Initializable;
-
-import entities.local.complexe;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import services.local.ServiceComplexe;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import org.controlsfx.control.Notifications;
-import javafx.util.Duration;
-import javafx.scene.control.Label;
 
 public class InscriptionController implements Initializable {
     private Image image;
@@ -89,7 +89,7 @@ private  Label label;
     @FXML
     void addcomplexe(ActionEvent event) {
         String nomC = nom.getText();
-        String idlC = "dida16";
+        String idlC = "dida";
         String adrC = adr.getText();
         String telC = tel.getText();
         if (nomC.isEmpty() || idlC.isEmpty() || adrC.isEmpty() || telC.isEmpty() || imagePath.isEmpty() || imagePath1.isEmpty()) {
@@ -128,7 +128,7 @@ private  Label label;
         alert.setContentText("personne ajoute");
         alert.showAndWait(); }
         catch (SQLException e) {
-            throw new RuntimeException(e.getMessage());
+            System.out.println(e.getMessage());
         }
 
     }

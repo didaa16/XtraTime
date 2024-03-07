@@ -166,6 +166,50 @@
                         <String fx:value="selected" />
                      </styleClass>
                         </Button>
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#eventsButtonOnClick" prefHeight="40.0" prefWidth="228.0" style="-fx-background-color: transparent;" text="Evenements" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="21.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <padding>
+                        <Insets left="30.0" />
+                     </padding>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="USERS" selectionFill="BLACK" />
+                     </graphic>
+                     <stylesheets>
+                        <URL value="@../Styles/styless.css" />
+                        <URL value="@../Styles/front.css" />
+                     </stylesheets>
+                     <styleClass>
+                        <String fx:value="selected" />
+                        <String fx:value="selected" />
+                     </styleClass>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#sponsosButtonOnClick" prefHeight="40.0" prefWidth="228.0" style="-fx-background-color: transparent;" text="Sponsors" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="21.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <padding>
+                        <Insets left="30.0" />
+                     </padding>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="USERS" selectionFill="BLACK" />
+                     </graphic>
+                     <stylesheets>
+                        <URL value="@../Styles/styless.css" />
+                        <URL value="@../Styles/front.css" />
+                     </stylesheets>
+                     <styleClass>
+                        <String fx:value="selected" />
+                        <String fx:value="selected" />
+                     </styleClass>
+                  </Button>
                     </children>
                 </VBox>
             </children>
@@ -174,7 +218,7 @@
     <center>
         <AnchorPane prefHeight="694.0" prefWidth="1322.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane fx:id="statsAnchor" layoutX="466.0" layoutY="27.0" prefHeight="539.0" prefWidth="748.0" style="-fx-background-color: #FFFFFF;" />
+            <AnchorPane fx:id="statsAnchor" layoutX="466.0" layoutY="27.0" prefHeight="539.0" prefWidth="748.0" style="-fx-background-color: #FFFFFF;" visible="false" />
             <AnchorPane fx:id="utilisateursAnchorPane" layoutX="1.0" prefHeight="694.0" prefWidth="1341.0" visible="false">
                <children>
                   <HBox layoutX="1.0" layoutY="32.0" prefHeight="37.0" prefWidth="778.0">
@@ -639,6 +683,7 @@
                   </GridPane>
                </children>
             </AnchorPane>
+            <AnchorPane fx:id="anchorMain" layoutX="182.0" layoutY="27.0" prefHeight="510.0" prefWidth="901.0" />
          </children>
         </AnchorPane>
     </center>

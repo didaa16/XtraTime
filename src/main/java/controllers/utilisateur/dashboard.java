@@ -36,6 +36,9 @@ import java.util.ResourceBundle;
 
 public class dashboard {
 
+
+@FXML
+private AnchorPane anchorMain;
     @FXML
     private ResourceBundle resources;
     @FXML
@@ -815,5 +818,21 @@ public class dashboard {
         }
         TableView.setItems(filteredList);
     }
+
+    @FXML
+    private void eventsButtonOnClick(ActionEvent event) throws IOException {
+        initialize();
+        anchorMain.getChildren().clear();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxmlevent/eventback.fxml"));
+        anchorMain.getChildren().add(root);
+    }
+    @FXML
+    private void sponsosButtonOnClick(ActionEvent event) throws IOException {
+        initialize();
+        anchorMain.getChildren().clear();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxmlevent/sponsoback.fxml"));
+        anchorMain.getChildren().add(root);
+    }
+
 
 }

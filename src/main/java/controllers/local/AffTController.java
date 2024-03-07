@@ -1,23 +1,19 @@
 package controllers.local;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import javafx.scene.Scene;
-
-import javafx.event.ActionEvent;
-import java.io.IOException;
-
+import entities.local.terrain;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import entities.local.terrain;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -27,6 +23,10 @@ import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 import services.local.ServiceTerrain;
 import utils.MyDataBase;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 public class AffTController {
     ServiceTerrain ServiceTerrain = new ServiceTerrain();
 
@@ -61,8 +61,7 @@ public class AffTController {
     private void pdf_user(ActionEvent event) {
         System.out.println("hello");
         try{
-
-            JasperDesign jDesign = JRXmlLoader.load("C:\\Users\\MSI\\IdeaProjects\\firsttry\\src\\main\\resources\\report.jrxml");
+            JasperDesign jDesign = JRXmlLoader.load("C:\\Users\\PC\\OneDrive\\Bureau\\STUDY\\SEMESTRE 2\\PI\\XtraTime\\src\\main\\resources\\FxmlLocal\\report.jrxml");
 
             JasperReport jReport = JasperCompileManager.compileReport(jDesign);
             Connection connection = myDatabase.getConnection();
@@ -154,8 +153,11 @@ public class AffTController {
     @FXML
     void afficherT(ActionEvent event) {
         try {
-            Parent root= FXMLLoader.load(getClass().getResource("/FxmlLocal/Stat.fxml"));
-            back.getScene().setRoot(root);
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("/FxmlLocal/Stat.fxml"));
+            stage.setTitle("XTRATIME");
+            stage.setScene(new Scene(root));
+            stage.show();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

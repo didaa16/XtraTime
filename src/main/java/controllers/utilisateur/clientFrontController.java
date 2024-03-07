@@ -5,6 +5,8 @@ import entities.utilisateur.Utilisateur;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.BlendMode;
@@ -164,8 +166,7 @@ public class clientFrontController {
     @FXML
     private VBox vboxDown;
     @FXML
-    private AnchorPane slider;
-
+    private AnchorPane slider, anchorMain;
     @FXML
     private VBox vboxUp;
     @FXML
@@ -410,6 +411,7 @@ public class clientFrontController {
         politiqueConfidentialiteScroll.setVisible(false);
         profilePane.setVisible(true);
         sauvegarderModificationsButton.setVisible(true);
+        anchorMain.setVisible(false);
     }
 
 
@@ -528,6 +530,7 @@ public class clientFrontController {
     void retourToProfileOnClick(ActionEvent event) {
         changementPane.setVisible(false);
         profilePane.setVisible(true);
+        anchorMain.setVisible(false);
     }
     @FXML
     void confirmerAdresseCodeOnClick(ActionEvent event) {
@@ -583,6 +586,7 @@ public class clientFrontController {
                 System.out.println("Utilisateur modifié avec succès !");
                 changementPane.setVisible(false);
                 profilePane.setVisible(true);
+                anchorMain.setVisible(false);
             } catch (SQLException | IOException e) {
                 System.out.println(e.getMessage());
             }
@@ -650,6 +654,7 @@ public class clientFrontController {
         profileButton.setOnMouseClicked(event -> {
             if (!sliderVisible) {
                 profilePane.setVisible(true);
+                anchorMain.setVisible(false);
                 sauvegarderModificationsButton.setVisible(false);
                 // Si le slider n'est pas déjà visible, l'afficher
                 TranslateTransition slide = new TranslateTransition();
@@ -720,6 +725,42 @@ public class clientFrontController {
 
         stage.setScene(scene);
         stage.show();
+    }
+
+
+    @FXML
+    private void afficherEvents(ActionEvent event) throws IOException {
+        changementPane.setVisible(false);
+        parametresMdpPane.setVisible(false);
+        parametresMdpPane.setVisible(false);
+        selectModeAnchor.setVisible(false);
+        profilePane.setVisible(false);
+        anchorMain.setVisible(true);
+        anchorMain.getChildren().clear();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxmlevent/listevents.fxml"));
+        anchorMain.getChildren().add(root);
+    }
+    @FXML
+    private void sponsos(ActionEvent event) throws IOException {
+        changementPane.setVisible(false);
+        parametresMdpPane.setVisible(false);
+        parametresMdpPane.setVisible(false);
+        selectModeAnchor.setVisible(false);
+        profilePane.setVisible(false);
+        anchorMain.getChildren().clear();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxmlevent/listsponso.fxml"));
+        anchorMain.getChildren().add(root);
+    }
+    @FXML
+    private void afficherChat(ActionEvent event) throws IOException {
+        changementPane.setVisible(false);
+        parametresMdpPane.setVisible(false);
+        parametresMdpPane.setVisible(false);
+        selectModeAnchor.setVisible(false);
+        profilePane.setVisible(false);
+        anchorMain.getChildren().clear();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxmlevent/chatbot.fxml"));
+        anchorMain.getChildren().add(root);
     }
 
 

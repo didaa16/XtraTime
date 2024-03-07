@@ -1,30 +1,28 @@
 package controllers.local;
 
-import java.io.FileOutputStream;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import javafx.event.ActionEvent;
-import java.io.IOException;
-import java.util.stream.Collectors;
-
-import javafx.scene.control.TextField;
+import entities.local.complexe;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import entities.local.complexe;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import services.local.ServiceComplexe;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class AfficherController {
 complexe complexe;
@@ -56,14 +54,6 @@ complexe complexe;
 
     @FXML
     void back(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/FxmlLocal/inscription.fxml"));
-            Scene scene = back.getScene();
-            scene.setRoot(root);
-        } catch (IOException e) {
-            e.printStackTrace();
-            showAlert("Erreur", "Erreur lors du retour à l'interface précédente", e.getMessage(), Alert.AlertType.ERROR);
-        }
     }
     @FXML
     private void ExportExcel(ActionEvent event) {
@@ -132,10 +122,13 @@ complexe complexe;
         complexe complexe = tv_complexe.getSelectionModel().getSelectedItem();
         if (complexe != null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/FxmlLocal/ModifierComplexe.fxml"));
-                Parent root = loader.load();
-                ModifierController controller = loader.getController();
+                Stage stage = new Stage();
+                Parent root = FXMLLoader.load(getClass().getResource("/FxmlLocal/ModifierComplexe.fxml"));
+                stage.setTitle("XTRATIME");
+                stage.setScene(new Scene(root));
+                stage.show();
 
+                ModifierController controller = new ModifierController();
                 // Passer le pack sélectionné au contrôleur de modification
                 controller.initData(complexe);
 
@@ -231,6 +224,7 @@ complexe complexe;
                 filteredList.add(complex);
             }
         }
+
         tv_complexe.setItems(filteredList);
     }
 

@@ -1,22 +1,23 @@
 package controllers.event;
 
-import java.net.URL;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
-import javafx.scene.control.Button;
 import entities.event.sponso;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import services.event.sponsoService;
 import utils.event.DataSource;
+
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 public class Listsponsocontroller {
 
@@ -91,30 +92,23 @@ public class Listsponsocontroller {
         this.Listpaneevent.add(this.Paneeventsfx);
         this.Listpaneevent.add(this.Paneeventsfx1);
         this.Listpaneevent.add(this.Paneeventsfx11);
-        //image
+
         this.ListImagese.add(this.imageeventspanefx);
         this.ListImagese.add(this.imageeventspanefx1);
         this.ListImagese.add(this.imageeventspanefx11);
 
-        //nom
         this.Listlabeltitleevent.add(this.subjecteventspanefx);
         this.Listlabeltitleevent.add(this.subjecteventspanefx1);
         this.Listlabeltitleevent.add(this.subjecteventspanefx11);
 
-
-
         int Nombre = this.es.numbersponso();
-        for (this.i = CurrentEvent; this.i < CurrentEvent + 3; ++this.i) {
-            System.out.println(((sponso) this.data.get(this.i)).getImage());
-            Image image = new Image(((sponso) this.data.get(this.i)).getImage());
-            ((ImageView) this.ListImagese.get(this.i)).setImage(image);
-            ((Label)this.Listlabeltitleevent.get(this.i)).setText(((sponso)this.data.get(this.i)).getNom());
-
-
-            ((AnchorPane) this.Listpaneevent.get(this.i)).setVisible(true);
+        int dataSize = this.data.size(); // Get the size of the data list
+        for (this.i = CurrentEvent; this.i < CurrentEvent + 3 && this.i < dataSize; ++this.i) {
+            Image image = new Image(this.data.get(this.i).getImage());
+            this.ListImagese.get(this.i).setImage(image);
+            this.Listlabeltitleevent.get(this.i).setText(this.data.get(this.i).getNom());
+            this.Listpaneevent.get(this.i).setVisible(true);
         }
-
-
     }
 
     @FXML

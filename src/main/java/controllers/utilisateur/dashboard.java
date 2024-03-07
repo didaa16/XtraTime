@@ -833,6 +833,36 @@ private AnchorPane anchorMain;
         Parent root = FXMLLoader.load(getClass().getResource("/fxmlevent/sponsoback.fxml"));
         anchorMain.getChildren().add(root);
     }
+    @FXML
+    private void abonnementsButtonOnClick(ActionEvent event) throws IOException {
+        initialize();
+        anchorMain.getChildren().clear();
+        Parent root = FXMLLoader.load(getClass().getResource("/FXMLAbonnement/AfficherA.fxml"));
+        anchorMain.getChildren().add(root);
+    }
+    @FXML
+    private void packsButtonOnClick(ActionEvent event) throws IOException {
+        initialize();
+        anchorMain.getChildren().clear();
+        Parent root = FXMLLoader.load(getClass().getResource("/FXMLAbonnement/Ajout.fxml"));
+        anchorMain.getChildren().add(root);
+    }
+    @FXML
+    private void produitsButtonOnClick(ActionEvent event) throws IOException {
+        initialize();
+        anchorMain.getChildren().clear();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/AjouterProduit.fxml"));
+        anchorMain.getChildren().add(root);
+    }
+    @FXML
+    private void commandesButtonOnClick(ActionEvent event) throws IOException {
+        initialize();
+        anchorMain.getChildren().clear();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/GestionCommande.fxml"));
+        anchorMain.getChildren().add(root);
+    }
+
+
 
 
 }

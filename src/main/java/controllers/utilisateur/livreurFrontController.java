@@ -5,6 +5,8 @@ import entities.utilisateur.Utilisateur;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.BlendMode;
@@ -164,7 +166,7 @@ public class livreurFrontController {
     @FXML
     private VBox vboxDown;
     @FXML
-    private AnchorPane slider;
+    private AnchorPane slider, anchorMain;
 
     @FXML
     private VBox vboxUp;
@@ -643,7 +645,7 @@ public class livreurFrontController {
     }
 
     @FXML
-    void initialize() throws SQLException {
+    void initialize() throws SQLException, IOException {
         slider.setTranslateX(-200);
 
         // Ajoutez un écouteur d'événements pour profileButton
@@ -668,6 +670,10 @@ public class livreurFrontController {
                 sliderVisible = false;
             }
         });
+        anchorMain.getChildren().clear();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/LivreurCommande.fxml"));
+        anchorMain.getChildren().add(root);
+
         pseudoTF.setStyle("-fx-text-fill: white;");
         cinTF.setStyle("-fx-text-fill: white;");
         nomTF.setStyle("-fx-text-fill: white;");

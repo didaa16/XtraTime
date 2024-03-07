@@ -763,6 +763,30 @@ public class clientFrontController {
         anchorMain.getChildren().add(root);
     }
 
+    @FXML
+    private void afficherAbonnements(ActionEvent event) throws IOException {
+        changementPane.setVisible(false);
+        parametresMdpPane.setVisible(false);
+        parametresMdpPane.setVisible(false);
+        selectModeAnchor.setVisible(false);
+        profilePane.setVisible(false);
+        anchorMain.getChildren().clear();
+        Parent root = FXMLLoader.load(getClass().getResource("/FXMLAbonnement/frontC.fxml"));
+        anchorMain.getChildren().add(root);
+    }
+
+    @FXML
+    private void afficherStore(ActionEvent event) throws IOException {
+        changementPane.setVisible(false);
+        parametresMdpPane.setVisible(false);
+        parametresMdpPane.setVisible(false);
+        selectModeAnchor.setVisible(false);
+        profilePane.setVisible(false);
+        anchorMain.getChildren().clear();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxmlstore/store.fxml"));
+        anchorMain.getChildren().add(root);
+    }
+
 
 
 

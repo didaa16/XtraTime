@@ -12,13 +12,14 @@
          <children>
             <TableView fx:id="tv_t" layoutX="6.0" layoutY="18.0" prefHeight="468.0" prefWidth="795.0" stylesheets="@styless.css">
                <columns>
+                  <TableColumn fx:id="col_id" editable="false" prefWidth="69.0" sortable="false" text="id" />
                   <TableColumn fx:id="col_r" editable="false" prefWidth="69.0" sortable="false" text="ref" visible="false" />
-                  <TableColumn fx:id="col_n" prefWidth="97.0" text="nom" />
-                  <TableColumn fx:id="col_c" prefWidth="125.0" text="capacite" />
-                  <TableColumn fx:id="col_t" prefWidth="133.0" text="type" />
-                  <TableColumn fx:id="col_p" prefWidth="99.0" text="prix" />
-                  <TableColumn fx:id="col_d" prefWidth="142.0" text="disponibilite" />
-                  <TableColumn fx:id="col_i" prefWidth="198.0" text="image" />
+                  <TableColumn fx:id="col_n" prefWidth="205.59999990463257" text="nom" />
+                  <TableColumn fx:id="col_c" prefWidth="108.79998779296875" text="capacite" />
+                  <TableColumn fx:id="col_t" prefWidth="132.79998779296875" text="type" />
+                  <TableColumn fx:id="col_p" prefWidth="64.79995727539062" text="prix" />
+                  <TableColumn fx:id="col_d" prefWidth="151.99993896484375" text="disponibilite" />
+                  <TableColumn fx:id="col_i" prefWidth="134.39996337890625" text="image" />
                </columns>
                <styleClass>
                   <String fx:value="line-color" />
@@ -55,7 +56,7 @@
                   <String fx:value="shadow" />
                </styleClass>
             </Button>
-            <Button layoutX="118.0" layoutY="693.0" mnemonicParsing="false" onAction="#reserver" stylesheets="@styless.css" text="Reserver">
+            <Button layoutX="32.0" layoutY="545.0" mnemonicParsing="false" onAction="#reserver" stylesheets="@styless.css" text="Reserver">
                <styleClass>
                   <String fx:value="button-container-mouse-moved" />
                   <String fx:value="shadow" />

@@ -2,6 +2,8 @@ package controllers.utilisateur;
 
 import controllers.Abonnement.CardController;
 import controllers.Abonnement.PackControllerClient;
+import controllers.Reservation.mesReservations;
+import controllers.local.AffTController;
 import controllers.store.*;
 import entities.utilisateur.Img;
 import entities.utilisateur.Utilisateur;
@@ -781,6 +783,20 @@ public class clientFrontController {
     }
 
     @FXML
+    private void afficherReservations(ActionEvent event) throws IOException {
+        changementPane.setVisible(false);
+        parametresMdpPane.setVisible(false);
+        parametresMdpPane.setVisible(false);
+        selectModeAnchor.setVisible(false);
+        profilePane.setVisible(false);
+        anchorMain.getChildren().clear();
+        mesReservations.setLoggedInUser(loggedInUser);
+        CardController.setLoggedInUser(loggedInUser);
+        Parent root = FXMLLoader.load(getClass().getResource("/Reservation/mesReservations.fxml"));
+        anchorMain.getChildren().add(root);
+    }
+
+    @FXML
     private void afficherStore(ActionEvent event) throws IOException {
         changementPane.setVisible(false);
         parametresMdpPane.setVisible(false);
@@ -805,6 +821,7 @@ public class clientFrontController {
         profilePane.setVisible(false);
         anchorMain.setVisible(true);
         anchorMain.getChildren().clear();
+        AffTController.setLoggedInUser(loggedInUser);
         Parent root = FXMLLoader.load(getClass().getResource("/FxmlLocal/AffTerrain.fxml"));
         anchorMain.getChildren().add(root);
     }

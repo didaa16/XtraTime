@@ -1,6 +1,8 @@
 package controllers.local;
 
+import controllers.Reservation.Reservations;
 import entities.local.terrain;
+import entities.utilisateur.Utilisateur;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,6 +30,10 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 public class AffTController {
+    private static Utilisateur loggedInUser;
+    public static void setLoggedInUser(Utilisateur user) {
+        loggedInUser = user;
+    }
     ServiceTerrain ServiceTerrain = new ServiceTerrain();
 
     private MyDataBase myDatabase = MyDataBase.getInstance();
@@ -35,7 +41,7 @@ public class AffTController {
     private TableView<terrain> tv_t;
 
     @FXML
-    private TableColumn<terrain, Integer> col_r;
+    private TableColumn<terrain, Integer> col_r, col_id;
 
     @FXML
     private TableColumn<terrain, String> col_n;
@@ -167,6 +173,7 @@ public class AffTController {
         try {
             ObservableList<terrain> terrains= FXCollections.observableList(ServiceTerrain.afficher());
             tv_t.setItems(terrains);
+            col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
             col_r.setCellValueFactory(new PropertyValueFactory<>("ref"));
             col_n.setCellValueFactory(new PropertyValueFactory<>("nom"));
             col_c.setCellValueFactory(new PropertyValueFactory<>("capacite"));
@@ -180,5 +187,15 @@ public class AffTController {
     }
 
     public void reserver(ActionEvent event) {
-    }
-}
+        try {
+            Reservations.setLoggedInUser(loggedInUser);
+            System.out.println(tv_t.getSelectionModel().getSelectedItem());
+            Reservations.setCurrentTerrain(tv_t.getSelectionModel().getSelectedItem());
+            Parent root = FXMLLoader.load(getClass().getResource("/Reservation/reservation.fxml"));
+            Scene scene = back.getScene();
+            scene.setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Erreur", "Erreur lors du retour à l'interface précédente", e.getMessage(), Alert.AlertType.ERROR);
+        }
+}}

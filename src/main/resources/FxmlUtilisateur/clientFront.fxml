@@ -481,6 +481,26 @@
                   </MenuItem>
                </items>
             </MenuButton>
+            <MenuButton fx:id="Reservation" layoutX="489.0" layoutY="44.0" mnemonicParsing="false" text="Reservation">
+               <items>
+                  <MenuItem mnemonicParsing="false">
+                     <graphic>
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#afficherReservations" prefHeight="33.0" prefWidth="123.0" stylesheets="@../Styles/front.css" text="Afficher" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="EYE" size="25" translateX="-10.0" />
+                           </graphic>
+                           <styleClass>
+                              <String fx:value="selected" />
+                              <String fx:value="button" />
+                           </styleClass>
+                        </Button>
+                     </graphic>
+                  </MenuItem>
+               </items>
+            </MenuButton>
          </children>
       </Pane>
    </top>

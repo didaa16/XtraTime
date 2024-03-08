@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1363.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Reservation.equipements">
+   <left>
+      <AnchorPane prefHeight="589.0" prefWidth="184.0" style="-fx-background-color: #000000;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="111.0" fitWidth="141.0" layoutX="28.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@421386197_913323057052560_175060100800875911_n.png" />
+               </image>
+            </ImageView>
+         </children></AnchorPane>
+   </left>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="gradient-background" stylesheets="@styless.css" BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="tableEquipements" layoutX="14.0" layoutY="167.0" onMouseClicked="#getSelected" prefHeight="470.0" prefWidth="547.0">
+              <columns>
+                <TableColumn fx:id="idEquipements" editable="false" prefWidth="42.4000244140625" sortable="false" text="ID" visible="false" />
+                <TableColumn fx:id="nomEquipements" prefWidth="85.5999755859375" text="NOM" />
+                  <TableColumn fx:id="descriptionEquipements" prefWidth="171.99993896484375" text="DESCRIPTION" />
+                  <TableColumn fx:id="typeEquipements" prefWidth="97.5999755859375" text="TYPE" />
+                  <TableColumn fx:id="stockEquipements" prefWidth="63.20001220703125" text="STOCK" />
+                  <TableColumn fx:id="prixEquipements" prefWidth="88.0" text="PRIX" />
+              </columns>
+               <styleClass>
+                  <String fx:value="shadow" />
+                  <String fx:value="gradient-background" />
+               </styleClass>
+            </TableView>
+            <TextField fx:id="recherche" layoutX="14.0" layoutY="59.0" prefHeight="34.0" prefWidth="243.0" promptText="Chercher par nom" />
+            <Button fx:id="ajouterButton" layoutX="356.0" layoutY="54.0" mnemonicParsing="false" onAction="#ajouterButtonOnClick" prefHeight="34.0" prefWidth="41.0">
+               <graphic>
+                  <FontAwesomeIconView glyphName="PLUS" size="20" />
+               </graphic>
+            </Button>
+            <Button fx:id="supprimerButton" layoutX="411.0" layoutY="53.0" mnemonicParsing="false" onAction="#supprimerButtonOnClick" prefHeight="34.0" prefWidth="41.0">
+               <graphic>
+                  <FontAwesomeIconView glyphName="TRASH" size="20" />
+               </graphic>
+            </Button>
+            <Button fx:id="modifierButton" layoutX="468.0" layoutY="53.0" mnemonicParsing="false" onAction="#modifierButtonOnClick" prefHeight="34.0" prefWidth="41.0">
+               <graphic>
+                  <FontAwesomeIconView glyphName="EDIT" size="20" />
+               </graphic>
+            </Button>
+            <GridPane layoutX="610.0" layoutY="190.0" prefHeight="419.0" prefWidth="500.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="444.20001220703125" minWidth="10.0" prefWidth="276.8" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="622.4000000000001" minWidth="10.0" prefWidth="622.4000000000001" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="70.8" minHeight="10.0" prefHeight="48.19998779296874" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="30.600012207031256" minHeight="0.0" prefHeight="22.600012207031256" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="33.60001220703123" minHeight="10.0" prefHeight="19.999975585937477" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="109.60002441406249" minHeight="10.0" prefHeight="75.20001220703125" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="39.59995117187498" minHeight="10.0" prefHeight="39.19998779296873" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="39.59995117187498" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="39.59995117187498" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label prefHeight="18.0" prefWidth="242.0" text="Nom" textFill="WHITE">
+                     <font>
+                        <Font size="13.0" />
+                     </font></Label>
+                  <Label fx:id="nomError" prefHeight="18.0" prefWidth="593.0" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label prefHeight="18.0" prefWidth="242.0" text="Image" textFill="WHITE" GridPane.rowIndex="10">
+                     <font>
+                        <Font size="13.0" />
+                     </font></Label>
+                  <Label prefHeight="18.0" prefWidth="242.0" text="Prix" textFill="WHITE" GridPane.rowIndex="8">
+                     <font>
+                        <Font size="13.0" />
+                     </font></Label>
+                  <Label prefHeight="18.0" prefWidth="242.0" text="Stock" textFill="WHITE" GridPane.rowIndex="6">
+                     <font>
+                        <Font size="13.0" />
+                     </font></Label>
+                  <Label prefHeight="18.0" prefWidth="242.0" text="Description" textFill="WHITE" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="13.0" />
+                     </font></Label>
+                  <Label prefHeight="18.0" prefWidth="242.0" text="Type" textFill="WHITE" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="13.0" />
+                     </font></Label>
+                  <Label fx:id="descriptionError" prefHeight="18.0" prefWidth="593.0" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label fx:id="typeError" prefHeight="18.0" prefWidth="593.0" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Label fx:id="stockError" prefHeight="18.0" prefWidth="593.0" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <Label fx:id="prixError" prefHeight="18.0" prefWidth="593.0" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                  <Label fx:id="imageError" prefHeight="18.0" prefWidth="593.0" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                  <TextField fx:id="nomAjout" promptText="Nom" GridPane.columnIndex="1" />
+                  <TextField fx:id="stockAjout" promptText="Stock" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <TextField fx:id="prixAjout" promptText="Prix" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                  <TextArea fx:id="descriptionAjout" prefHeight="200.0" prefWidth="200.0" promptText="Description" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <ComboBox fx:id="typeAjout" prefHeight="26.0" prefWidth="618.0" promptText="Type" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Button fx:id="importerImage" mnemonicParsing="false" onAction="#importerOnClick" prefHeight="26.0" prefWidth="232.0" text="Importer" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                  <ImageView fx:id="imageAjouter" fitHeight="110.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                     <GridPane.margin>
+                        <Insets left="250.0" />
+                     </GridPane.margin>
+                  </ImageView>
+                  <Label prefHeight="18.0" prefWidth="242.0" text="TerrainId" textFill="WHITE" GridPane.rowIndex="12">
+                     <font>
+                        <Font size="13.0" />
+                     </font></Label>
+                  <Label fx:id="terrainIdError" prefHeight="18.0" prefWidth="593.0" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+                  <ComboBox fx:id="TerrainIdAjout" prefHeight="26.0" prefWidth="618.0" promptText="Terrains" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+               </children>
+            </GridPane>
+            <TextField fx:id="idField" layoutX="689.0" layoutY="91.0" prefHeight="26.0" prefWidth="414.0" visible="false" />
+            <Button fx:id="listedesreservations" layoutX="951.0" layoutY="28.0" mnemonicParsing="false" onAction="#navigateToListReservationInterface" prefHeight="34.0" prefWidth="200.0" text="Liste des réservations" />
+            <FontAwesomeIconView glyphName="BOOK" layoutX="960.0" layoutY="52.0" size="18" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

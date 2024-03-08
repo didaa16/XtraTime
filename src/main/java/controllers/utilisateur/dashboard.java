@@ -913,6 +913,17 @@ private AnchorPane anchorMain;
         anchorMain.getChildren().add(root);
     }
     @FXML
+    private void reservationOnClick(ActionEvent event) throws IOException {
+        anchorMain.setVisible(true);
+        ajouterAnchorPane.setVisible(false);
+        utilisateursAnchorPane.setVisible(false);
+        anchorPaneModifierMdp.setVisible(false);
+        anchorMain.getChildren().clear();
+        eventDashboard.setLoggedInUser(loggedInUser);
+        Parent root = FXMLLoader.load(getClass().getResource("/Reservation/equipements.fxml"));
+        anchorMain.getChildren().add(root);
+    }
+    @FXML
     private StackPane chartContainer;
     @FXML
     private Button PK;
@@ -1025,6 +1036,8 @@ private AnchorPane anchorMain;
         // Ajoutez la série de données au BarChart
         piechart1.getData().add(series); // Utilisation de la référence injectée au lieu de créer un nouveau BarChart
     }
+
+
 
 
 

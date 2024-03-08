@@ -347,6 +347,28 @@
                         <String fx:value="selected" />
                      </styleClass>
                   </Button>
+                  <Button fx:id="Reservation" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#reservationOnClick" prefHeight="40.0" prefWidth="228.0" style="-fx-background-color: transparent;" text="Reservation" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="21.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <padding>
+                        <Insets left="30.0" />
+                     </padding>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="USERS" selectionFill="BLACK" />
+                     </graphic>
+                     <stylesheets>
+                        <URL value="@../Styles/styless.css" />
+                        <URL value="@../Styles/front.css" />
+                     </stylesheets>
+                     <styleClass>
+                        <String fx:value="selected" />
+                        <String fx:value="selected" />
+                     </styleClass>
+                  </Button>
                     </children>
                 </VBox>
             </children>

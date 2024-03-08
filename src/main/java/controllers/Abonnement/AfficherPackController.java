@@ -87,7 +87,7 @@ public class AfficherPackController {
     @FXML
     void goBack(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/FXMLAbonnement/Ajout.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/FXMLUtilisateur/dashboard.fxml"));
             Scene scene = backButton.getScene();
             scene.setRoot(root);
         } catch (IOException e) {

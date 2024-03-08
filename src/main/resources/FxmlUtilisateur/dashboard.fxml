@@ -5,6 +5,10 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -26,6 +30,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
@@ -350,7 +355,6 @@
     <center>
         <AnchorPane prefHeight="694.0" prefWidth="1322.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane fx:id="statsAnchor" layoutX="466.0" layoutY="27.0" prefHeight="539.0" prefWidth="748.0" style="-fx-background-color: #FFFFFF;" visible="false" />
             <AnchorPane fx:id="utilisateursAnchorPane" layoutX="1.0" prefHeight="694.0" prefWidth="1341.0" visible="false">
                <children>
                   <HBox layoutX="1.0" layoutY="32.0" prefHeight="37.0" prefWidth="778.0">
@@ -815,7 +819,28 @@
                   </GridPane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="anchorMain" layoutX="182.0" layoutY="27.0" prefHeight="510.0" prefWidth="901.0" />
+            <AnchorPane fx:id="anchorMain" layoutX="41.0" layoutY="27.0" prefHeight="650.0" prefWidth="1284.0">
+               <children>
+                  <AnchorPane fx:id="statsAnchor" layoutX="696.0" layoutY="32.0" prefHeight="216.0" prefWidth="418.0" style="-fx-background-color: #FFFFFF;" />
+                  <LineChart fx:id="stat" layoutX="643.0" layoutY="347.0" prefHeight="278.0" prefWidth="524.0">
+                     <xAxis>
+                        <CategoryAxis side="BOTTOM" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis side="LEFT" />
+                     </yAxis>
+                  </LineChart>
+                  <StackPane fx:id="chartContainer" layoutX="123.0" layoutY="325.0" prefHeight="310.0" prefWidth="344.0" />
+                  <BarChart fx:id="piechart1" layoutX="83.0" layoutY="22.0" prefHeight="336.0" prefWidth="522.0">
+                     <xAxis>
+                        <CategoryAxis label="Months" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis side="LEFT" />
+                     </yAxis>
+                  </BarChart>
+               </children>
+            </AnchorPane>
          </children>
         </AnchorPane>
     </center>

@@ -8,141 +8,12 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Bloom?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="561.0" prefWidth="844.0" styleClass="gradient-background" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Abonnement.ModifierPackController">
-   <top>
-      <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="801.0" spacing="20.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label alignment="CENTER" prefHeight="62.0" prefWidth="138.0" text="Eya BenSaid" textFill="WHITE">
-               <font>
-                  <Font name="Franklin Gothic Medium Cond" size="22.0" />
-               </font>
-            </Label>
-            <Pane maxHeight="-Infinity" prefHeight="1.0" prefWidth="200.0" styleClass="line-color" stylesheets="@styless.css" HBox.hgrow="ALWAYS" />
-            <ImageView fitHeight="32.0" fitWidth="35.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@icons8-setting-64.png" />
-               </image>
-            </ImageView>
-         </children>
-         <BorderPane.margin>
-            <Insets left="20.0" right="20.0" />
-         </BorderPane.margin>
-      </HBox>
-   </top>
-   <left>
-      <VBox prefHeight="443.0" prefWidth="218.0" styleClass="container" stylesheets="@styless.css" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </BorderPane.margin>
-         <children>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@421386197_913323057052560_175060100800875911_n.png" />
-                     </image>
-                  </ImageView>
-                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="129.0">
-                     <children>
-                        <Label prefHeight="32.0" prefWidth="118.0" styleClass="shadow" stylesheets="@styless.css" text="  XtraTime" textFill="WHITE">
-                           <font>
-                              <Font name="Franklin Gothic Medium Cond" size="27.0" />
-                           </font>
-                        </Label>
-                     </children>
-                     <padding>
-                        <Insets top="1.0" />
-                     </padding>
-                  </VBox>
-               </children>
-            </HBox>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1.0" prefWidth="190.0" styleClass="line-color" stylesheets="@styless.css">
-               <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
-               </VBox.margin>
-            </Pane>
-            <VBox prefHeight="322.0" prefWidth="218.0" spacing="20.0">
-               <children>
-                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@icons8-accueil-50.png" />
-                           </image>
-                        </ImageView>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="32.0" prefWidth="100.0" styleClass="shadow" stylesheets="@styless.css" text="Home" textFill="#c4bbbb" textOverrun="CENTER_WORD_ELLIPSIS">
-                           <font>
-                              <Font name="Franklin Gothic Medium Cond" size="18.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@icons8-abonnement-48.png" />
-                           </image>
-                        </ImageView>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="32.0" prefWidth="100.0" styleClass="shadow" stylesheets="@styless.css" text="Abonnement" textFill="#c4bbbb" textOverrun="CENTER_WORD_ELLIPSIS">
-                           <font>
-                              <Font name="Franklin Gothic Medium Cond" size="18.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="60.0" stylesheets="@styless.css">
-                     <children>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@icons8-pile-de-papier-100.png" />
-                           </image>
-                        </ImageView>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="32.0" prefWidth="100.0" styleClass="shadow" stylesheets="@styless.css" text="Pack" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
-                           <font>
-                              <Font name="Franklin Gothic Medium Cond" size="18.0" />
-                           </font>
-                        </Label>
-                     </children>
-                     <styleClass>
-                        <String fx:value="button-container-mouse-moved" />
-                        <String fx:value="container" />
-                     </styleClass>
-                  </HBox>
-                  <Button mnemonicParsing="false" onAction="#sauvegarder" prefHeight="28.0" prefWidth="98.0" stylesheets="@styless.css" text="Enregistrer">
-                     <font>
-                        <Font name="Franklin Gothic Medium" size="15.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="70.0" right="30.0" />
-                     </VBox.margin>
-                     <styleClass>
-                        <String fx:value="button-container-mouse-moved" />
-                        <String fx:value="container" />
-                     </styleClass>
-                  </Button>
-                  <Button fx:id="Back" mnemonicParsing="false" onAction="#goBack" stylesheets="@styless.css" text="Back">
-                     <VBox.margin>
-                        <Insets left="100.0" />
-                     </VBox.margin>
-                     <styleClass>
-                        <String fx:value="button-container-mouse-moved" />
-                        <String fx:value="container" />
-                     </styleClass>
-                  </Button>
-               </children>
-            </VBox>
-         </children>
-      </VBox>
-   </left>
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -184,7 +55,11 @@
                         <Insets left="200.0" />
                      </VBox.margin>
                   </ImageView>
-                  <Button fx:id="upload" mnemonicParsing="false" onAction="#upload" text="Telecharger" />
+                  <Button fx:id="upload" mnemonicParsing="false" onAction="#upload" stylesheets="@../fxmlStore/styless.css" text="Telecharger" translateX="600.0">
+                     <styleClass>
+                        <String fx:value="button-container-mouse-moved" />
+                        <String fx:value="switch_button" />
+                     </styleClass></Button>
                   <Label prefHeight="32.0" prefWidth="118.0" styleClass="shadow" stylesheets="@styless.css" text="Reduction" textFill="WHITE">
                      <font>
                         <Font name="Franklin Gothic Medium Cond" size="25.0" />
@@ -219,6 +94,30 @@
                   </TextArea>
                </children>
             </VBox>
+            <Button mnemonicParsing="false" onAction="#sauvegarder" prefHeight="28.0" prefWidth="98.0" stylesheets="@../fxmlStore/styless.css" text="Enregistrer" translateX="550.0" translateY="55.0">
+               <font>
+                  <Font name="Franklin Gothic Medium" size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="70.0" right="30.0" />
+               </VBox.margin>
+               <styleClass>
+                  <String fx:value="button-container-mouse-moved" />
+                  <String fx:value="switch_button" />
+               </styleClass>
+            </Button>
+            <Button fx:id="Back" mnemonicParsing="false" onAction="#goBack" prefHeight="26.0" prefWidth="57.0" stylesheets="@../fxmlStore/styless.css" text="Back" translateX="650.0" translateY="30.0">
+               <VBox.margin>
+                  <Insets left="100.0" />
+               </VBox.margin>
+               <styleClass>
+                  <String fx:value="button-container-mouse-moved" />
+                  <String fx:value="switch_button" />
+               </styleClass>
+               <font>
+                  <Font name="Franklin Gothic Medium Cond" size="12.0" />
+               </font>
+            </Button>
          </children>
       </VBox>
    </center>

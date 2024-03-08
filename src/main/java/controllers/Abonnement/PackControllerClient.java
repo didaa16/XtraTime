@@ -8,19 +8,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.web.WebView;
+import javafx.stage.Stage;
 import services.Abonnement.ServicePack;
 
 import java.awt.*;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.io.IOException;
 import java.util.List;
 
 public class PackControllerClient {
@@ -160,8 +160,10 @@ public class PackControllerClient {
     void switchW(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/FXMLAbonnement/WebView.fxml"));
-            Scene scene = ((Button) event.getSource()).getScene();
-            scene.setRoot(root);
+            Scene scene= new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println(e.getMessage());

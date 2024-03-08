@@ -1,6 +1,7 @@
 package controllers.utilisateur;
 
 import controllers.event.eventDashboard;
+import entities.Abonnement.Abonnement;
 import entities.utilisateur.Utilisateur;
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
@@ -11,7 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.PieChart;
+import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.BlendMode;
@@ -19,21 +20,27 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.jfree.chart.ChartPanel;
+import services.Abonnement.ServiceAbonnement;
+import services.event.eventService;
 import services.utilisateur.ServiceUtilisateurs;
 import utils.Encryptor;
+import utils.event.DataSource;
 
 import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class dashboard {
 
@@ -165,7 +172,11 @@ private AnchorPane anchorMain;
     @FXML
     void initialize() {
         logo.setOnAction(event -> {
-            statsAnchor.setVisible(true);
+            anchorMain.getChildren().clear();
+            anchorMain.getChildren().addAll(piechart1, statsAnchor, stat, chartContainer);
+
+            anchorMain.setVisible(true);
+
             utilisateursAnchorPane.setVisible(false);
             ajouterAnchorPane.setVisible(false);
             anchorPaneModifierMdp.setVisible(false);
@@ -180,7 +191,7 @@ private AnchorPane anchorMain;
             }
 
         });
-        slider.setTranslateX(-176);
+        slider.setTranslateX(-222);
         Menu.setOnMouseClicked(event -> {
             TranslateTransition slide = new TranslateTransition();
             slide.setDuration(Duration.seconds(0.4));
@@ -189,7 +200,7 @@ private AnchorPane anchorMain;
             slide.setToX(0);
             slide.play();
 
-            slider.setTranslateX(-176);
+            slider.setTranslateX(-222);
 
             slide.setOnFinished((ActionEvent e)-> {
                 Menu.setVisible(false);
@@ -202,7 +213,7 @@ private AnchorPane anchorMain;
             slide.setDuration(Duration.seconds(0.4));
             slide.setNode(slider);
 
-            slide.setToX(-176);
+            slide.setToX(-222);
             slide.play();
 
             slider.setTranslateX(0);
@@ -217,7 +228,7 @@ private AnchorPane anchorMain;
         supprimerButton.setDisable(true);
         getComplexite();
         getComplexite1();
-        updateChart();
+        stats();
         TableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         TableView.getSelectionModel().getSelectedItems().addListener((ListChangeListener.Change<? extends Utilisateur> change) -> {
             if (change.getList().size() > 0 && change.getList().get(0) != null && change.getList().get(0).equals(KeyCode.CONTROL)) {
@@ -457,10 +468,10 @@ private AnchorPane anchorMain;
         anchorMain.setVisible(false);
         ajouterAnchorPane.setVisible(false);
         anchorPaneModifierMdp.setVisible(false);
-        statsAnchor.setVisible(false);
     }
     @FXML
     private void ajouterButtonOnClick(ActionEvent event){
+        anchorMain.setVisible(false);
         utilisateursAnchorPane.setVisible(false);
         ajouterAnchorPane.setVisible(true);
         statsAnchor.setVisible(false);
@@ -582,7 +593,7 @@ private AnchorPane anchorMain;
     }
     @FXML
     private void profileButtonOnClick(ActionEvent event){
-        statsAnchor.setVisible(false);
+        anchorMain.setVisible(false);
         utilisateursAnchorPane.setVisible(false);
         anchorPaneModifierMdp.setVisible(false);
         ajouterAnchorPane.setVisible(true);
@@ -618,7 +629,7 @@ private AnchorPane anchorMain;
     }
     @FXML
     private void modifierMdpOnClick(ActionEvent event){
-        statsAnchor.setVisible(false);
+        anchorMain.setVisible(false);
         ajouterAnchorPane.setVisible(false);
         utilisateursAnchorPane.setVisible(false);
         anchorPaneModifierMdp.setVisible(true);
@@ -784,12 +795,9 @@ private AnchorPane anchorMain;
                 new PieChart.Data("LIVREURS : " + String.valueOf(livreurP) + " %", livreur)
         );
         PieChart pieChart = new PieChart(pie);
-        pieChart.setTitle("ROLES");
-        pieChart.setClockwise(true);
         pieChart.setAnimated(true);
-        pieChart.setLabelLineLength(50);
         pieChart.setVisible(true);
-        pieChart.setStartAngle(180);
+        pieChart.setLegendVisible(false);
         statsAnchor.getChildren().add(pieChart);
     }
     private void updateChart(){
@@ -824,7 +832,10 @@ private AnchorPane anchorMain;
 
     @FXML
     private void eventsButtonOnClick(ActionEvent event) throws IOException {
-        initialize();
+        anchorMain.setVisible(true);
+        ajouterAnchorPane.setVisible(false);
+        utilisateursAnchorPane.setVisible(false);
+        anchorPaneModifierMdp.setVisible(false);
         anchorMain.getChildren().clear();
         eventDashboard.setLoggedInUser(loggedInUser);
         Parent root = FXMLLoader.load(getClass().getResource("/fxmlevent/eventback.fxml"));
@@ -832,42 +843,60 @@ private AnchorPane anchorMain;
     }
     @FXML
     private void sponsosButtonOnClick(ActionEvent event) throws IOException {
-        initialize();
+        anchorMain.setVisible(true);
+        ajouterAnchorPane.setVisible(false);
+        utilisateursAnchorPane.setVisible(false);
+        anchorPaneModifierMdp.setVisible(false);
         anchorMain.getChildren().clear();
         Parent root = FXMLLoader.load(getClass().getResource("/fxmlevent/sponsoback.fxml"));
         anchorMain.getChildren().add(root);
     }
     @FXML
     private void abonnementsButtonOnClick(ActionEvent event) throws IOException {
-        initialize();
+        anchorMain.setVisible(true);
+        ajouterAnchorPane.setVisible(false);
+        utilisateursAnchorPane.setVisible(false);
+        anchorPaneModifierMdp.setVisible(false);
         anchorMain.getChildren().clear();
         Parent root = FXMLLoader.load(getClass().getResource("/FXMLAbonnement/AfficherA.fxml"));
         anchorMain.getChildren().add(root);
     }
     @FXML
     private void packsButtonOnClick(ActionEvent event) throws IOException {
-        initialize();
+        anchorMain.setVisible(true);
+        ajouterAnchorPane.setVisible(false);
+        utilisateursAnchorPane.setVisible(false);
+        anchorPaneModifierMdp.setVisible(false);
         anchorMain.getChildren().clear();
         Parent root = FXMLLoader.load(getClass().getResource("/FXMLAbonnement/Ajout.fxml"));
         anchorMain.getChildren().add(root);
     }
     @FXML
     private void produitsButtonOnClick(ActionEvent event) throws IOException {
-        initialize();
+        anchorMain.setVisible(true);
+        ajouterAnchorPane.setVisible(false);
+        utilisateursAnchorPane.setVisible(false);
+        anchorPaneModifierMdp.setVisible(false);
         anchorMain.getChildren().clear();
         Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/AjouterProduit.fxml"));
         anchorMain.getChildren().add(root);
     }
     @FXML
     private void commandesButtonOnClick(ActionEvent event) throws IOException {
-        initialize();
+        anchorMain.setVisible(true);
+        ajouterAnchorPane.setVisible(false);
+        utilisateursAnchorPane.setVisible(false);
+        anchorPaneModifierMdp.setVisible(false);
         anchorMain.getChildren().clear();
         Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/GestionCommande.fxml"));
         anchorMain.getChildren().add(root);
     }
     @FXML
     private void afficherTerrain(ActionEvent event) throws IOException {
-        initialize();
+        anchorMain.setVisible(true);
+        ajouterAnchorPane.setVisible(false);
+        utilisateursAnchorPane.setVisible(false);
+        anchorPaneModifierMdp.setVisible(false);
         anchorMain.getChildren().clear();
         Parent root = FXMLLoader.load(getClass().getResource("/FxmlLocal/AffTerrain.fxml"));
         anchorMain.getChildren().add(root);
@@ -875,10 +904,126 @@ private AnchorPane anchorMain;
 
     @FXML
     private void complexButtonOnClick(ActionEvent event) throws IOException {
-        initialize();
+        anchorMain.setVisible(true);
+        ajouterAnchorPane.setVisible(false);
+        utilisateursAnchorPane.setVisible(false);
+        anchorPaneModifierMdp.setVisible(false);
         anchorMain.getChildren().clear();
         Parent root = FXMLLoader.load(getClass().getResource("/FxmlLocal/AfficherComplexe.fxml"));
         anchorMain.getChildren().add(root);
+    }
+    @FXML
+    private StackPane chartContainer;
+    @FXML
+    private Button PK;
+    @FXML
+    private LineChart<String, Integer> stat;
+    private ChartPanel weightChartPanel;
+    ServiceAbonnement sa = new ServiceAbonnement();
+
+    private void stats(){
+        updateChart();
+        List<Abonnement> abonnements = null;
+        try {
+            abonnements = sa.getAllAbonnements();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        Map<Integer, Long> numberPacks = abonnements.stream()
+                .collect(Collectors.groupingBy(Abonnement::getPackId, Collectors.counting()));
+
+        // Calculate total number of abonnements
+        long totalAbonnements = abonnements.size();
+
+        // Create dataset for pie chart
+        PieChart.Data[] pieChartData = numberPacks.entrySet().stream()
+                .map(entry -> {
+                    double percentage = entry.getValue() / (double) totalAbonnements * 100;
+                    return new PieChart.Data("Pack " + entry.getKey() + " (" + String.format("%.2f", percentage) + "%)", percentage);
+                })
+                .toArray(PieChart.Data[]::new);
+
+        // Create the pie chart
+        PieChart pieChart = new PieChart();
+        pieChart.getData().addAll(pieChartData);
+
+        // Customize the labels to display percentage and set color to white
+        for (PieChart.Data data : pieChartData) {
+            data.getNode().setStyle("-fx-text-fill: white;");
+        }
+
+        // Add the pie chart to the chart container
+        chartContainer.getChildren().add(pieChart);
+        afficherAbonnementsParDate();
+        populateBarChart();
+
+    }
+    private void afficherAbonnementsParDate() {
+        // Obtenez la liste de tous les abonnements
+        List<Abonnement> abonnements = null;
+        try {
+            abonnements = sa.getAllAbonnements();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        // Créez une carte pour compter le nombre d'abonnements par date
+        Map<String, Integer> abonnementsParDate = new HashMap<>();
+        for (Abonnement abonnement : abonnements) {
+            String date = abonnement.getDate().toString(); // Vous devez adapter cela selon le format de votre date
+            abonnementsParDate.put(date, abonnementsParDate.getOrDefault(date, 0) + 1);
+        }
+
+        // Créez une série de données pour le LineChart
+        XYChart.Series<String, Integer> series = new XYChart.Series<>();
+        series.setName("Nombre d'abonnements par date");
+
+        // Ajoutez les données de la carte à la série
+        for (Map.Entry<String, Integer> entry : abonnementsParDate.entrySet()) {
+            series.getData().add(new XYChart.Data<>(entry.getKey(), entry.getValue()));
+        }
+
+        // Ajoutez la série au LineChart
+        stat.getData().add(series);
+    }
+
+    @FXML
+    private BarChart<String, Number> piechart1;
+    eventService es = new eventService();
+
+    private void populateBarChart() {
+
+        CategoryAxis xAxis = new CategoryAxis(); // Axe X pour les mois
+        NumberAxis yAxis = new NumberAxis(); // Axe Y pour le nombre d'événements
+        BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
+
+        // Définissez les noms des mois dans l'ordre
+        String[] months = {"Janvier", "February", "Mars", "Avril", "May", "June", "July", "August", "September", "October", "November", "December"};
+
+        // Créez une série de données pour le BarChart
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+
+        // Exécutez la requête SQL pour obtenir le nombre d'événements par mois
+
+        String query = "SELECT MONTH(datedebut) AS month, COUNT(*) AS event_count FROM event GROUP BY MONTH(datedebut)";
+        Connection con = DataSource.getInstance().getCnx();
+        try (
+                PreparedStatement preparedStatement = con.prepareStatement(query);
+                ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+                int monthIndex = resultSet.getInt("month");
+                int eventCount = resultSet.getInt("event_count");
+
+                // Ajoutez le nombre d'événements à la série de données sous le nom du mois correspondant
+                series.getData().add(new XYChart.Data<>(months[monthIndex - 1], eventCount));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // Ajoutez la série de données au BarChart
+        piechart1.getData().add(series); // Utilisation de la référence injectée au lieu de créer un nouveau BarChart
     }
 
 

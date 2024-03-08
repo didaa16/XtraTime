@@ -1,6 +1,7 @@
-package controllers;
+package controllers.Reservation;
 
 import java.net.URL;
+import java.security.GeneralSecurityException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -8,6 +9,7 @@ import java.util.ResourceBundle;
 import entities.Reservation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import services.ServiceReservation;
 import javafx.fxml.FXMLLoader;
@@ -76,7 +78,7 @@ public class CardController {
     public void voirTemperatureOnClick(ActionEvent actionEvent) {
         try {
             String date = reservationE.getDate(); // Assuming this gets the date from somewhere
-            TimelineApiForecastSample.setCountry("tunisia"); // Set country dynamically if needed
+            TimelineApiForecastSample.setCountry("Tunisia"); // Set country dynamically if needed
             TimelineApiForecastSample.downloadWeatherExcel(date, (Stage) affDate.getScene().getWindow());
             System.out.println("Weather Excel file downloaded for date: " + date);
         } catch (IOException | InterruptedException e) {
@@ -84,6 +86,7 @@ public class CardController {
             e.printStackTrace();
         }
     }
+
 
 }
 

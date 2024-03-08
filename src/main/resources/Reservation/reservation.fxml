@@ -89,8 +89,8 @@
                         </ContextMenu>
                      </contextMenu>
                   </MenuButton>
-                  <TextField fx:id="dateAjout" promptText="JJ/MM/YYYY" GridPane.columnIndex="1" />
                   <TextField fx:id="dureeAjout" promptText="HH:MM" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="dateAjout" promptText="jj/mm/aa" GridPane.columnIndex="1" />
                </children>
             </GridPane>
             <Button fx:id="reserverButton" layoutX="371.0" layoutY="493.0" mnemonicParsing="false" onAction="#confirmerrResOnClick" prefHeight="30.0" prefWidth="135.0" text="Reserver" />

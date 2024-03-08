@@ -1,4 +1,4 @@
-package entities;
+package entities.Reservation;
 
 public class Terrain {
     private int id ,ref , capacite , prix;

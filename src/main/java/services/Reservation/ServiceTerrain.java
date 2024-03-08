@@ -1,7 +1,7 @@
-package services;
+package services.Reservation;
 
-import entities.Equipement;
-import entities.Terrain;
+import entities.Reservation.Equipement;
+import entities.Reservation.Terrain;
 import utils.MyDatabase;
 
 import java.sql.Connection;

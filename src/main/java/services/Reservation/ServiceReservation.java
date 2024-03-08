@@ -1,6 +1,6 @@
-package services;
+package services.Reservation;
 
-import entities.Reservation;
+import entities.Reservation.Reservation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import controllers.mesReservtions;
+import controllers.Reservation.mesReservations;
 
 public class ServiceReservation implements IService<Reservation> {
     static Connection connection;
@@ -118,7 +118,7 @@ public class ServiceReservation implements IService<Reservation> {
     }
     public void changeScreen(ActionEvent event, String fxmlFile, String title){
         try {
-            FXMLLoader loader = new FXMLLoader(mesReservtions.class.getResource(fxmlFile));
+            FXMLLoader loader = new FXMLLoader(mesReservations.class.getResource(fxmlFile));
             Parent root = loader.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setTitle(title);

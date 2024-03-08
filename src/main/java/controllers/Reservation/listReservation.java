@@ -1,4 +1,4 @@
-package controllers;
+package controllers.Reservation;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;

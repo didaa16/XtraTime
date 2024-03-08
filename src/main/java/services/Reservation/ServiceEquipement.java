@@ -1,6 +1,6 @@
-package services;
+package services.Reservation;
 
-import entities.Equipement;
+import entities.Reservation.Equipement;
 import utils.MyDatabase;
 
 import javax.swing.*;

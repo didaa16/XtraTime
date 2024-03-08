@@ -1,6 +1,6 @@
-package services;
+package services.Reservation;
 
-import entities.ResEquip;
+import entities.Reservation.ResEquip;
 import javafx.collections.ObservableList;
 import utils.MyDatabase;
 

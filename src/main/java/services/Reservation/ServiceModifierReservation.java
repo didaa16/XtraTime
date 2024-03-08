@@ -1,8 +1,8 @@
-package services;
+package services.Reservation;
 
-import controllers.ModifierReservationController;
-import entities.Equipement;
-import entities.Reservation;
+import controllers.Reservation.ModifierReservationController;
+import entities.Reservation.Equipement;
+import entities.Reservation.Reservation;
 import utils.MyDatabase;
 
 import java.sql.Connection;

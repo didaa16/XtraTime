@@ -1,4 +1,4 @@
-package entities;
+package entities.Reservation;
 
 import jdk.jfr.MemoryAddress;
 

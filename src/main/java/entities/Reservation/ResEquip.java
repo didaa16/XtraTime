@@ -1,4 +1,4 @@
-package entities;
+package entities.Reservation;
 
 public class ResEquip {
     private int idReservation;

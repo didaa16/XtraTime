@@ -1,4 +1,4 @@
-package controllers;
+package controllers.Reservation;
 
 import java.io.File;
 import java.io.IOException;

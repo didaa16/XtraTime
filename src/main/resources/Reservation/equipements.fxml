@@ -10,7 +10,6 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -21,14 +20,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1363.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Reservation.equipements">
    <left>
-      <AnchorPane prefHeight="589.0" prefWidth="184.0" style="-fx-background-color: #000000;" BorderPane.alignment="CENTER">
-         <children>
-            <ImageView fitHeight="111.0" fitWidth="141.0" layoutX="28.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@421386197_913323057052560_175060100800875911_n.png" />
-               </image>
-            </ImageView>
-         </children></AnchorPane>
+      <AnchorPane prefHeight="720.0" prefWidth="131.0" style="-fx-background-color: #000000;" BorderPane.alignment="CENTER" />
    </left>
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="gradient-background" stylesheets="@styless.css" BorderPane.alignment="CENTER">
@@ -48,17 +40,17 @@
                </styleClass>
             </TableView>
             <TextField fx:id="recherche" layoutX="14.0" layoutY="59.0" prefHeight="34.0" prefWidth="243.0" promptText="Chercher par nom" />
-            <Button fx:id="ajouterButton" layoutX="356.0" layoutY="54.0" mnemonicParsing="false" onAction="#ajouterButtonOnClick" prefHeight="34.0" prefWidth="41.0">
+            <Button fx:id="ajouterButton" layoutX="356.0" layoutY="54.0" mnemonicParsing="false" onAction="#ajouterButtonOnClick" prefHeight="34.0" prefWidth="41.0" style="-fx-background-radius: 100;">
                <graphic>
                   <FontAwesomeIconView glyphName="PLUS" size="20" />
                </graphic>
             </Button>
-            <Button fx:id="supprimerButton" layoutX="411.0" layoutY="53.0" mnemonicParsing="false" onAction="#supprimerButtonOnClick" prefHeight="34.0" prefWidth="41.0">
+            <Button fx:id="supprimerButton" layoutX="411.0" layoutY="53.0" mnemonicParsing="false" onAction="#supprimerButtonOnClick" prefHeight="34.0" prefWidth="41.0" style="-fx-background-radius: 100;">
                <graphic>
                   <FontAwesomeIconView glyphName="TRASH" size="20" />
                </graphic>
             </Button>
-            <Button fx:id="modifierButton" layoutX="468.0" layoutY="53.0" mnemonicParsing="false" onAction="#modifierButtonOnClick" prefHeight="34.0" prefWidth="41.0">
+            <Button fx:id="modifierButton" layoutX="468.0" layoutY="53.0" mnemonicParsing="false" onAction="#modifierButtonOnClick" prefHeight="34.0" prefWidth="41.0" style="-fx-background-radius: 100;">
                <graphic>
                   <FontAwesomeIconView glyphName="EDIT" size="20" />
                </graphic>
@@ -135,8 +127,8 @@
                </children>
             </GridPane>
             <TextField fx:id="idField" layoutX="689.0" layoutY="91.0" prefHeight="26.0" prefWidth="414.0" visible="false" />
-            <Button fx:id="listedesreservations" layoutX="951.0" layoutY="28.0" mnemonicParsing="false" onAction="#navigateToListReservationInterface" prefHeight="34.0" prefWidth="200.0" text="Liste des réservations" />
-            <FontAwesomeIconView glyphName="BOOK" layoutX="960.0" layoutY="52.0" size="18" />
+            <Button fx:id="listedesreservations" layoutX="951.0" layoutY="28.0" mnemonicParsing="false" onAction="#navigateToListReservationInterface" prefHeight="34.0" prefWidth="200.0" style="-fx-background-radius: 100;" text="Liste des réservations" visible="false" />
+            <FontAwesomeIconView glyphName="BOOK" layoutX="960.0" layoutY="52.0" size="18" visible="false" />
          </children>
       </AnchorPane>
    </center>

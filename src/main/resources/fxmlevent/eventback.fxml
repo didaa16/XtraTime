@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -33,34 +35,26 @@
       <ComboBox fx:id="tfterrain" layoutX="17.0" layoutY="322.0" prefHeight="25.0" prefWidth="124.0" promptText="Choisir_Terrain" stylesheets="@styless.css" />
       <DatePicker fx:id="tfdd" layoutX="164.0" layoutY="245.0" prefHeight="25.0" prefWidth="124.0" promptText="Date_Debut" stylesheets="@styless.css" />
       <ComboBox fx:id="tfsponso" layoutX="17.0" layoutY="282.0" prefHeight="25.0" prefWidth="124.0" promptText="choisirsponso" stylesheets="@styless.css" />
-      <Button fx:id="bajouter" layoutX="37.0" layoutY="436.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="33.0" prefWidth="110.0" style="-fx-background-color: #008000;" stylesheets="@styless.css" text="Ajouter">
+      <Button fx:id="bajouter" layoutX="37.0" layoutY="436.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="33.0" prefWidth="110.0" style="-fx-background-radius: 100;" text="Ajouter">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
-         <styleClass>
-            <String fx:value="button-container-mouse-moved" />
-            <String fx:value="transparent-button" />
-         </styleClass>
+         <stylesheets>
+            <URL value="@styless.css" />
+            <URL value="@styless.css" />
+         </stylesheets>
       </Button>
-      <Button fx:id="bmodifier" layoutX="191.0" layoutY="436.0" mnemonicParsing="false" onAction="#modifier" prefHeight="33.0" prefWidth="110.0" style="-fx-background-color: #3b5998;" stylesheets="@styless.css" text="Modifier">
+      <Button fx:id="bmodifier" layoutX="191.0" layoutY="436.0" mnemonicParsing="false" onAction="#modifier" prefHeight="33.0" prefWidth="110.0" style="-fx-background-radius: 100;" stylesheets="@styless.css" text="Modifier">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
-         <styleClass>
-            <String fx:value="button-container-mouse-moved" />
-            <String fx:value="transparent-button" />
-         </styleClass>
       </Button>
-      <Button fx:id="bsupprimer" layoutX="323.0" layoutY="436.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="33.0" prefWidth="110.0" style="-fx-background-color: #FF0000;" stylesheets="@styless.css" text="Supprimer">
+      <Button fx:id="bsupprimer" layoutX="323.0" layoutY="436.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="33.0" prefWidth="110.0" style="-fx-background-radius: 100;" stylesheets="@styless.css" text="Supprimer">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
-         <styleClass>
-            <String fx:value="button-container-mouse-moved" />
-            <String fx:value="transparent-button" />
-         </styleClass>
       </Button>
-      <Button fx:id="bimporter" layoutX="332.0" layoutY="376.0" mnemonicParsing="false" onAction="#importer" prefHeight="25.0" prefWidth="108.0" style="-fx-background-color: #008000;" stylesheets="@styless.css" text="Importer_Image">
+      <Button fx:id="bimporter" layoutX="332.0" layoutY="376.0" mnemonicParsing="false" onAction="#importer" prefHeight="25.0" prefWidth="108.0" stylesheets="@styless.css" text="Importer_Image">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -69,18 +63,10 @@
       <TextField fx:id="tfhd" layoutX="163.0" layoutY="286.0" prefHeight="25.0" prefWidth="124.0" promptText="Heure_Debut" stylesheets="@styless.css" />
       <TextField fx:id="tfhf" layoutX="161.0" layoutY="324.0" prefHeight="25.0" prefWidth="124.0" promptText="Heure_Fin" stylesheets="@styless.css" />
       <TextField fx:id="searchTF" layoutX="369.0" layoutY="5.0" onAction="#filter" prefHeight="33.0" prefWidth="136.0" promptText="Chercher_Event" stylesheets="@styless.css" />
-      <Button layoutX="17.0" layoutY="7.0" mnemonicParsing="false" onAction="#pdf" style="-fx-background-color: #FF0000;" stylesheets="@styless.css" text="PDF" textFill="GREEN">
-         <styleClass>
-            <String fx:value="transparent-button" />
-            <String fx:value="button-container-mouse-moved" />
-            <String fx:value="day-name" />
-         </styleClass></Button>
-      <Button layoutX="79.0" layoutY="4.0" mnemonicParsing="false" onAction="#calendrier" prefHeight="35.0" prefWidth="124.0" style="-fx-background-color: #008000;" stylesheets="@styless.css" text="Calendrier" textFill="#10b510">
-         <styleClass>
-            <String fx:value="transparent-button" />
-            <String fx:value="button-container-mouse-moved" />
-            <String fx:value="event-title" />
-         </styleClass>
-      </Button>
+      <Button layoutX="17.0" layoutY="7.0" mnemonicParsing="false" onAction="#pdf" stylesheets="@styless.css" text="PDF" textFill="GREEN" />
+      <Button layoutX="79.0" layoutY="4.0" mnemonicParsing="false" onAction="#calendrier" prefHeight="35.0" prefWidth="124.0" stylesheets="@styless.css" text="Calendrier" textFill="#10b510" />
    </children>
+   <padding>
+      <Insets bottom="5.0" />
+   </padding>
 </AnchorPane>

@@ -11,12 +11,19 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import services.store.ServiceProduit;
 import tests.IListener;
 
@@ -165,8 +172,9 @@ public class StoreController implements Initializable {
     void goBack(MouseEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/AjouterProduit.fxml"));
-            Scene scene = back.getScene();
-            scene.setRoot(root);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
 
@@ -177,16 +185,25 @@ public class StoreController implements Initializable {
     @FXML
     void consulter(MouseEvent event) {
         try {
+            // Charger le fichier FXML de la nouvelle fenêtre
             Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/AjoutCom.fxml"));
-            Scene scene = consulter.getScene();
-            scene.setRoot(root);
+
+            // Créer une nouvelle instance de Stage pour la nouvelle fenêtre
+            Stage newStage = new Stage();
+
+            // Définir la scène de la nouvelle fenêtre avec la racine (root)
+            newStage.setScene(new Scene(root));
+
+            // Afficher la nouvelle fenêtre
+            newStage.show();
+
         } catch (IOException e) {
             e.printStackTrace();
-
         }
     }
 
-//recherche
+
+    //recherche
 @FXML
 private void handleSearch(KeyEvent event) throws IOException {
     String searchText = recherche.getText().toLowerCase();

@@ -77,14 +77,23 @@ public class AjouterProduitController {
     @FXML
     void afficherProduit(ActionEvent event) {
         try {
+            // Charger le fichier FXML de la nouvelle fenêtre
             Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/AfficherProduit.fxml"));
-            refProduit.getScene().setRoot(root);
 
+            // Créer une nouvelle instance de Stage pour la nouvelle fenêtre
+            Stage newStage = new Stage();
+
+            // Définir la scène de la nouvelle fenêtre avec la racine (root)
+            newStage.setScene(new Scene(root));
+
+            // Afficher la nouvelle fenêtre
+            newStage.show();
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            // Gérer les erreurs lors du chargement du fichier FXML
+            System.out.println("Erreur lors du chargement de la nouvelle fenêtre : " + e.getMessage());
         }
-
     }
+
 
     private void showAlert(String title, String headerText, String contentText, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);

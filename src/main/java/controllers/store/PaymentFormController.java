@@ -82,7 +82,10 @@ public class PaymentFormController implements Initializable {
             showAlert("Erreur", "", "Les champs mois et année doivent être des nombres.", Alert.AlertType.ERROR);
             return;
         }
-
+// Vérification de la longueur du numéro de carte
+        if (cardNumber.length() < 13 || cardNumber.length() > 19) {
+            showAlert("Erreur", "", "Le numéro de carte de crédit doit avoir entre 13 et 19 chiffres.", Alert.AlertType.ERROR);
+            return;}
         if (expYear < 2024 || (expYear == 2024 && expMonth < 5 )) {
             showAlert("Erreur", "", "Date d'expiration de la carte de crédit invalide.", Alert.AlertType.ERROR);
             return;

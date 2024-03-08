@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -8,7 +7,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -18,123 +16,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="634.0" prefWidth="960.0" styleClass="gradient-background" stylesheets="@styless.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.store.AjouterProduitController">
+<AnchorPane prefHeight="634.0" prefWidth="960.0" styleClass="transparent" stylesheets="@styless.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.store.AjouterProduitController">
    <children>
       <BorderPane layoutX="-17.6" prefHeight="634.0" prefWidth="978.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <left>
-            <VBox prefHeight="496.0" prefWidth="246.0" styleClass="container" stylesheets="@styless.css" BorderPane.alignment="CENTER">
-               <children>
-                  <HBox prefHeight="130.0" prefWidth="243.0">
-                     <children>
-                        <ImageView fitHeight="83.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@imagesss/logo.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets left="15.0" top="20.0" />
-                           </HBox.margin>
-                        </ImageView>
-                        <Label prefHeight="35.0" prefWidth="127.0" stylesheets="@styless.css" text="Xtratime" textFill="WHITE">
-                           <font>
-                              <Font name="Microsoft YaHei" size="28.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="8.0" top="50.0" />
-                           </HBox.margin>
-                        </Label>
-                     </children>
-                     <VBox.margin>
-                        <Insets top="20.0" />
-                     </VBox.margin>
-                  </HBox>
-                  <Separator prefHeight="18.0" prefWidth="218.0">
-                     <VBox.margin>
-                        <Insets left="20.0" right="20.0" />
-                     </VBox.margin>
-                  </Separator>
-                  <HBox prefHeight="60.0" prefWidth="260.0" styleClass="button-container-mouse-moved">
-                     <VBox.margin>
-                        <Insets top="30.0" />
-                     </VBox.margin>
-                     <children>
-                        <ImageView fitHeight="59.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@imagesss/home.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets left="20.0" />
-                           </HBox.margin>
-                        </ImageView>
-                        <Label prefHeight="60.0" prefWidth="80.0" text="Home" textFill="WHITE">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="20.0" />
-                           </HBox.margin>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="60.0" prefWidth="260.0" stylesheets="@styless.css">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                     <children>
-                        <ImageView fitHeight="59.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@imagesss/product.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets left="20.0" />
-                           </HBox.margin>
-                        </ImageView>
-                        <Label prefHeight="64.0" prefWidth="98.0" text="Produits" textFill="WHITE">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="15.0" />
-                           </HBox.margin>
-                        </Label>
-                     </children>
-                     <styleClass>
-                        <String fx:value="button-container-mouse-moved" />
-                        <String fx:value="container" />
-                     </styleClass>
-                  </HBox>
-                  <HBox fx:id="back" onMouseClicked="#goBack" prefHeight="78.0" prefWidth="226.0" styleClass="button-container-mouse-moved">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                     <children>
-                        <ImageView fitHeight="59.0" fitWidth="93.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@imagesss/order-delivery.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets left="20.0" />
-                           </HBox.margin>
-                        </ImageView>
-                        <Label prefHeight="60.0" prefWidth="141.0" text="Commandes" textFill="WHITE">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="20.0" />
-                           </HBox.margin>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <Button fx:id="store" mnemonicParsing="false" onAction="#store" text="store" />
-               </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <BorderPane.margin>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </BorderPane.margin>
-            </VBox>
-         </left>
          <center>
             <VBox prefHeight="630.0" prefWidth="678.0" BorderPane.alignment="CENTER">
                <children>
@@ -164,7 +48,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="nomProduit" prefHeight="34.0" prefWidth="196.0">
+                        <TextField fx:id="nomProduit" prefHeight="34.0" prefWidth="196.0" promptText="nom produit">
                            <HBox.margin>
                               <Insets left="50.0" />
                            </HBox.margin>
@@ -177,7 +61,7 @@
                               <Insets left="20.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="quantite" prefHeight="34.0" prefWidth="189.0" />
+                        <TextField fx:id="quantite" prefHeight="34.0" prefWidth="189.0" promptText="quantité des produits" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="62.0" prefWidth="659.0">
@@ -187,7 +71,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="refProduit" prefHeight="34.0" prefWidth="196.0">
+                        <TextField fx:id="refProduit" prefHeight="34.0" prefWidth="196.0" promptText="reference">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
@@ -227,7 +111,7 @@
                               <Insets left="20.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="taille" prefHeight="34.0" prefWidth="189.0">
+                        <TextField fx:id="taille" prefHeight="34.0" prefWidth="189.0" promptText="taille">
                            <HBox.margin>
                               <Insets left="60.0" />
                            </HBox.margin>
@@ -241,7 +125,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="prix" prefHeight="34.0" prefWidth="196.0">
+                        <TextField fx:id="prix" prefHeight="34.0" prefWidth="196.0" promptText="prrix">
                            <HBox.margin>
                               <Insets left="60.0" />
                            </HBox.margin>
@@ -253,7 +137,7 @@
                         <StackPane prefHeight="118.0" prefWidth="162.0">
                            <children>
                               <ImageView fx:id="imageView" fitHeight="99.0" fitWidth="102.0" pickOnBounds="true" preserveRatio="true" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff38" height="130.0" stroke="BLACK" strokeType="INSIDE" width="127.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#76947638" height="130.0" stroke="BLACK" strokeType="INSIDE" width="127.0" />
                            </children>
                            <HBox.margin>
                               <Insets left="30.0" />
@@ -271,7 +155,7 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="description" alignment="TOP_LEFT" prefHeight="129.0" prefWidth="233.0">
+                              <TextField fx:id="description" alignment="TOP_LEFT" prefHeight="129.0" prefWidth="233.0" promptText="Entrez la description de produit">
                                  <opaqueInsets>
                                     <Insets top="200.0" />
                                  </opaqueInsets>

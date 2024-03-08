@@ -221,7 +221,7 @@ public class CommandeJdida implements Initializable {
     void payment(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/paiement.fxml"));
-            Scene scene = back.getScene();
+            Scene scene = payer.getScene();
             scene.setRoot(root);
         } catch (IOException e) {
             e.printStackTrace();

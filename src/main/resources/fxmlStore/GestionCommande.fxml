@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -18,127 +13,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="634.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.store.CommandeController">
+<AnchorPane prefHeight="664.0" prefWidth="894.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.store.CommandeController">
    <children>
-      <BorderPane layoutY="-6.0" prefHeight="664.0" prefWidth="942.0" styleClass="gradient-background" stylesheets="@styless.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <left>
-            <VBox prefHeight="664.0" prefWidth="274.0" styleClass="container" BorderPane.alignment="CENTER">
+      <BorderPane layoutY="-6.0" prefHeight="664.0" prefWidth="942.0" styleClass="transparent" stylesheets="@styless.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <bottom>
+            <VBox prefHeight="664.0" prefWidth="566.0" styleClass="transparent" stylesheets="@styless.css" BorderPane.alignment="CENTER">
                <children>
-                  <HBox prefHeight="130.0" prefWidth="244.0">
-                     <children>
-                        <ImageView fitHeight="83.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@imagesss/logo.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets left="15.0" top="20.0" />
-                           </HBox.margin>
-                        </ImageView>
-                        <Label prefHeight="35.0" prefWidth="127.0" text="Xtratime" textFill="WHITE">
-                           <font>
-                              <Font name="Microsoft YaHei" size="28.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="8.0" top="50.0" />
-                           </HBox.margin>
-                        </Label>
-                     </children>
-                     <VBox.margin>
-                        <Insets top="20.0" />
-                     </VBox.margin>
-                  </HBox>
-                  <Separator prefHeight="18.0" prefWidth="218.0">
-                     <VBox.margin>
-                        <Insets left="20.0" right="20.0" />
-                     </VBox.margin>
-                  </Separator>
-                  <HBox prefHeight="60.0" prefWidth="260.0" styleClass="button-container-mouse-moved" stylesheets="@styless.css">
-                     <VBox.margin>
-                        <Insets top="30.0" />
-                     </VBox.margin>
-                     <children>
-                        <ImageView fitHeight="59.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@imagesss/home.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets left="20.0" />
-                           </HBox.margin>
-                        </ImageView>
-                        <Label prefHeight="60.0" prefWidth="80.0" text="Home" textFill="WHITE">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="20.0" />
-                           </HBox.margin>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox fx:id="back" onMouseClicked="#goBack" prefHeight="60.0" prefWidth="260.0" styleClass="button-container-mouse-moved" stylesheets="@styless.css">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                     <children>
-                        <ImageView fitHeight="59.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@imagesss/product.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets left="20.0" />
-                           </HBox.margin>
-                        </ImageView>
-                        <Label prefHeight="60.0" prefWidth="162.0" text="Produits" textFill="WHITE">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="15.0" />
-                           </HBox.margin>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="60.0" prefWidth="260.0" stylesheets="@styless.css">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                     <children>
-                        <ImageView fitHeight="59.0" fitWidth="93.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@imagesss/order-delivery.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets left="20.0" />
-                           </HBox.margin>
-                        </ImageView>
-                        <Label prefHeight="60.0" prefWidth="141.0" text="Commandes" textFill="WHITE">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="20.0" />
-                           </HBox.margin>
-                        </Label>
-                     </children>
-                     <styleClass>
-                        <String fx:value="button-container-mouse-moved" />
-                        <String fx:value="container" />
-                     </styleClass>
-                  </HBox>
-                  <Button fx:id="liv" mnemonicParsing="false" onAction="#livCom" text="livreur" />
-               </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <BorderPane.margin>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </BorderPane.margin>
-            </VBox>
-         </left>
-         <center>
-            <VBox prefHeight="664.0" prefWidth="566.0" BorderPane.alignment="CENTER">
-               <children>
-                  <HBox alignment="CENTER" prefHeight="13.0" prefWidth="246.0" style="-fx-background-color: #769476;" styleClass="container" stylesheets="@styless.css">
+                  <HBox alignment="CENTER" prefHeight="39.0" prefWidth="498.0" style="-fx-background-color: #769476;" styleClass="container" stylesheets="@styless.css">
                      <children>
                         <Label prefHeight="25.0" prefWidth="191.0" text="Les commandes">
                            <font>
@@ -147,7 +28,7 @@
                         </Label>
                      </children>
                      <VBox.margin>
-                        <Insets left="200.0" right="200.0" top="20.0" />
+                        <Insets left="250.0" right="250.0" top="20.0" />
                      </VBox.margin>
                   </HBox>
                   <VBox alignment="TOP_RIGHT" prefHeight="90.0" prefWidth="635.0">
@@ -160,7 +41,7 @@
                               <Insets />
                            </VBox.margin>
                         </Label>
-                        <ComboBox fx:id="statusFilterComboBox" prefHeight="42.0" prefWidth="150.0" promptText="Statut" style="-fx-background-color: grey;">
+                        <ComboBox fx:id="statusFilterComboBox" prefHeight="30.0" prefWidth="192.0" promptText="Statut" style="-fx-background-color: grey;">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
@@ -170,15 +51,15 @@
                         <Insets right="10.0" />
                      </VBox.margin>
                   </VBox>
-                  <TableView fx:id="tableCommande" prefHeight="133.0" prefWidth="535.0" styleClass="shadow">
+                  <TableView fx:id="tableCommande" prefHeight="136.0" prefWidth="617.0" styleClass="shadow">
                     <columns>
-                      <TableColumn fx:id="c_refC" prefWidth="162.39996910095215" text="Référence commande" />
-                      <TableColumn fx:id="c_total" prefWidth="158.4000244140625" text="total" />
-                        <TableColumn fx:id="c_status" minWidth="0.0" prefWidth="139.99993896484375" text="status" />
-                        <TableColumn fx:id="c_pseudo" prefWidth="128.80001831054688" text="pseudo " />
+                      <TableColumn fx:id="c_refC" prefWidth="194.40000915527344" text="Référence commande" />
+                      <TableColumn fx:id="c_total" prefWidth="148.79998779296875" text="total" />
+                        <TableColumn fx:id="c_status" minWidth="0.0" prefWidth="178.4000244140625" text="status" />
+                        <TableColumn fx:id="c_pseudo" prefWidth="171.20001220703125" text="pseudo " />
                     </columns>
                      <VBox.margin>
-                        <Insets left="60.0" right="50.0" top="20.0" />
+                        <Insets left="100.0" right="100.0" top="20.0" />
                      </VBox.margin>
                   </TableView>
                   <HBox alignment="CENTER" prefHeight="39.0" prefWidth="232.0" style="-fx-background-color: #769476;" styleClass="container">
@@ -190,10 +71,10 @@
                         </Label>
                      </children>
                      <VBox.margin>
-                        <Insets left="200.0" right="200.0" top="20.0" />
+                        <Insets left="250.0" right="250.0" top="20.0" />
                      </VBox.margin>
                   </HBox>
-                  <TableView fx:id="listeProduit" prefHeight="158.0" prefWidth="535.0">
+                  <TableView fx:id="listeProduit" prefHeight="191.0" prefWidth="784.0">
                      <columns>
                         <TableColumn fx:id="c_nom" prefWidth="66.39999085664749" text="Nom" />
                         <TableColumn fx:id="c_reference" prefWidth="97.60004425048828" text="reference" />
@@ -209,11 +90,11 @@
                         <Insets left="60.0" right="50.0" top="20.0" />
                      </VBox.margin>
                   </TableView>
-                  <HBox alignment="CENTER" prefHeight="61.0" prefWidth="280.0" styleClass="container">
+                  <HBox alignment="CENTER" prefHeight="77.0" prefWidth="475.0" styleClass="container">
                      <children>
                         <VBox alignment="CENTER" prefHeight="66.0" prefWidth="266.0">
                            <children>
-                              <TextField fx:id="nbrCom" alignment="CENTER" prefHeight="61.0" prefWidth="106.0">
+                              <TextField fx:id="nbrCom" alignment="CENTER" prefHeight="61.0" prefWidth="106.0" style="-fx-background-color: white;">
                                  <VBox.margin>
                                     <Insets left="100.0" right="100.0" top="10.0" />
                                  </VBox.margin>
@@ -241,7 +122,7 @@
                   </HBox>
                </children>
             </VBox>
-         </center>
+         </bottom>
       </BorderPane>
    </children>
 </AnchorPane>

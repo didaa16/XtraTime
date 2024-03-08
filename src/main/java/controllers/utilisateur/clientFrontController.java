@@ -751,6 +751,7 @@ public class clientFrontController {
         parametresMdpPane.setVisible(false);
         parametresMdpPane.setVisible(false);
         selectModeAnchor.setVisible(false);
+        anchorMain.setVisible(true);
         profilePane.setVisible(false);
         anchorMain.getChildren().clear();
         Parent root = FXMLLoader.load(getClass().getResource("/fxmlevent/listsponso.fxml"));
@@ -763,6 +764,7 @@ public class clientFrontController {
         parametresMdpPane.setVisible(false);
         selectModeAnchor.setVisible(false);
         profilePane.setVisible(false);
+        anchorMain.setVisible(true);
         anchorMain.getChildren().clear();
         Parent root = FXMLLoader.load(getClass().getResource("/fxmlevent/chatbot.fxml"));
         anchorMain.getChildren().add(root);
@@ -775,6 +777,7 @@ public class clientFrontController {
         parametresMdpPane.setVisible(false);
         selectModeAnchor.setVisible(false);
         profilePane.setVisible(false);
+        anchorMain.setVisible(true);
         anchorMain.getChildren().clear();
         PackControllerClient.setLoggedInUser(loggedInUser);
         CardController.setLoggedInUser(loggedInUser);
@@ -789,6 +792,7 @@ public class clientFrontController {
         parametresMdpPane.setVisible(false);
         selectModeAnchor.setVisible(false);
         profilePane.setVisible(false);
+        anchorMain.setVisible(true);
         anchorMain.getChildren().clear();
         mesReservations.setLoggedInUser(loggedInUser);
         CardController.setLoggedInUser(loggedInUser);
@@ -803,6 +807,7 @@ public class clientFrontController {
         parametresMdpPane.setVisible(false);
         selectModeAnchor.setVisible(false);
         profilePane.setVisible(false);
+        anchorMain.setVisible(true);
         anchorMain.getChildren().clear();
         StoreController.setLoggedInUser(loggedInUser);
         ItemController.setLoggedInUser(loggedInUser);

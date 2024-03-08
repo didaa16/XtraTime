@@ -369,7 +369,7 @@
                   <String fx:value="button" />
                </styleClass>
             </Button>
-            <MenuButton layoutX="66.0" layoutY="43.0" mnemonicParsing="false" text="Complexe">
+            <MenuButton layoutX="66.0" layoutY="43.0" mnemonicParsing="false" styleClass="switch_button" stylesheets="@../fxmlStore/styless.css" text="Complexe">
               <items>
                 <MenuItem mnemonicParsing="false">
                      <graphic>
@@ -405,7 +405,7 @@
                   </MenuItem>
               </items>
             </MenuButton>
-            <MenuButton layoutX="158.0" layoutY="42.0" mnemonicParsing="false" text="Terrain">
+            <MenuButton layoutX="158.0" layoutY="42.0" mnemonicParsing="false" styleClass="switch_button" stylesheets="@../fxmlStore/styless.css" text="Terrain">
                <items>
                   <MenuItem mnemonicParsing="false">
                      <graphic>

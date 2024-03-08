@@ -1038,7 +1038,14 @@ private AnchorPane anchorMain;
     }
 
 
-
-
-
+    public void reservationsOnClick(ActionEvent event) throws IOException {
+        anchorMain.setVisible(true);
+        ajouterAnchorPane.setVisible(false);
+        utilisateursAnchorPane.setVisible(false);
+        anchorPaneModifierMdp.setVisible(false);
+        anchorMain.getChildren().clear();
+        eventDashboard.setLoggedInUser(loggedInUser);
+        Parent root = FXMLLoader.load(getClass().getResource("/Reservation/ListReservations.fxml"));
+        anchorMain.getChildren().add(root);
+    }
 }

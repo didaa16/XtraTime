@@ -2,6 +2,7 @@
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -29,11 +30,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1920.0" styleClass="primary-color" stylesheets="@../Styles/front.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.utilisateur.clientFrontController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1920.0" styleClass="primary-color" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.utilisateur.clientFrontController">
    <center>
-      <AnchorPane prefHeight="750.0" prefWidth="1462.0" stylesheets="@../Styles/front.css" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="706.0" prefWidth="1720.0" BorderPane.alignment="CENTER">
          <children>
-            <Pane fx:id="profilePane" prefHeight="750.0" prefWidth="1571.0" visible="false">
+            <Pane fx:id="profilePane" layoutY="56.0" prefHeight="694.0" prefWidth="1571.0" visible="false">
                <children>
                   <Text fill="WHITE" fontSmoothingType="LCD" layoutX="180.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Paramétres de profile">
                      <font>
@@ -135,21 +136,9 @@
                            </font></TextField>
                      </children>
                   </GridPane>
-                  <Button fx:id="sauvegarderModificationsButton" alignment="CENTER" layoutX="543.0" layoutY="655.0" mnemonicParsing="false" onAction="#sauvegarderModificationsButtonOnClick" prefHeight="38.0" prefWidth="209.0" stylesheets="@../Styles/front.css" text="Sauvegarder les modifications" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                     <styleClass>
-                        <String fx:value="selected" />
-                        <String fx:value="button" />
-                     </styleClass>
-                     <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="SAVE" size="20" translateX="-5.0" />
-                     </graphic>
-                  </Button>
                </children>
             </Pane>
-            <Pane fx:id="changementPane" prefHeight="750.0" prefWidth="1573.0" visible="false">
+            <Pane fx:id="changementPane" layoutY="58.0" prefHeight="692.0" prefWidth="1574.0" visible="false">
                <children>
                   <Label fx:id="messageLabel" layoutX="218.0" layoutY="213.0" prefHeight="25.0" prefWidth="1125.0" text=" " textFill="WHITE">
                      <font>
@@ -195,7 +184,7 @@
                   </Button>
                </children>
             </Pane>
-            <Pane fx:id="parametresMdpPane" prefHeight="750.0" prefWidth="1575.0" visible="false">
+            <Pane fx:id="parametresMdpPane" layoutY="55.0" prefHeight="695.0" prefWidth="1575.0" visible="false">
                <children>
                   <GridPane layoutX="427.0" layoutY="201.0" prefHeight="349.0" prefWidth="679.0">
                      <columnConstraints>
@@ -295,7 +284,7 @@
                   </AnchorPane>
                </content>
             </ScrollPane>
-            <AnchorPane fx:id="selectModeAnchor" prefHeight="750.0" prefWidth="1586.0" visible="false">
+            <AnchorPane fx:id="selectModeAnchor" layoutY="58.0" prefHeight="692.0" prefWidth="1586.0" visible="false">
                <children>
                   <Button fx:id="verifierEmail" layoutX="465.0" layoutY="222.0" mnemonicParsing="false" onAction="#verifierEmailOnClick" prefHeight="56.0" prefWidth="294.0" style="-fx-background-color: #000000;" text="Se vérifier avec votre email" textFill="WHITE">
                      <font>
@@ -332,12 +321,32 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="anchorMain" layoutX="99.0" layoutY="74.0" prefHeight="625.0" prefWidth="1133.0" />
+            <AnchorPane fx:id="anchorMain" layoutX="49.0" layoutY="62.0" prefHeight="626.0" prefWidth="1226.0">
+               <children>
+                  <Button fx:id="sauvegarderModificationsButton" alignment="CENTER" layoutX="975.0" layoutY="306.0" mnemonicParsing="false" onAction="#sauvegarderModificationsButtonOnClick" prefHeight="38.0" prefWidth="209.0" stylesheets="@../Styles/front.css" text="Sauvegarder les modifications" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="selected" />
+                        <String fx:value="button" />
+                     </styleClass>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="SAVE" size="20" translateX="-5.0" />
+                     </graphic>
+                  </Button>
+               </children></AnchorPane>
          </children>
          <styleClass>
             <String fx:value="primary-color" />
             <String fx:value="selected-border" />
+            <String fx:value="gradient-background" />
          </styleClass>
+         <stylesheets>
+            <URL value="@../Styles/front.css" />
+            <URL value="@../Styles/styless.css" />
+            <URL value="@../Styles/styless.css" />
+         </stylesheets>
       </AnchorPane>
    </center>
    <top>
@@ -369,7 +378,7 @@
                   <String fx:value="button" />
                </styleClass>
             </Button>
-            <MenuButton layoutX="205.0" layoutY="44.0" mnemonicParsing="false" text="Evenements">
+            <MenuButton layoutX="205.0" layoutY="44.0" mnemonicParsing="false" styleClass="switch_button" stylesheets="@../fxmlStore/styless.css" text="Evenements">
                <items>
                   <MenuItem mnemonicParsing="false">
                      <graphic>
@@ -421,7 +430,7 @@
                   </MenuItem>
                </items>
             </MenuButton>
-            <MenuButton layoutX="308.0" layoutY="44.0" mnemonicParsing="false" text="Abonnements">
+            <MenuButton layoutX="308.0" layoutY="44.0" mnemonicParsing="false" styleClass="switch_button" stylesheets="@../fxmlStore/styless.css" text="Abonnements">
                <items>
                   <MenuItem mnemonicParsing="false">
                      <graphic>
@@ -441,7 +450,7 @@
                   </MenuItem>
                </items>
             </MenuButton>
-            <MenuButton layoutX="420.0" layoutY="44.0" mnemonicParsing="false" text="Store">
+            <MenuButton layoutX="420.0" layoutY="44.0" mnemonicParsing="false" styleClass="switch_button" stylesheets="@../fxmlStore/styless.css" text="Store">
                <items>
                   <MenuItem mnemonicParsing="false">
                      <graphic>
@@ -461,7 +470,7 @@
                   </MenuItem>
                </items>
             </MenuButton>
-            <MenuButton layoutX="124.0" layoutY="44.0" mnemonicParsing="false" text="Terrain">
+            <MenuButton layoutX="124.0" layoutY="44.0" mnemonicParsing="false" styleClass="switch_button" stylesheets="@../fxmlStore/styless.css" text="Terrain">
                <items>
                   <MenuItem mnemonicParsing="false">
                      <graphic>
@@ -481,7 +490,7 @@
                   </MenuItem>
                </items>
             </MenuButton>
-            <MenuButton fx:id="Reservation" layoutX="489.0" layoutY="44.0" mnemonicParsing="false" text="Reservation">
+            <MenuButton fx:id="Reservation" layoutX="489.0" layoutY="44.0" mnemonicParsing="false" styleClass="switch_button" stylesheets="@../fxmlStore/styless.css" text="Reservation">
                <items>
                   <MenuItem mnemonicParsing="false">
                      <graphic>
@@ -609,4 +618,8 @@
          </children>
       </AnchorPane>
    </left>
+   <stylesheets>
+      <URL value="@../Styles/front.css" />
+      <URL value="@../Styles/styless.css" />
+   </stylesheets>
 </BorderPane>

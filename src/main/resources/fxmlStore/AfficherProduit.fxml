@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -22,123 +20,27 @@
          <left>
             <VBox prefHeight="570.0" prefWidth="246.0" styleClass="container" stylesheets="@styless.css" BorderPane.alignment="CENTER">
                <children>
-                  <HBox prefHeight="130.0" prefWidth="243.0">
-                     <children>
-                        <ImageView fitHeight="83.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@imagesss/logo.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets left="15.0" top="20.0" />
-                           </HBox.margin>
-                        </ImageView>
-                        <Label prefHeight="35.0" prefWidth="127.0" stylesheets="@styless.css" text="Xtratime" textFill="WHITE">
-                           <font>
-                              <Font name="Microsoft YaHei" size="28.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="8.0" top="50.0" />
-                           </HBox.margin>
-                        </Label>
-                     </children>
-                     <VBox.margin>
-                        <Insets top="20.0" />
-                     </VBox.margin>
-                  </HBox>
-                  <Separator prefHeight="18.0" prefWidth="218.0">
-                     <VBox.margin>
-                        <Insets left="20.0" right="20.0" />
-                     </VBox.margin>
-                  </Separator>
-                  <HBox prefHeight="60.0" prefWidth="260.0" styleClass="button-container-mouse-moved">
+                  <HBox prefHeight="159.0" prefWidth="246.0" styleClass="button-container-mouse-moved">
                      <VBox.margin>
                         <Insets top="30.0" />
                      </VBox.margin>
-                     <children>
-                        <ImageView fitHeight="59.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@imagesss/home.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets left="20.0" />
-                           </HBox.margin>
-                        </ImageView>
-                        <Label prefHeight="60.0" prefWidth="80.0" text="Home" textFill="WHITE">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="20.0" />
-                           </HBox.margin>
-                        </Label>
-                     </children>
                   </HBox>
-                  <HBox prefHeight="60.0" prefWidth="260.0" stylesheets="@styless.css">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
+                  <VBox prefHeight="270.0" prefWidth="246.0">
                      <children>
-                        <ImageView fitHeight="59.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@imagesss/product.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets left="20.0" />
-                           </HBox.margin>
-                        </ImageView>
-                        <Label prefHeight="64.0" prefWidth="98.0" text="Produits" textFill="WHITE">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="15.0" />
-                           </HBox.margin>
-                        </Label>
-                     </children>
-                     <styleClass>
-                        <String fx:value="button-container-mouse-moved" />
-                        <String fx:value="container" />
-                     </styleClass>
-                  </HBox>
-                  <HBox fx:id="back" onMouseClicked="#goBack" prefHeight="78.0" prefWidth="226.0" styleClass="button-container-mouse-moved">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                     <children>
-                        <ImageView fitHeight="59.0" fitWidth="93.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@imagesss/order-delivery.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets left="20.0" />
-                           </HBox.margin>
-                        </ImageView>
-                        <Label prefHeight="60.0" prefWidth="141.0" text="Commandes" textFill="WHITE">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="20.0" />
-                           </HBox.margin>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Button fx:id="btnpdf" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#exporterPDF" prefHeight="42.0" prefWidth="96.0" stylesheets="@styless.css" text="pdf">
+                        <Button fx:id="btnpdf" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#exporterPDF" prefHeight="71.0" prefWidth="147.0" stylesheets="@styless.css" text="pdf">
                            <font>
                               <Font size="26.0" />
                            </font>
                            <VBox.margin>
-                              <Insets left="70.0" top="20.0" />
+                              <Insets left="50.0" top="20.0" />
                            </VBox.margin>
                         </Button>
-                        <Button fx:id="btnExcel" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#exporteeExcel" prefHeight="42.0" prefWidth="96.0" stylesheets="@styless.css" text="excel">
+                        <Button fx:id="btnExcel" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#exporteeExcel" prefHeight="63.0" prefWidth="148.0" stylesheets="@styless.css" text="excel">
                            <font>
                               <Font size="26.0" />
                            </font>
                            <VBox.margin>
-                              <Insets left="70.0" top="20.0" />
+                              <Insets left="50.0" top="50.0" />
                            </VBox.margin>
                         </Button>
                      </children>
@@ -211,11 +113,6 @@
                   </TableView>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="411.0" spacing="50.0">
                      <children>
-                        <Button fx:id="btnAjouter" mnemonicParsing="false" onAction="#ajouterProduit" prefHeight="46.0" prefWidth="98.0" style="-fx-background-radius: 100;" styleClass="switch_button" text="Add">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
                         <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#modifierProduit" prefHeight="45.0" prefWidth="98.0" style="-fx-background-radius: 100;" styleClass="switch_button" stylesheets="@StyleS.css" text="Update">
                            <font>
                               <Font size="18.0" />

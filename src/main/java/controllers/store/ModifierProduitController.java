@@ -83,6 +83,11 @@ public class ModifierProduitController {
 
         // Initialiser l'ImageView
         imageView.setImage(null);
+
+            marque.getItems().addAll(Marque.values());
+            typeSport.getItems().addAll(TypeSport.values());
+
+
     }
 
     public void setProduit(Produit produit) throws SQLException {

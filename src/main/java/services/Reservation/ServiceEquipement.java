@@ -78,19 +78,19 @@ public class ServiceEquipement implements  IService<Equipement>{
         List<Equipement> equipements= new ArrayList<>();
         String req="select * from equipement";
         Statement st  = connection.createStatement();
-       ResultSet rs = st.executeQuery(req);
-       while (rs.next()){
-           Equipement p = new Equipement();
-           p.setId(rs.getInt(1));
-           p.setNom(rs.getString("nom"));
-           p.setDescription(rs.getString(3));
-           p.setType(rs.getString("type"));
-           p.setPrix(rs.getInt("prix"));
-           p.setImage(rs.getString("image"));
-           p.setStock(rs.getInt("stock"));
+        ResultSet rs = st.executeQuery(req);
+        while (rs.next()){
+            Equipement p = new Equipement();
+            p.setId(rs.getInt(1));
+            p.setNom(rs.getString("nom"));
+            p.setDescription(rs.getString(3));
+            p.setType(rs.getString("type"));
+            p.setPrix(rs.getInt("prix"));
+            p.setImage(rs.getString("image"));
+            p.setStock(rs.getInt("stock"));
 
-           equipements.add(p);
-       }
+            equipements.add(p);
+        }
         return equipements;
     }
 

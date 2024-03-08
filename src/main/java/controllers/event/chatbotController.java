@@ -37,7 +37,7 @@ public class chatbotController {
     private HBox additionalButtonsContainer;
 
     private boolean chatGPTEnabled = false;
-java.sql.Connection connection = DataSource.getInstance().getCnx();
+    java.sql.Connection connection = DataSource.getInstance().getCnx();
     @FXML
     private void initialize() {
         // Masquer les boutons "Oui" et "Non" au chargement de la scène
@@ -62,7 +62,7 @@ java.sql.Connection connection = DataSource.getInstance().getCnx();
         inputTextField.clear();
     }
 
-    private static final String apiKey = "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";
+    private static final String apiKey = "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";
     private static final String model = "gpt-3.5-turbo";  // Adjust the model name
 
     private static String getOpenAIAPIAnswer(String question) {
@@ -103,9 +103,11 @@ java.sql.Connection connection = DataSource.getInstance().getCnx();
         } catch (IOException e) {
             e.printStackTrace();
             return "Oops! An error occurred while processing your request. Error: " + e.getMessage();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Oops! An unexpected error occurred. Error: " + e.getMessage();
         }
     }
-
     @FXML
     private void handleYes(ActionEvent event) {
         if (chatGPTEnabled) {

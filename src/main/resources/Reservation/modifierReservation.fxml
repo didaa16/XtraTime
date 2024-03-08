@@ -94,7 +94,7 @@
                         <TextField fx:id="dureeAjout" promptText="HH:MM" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                     </children>
                 </GridPane>
-                <Button fx:id="confirmerRes" layoutX="517.0" layoutY="493.0" mnemonicParsing="false" onAction="#confirmerResOnClick" prefHeight="30.0" prefWidth="135.0" stylesheets="@styless.css" text="Confirmer">
+                <Button fx:id="confirmerRes" layoutX="517.0" layoutY="493.0" mnemonicParsing="false" onAction="#confirmerResOnClick" prefHeight="30.0" prefWidth="135.0" style="-fx-background-radius: 100;" stylesheets="@styless.css" text="Confirmer">
                <styleClass>
                   <String fx:value="button-container-mouse-moved" />
                   <String fx:value="button-container-mouse-moved" />

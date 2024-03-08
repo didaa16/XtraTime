@@ -59,7 +59,7 @@ public class ModifierReservationController {
         try {
             serviceModifierReservation.modifier(reservationModifiee);
             JOptionPane.showMessageDialog(null, "Réservation modifiée avec succès !");
-            ser.changeScreen(event, "/Reservation/mesreservations.fxml", "XTRATIME");
+            ser.changeScreen(event, "/FxmlUtilisateur/clientFront.fxml", "XTRATIME");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }

@@ -106,6 +106,7 @@ public class AfficherProduitController {
 
     @FXML
     void initialize() {
+
         try {
             ObservableList<Produit> produits = FXCollections.observableList(serviceProduit.afficher());
             listeProduit.setItems(produits);
@@ -224,9 +225,14 @@ public class AfficherProduitController {
     void ajouterProduit(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/AjouterProduit.fxml"));
+// Créer une nouvelle instance de Stage pour la nouvelle fenêtre
+            Stage newStage = new Stage();
 
-            Scene scene = btnAjouter.getScene();
-            scene.setRoot(root);
+            // Définir la scène de la nouvelle fenêtre avec la racine (root)
+            newStage.setScene(new Scene(root));
+
+            // Afficher la nouvelle fenêtre
+            newStage.show();
         } catch (IOException e) {
             e.printStackTrace();
             showAlert("Erreur", "Erreur lors du chargement de la page AjouterProduit", e.getMessage(), Alert.AlertType.ERROR);

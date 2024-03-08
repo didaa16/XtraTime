@@ -93,8 +93,8 @@
                   <TextField fx:id="dateAjout" promptText="jj/mm/aa" GridPane.columnIndex="1" />
                </children>
             </GridPane>
-            <Button fx:id="reserverButton" layoutX="371.0" layoutY="493.0" mnemonicParsing="false" onAction="#confirmerrResOnClick" prefHeight="30.0" prefWidth="135.0" text="Reserver" />
-            <Button fx:id="annulerRes" layoutX="517.0" layoutY="493.0" mnemonicParsing="false" onAction="#annulerrResOnClick" prefHeight="30.0" prefWidth="135.0" styleClass="button-container-mouse-moved" stylesheets="@styless.css" text="Annuler" />
+            <Button fx:id="reserverButton" layoutX="371.0" layoutY="493.0" mnemonicParsing="false" onAction="#confirmerrResOnClick" prefHeight="30.0" prefWidth="135.0" style="-fx-background-radius: 100;" text="Reserver" />
+            <Button fx:id="annulerRes" layoutX="517.0" layoutY="493.0" mnemonicParsing="false" onAction="#annulerrResOnClick" prefHeight="30.0" prefWidth="135.0" style="-fx-background-radius: 100;" styleClass="button-container-mouse-moved" stylesheets="@styless.css" text="Annuler" />
          </children>
       </AnchorPane>
    </center>

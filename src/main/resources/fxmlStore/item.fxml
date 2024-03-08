@@ -55,7 +55,7 @@
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </Label>
-                  <Rating fx:id="rating" onMouseClicked="#handleRatingClick" prefHeight="0.0" prefWidth="32.0" />
+                  <Rating fx:id="rating" onMouseClicked="#handleRatingClick" />
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <Spinner fx:id="spinner" editable="true" initialValue="1" max="10" min="1" prefHeight="27.0" prefWidth="60.0">

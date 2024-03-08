@@ -83,10 +83,10 @@ public class ServiceRating {
         double averageRating = 0;
         String query = "SELECT AVG(rating) FROM ratingProd WHERE ref = ?";
         PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1, ref);
+        ps.setString(1, ref);
         ResultSet rs = ps.executeQuery();
-                if (rs.next()) {
-                    averageRating = rs.getDouble(1);
+        if (rs.next()) {
+            averageRating = rs.getDouble(1);
 
         }
         return averageRating;

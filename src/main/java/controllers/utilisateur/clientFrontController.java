@@ -1,5 +1,8 @@
 package controllers.utilisateur;
 
+import controllers.Abonnement.CardController;
+import controllers.Abonnement.PackControllerClient;
+import controllers.store.*;
 import entities.utilisateur.Img;
 import entities.utilisateur.Utilisateur;
 import javafx.animation.TranslateTransition;
@@ -771,6 +774,8 @@ public class clientFrontController {
         selectModeAnchor.setVisible(false);
         profilePane.setVisible(false);
         anchorMain.getChildren().clear();
+        PackControllerClient.setLoggedInUser(loggedInUser);
+        CardController.setLoggedInUser(loggedInUser);
         Parent root = FXMLLoader.load(getClass().getResource("/FXMLAbonnement/frontC.fxml"));
         anchorMain.getChildren().add(root);
     }
@@ -783,7 +788,24 @@ public class clientFrontController {
         selectModeAnchor.setVisible(false);
         profilePane.setVisible(false);
         anchorMain.getChildren().clear();
+        StoreController.setLoggedInUser(loggedInUser);
+        ItemController.setLoggedInUser(loggedInUser);
+        CommandeJdida.setLoggedInUser(loggedInUser);
+        ProduitDansCom.setLoggedInUser(loggedInUser);
+        PaymentFormController.setLoggedInUser(loggedInUser);
         Parent root = FXMLLoader.load(getClass().getResource("/fxmlstore/store.fxml"));
+        anchorMain.getChildren().add(root);
+    }
+    @FXML
+    private void afficherTerrain(ActionEvent event) throws IOException {
+        changementPane.setVisible(false);
+        parametresMdpPane.setVisible(false);
+        parametresMdpPane.setVisible(false);
+        selectModeAnchor.setVisible(false);
+        profilePane.setVisible(false);
+        anchorMain.setVisible(true);
+        anchorMain.getChildren().clear();
+        Parent root = FXMLLoader.load(getClass().getResource("/FxmlLocal/AffTerrain.fxml"));
         anchorMain.getChildren().add(root);
     }
 

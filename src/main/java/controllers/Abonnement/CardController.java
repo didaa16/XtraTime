@@ -1,4 +1,5 @@
 package controllers.Abonnement;
+import entities.utilisateur.Utilisateur;
 import javafx.scene.image.Image; // Assurez-vous d'importer javafx.scene.image.Image
 
 import entities.Abonnement.Pack;
@@ -15,6 +16,10 @@ import java.io.File;
 import java.io.IOException;
 
 public class CardController {
+    private static Utilisateur loggedInUser;
+    public static void setLoggedInUser(Utilisateur user) {
+        loggedInUser = user;
+    }
     @FXML
     private javafx.scene.control.Label description;
 
@@ -82,6 +87,7 @@ public class CardController {
     @FXML
     void Abonnement(ActionEvent event) {
         try {
+            AjouterAbonnementController.setLoggedInUser(loggedInUser);
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXMLAbonnement/AjoutA.fxml"));
             Parent root = fxmlLoader.load();
 

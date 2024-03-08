@@ -1,5 +1,6 @@
 package controllers.utilisateur;
 
+import controllers.local.InscriptionController;
 import entities.utilisateur.Img;
 import entities.utilisateur.Utilisateur;
 import javafx.animation.TranslateTransition;
@@ -771,6 +772,7 @@ public class locateurFrontController {
         profilePane.setVisible(false);
         anchorMain.setVisible(true);
         anchorMain.getChildren().clear();
+        InscriptionController.setLoggedInUser(loggedInUser);
         Parent root = FXMLLoader.load(getClass().getResource("/FxmlLocal/inscription.fxml"));
         anchorMain.getChildren().add(root);
     }

@@ -2,6 +2,7 @@ package controllers.store;
 
 import entities.store.Commande;
 import entities.store.Produit;
+import entities.utilisateur.Utilisateur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,6 +28,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class CommandeJdida implements Initializable {
+    private static Utilisateur loggedInUser;
+    public static void setLoggedInUser(Utilisateur user) {
+        loggedInUser = user;
+    }
     private IListener iListener;
     private List<Produit> produits = new ArrayList<>();
     @FXML
@@ -82,7 +87,7 @@ public class CommandeJdida implements Initializable {
         ServiceCommande serviceCommande = new ServiceCommande();
         Commande commandeActuelle = null;
         try {
-            commandeActuelle = serviceCommande.getCommande("dida16");
+            commandeActuelle = serviceCommande.getCommande(loggedInUser.getPseudo());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

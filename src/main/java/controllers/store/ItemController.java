@@ -4,8 +4,12 @@ package controllers.store;
 import entities.store.Commande;
 import entities.store.Produit;
 import entities.store.Status;
+import entities.utilisateur.Utilisateur;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -20,6 +24,10 @@ import java.sql.SQLException;
 
 
 public class ItemController {
+    private static Utilisateur loggedInUser;
+    public static void setLoggedInUser(Utilisateur user) {
+        loggedInUser = user;
+    }
 
     @FXML
     private ImageView addBtn;
@@ -112,14 +120,14 @@ public class ItemController {
             }
         }
     }
-            /*//currentCommande = serviceCommande.getCommande("dida16");
+            /*//currentCommande = serviceCommande.getCommande(loggedInUser.getPseudo());
         if (produit != null) {
             if (!serviceCommande.commandeExiste(currentCommande)) {
                 // Si aucune commande n'est sélectionnée, créer une nouvelle commande vide
                 currentCommande = new Commande();
                 currentCommande.setPrix(0.0); // Initialiser le prix total de la commande à 0
                 currentCommande.setStatus(Status.enAttente); // Status initial
-                currentCommande.setIdUser("dida16"); // ID de l'utilisateur actuel
+                currentCommande.setIdUser(loggedInUser.getPseudo()); // ID de l'utilisateur actuel
                 try {
                     // Ajouter la commande à la base de données
                     serviceCommande.ajouter(currentCommande);
@@ -130,7 +138,7 @@ public class ItemController {
                 }
             }
             try {
-                currentCommande = serviceCommande.getCommande("dida16");
+                currentCommande = serviceCommande.getCommande(loggedInUser.getPseudo());
                 // Ajouter le produit à la commande
                 serviceCommandeProduit.ajouterProduitACommande(currentCommande.getRefCommande(), produit.getRef());
                 // Mettre à jour le prix total de la commande
@@ -152,7 +160,7 @@ public class ItemController {
             currentCommande = new Commande();
             currentCommande.setPrix(0.0); // Initialiser le prix total de la commande à 0
             currentCommande.setStatus(Status.enAttente); // Status initial
-            currentCommande.setIdUser("dida16"); // ID de l'utilisateur actuel
+            currentCommande.setIdUser(loggedInUser.getPseudo()); // ID de l'utilisateur actuel
             try {
                 // Ajouter la commande à la base de données
                 serviceCommande.ajouter(currentCommande);
@@ -165,12 +173,12 @@ public class ItemController {
             }
         }
         try {
-            currentCommande = serviceCommande.getCommande("dida16");
+            currentCommande = serviceCommande.getCommande(loggedInUser.getPseudo());
             // Ajouter le produit à la commande
             serviceCommandeProduit.ajouterProduitACommande(currentCommande.getRefCommande(), produit.getRef());
             System.out.println("khatfet");
             // Mettre à jour le prix total de la commande
-            for (int i = 0; i < spinner.getValue(); i++) {
+            for (int i = 1; i < spinner.getValue(); i++) {
                 // Ajouter le produit à la commande
                 serviceCommandeProduit.ajouterProduitACommande(currentCommande.getRefCommande(), produit.getRef());
                 System.out.println("khatfet");
@@ -187,8 +195,8 @@ public class ItemController {
 
     private void refreshCommandeTable() {
         // Mettre à jour les données de la table des commandes
-       // commandeTable.getItems().clear();
-       // commandeTable.getItems().addAll(serviceCommande.getAllCommandes());
+        // commandeTable.getItems().clear();
+        // commandeTable.getItems().addAll(serviceCommande.getAllCommandes());
     }
 
 
@@ -196,7 +204,7 @@ public class ItemController {
     private void handleRatingClick(MouseEvent event) {
         double ratingValue = rating.getRating();
         try {
-            serviceRating.addOrUpdateRating("dida16", produit.getRef(), (int) ratingValue);
+            serviceRating.addOrUpdateRating(loggedInUser.getPseudo(), produit.getRef(), (int) ratingValue);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information");
             alert.setHeaderText(null);
@@ -213,4 +221,4 @@ public class ItemController {
     }
 
 
-}
+}    

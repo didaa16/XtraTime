@@ -1,6 +1,7 @@
 package controllers.local;
 
 import entities.local.complexe;
+import entities.utilisateur.Utilisateur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -54,6 +55,11 @@ private  Label label;
     @FXML
     private Button upp;
 
+    private static Utilisateur loggedInUser;
+    public static void setLoggedInUser(Utilisateur user) {
+        loggedInUser = user;
+    }
+
     @FXML
     void afficher(ActionEvent event) {
         try {
@@ -89,7 +95,7 @@ private  Label label;
     @FXML
     void addcomplexe(ActionEvent event) {
         String nomC = nom.getText();
-        String idlC = "dida";
+        String idlC = loggedInUser.getPseudo();
         String adrC = adr.getText();
         String telC = tel.getText();
         if (nomC.isEmpty() || idlC.isEmpty() || adrC.isEmpty() || telC.isEmpty() || imagePath.isEmpty() || imagePath1.isEmpty()) {

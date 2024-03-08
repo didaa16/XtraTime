@@ -3,6 +3,7 @@ package controllers.store;
 import entities.store.Commande;
 import entities.store.Produit;
 import entities.store.Produit_Commande;
+import entities.utilisateur.Utilisateur;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,6 +21,10 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class ProduitDansCom {
+    private static Utilisateur loggedInUser;
+    public static void setLoggedInUser(Utilisateur user) {
+        loggedInUser = user;
+    }
 
     @FXML
     private Label description;
@@ -108,7 +113,7 @@ public class ProduitDansCom {
         try {
             // Obtenez la référence de la commande actuelle à partir de la base de données
             ServiceCommande serviceCommande = new ServiceCommande();
-            Commande commandeActuelle = serviceCommande.getCommande("dida16");
+            Commande commandeActuelle = serviceCommande.getCommande(loggedInUser.getPseudo());
             int refCommande = commandeActuelle.getRefCommande();
 
             // Obtenez la référence du produit à partir de l'étiquette reffff

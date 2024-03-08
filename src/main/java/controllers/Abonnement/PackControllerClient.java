@@ -1,6 +1,7 @@
 package controllers.Abonnement;
 
 import entities.Abonnement.Pack;
+import entities.utilisateur.Utilisateur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,6 +34,10 @@ public class PackControllerClient {
 
     @FXML
     private WebView webview;
+    private static Utilisateur loggedInUser;
+    public static void setLoggedInUser(Utilisateur user) {
+        loggedInUser = user;
+    }
 
     private void setDataModules() throws IOException {
         ServicePack servicePack = new ServicePack();

@@ -1,6 +1,7 @@
 package controllers.store;
 
 import entities.store.Produit;
+import entities.utilisateur.Utilisateur;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,6 +29,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class StoreController implements Initializable {
+    private static Utilisateur loggedInUser;
+    public static void setLoggedInUser(Utilisateur user) {
+        loggedInUser = user;
+    }
     @FXML
     private ImageView back;
     @FXML

@@ -1,5 +1,6 @@
 package controllers.utilisateur;
 
+import controllers.event.eventDashboard;
 import entities.utilisateur.Utilisateur;
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
@@ -231,6 +232,7 @@ private AnchorPane anchorMain;
         deletedUtilisateurs.addAll(utilisateursSelectionnes);
     }
     private void afficherUtilisateursParRole(String role) {
+
         ObservableList<Utilisateur> listeUtilisateurs = FXCollections.observableList(serviceUtilisateurs.afficherParRole(role));
         pseudoC.setCellValueFactory(new PropertyValueFactory<>("pseudo"));
         cinC.setCellValueFactory(new PropertyValueFactory<>("cin"));
@@ -452,6 +454,7 @@ private AnchorPane anchorMain;
     @FXML
     private void utilisateursButtonOnClick(ActionEvent event){
         utilisateursAnchorPane.setVisible(true);
+        anchorMain.setVisible(false);
         ajouterAnchorPane.setVisible(false);
         anchorPaneModifierMdp.setVisible(false);
         statsAnchor.setVisible(false);
@@ -823,6 +826,7 @@ private AnchorPane anchorMain;
     private void eventsButtonOnClick(ActionEvent event) throws IOException {
         initialize();
         anchorMain.getChildren().clear();
+        eventDashboard.setLoggedInUser(loggedInUser);
         Parent root = FXMLLoader.load(getClass().getResource("/fxmlevent/eventback.fxml"));
         anchorMain.getChildren().add(root);
     }
@@ -861,7 +865,21 @@ private AnchorPane anchorMain;
         Parent root = FXMLLoader.load(getClass().getResource("/fxmlStore/GestionCommande.fxml"));
         anchorMain.getChildren().add(root);
     }
+    @FXML
+    private void afficherTerrain(ActionEvent event) throws IOException {
+        initialize();
+        anchorMain.getChildren().clear();
+        Parent root = FXMLLoader.load(getClass().getResource("/FxmlLocal/AffTerrain.fxml"));
+        anchorMain.getChildren().add(root);
+    }
 
+    @FXML
+    private void complexButtonOnClick(ActionEvent event) throws IOException {
+        initialize();
+        anchorMain.getChildren().clear();
+        Parent root = FXMLLoader.load(getClass().getResource("/FxmlLocal/AfficherComplexe.fxml"));
+        anchorMain.getChildren().add(root);
+    }
 
 
 

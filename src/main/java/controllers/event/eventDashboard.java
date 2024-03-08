@@ -1,29 +1,12 @@
 package controllers.event;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.URL;
-import java.sql.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Optional;
-import java.util.ResourceBundle;
-import java.util.Date;
-
-
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-
-import javafx.beans.property.SimpleStringProperty;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-
 import entities.event.event;
+import entities.utilisateur.Utilisateur;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -32,8 +15,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -43,8 +24,21 @@ import services.event.eventService;
 import services.event.sponsoService;
 import utils.event.DataSource;
 
-
 import javax.swing.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URL;
+import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Date;
+import java.util.Optional;
+import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class eventDashboard {
     private Image image;
@@ -124,7 +118,10 @@ public class eventDashboard {
     @FXML
     private TextField searchTF;
     ObservableList<event> events = FXCollections.observableList(es.readAll());
-
+    private static Utilisateur loggedInUser;
+    public static void setLoggedInUser(Utilisateur user) {
+        loggedInUser = user;
+    }
 
 
 
@@ -172,7 +169,7 @@ public class eventDashboard {
 
         // Create a new event object
         if (verifTitre() && verifDatedebut()) {
-            event newEvent = new event(titre, description, imageUrl, dated, datef, idTerrain, idSponso, "boh");
+            event newEvent = new event(titre, description, imageUrl, dated, datef, idTerrain, idSponso, loggedInUser.getPseudo());
             if (es.eventExistsWithSameTerrainAndDates(tfterrain.getValue(), dated, datef)) {
                 Alert eventExistsAlert = new Alert(Alert.AlertType.WARNING);
                 eventExistsAlert.setTitle("\n" +
@@ -518,7 +515,7 @@ public class eventDashboard {
     void pdf(ActionEvent event) {
         try {
             Document document = new Document();
-            PdfWriter.getInstance(document, new FileOutputStream("C://Users//MTIRI LYNDA//Desktop//eventpi//event.pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream("C://Users//PC//OneDrive//Bureau//STUDY//SEMESTRE 2//PI//XtraTime/event.pdf"));
             document.open();
 
             // Title

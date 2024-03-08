@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.local.AffTController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.local.AffTController">
    <children>
       <AnchorPane prefHeight="795.0" prefWidth="909.0" styleClass="gradient-background" stylesheets="@styless.css">
          <children>
@@ -50,6 +50,12 @@
                </styleClass>
             </Button>
             <Button layoutX="497.0" layoutY="553.0" mnemonicParsing="false" onAction="#afficherT" stylesheets="@styless.css" text="Statistiques">
+               <styleClass>
+                  <String fx:value="button-container-mouse-moved" />
+                  <String fx:value="shadow" />
+               </styleClass>
+            </Button>
+            <Button layoutX="118.0" layoutY="693.0" mnemonicParsing="false" onAction="#reserver" stylesheets="@styless.css" text="Reserver">
                <styleClass>
                   <String fx:value="button-container-mouse-moved" />
                   <String fx:value="shadow" />

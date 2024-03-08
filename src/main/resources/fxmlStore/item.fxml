@@ -21,7 +21,7 @@
                <children>
                   <ImageView fx:id="imageProduit" fitHeight="144.0" fitWidth="152.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../xml-xtratime/nike-air-zoom-sructure-22.jpg" />
+                        <Image url="@../Design/LOGO.png" />
                      </image>
                      <VBox.margin>
                         <Insets />

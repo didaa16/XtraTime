@@ -2,6 +2,9 @@ package controllers.Abonnement;
 
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
+import entities.utilisateur.Utilisateur;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,18 +12,13 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import services.Abonnement.ServiceAbonnement;
-
-import java.io.IOException;
-import java.util.List;
-import javafx.collections.ObservableList;
-import javafx.collections.FXCollections;
-import java.sql.SQLException;
-
 import services.Abonnement.ServicePack;
 
 import javax.security.auth.callback.ConfirmationCallback;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDate;
-
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,9 +37,6 @@ public class AjouterAbonnementController {
     private DatePicker date;
 
     @FXML
-    private TextField idC;
-
-    @FXML
     private TextField idC1;
 
     @FXML
@@ -58,6 +53,10 @@ public class AjouterAbonnementController {
 
     private ServiceAbonnement serviceAbonnement = new ServiceAbonnement();
 
+    private static Utilisateur loggedInUser;
+    public static void setLoggedInUser(Utilisateur user) {
+        loggedInUser = user;
+    }
     @FXML
     public void initialize() {
         try {
@@ -90,7 +89,7 @@ public class AjouterAbonnementController {
     void change(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/FXMLAbonnement/frontC.fxml"));
-            idC.getScene().setRoot(root);
+            idC1.getScene().setRoot(root);
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
@@ -127,7 +126,7 @@ public class AjouterAbonnementController {
             }
             String nomTerrain = idT.getValue();
             String nomPack = nomP.getValue();
-            String nomUser = idC.getText();
+            String nomUser = loggedInUser.getNom();
             int numtel = Integer.parseInt(idC1.getText());
             String numTelTwilio = "+216" + idC1.getText();
             System.out.println(numTelTwilio);
@@ -248,8 +247,6 @@ public class AjouterAbonnementController {
         return matcher.matches();
     }
     private void clearFields() {
-        // Effacez le contenu des champs de texte, des zones de texte ou d'autres composants que vous souhaitez vider.
-        idC.setText("");
         idC1.setText("");
         date.setValue(null);
         idT.setValue(null);

@@ -159,7 +159,7 @@ public class ServiceCommandeProduit implements IService<Produit_Commande> {
 
         // Vérifiez si la commande existe, sinon créez-la
         if (!verifierExistenceCommande(refCommande)) {
-            Commande commande = new Commande(refCommande, 0.0, Status.enAttente, "dida16");
+            Commande commande = new Commande(refCommande, 0.0, Status.enAttente, "bohmid");
             ServiceCommande serviceCommande = new ServiceCommande();
             serviceCommande.ajouter(commande);
         }

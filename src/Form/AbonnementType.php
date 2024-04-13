@@ -25,18 +25,12 @@ class AbonnementType extends AbstractType
                 'widget' => 'single_text',
                 'required' => true,
             ])
-            ->add('prix', IntegerType::class, [
-                'label' => 'Prix',
-                'required' => true,
-            ])
-            ->add('pack', EntityType::class, [
-                'class' => 'App\Entity\Pack',
-                'choice_label' => 'nom', // Le champ de l'entité à afficher dans la liste déroulante
-            ])
+          
             // Ajoutez le champ pour le terrain
             ->add('terrain', EntityType::class, [
-                'class' => 'App\Entity\Terrain',
+                'class' => Terrain::class,
                 'choice_label' => 'nom', // Le champ de l'entité à afficher dans la liste déroulante
+                'required' => true,
             ])
             ->add('nomuser', TextType::class, [
                 'label' => 'Nom de l\'Utilisateur',
@@ -45,11 +39,8 @@ class AbonnementType extends AbstractType
             ->add('numtel', IntegerType::class, [
                 'label' => 'Numéro de Téléphone',
                 'required' => true,
-            ])
-            ->add('prixtotal', IntegerType::class, [
-                'label' => 'Prix Total',
-                'required' => true,
             ]);
+            
         
     }
 

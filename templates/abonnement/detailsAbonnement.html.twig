@@ -1,0 +1,46 @@
+{% extends 'front.html.twig' %}
+
+{% block body %}
+
+<h1>Détails de l'abonnement</h1>
+<ul>
+    <li><strong>Nom de l'utilisateur :</strong> {{ nomUser }}</li>
+    <li><strong>Numéro de téléphone :</strong> {{ numTel }}</li>
+    <li><strong>Date de début :</strong> {{ dateDebut ? dateDebut|date('d/m/Y') : 'Non spécifiée' }}</li>
+    <li><strong>Nom du terrain :</strong> {{ nomTerrain ? nomTerrain : 'Non spécifié' }}</li>
+       <li><strong>Nom du pack :</strong> {{ nomPack ? nomPack : 'Non spécifié' }}</li>
+    <li><strong>Prix avant réduction :</strong> {{ prixAvantReduction ? prixAvantReduction ~ ' DT' : 'Non calculé' }}</li>
+    <li><strong>Prix après réduction :</strong> {{ prixApresReduction ? prixApresReduction ~ ' DT' : 'Non calculé' }}</li>
+</ul>
+
+<div>
+    <button href="" type="button" onclick="AnnulerAbonnement();" class="btn btn-secondary">Annuler</button>
+    <button  href="" type="button" onclick="confirmerAbonnement();" class="btn btn-primary">Confirmer</button>
+</div>
+
+<script>
+    function confirmerAbonnement() {
+        // Vous pouvez ajouter ici le code JavaScript pour confirmer l'abonnement
+        alert("Abonnement confirmé avec succès !");
+        // Rediriger l'utilisateur vers une autre page si nécessaire
+        window.location.href = "{{ path('app_front') }}";
+    }
+</script>
+
+<script>
+    function AnnulerAbonnement() {
+    // Afficher une boîte de dialogue pour confirmer l'annulation de l'abonnement
+    if (confirm("Cher Client, Votre Abonnement est Annuler. Si vous voulez, vous pouvez choisir un autre pack ?")) {
+        // Si l'utilisateur confirme, rediriger vers la route de suppression de l'abonnement
+        window.location.href = "{{ path('app_abonnement_deleteP', {'id': abonnement.id }) }}"; // Utiliser abonnementId
+    } else {
+        // Si l'utilisateur annule, rediriger vers la page d'accueil
+        window.location.href = "{{ path('app_abonnement_deleteF', {'id': abonnement.id }) }}"; // Utiliser abonnementId
+    }
+}
+
+</script>
+
+
+
+{% endblock %}

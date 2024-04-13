@@ -26,10 +26,15 @@ class AbonnementController extends AbstractController
     }
 
     #[Route('/{idp}', name: 'app_abonnement_form', methods: ['GET', 'POST'])]
-    public function showAbonnementForm(Request $request, $idp)
+    public function showAbonnementForm(Request $request, $idp): Response
     {
         // Récupérer le pack choisi par l'utilisateur
         $pack = $this->getDoctrine()->getRepository(Pack::class)->find($idp);
+
+        // Vérifier si le pack existe
+        if (!$pack) {
+            throw $this->createNotFoundException('Pack non trouvé pour l\'ID : '.$idp);
+        }
 
         // Créer une nouvelle instance d'Abonnement
         $abonnement = new Abonnement();
@@ -47,19 +52,50 @@ class AbonnementController extends AbstractController
 
         // Si le formulaire est soumis et valide, enregistrer l'abonnement
         if ($form->isSubmitted() && $form->isValid()) {
+            // Convertir la durée du pack de mois en jours
+            function convertirDureeEnJours($duree)
+            {
+                $nombreMois = intval($duree);
+                $joursParMois = 30; // ou tout autre nombre de jours par mois
+                return $nombreMois * $joursParMois;
+            }
+
+            // Utilisation de la fonction pour convertir la durée du pack
+            $dureePack = convertirDureeEnJours($pack->getDuree());
+            $terrain = $abonnement->getTerrain();
+
+            // Définir la valeur de 'nomterrain' avec le nom du terrain choisi
+            $abonnement->setNomterrain($terrain->getNom());
+            // Calculer le prix avant réduction
+            $prixTerrain = $terrain->getPrix();
+            $prix = $prixTerrain * $dureePack;
+            $abonnement->setPrix($prix);
+
+            // Calculer le prix après réduction
+            $reduction = $pack->getReduction();
+            $prixTotal = $prix * (1 - $reduction / 100);
+
+            $abonnement->setPrixTotal($prixTotal);
+
+            // Enregistrer l'abonnement dans la base de données
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($abonnement);
             $entityManager->flush();
 
             // Rediriger l'utilisateur vers une autre page ou afficher un message de succès
-            return $this->redirectToRoute('nom_de_la_route_vers_la_page_de_confirmation');
+            return $this->redirectToRoute('app_abonnement_details', ['id' => $abonnement->getId()]);
+
         }
 
         // Afficher le formulaire
         return $this->render('abonnement/AjouterAbonnement.html.twig', [
             'form' => $form->createView(),
+            'abonnement' => $abonnement,
         ]);
     }
+    
+    
+    
 
     #[Route('/{id}/edit', name: 'app_abonnement_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Abonnement $abonnement, EntityManagerInterface $entityManager): Response
@@ -79,14 +115,94 @@ class AbonnementController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_abonnement_delete', methods: ['POST'])]
-    public function delete(Request $request, Abonnement $abonnement, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}/delete', name: 'app_abonnement_deleteP', methods: ['GET', 'POST'])]
+    public function deleteAbonnement($id, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$abonnement->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($abonnement);
-            $entityManager->flush();
+        // Récupérer l'abonnement à supprimer
+        $abonnement = $entityManager->getRepository(Abonnement::class)->find($id);
+    
+        // Vérifier si l'abonnement existe
+        if (!$abonnement) {
+            throw $this->createNotFoundException('Abonnement non trouvé pour l\'ID : '.$id);
         }
-
-        return $this->redirectToRoute('app_abonnement_index', [], Response::HTTP_SEE_OTHER);
+    
+        // Supprimer l'abonnement
+        $entityManager->remove($abonnement);
+        $entityManager->flush();
+        
+        // Rediriger vers la page principale ou toute autre page appropriée après la suppression
+        return $this->redirectToRoute('app_packC_show'); // Remplacez 'page_principale' par le nom de votre route pour la page principale du site
     }
+    
+
+    #[Route('/{id}/deleteF', name: 'app_abonnement_deleteF', methods: ['GET', 'POST'])]
+    public function delete($id, EntityManagerInterface $entityManager): Response
+    {
+        // Récupérer l'abonnement à supprimer
+        $abonnement = $entityManager->getRepository(Abonnement::class)->find($id);
+    
+        // Vérifier si l'abonnement existe
+        if (!$abonnement) {
+            throw $this->createNotFoundException('Abonnement non trouvé pour l\'ID : '.$id);
+        }
+    
+        // Supprimer l'abonnement
+        $entityManager->remove($abonnement);
+        $entityManager->flush();
+        
+        // Rediriger vers la page principale ou toute autre page appropriée après la suppression
+        return $this->redirectToRoute('app_front'); // Remplacez 'page_principale' par le nom de votre route pour la page principale du site
+    }
+    
+
+
+   #[Route('/abonnement/{id}', name: 'app_abonnement_details')]
+   
+   public function showAbonnementDetails($id): Response
+{
+    // Récupérer les détails de l'abonnement en fonction de l'ID
+    $abonnement = $this->getDoctrine()->getRepository(Abonnement::class)->find($id);
+
+    // Vérifier si l'abonnement existe
+    if (!$abonnement) {
+        throw $this->createNotFoundException('Abonnement non trouvé pour l\'ID : '.$id);
+    }
+
+    // Vérifier si l'abonnement a le pack associé
+    if ($abonnement->getPack()) {
+        // Si oui, récupérez le nom du pack
+        $nomPack = $abonnement->getPack()->getNom();
+    } 
+    // Charger les associations avec les entités Terrain et Pack
+    $abonnement->getTerrain();
+    $abonnement->getPack();
+
+    // Récupérer les informations nécessaires sur l'abonnement
+    $nomUser = $abonnement->getNomuser();
+    $numTel = $abonnement->getNumtel();
+    $dateDebut = $abonnement->getDate();
+    $nomTerrain = $abonnement->getTerrain() ? $abonnement->getTerrain()->getNom() : null;
+    $nomPack = $abonnement->getNompack();
+    $prixAvantReduction = $abonnement->getPrix();
+    $prixApresReduction = $abonnement->getPrixtotal();
+
+    // Afficher les détails dans une vue Twig
+    return $this->render('abonnement/detailsAbonnement.html.twig', [
+        'abonnement' => $abonnement, // Transmettre l'objet abonnement au template Twig
+        'nomUser' => $nomUser,
+        'numTel' => $numTel,
+        'dateDebut' => $dateDebut,
+        'nomTerrain' => $nomTerrain,
+        'nomPack' => $nomPack,
+        'prixAvantReduction' => $prixAvantReduction,
+        'prixApresReduction' => $prixApresReduction,
+    ]);
 }
+
+   
+
+
+
+}
+    
+

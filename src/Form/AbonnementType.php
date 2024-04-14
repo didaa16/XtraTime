@@ -12,6 +12,11 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 
 class AbonnementType extends AbstractType
@@ -19,35 +24,84 @@ class AbonnementType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         
-            $builder
-            ->add('date', DateType::class, [
-                'label' => 'Date',
-                'widget' => 'single_text',
-                'required' => true,
-            ])
-          
-            // Ajoutez le champ pour le terrain
-            ->add('terrain', EntityType::class, [
-                'class' => Terrain::class,
-                'choice_label' => 'nom', // Le champ de l'entité à afficher dans la liste déroulante
-                'required' => true,
-            ])
-            ->add('nomuser', TextType::class, [
-                'label' => 'Nom de l\'Utilisateur',
-                'required' => true,
-            ])
-            ->add('numtel', IntegerType::class, [
-                'label' => 'Numéro de Téléphone',
-                'required' => true,
-            ]);
+        $builder
+        ->add('date', DateType::class, [
+            'label' => 'Date',
+            'widget' => 'single_text',
+            'required' => true,
+            'constraints' => [
+                new GreaterThanOrEqual(['value' => 'today', 'message' => 'La date doit être postérieure ou égale à aujourd\'hui']),
+            ],
+        ])
+        ->add('terrain', EntityType::class, [
+            'class' => Terrain::class,
+            'choice_label' => 'nom',
+            'required' => true,
+        ])
+
+        ->add('nomuser', TextType::class, [
+            'label' => 'Nom',
+            'required' => true,
+            'constraints' => [
+                new NotBlank(['message' => 'Veuillez saisir un nom']),
+                new Length([
+                    'max' => 20,
+                    'maxMessage' => 'Le nom ne peut pas dépasser {{ limit }} caractères',
+                ]),
+                new Regex([
+                    'pattern' => '/^[a-zA-Z\s]+$/',
+                    'message' => 'Le nom ne peut contenir que des lettres alphabétiques',
+                ]),
+            ],
+        ])
+        
+        ->add('numtel', IntegerType::class, [
+            'label' => 'Numéro de Téléphone',
+            'required' => true,
+            'constraints' => [
+                new NotBlank(['message' => 'Veuillez saisir le numéro de téléphone']),
+                new Length([
+                    'min' => 8,
+                    'max' => 15,
+                    'minMessage' => 'Le numéro de téléphone doit avoir au moins {{ limit }} chiffres.',
+                    'maxMessage' => 'Le numéro de téléphone ne peut pas dépasser {{ limit }} chiffres.',
+                ]),
+                new Regex([
+                    'pattern' => '/^\d+$/',
+                    'message' => 'Le numéro de téléphone ne peut contenir que des chiffres.',
+                ]),
+            ],
+        ])
+
+        ->add('nompack', TextType::class, [
+            'label' => 'Nom du Pack',
+            'disabled' => true, // Champ non modifiable
+            'data' => $options['pack']->getNom(), // Pré-remplissage avec le nom du pack
+            
+        ])
+        
+
+        ->add('idp', HiddenType::class, [
+            'mapped' => false, // Ne pas mapper ce champ à une propriété de l'entité
+        ])
+
+        ->add('pack', EntityType::class, [
+            'class' => Pack::class,
+            'choice_label' => 'nom', // Choisir le champ à afficher dans la liste déroulante
+            'attr' => [
+                'style' => 'display: none;' // Cacher le champ visuellement
+            ]
+        ]);
+}
             
         
-    }
+    
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([
+         $resolver->setDefaults([
             'data_class' => Abonnement::class,
+            'pack' => null, // Définir l'option 'pack' avec une valeur par défaut de null
             'packs' => [], // Déclaration de l'option 'packs'
             'terrains' => [],
         ]);

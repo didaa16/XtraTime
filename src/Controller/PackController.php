@@ -54,6 +54,8 @@ class PackController extends AbstractController
         ]);
     }
 
+
+
     #[Route('/show', name: 'app_pack_show', methods: ['GET'])]
     public function show(PackRepository $packrepo): Response
     {
@@ -117,7 +119,7 @@ class PackController extends AbstractController
    
 
     #[Route('/{idp}', name: 'app_pack_delete', methods: ['POST'])]
-public function delete($idp, PackRepository $repository, EntityManagerInterface $entityManager): Response
+    public function delete($idp, PackRepository $repository, EntityManagerInterface $entityManager): Response
 {
     $pack = $repository->find($idp);
     
@@ -132,6 +134,9 @@ public function delete($idp, PackRepository $repository, EntityManagerInterface 
         return $this->redirectToRoute('app_pack_show');
 }
 
+
+
+
 #[Route('/showC', name: 'app_packC_show')]
 public function showC(PackRepository $packrepo): Response
 {
@@ -140,6 +145,7 @@ public function showC(PackRepository $packrepo): Response
     return $this->render('pack/package-v2.html.twig',['packs'=>$packs]);
     
 }
+
 
 #[Route('/MoreDetailsPack/{idp}', name: 'MoreDetailsPack')]
 public function MoreDetailsPack($idp): Response
@@ -156,4 +162,6 @@ public function MoreDetailsPack($idp): Response
         'pack' => $pack,
     ]);
 }
+
+
 }

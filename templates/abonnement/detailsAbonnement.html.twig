@@ -30,12 +30,13 @@
 <script>
     function AnnulerAbonnement() {
     // Afficher une boîte de dialogue pour confirmer l'annulation de l'abonnement
-    if (confirm("Cher Client, Votre Abonnement est Annuler. Si vous voulez, vous pouvez choisir un autre pack ?")) {
+    if (confirm("Cher Client, Voulez-vous modifier votre abonnement  ?")) {
         // Si l'utilisateur confirme, rediriger vers la route de suppression de l'abonnement
-        window.location.href = "{{ path('app_abonnement_deleteP', {'id': abonnement.id }) }}"; // Utiliser abonnementId
+        window.location.href = "{{ path('app_abonnement_edit', {'id': abonnement.id }) }}" ; // Utiliser abonnementId
     } else {
         // Si l'utilisateur annule, rediriger vers la page d'accueil
-        window.location.href = "{{ path('app_abonnement_deleteF', {'id': abonnement.id }) }}"; // Utiliser abonnementId
+        window.location.href = "{{ path('app_abonnement_deleteP', {'id': abonnement.id }) }}";
+       // // Utiliser abonnementId
     }
 }
 

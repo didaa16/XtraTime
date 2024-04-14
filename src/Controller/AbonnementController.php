@@ -27,72 +27,47 @@ class AbonnementController extends AbstractController
 
     #[Route('/{idp}', name: 'app_abonnement_form', methods: ['GET', 'POST'])]
     public function showAbonnementForm(Request $request, $idp): Response
-    {
-        // Récupérer le pack choisi par l'utilisateur
-        $pack = $this->getDoctrine()->getRepository(Pack::class)->find($idp);
+{
+    // Récupérer le pack choisi par l'utilisateur
+    $pack = $this->getDoctrine()->getRepository(Pack::class)->find($idp);
 
-        // Vérifier si le pack existe
-        if (!$pack) {
-            throw $this->createNotFoundException('Pack non trouvé pour l\'ID : '.$idp);
-        }
-
-        // Créer une nouvelle instance d'Abonnement
-        $abonnement = new Abonnement();
-
-        // Pré-remplir le champ nomPack avec le nom du pack choisi
-        $abonnement->setNompack($pack->getNom());
-
-        // Créer le formulaire en passant le pack choisi
-        $form = $this->createForm(AbonnementType::class, $abonnement, [
-            'packs' => [$pack], // Passer le pack choisi au formulaire
-        ]);
-
-        // Gérer la soumission du formulaire
-        $form->handleRequest($request);
-
-        // Si le formulaire est soumis et valide, enregistrer l'abonnement
-        if ($form->isSubmitted() && $form->isValid()) {
-            // Convertir la durée du pack de mois en jours
-            function convertirDureeEnJours($duree)
-            {
-                $nombreMois = intval($duree);
-                $joursParMois = 30; // ou tout autre nombre de jours par mois
-                return $nombreMois * $joursParMois;
-            }
-
-            // Utilisation de la fonction pour convertir la durée du pack
-            $dureePack = convertirDureeEnJours($pack->getDuree());
-            $terrain = $abonnement->getTerrain();
-
-            // Définir la valeur de 'nomterrain' avec le nom du terrain choisi
-            $abonnement->setNomterrain($terrain->getNom());
-            // Calculer le prix avant réduction
-            $prixTerrain = $terrain->getPrix();
-            $prix = $prixTerrain * $dureePack;
-            $abonnement->setPrix($prix);
-
-            // Calculer le prix après réduction
-            $reduction = $pack->getReduction();
-            $prixTotal = $prix * (1 - $reduction / 100);
-
-            $abonnement->setPrixTotal($prixTotal);
-
-            // Enregistrer l'abonnement dans la base de données
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($abonnement);
-            $entityManager->flush();
-
-            // Rediriger l'utilisateur vers une autre page ou afficher un message de succès
-            return $this->redirectToRoute('app_abonnement_details', ['id' => $abonnement->getId()]);
-
-        }
-
-        // Afficher le formulaire
-        return $this->render('abonnement/AjouterAbonnement.html.twig', [
-            'form' => $form->createView(),
-            'abonnement' => $abonnement,
-        ]);
+    // Vérifier si le pack existe
+    if (!$pack) {
+        throw $this->createNotFoundException('Pack non trouvé pour l\'ID : '.$idp);
     }
+
+    // Créer une nouvelle instance d'Abonnement
+    $abonnement = new Abonnement();
+
+    // Pré-remplir le champ nomPack avec le nom du pack choisi
+    $abonnement->setNompack($pack->getNom());
+
+    // Créer le formulaire en passant le pack choisi
+    $form = $this->createForm(AbonnementType::class, $abonnement, [
+        'pack' => $pack, // Passer le pack choisi au formulaire
+    ]);
+    
+
+    // Gérer la soumission du formulaire
+    $form->handleRequest($request);
+
+    // Si le formulaire est soumis et valide, enregistrer l'abonnement
+    if ($form->isSubmitted() && $form->isValid()) {
+        // Enregistrer l'abonnement dans la base de données
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($abonnement);
+        $entityManager->flush();
+
+        // Rediriger l'utilisateur vers une autre page ou afficher un message de succès
+        return $this->redirectToRoute('app_abonnement_details', ['id' => $abonnement->getId()]);
+    }
+
+    // Afficher le formulaire
+    return $this->render('abonnement/AjouterAbonnement.html.twig', [
+        'form' => $form->createView(),
+    ]);
+}
+
     
     
     
@@ -106,14 +81,19 @@ class AbonnementController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_abonnement_index', [], Response::HTTP_SEE_OTHER);
+            // Rediriger l'utilisateur vers une autre page en passant l'ID de l'abonnement comme paramètre
+return $this->redirectToRoute('app_abonnement_details', ['id' => $abonnement->getId()]);
+
+
         }
 
-        return $this->renderForm('abonnement/edit.html.twig', [
+        return $this->renderForm('abonnement/editerAbonnement.html.twig', [
             'abonnement' => $abonnement,
             'form' => $form,
         ]);
     }
+
+    
 
     #[Route('/{id}/delete', name: 'app_abonnement_deleteP', methods: ['GET', 'POST'])]
     public function deleteAbonnement($id, EntityManagerInterface $entityManager): Response

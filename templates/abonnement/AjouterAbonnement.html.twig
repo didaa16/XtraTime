@@ -12,8 +12,8 @@
 
          <section class="inner-banner pattern-3">
         <div class="container text-center">
-            <h2>Checkout Page</h2>
-            <p>We offer Fitness & Yoga services since 1996</p>
+            <h2>Subscription Page</h2>
+            
         </div>
     </section>
 
@@ -22,8 +22,8 @@
         <div class="container text-center">
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="shop.html">Shop</a></li>
-                <li><span>Checkout Page</span></li>
+                <li><a href="shop.html">Package</a></li>
+                <li><span>Subscription Page</span></li>
             </ul>
         </div>
     </section>
@@ -35,7 +35,7 @@
             {{ form_start(form) }}
             <div class="col-md-6 col-sm-12 col-xs-12 column form-column">
                 <div class="section-title text-left">
-                    <h1><span>Billing Address</span></h1>
+                    <h1><span> Abonnez-vous </span></h1>
                 </div>
                 <div class="default-form billing-info-form">
                     <div class="row clearfix">
@@ -53,11 +53,15 @@
                             {{ form_errors(form.terrain) }}
                         </div>
 
-                        
-<div class="form-group col-md-12 col-sm-12 col-xs-12">
-    <div class="field-label">Nom du Pack*</div>
-    <input type="text" class="form-control" value="{{ abonnement.nompack }}" readonly>
-</div>
+   <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <div class="field-label">Nom du Pack*</div>
+{{ form_widget(form.nompack, { 'attr': {'disabled': 'disabled'} }) }}
+   </div>
+
+
+
+ {# Champ IDP caché pour associer l'abonnement au pack #}
+{{ form_row(form.idp, { 'attr': {'style': 'display: none;'} }) }}
 
 
 

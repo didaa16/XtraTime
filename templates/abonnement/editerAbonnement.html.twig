@@ -35,7 +35,7 @@
             {{ form_start(form) }}
             <div class="col-md-6 col-sm-12 col-xs-12 column form-column">
                 <div class="section-title text-left">
-                    <h1><span>Billing Address</span></h1>
+                    <h1><span> Abonnez-vous </span></h1>
                 </div>
                 <div class="default-form billing-info-form">
                     <div class="row clearfix">
@@ -55,9 +55,11 @@
 
                         
 <div class="form-group col-md-12 col-sm-12 col-xs-12">
-    <div class="field-label">Nom du Pack*</div>
-    <input type="text" class="form-control" value="{{ abonnement.nompack }}" readonly>
-</div>
+                            <div class="field-label">Nom du Pack*</div>
+{{ form_widget(form.nompack, { 'attr': {'disabled': 'disabled'} }) }}
+   </div>
+
+   {{ form_row(form.idp, { 'attr': {'style': 'display: none;'} }) }}
 
 
 

@@ -53,6 +53,31 @@ class AbonnementController extends AbstractController
 
     // Si le formulaire est soumis et valide, enregistrer l'abonnement
     if ($form->isSubmitted() && $form->isValid()) {
+
+        function convertirDureeEnJours($duree)
+            {
+                $nombreMois = intval($duree);
+                $joursParMois = 30; // ou tout autre nombre de jours par mois
+                return $nombreMois * $joursParMois;
+            }
+
+            // Utilisation de la fonction pour convertir la durée du pack
+            $dureePack = convertirDureeEnJours($pack->getDuree());
+            $terrain = $abonnement->getTerrain();
+
+            // Définir la valeur de 'nomterrain' avec le nom du terrain choisi
+            $abonnement->setNomterrain($terrain->getNom());
+            // Calculer le prix avant réduction
+            $prixTerrain = $terrain->getPrix();
+            $prix = $prixTerrain * $dureePack;
+            $abonnement->setPrix($prix);
+
+            // Calculer le prix après réduction
+            $reduction = $pack->getReduction();
+            $prixTotal = $prix * (1 - $reduction / 100);
+
+            $abonnement->setPrixTotal($prixTotal);
+
         // Enregistrer l'abonnement dans la base de données
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($abonnement);
@@ -74,24 +99,35 @@ class AbonnementController extends AbstractController
 
     #[Route('/{id}/edit', name: 'app_abonnement_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Abonnement $abonnement, EntityManagerInterface $entityManager): Response
-    {
-        $form = $this->createForm(AbonnementType::class, $abonnement);
-        $form->handleRequest($request);
+{
+    // Récupérer le pack associé à l'abonnement
+    $pack = $abonnement->getPack();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-
-            // Rediriger l'utilisateur vers une autre page en passant l'ID de l'abonnement comme paramètre
-return $this->redirectToRoute('app_abonnement_details', ['id' => $abonnement->getId()]);
-
-
-        }
-
-        return $this->renderForm('abonnement/editerAbonnement.html.twig', [
-            'abonnement' => $abonnement,
-            'form' => $form,
-        ]);
+    // Vérifier si le pack existe
+    if (!$pack) {
+        throw $this->createNotFoundException('Pack non trouvé pour cet abonnement');
     }
+
+    // Créer le formulaire en passant le nom du pack
+    $form = $this->createForm(AbonnementType::class, $abonnement, [
+        'pack' => $pack,
+    ]);
+
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+        $entityManager->flush();
+
+        // Rediriger l'utilisateur vers une autre page en passant l'ID de l'abonnement comme paramètre
+        return $this->redirectToRoute('app_abonnement_details', ['id' => $abonnement->getId()]);
+    }
+
+    return $this->renderForm('abonnement/editerAbonnement.html.twig', [
+        'abonnement' => $abonnement,
+        'form' => $form,
+    ]);
+}
+
 
     
 

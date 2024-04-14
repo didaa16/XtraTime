@@ -76,9 +76,9 @@ class AbonnementType extends AbstractType
         ->add('nompack', TextType::class, [
             'label' => 'Nom du Pack',
             'disabled' => true, // Champ non modifiable
-            'data' => $options['pack']->getNom(), // Pré-remplissage avec le nom du pack
-            
+            'data' => isset($options['pack']) ? $options['pack']->getNom() : null, // Vérification de nullité
         ])
+        
         
 
         ->add('idp', HiddenType::class, [
@@ -91,7 +91,9 @@ class AbonnementType extends AbstractType
             'attr' => [
                 'style' => 'display: none;' // Cacher le champ visuellement
             ]
+            
         ]);
+        
 }
             
         
@@ -101,9 +103,11 @@ class AbonnementType extends AbstractType
     {
          $resolver->setDefaults([
             'data_class' => Abonnement::class,
+            'nompack' => null, // Ajouter l'option 'nompack' avec une valeur par défaut de null
             'pack' => null, // Définir l'option 'pack' avec une valeur par défaut de null
             'packs' => [], // Déclaration de l'option 'packs'
             'terrains' => [],
+            
         ]);
     }
 }

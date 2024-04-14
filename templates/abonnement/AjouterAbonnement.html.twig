@@ -41,11 +41,16 @@
                     <div class="row clearfix">
                         <div class="form-group col-md-12 col-sm-12 col-xs-12">
                             <div class="field-label">Nom*</div>
+
                             {{ form_widget(form.nomuser, { 'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form.nomuser) }}
+
                         </div>
                         <div class="form-group col-md-12 col-sm-12 col-xs-12">
                             <div class="field-label">Numero du Tel*</div>
                             {{ form_widget(form.numtel, { 'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form.numtel) }}
+
                         </div>
                         <div class="form-group col-md-12 col-sm-12 col-xs-12">
                             <div class="field-label">Nom du Terrain*</div>
@@ -55,12 +60,14 @@
 
    <div class="form-group col-md-12 col-sm-12 col-xs-12">
                             <div class="field-label">Nom du Pack*</div>
-{{ form_widget(form.nompack, { 'attr': {'disabled': 'disabled'} }) }}
+{{ form_widget(form.nompack, { 'attr': {'disabled': 'disabled'} }) }}          
+  {{ form_errors(form.nompack) }}
+
    </div>
 
 
 
- {# Champ IDP caché pour associer l'abonnement au pack #}
+
 {{ form_row(form.idp, { 'attr': {'style': 'display: none;'} }) }}
 
 

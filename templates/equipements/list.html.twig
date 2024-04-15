@@ -1,0 +1,53 @@
+{% extends 'back.html.twig' %}
+{% block Fbody %}{% endblock %}
+{% block Sbody %}{% endblock %}
+{% block title %}List of Equipements{% endblock %}
+
+{% block body %}
+    <div class="container-fluid d-flex justify-content-center align-items-center" style="height: 100vh; margin-left: 180px">
+        <div class="col-md-8">
+            <h1 class="text-center mb-4">List of Equipements</h1>
+
+            {% if tabequipement is not empty %}
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Type</th>
+                        <th>Price</th>
+                        <th>Stock</th>
+                        <th>Image</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for equipement in tabequipement %}
+                        <tr>
+                            <td>{{ equipement.nom }}</td>
+                            <td>{{ equipement.description }}</td>
+                            <td>{{ equipement.type }}</td>
+                            <td>{{ equipement.prix }}</td>
+                            <td>{{ equipement.stock }}</td>
+                            <td>
+                                {% if equipement.image %}
+                                    <img src="{{ asset('uploads/equipements/' ~ equipement.image) }}" alt="Equipement Image" style="max-width: 100px;">
+                                {% else %}
+                                    No image
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{{ path('update_Equipements', { 'id': equipement.id }) }}" class="btn btn-sm btn-primary">Edit</a>
+                                <a href="{{ path('remove_Equipements', { 'id': equipement.id }) }}" class="btn btn-sm btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                    {% else %}
+                        <div align="center"><p>No equipements found.</p></div>
+                    {% endif %}
+                </table>
+                <a href="{{ path('add_equipements') }}" class="btn">Add Items</a>
+        </div>
+    </div>
+{% endblock %}

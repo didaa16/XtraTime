@@ -1,0 +1,31 @@
+{% extends 'front.html.twig' %}
+{% block Fbody %}{% endblock %}
+{% block Sbody %}{% endblock %}
+{% block body %}
+    <div class="container">
+        <h1>List Reservations</h1>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Duree</th>
+                <th>Prix</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for reservation in reservations %}
+                <tr>
+                    <td>{{ reservation.date }}</td>
+                    <td>{{ reservation.duree }}</td>
+                    <td>{{ reservation.prix }}</td>
+                    <td>
+                        <a href="{{ path('update_Reservations', { 'id': reservation.id }) }}" class="btn btn-primary">Edit</a>
+                        <a href="{{ path('remove_Reservations', { 'id': reservation.id }) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

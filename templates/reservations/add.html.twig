@@ -1,0 +1,40 @@
+{% extends 'front.html.twig' %}
+{% block Fbody %}{% endblock %}
+{% block Sbody %}{% endblock %}
+{% block body %}
+    <div class="container-fluid d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <div class="col-md-6">
+            <h1 class="text-center mb-4">Add Reservation</h1>
+            {{ form_start(form, {'attr': {'class': 'mt-3'}}) }}
+            {{ form_errors(form) }}
+            <div class="form-group">
+                {{ form_label(form.date) }}
+                {{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.date) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.duree) }}
+                {{ form_widget(form.duree, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.duree) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.prix) }}
+                {{ form_widget(form.prix, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.prix) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.equipements) }}
+                {{ form_widget(form.equipements, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.equipements) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.User) }}
+                {{ form_widget(form.User, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.User) }}
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Add Reservation</button>
+            {{ form_end(form) }}
+            <a href="{{ path('listReservations') }}" class="btn">My Reservations</a>
+        </div>
+    </div>
+{% endblock %}

@@ -30,6 +30,20 @@
                         </div><!-- end card header -->
 
                         <div class="card-body">
+                        <div class="listjs-table" id="customerList">
+                                        <div class="row g-4 mb-3">
+<div class="col-sm-auto">
+    <div class="col-sm">
+                                                <div class="d-flex justify-content-sm-end">
+                                                    <div class="search-box ms-2">
+                                                        <input type="text" class="form-control search" placeholder="Rechercher par nom de user..." id="searchInput">
+                                                        <i class="ri-search-line search-icon"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                              </div>
+                                              </div>
+                                              </div>
 
 
                             <div class="table-responsive table-card mt-3 mb-1">
@@ -66,7 +80,8 @@
         <td>{{ abonnement.terrain.id }}</td>
         <td>{{ abonnement.pack is not null ? abonnement.pack.nom : '' }}</td> <!-- Afficher le nom du pack -->
         <td>{{ abonnement.terrain.nom }}</td>
-        <td>{{ abonnement.nomuser }}</td>
+        <td data-user-name="{{ abonnement.nomuser }}">{{ abonnement.nomuser }}</td>
+
         <td>{{ abonnement.numtel }}</td>
         <td>{{ abonnement.prixtotal }}</td>
                                     </tr>
@@ -101,44 +116,25 @@
 
 
             <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    const deleteButtons = document.querySelectorAll('.remove-item-btn');
+               document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    const rows = document.querySelectorAll('#customerTable tbody tr');
 
-                    deleteButtons.forEach(button => {
-                        button.addEventListener('click', function(event) {
-                            event.preventDefault(); // Empêche le comportement par défaut du lien
+    searchInput.addEventListener('input', function() {
+        const searchText = this.value.trim().toLowerCase();
 
-                            // Récupérer l'ID du pack à supprimer à partir des attributs de données du bouton
-                            const packId = this.getAttribute('data-pack-id');
+        rows.forEach(row => {
+            const userName = row.querySelector('td[data-user-name]').getAttribute('data-user-name').trim().toLowerCase();
 
-                            if (packId) {
-                                // Effectuer une requête AJAX POST pour supprimer le pack
-                                fetch(this.getAttribute('data-delete-url'), {
-                                        method: 'POST',
-                                        headers: {
-                                            'Content-Type': 'application/json'
-                                        },
-                                        body: JSON.stringify({
-                                            idp: packId
-                                        })
-                                    })
-                                    .then(response => {
-                                        if (response.ok) {
-                                            // Rediriger vers la page de liste des packs après suppression
-                                            window.location.href = '{{ path("app_pack_show") }}';
-                                        } else {
-                                            console.error('La suppression du pack a échoué.');
-                                        }
-                                    })
-                                    .catch(error => {
-                                        console.error('Une erreur s\'est produite lors de la suppression du pack:', error);
-                                    });
-                            } else {
-                                console.error('ID du pack à supprimer non trouvé.');
-                            }
-                        });
-                    });
-                });
+            if (userName.includes(searchText)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+});
+
             </script>
 
 

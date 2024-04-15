@@ -42,7 +42,7 @@
                                             <div class="col-sm">
                                                 <div class="d-flex justify-content-sm-end">
                                                     <div class="search-box ms-2">
-                                                        <input type="text" class="form-control search" placeholder="Search...">
+                                                        <input type="text" class="form-control search" placeholder="Rechercher par nom de pack..." id="searchInput">
                                                         <i class="ri-search-line search-icon"></i>
                                                     </div>
                                                 </div>
@@ -80,7 +80,8 @@
     {% else %}
     <td>N/A</td>
     {% endif %}
-    <td>{{ pack.nom }}</td>
+    <td data-pack-name="{{ pack.nom }}">{{ pack.nom }}</td>
+
     <td>{{ pack.description }}</td>
     <td>{{ pack.reduction }}</td>
      <td>{{ pack.duree }}</td>
@@ -199,7 +200,26 @@
                 }
             });
         });
+
+ 
+    const searchInput = document.getElementById('searchInput');
+    const rows = document.querySelectorAll('#customerTable tbody tr');
+
+    searchInput.addEventListener('input', function() {
+        const searchText = this.value.trim().toLowerCase();
+
+        rows.forEach(row => {
+            const packName = row.querySelector('td[data-pack-name]').getAttribute('data-pack-name').trim().toLowerCase();
+
+            if (packName.includes(searchText)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
     });
+});
+
 </script>
 
 

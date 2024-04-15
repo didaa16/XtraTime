@@ -2,20 +2,53 @@
 
 {% block body %}
 
-<h1>Détails de l'abonnement</h1>
-<ul>
-    <li><strong>Nom de l'utilisateur :</strong> {{ nomUser }}</li>
-    <li><strong>Numéro de téléphone :</strong> {{ numTel }}</li>
-    <li><strong>Date de début :</strong> {{ dateDebut ? dateDebut|date('d/m/Y') : 'Non spécifiée' }}</li>
-    <li><strong>Nom du terrain :</strong> {{ nomTerrain ? nomTerrain : 'Non spécifié' }}</li>
-       <li><strong>Nom du pack :</strong> {{ nomPack ? nomPack : 'Non spécifié' }}</li>
-    <li><strong>Prix avant réduction :</strong> {{ prixAvantReduction ? prixAvantReduction ~ ' DT' : 'Non calculé' }}</li>
-    <li><strong>Prix après réduction :</strong> {{ prixApresReduction ? prixApresReduction ~ ' DT' : 'Non calculé' }}</li>
-</ul>
+<title>Détails de l'abonnement</title>
+<style>
+  .center {
+    text-align: center;
+    margin-top: 20px; /* Ajustez la marge selon vos besoins */
+  }
 
-<div>
-    <button href="" type="button" onclick="AnnulerAbonnement();" class="btn btn-secondary">Annuler</button>
-    <button  href="" type="button" onclick="confirmerAbonnement();" class="btn btn-primary">Confirmer</button>
+  .details {
+    width: 50%; /* Ajustez la largeur de la boîte selon vos besoins */
+    margin: 0 auto; /* Centre horizontalement */
+    border: 1px solid #ccc; /* Ajoute une bordure pour la clarté */
+    padding: 20px; /* Ajoute un peu d'espace à l'intérieur de la boîte */
+  }
+</style>
+</head>
+<body>
+
+<div class="center">
+    <h1>Détails de l'abonnement</h1>
+    <ul>
+        <strong>Nom de l'utilisateur :</strong> {{ nomUser }}
+        </ul>
+         <ul>
+        <strong>Numéro de téléphone :</strong> {{ numTel }}
+        </ul>
+         <ul>
+        <strong>Date de début :</strong> {{ dateDebut ? dateDebut|date('d/m/Y') : 'Non spécifiée' }}
+        </ul>
+         <ul>
+        <strong>Nom du terrain :</strong> {{ nomTerrain ? nomTerrain : 'Non spécifié' }} 
+        </ul>
+         <ul>
+        <strong>Nom du pack :</strong> {{ nomPack ? nomPack : 'Non spécifié' }}
+        </ul>
+         <ul>
+        <strong>Prix avant réduction :</strong> {{ prixAvantReduction ? prixAvantReduction ~ ' DT' : 'Non calculé' }}
+        </ul>
+         <ul>
+        <strong>Prix après réduction :</strong> {{ prixApresReduction ? prixApresReduction ~ ' DT' : 'Non calculé' }}
+        </ul>
+    
+
+    <div>
+        <button href="" type="button" onclick="AnnulerAbonnement();" class="btn btn-secondary">Annuler</button>
+        <button  href="" type="button" onclick="confirmerAbonnement();" class="btn btn-primary">Confirmer</button>
+    </div>
+  
 </div>
 
 <script>

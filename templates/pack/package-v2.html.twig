@@ -83,17 +83,20 @@
                 </div>
                 <!-- /.col-lg-9 -->
                 <div class="col-lg-3 col-md-4">
-                    <div class="sidebar-wrapper section-padding">
-                        <div class="single-sidebar search-widget">
-                            <div class="title">
-                                <h3>Search Keywords</h3>
-                            </div>
-                            <!-- /.title -->
-                            <form action="#">
-                                <input type="text" placeholder="Serach For Keywords" />
-                                <button type="submit"><i class="fa fa-search"></i></button>
-                            </form>
-                        </div>
+    <div class="sidebar-wrapper section-padding">
+        <div class="single-sidebar search-widget">
+            <div class="title">
+                <h3>Search Keywords</h3>
+            </div>
+            <!-- /.title -->
+            <form action="#" id="searchForm">
+                <input type="text" placeholder="Search For Keywords" id="searchInput">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+    </div>
+</div>
+
                         <!-- /.single-sidebar -->
                    
                         <!-- /.single-sidebar -->
@@ -112,4 +115,26 @@
         </div>
         <!-- /.container -->
     </section>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('searchInput');
+        const packageItems = document.querySelectorAll('.single-item');
+
+        searchInput.addEventListener('input', function() {
+            const searchText = this.value.trim().toLowerCase();
+
+            packageItems.forEach(item => {
+                const packName = item.querySelector('.content-heading h3').textContent.trim().toLowerCase();
+
+                if (packName.includes(searchText)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
+
 {% endblock %}
